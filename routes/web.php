@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\controller_kepuharjo;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
-Route::get('/login', function () {
-    return view('login');
-});
+// Route::get('/login', function () {
+//     return view('login');
+// });
+
+
+
+Route::get('/', [controller_kepuharjo::class, 'index']);
+Route::get('/login', [controller_kepuharjo::class, 'login']);
+Route::get('/dashboard', [controller_kepuharjo::class, 'dashboard']);

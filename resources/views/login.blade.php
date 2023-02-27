@@ -169,7 +169,8 @@
                 <input type="password" placeholder="Password" name="password" required>
             </div>
             <div class="input-group">
-                <button name="submit" class="btn">Login</button>
+                <a  class="btn" href="/dashboard">login</a>
+                {{-- <button name="submit" class="btn">Login</button> --}}
             </div>
             <!-- <p class="login-register-text">Anda belum punya akun? <a href="register.php">Register</a></p> -->
         </form>
