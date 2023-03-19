@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\controller_kepuharjo;
+use App\Http\Controllers\logincontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ use App\Http\Controllers\controller_kepuharjo;
 
 
 
-Route::get('/', [controller_kepuharjo::class, 'index']);
-Route::get('/login', [controller_kepuharjo::class, 'login']);
-Route::get('/dashboard', [controller_kepuharjo::class, 'dashboard']);
+Route::get('/', [controller_kepuharjo::class, 'index'])->name('index');
+Route::get('/login', [controller_kepuharjo::class, 'login'])->name('login');
+Route::get('/dashboard', [controller_kepuharjo::class, 'dashboard'])->name('dashboard');
+Route::post('/postlogin',[controller_kepuharjo::class, 'customLogin'])->name('postlogin');
