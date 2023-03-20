@@ -29,3 +29,17 @@ Route::get('/', [controller_kepuharjo::class, 'index'])->name('index');
 Route::get('/login', [controller_kepuharjo::class, 'login'])->name('login');
 Route::get('/dashboard', [controller_kepuharjo::class, 'dashboard'])->name('dashboard');
 Route::post('/postlogin',[controller_kepuharjo::class, 'customLogin'])->name('postlogin');
+
+
+Route::get('/suratmasuk', [controller_kepuharjo::class, 'suratmasuk'])->name('suratmasuk');
+Route::get('/suratditolak', [controller_kepuharjo::class, 'suratditolak'])->name('suratditolak');
+Route::get('/suratselesai', [controller_kepuharjo::class, 'suratselesai'])->name('suratselesai');
+
+Route::get('/masteruser', [controller_kepuharjo::class, 'masteruser'])->name('masteruser');
+Route::get('/masterrtrw', [controller_kepuharjo::class, 'master_rtrw'])->name('masterrtrw');
+Route::get('/berita', [controller_kepuharjo::class, 'berita'])->name('berita');
+Route::get('/tentang', [controller_kepuharjo::class, 'tentang'])->name('tentang');
+
+Route::get('/buttons', [controller_kepuharjo::class, 'buttons'])->name('buttons');
+
+

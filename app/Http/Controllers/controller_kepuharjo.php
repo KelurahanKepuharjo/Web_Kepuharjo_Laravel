@@ -40,4 +40,35 @@ class controller_kepuharjo extends Controller
         return view('dashboard');
     }
 
+    public function buttons(){
+        return view('pages/ui-features/buttons');
+    }
+
+    public function suratmasuk(){
+        return view('surat_masuk');
+    }
+
+    public function suratditolak(){
+        return view('surat_ditolak');
+    }
+
+    public function suratselesai(){
+        return view('surat_selesai');
+    }
+
+    public function masteruser(){
+        return view('master_user');
+    }
+
+    public function master_rtrw(){
+        return view('master_rtrw');
+    }
+
+    public function berita(){
+        return view('berita');
+    }
+
+    public function tentang(){
+        return view('tentang');
+    }
 }
