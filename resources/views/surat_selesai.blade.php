@@ -5,7 +5,7 @@
   <!-- Required meta tags --> 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Dashboard</title>
+  <title>Surat Selesai</title>
   <!-- base:css -->
   <link rel="stylesheet" href="{{ asset('template/vendors/mdi/css/materialdesignicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('template/vendors/feather/feather.css') }}">
@@ -34,7 +34,7 @@
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="icon-menu"></span>
         </button>
-        {{-- <ul class="navbar-nav mr-lg-2">
+        <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
             <div class="input-group">
               <div class="input-group-prepend">
@@ -42,10 +42,10 @@
                   <i class="icon-search"></i>
                 </span>
               </div>
-              <input type="text" class="form-control" placeholder="Search Projects.." aria-label="search" aria-describedby="search">
+              <input type="text" class="form-control" placeholder="Cari Nama.." aria-label="search" aria-describedby="search">
             </div>
           </li>
-        </ul> --}}
+        </ul>
         <ul class="navbar-nav navbar-nav-right">
             {{-- <li class="nav-item dropdown d-lg-flex d-none">
                 <button type="button" class="btn btn-info font-weight-bold">+ Create New</button>
@@ -143,7 +143,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-mail  menu-icon"></i>
+              <i class="icon-file menu-icon"></i>
               <span class="menu-title">Pengajuan Surat</span>
               <i class="menu-arrow"></i>
             </a>
@@ -179,7 +179,6 @@
               <span class="menu-title">Tentang</span>
             </a>
           </li>
-          
           {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-disc menu-icon"></i>
@@ -188,7 +187,7 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="buttons">Buttons</a></li>
+                <li class="nav-item"> <a class="nav-link" href="suratmasuk">Buttons</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
               </ul>
             </div>
@@ -246,13 +245,13 @@
         <div class="content-wrapper">
           <div class="row">
             <div class="col-sm-12 mb-4 mb-xl-0">
-              <h4 class="font-weight-bold text-dark">Dashboard</h4>
+              <h4 class="font-weight-bold text-dark">Surat Selesai</h4>
 
               <?php $tanggal = date("Y/m/d") ?>
               <p class="font-weight-normal mb-2 text-muted">{{ $tanggal }}</p>
             </div>
           </div>
-          <div class="row mt-3">
+          {{-- <div class="row mt-3">
             <div class="col-xl-3 flex-column d-flex grid-margin stretch-card">
               <div class="row flex-grow">
                 <div class="col-sm-12 grid-margin stretch-card">
@@ -298,7 +297,7 @@
                     </div>
                   </div>
             </div>
-          </div>
+          </div> --}}
           {{-- <div class="row"> --}}
               {{-- <div class="col-xl-4 grid-margin stretch-card">
                   <div class="card">
@@ -434,7 +433,7 @@
                 </div>
               </div> --}}
           {{-- </div> --}}
-          <div class="row">
+          {{-- <div class="row">
             <div class="col-xl-9 grid-margin-lg-0 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -747,7 +746,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
