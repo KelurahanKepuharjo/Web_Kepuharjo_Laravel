@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\controller_kepuharjo;
 use App\Http\Controllers\logincontroller;
+use App\Http\Controllers\data_usercontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,9 @@ use App\Http\Controllers\logincontroller;
 //     return view('index');
 // });
 
-// Route::get('/login', function () {
-//     return view('login');
-// });
+Route::get('/home', function () {
+    return view('home', ['name' => 'Edy Atthoillah', 'role' => 'user']);
+});
 
 
 
@@ -43,3 +44,6 @@ Route::get('/tentang', [controller_kepuharjo::class, 'tentang'])->name('tentang'
 Route::get('/buttons', [controller_kepuharjo::class, 'buttons'])->name('buttons');
 
 
+// Route::get('/data_user', 'data');
+// Route::get('/data_user', [data_usercontroller::class, 'index']);
+// Route::get('/data_user/json', [data_usercontroller::class, 'json']);
