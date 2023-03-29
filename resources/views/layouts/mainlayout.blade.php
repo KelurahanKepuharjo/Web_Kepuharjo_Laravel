@@ -143,7 +143,7 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <div class="row" style="width: 100%">
+                    <div class="row">
                         <div class="col-sm-12 mb-4 mb-xl-0">
                             @yield('content')
                         </div>
