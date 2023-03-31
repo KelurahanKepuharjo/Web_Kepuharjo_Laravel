@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\master_kks;
+use Redirect;
 
 class controller_kepuharjo extends Controller
 {
@@ -20,21 +22,30 @@ class controller_kepuharjo extends Controller
     //     }
     // }
 
-    public function customLogin(Request $request)
+    public function simpanmasterkk(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'password' => 'required'
+        $this->validate($request, [
+            'no_kk' => 'unique:master_kks'
         ]);
-        dd('Berhasil Login');
-        // $credentials = $request->only('name', 'password');
-        // if (Auth::attempt($credentials)) {
-        //     return redirect()->intended('/dashboard')
-        //                 ->withSuccess('Signed in');
-        // }
 
-        // return redirect("login")->withSuccess('Login details are not valid');
+            $data = new master_kks();
+            $data->no_kk = $request->nokk;
+            $data->nama_kepala_keluarga = $request->kepala_keluarga;
+            $data->alamat = $request-> alamatkk;
+            $data->rt = $request->rt;
+            $data->rw = $request->rw;
+            $data->kode_pos = $request->kdpos;
+            $data->kelurahan = $request->kel;
+            $data->kecamatan = $request->kec;
+            $data->kabupaten = $request->kab;
+            $data->provinsi = $request->prov;
+            $data->kk_tgl = $request->tglkk;
+        $data->save();
+        return Redirect('masterkk');
+
+
     }
+
 
     public function dashboard(){
         return view('dashboard');
@@ -63,6 +74,12 @@ class controller_kepuharjo extends Controller
     public function master_rtrw(){
         return view('master_rtrw');
     }
+
+    public function master_kk(){
+        $data = master_kks::all();
+        return view('master_kk', compact('data'));
+    }
+
 
     public function berita(){
         return view('berita');

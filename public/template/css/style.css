@@ -8960,27 +8960,27 @@ h1, h2, h3, h4, h5, h6,
 }
 
 h1, .h1 {
-  font-size: 2.5rem;
-}
-
-h2, .h2 {
   font-size: 2rem;
 }
 
-h3, .h3 {
-  font-size: 1.75rem;
-}
-
-h4, .h4 {
+h2, .h2 {
   font-size: 1.5rem;
 }
 
-h5, .h5 {
+h3, .h3 {
   font-size: 1.25rem;
 }
 
-h6, .h6 {
+h4, .h4 {
   font-size: 1rem;
+}
+
+h5, .h5 {
+  font-size: 0.75rem;
+}
+
+h6, .h6 {
+  font-size: 0.5rem;
 }
 
 .lead {
@@ -21721,7 +21721,7 @@ dl li {
 
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
-  width: calc(100% - 240px);
+  width: calc(100% - 220px);
   min-height: calc(100vh - 60px);
   display: -webkit-flex;
   display: flex;
@@ -21738,7 +21738,7 @@ dl li {
 
 .content-wrapper {
   background: #f4f7fa;
-  padding: 2.5rem 2.5rem;
+  padding: 1rem 1rem;
   width: 100%;
   -webkit-flex-grow: 1;
   flex-grow: 1;
@@ -21757,7 +21757,7 @@ dl li {
   font-family: "Karla", sans-serif;
   font-weight: normal;
   padding: 0;
-  width: 240px;
+  width: 220px;
   z-index: 11;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -21859,7 +21859,7 @@ dl li {
 .sidebar .nav .nav-item .nav-link .menu-title {
   color: inherit;
   display: inline-block;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   line-height: 1;
   vertical-align: middle;
 }
@@ -22050,7 +22050,7 @@ dl li {
   -webkit-transition: width 0.25s ease, background 0.25s ease;
   -moz-transition: width 0.25s ease, background 0.25s ease;
   -ms-transition: width 0.25s ease, background 0.25s ease;
-  width: 240px;
+  width: 220px;
   height: 60px;
 }
 
@@ -22097,7 +22097,7 @@ dl li {
   color: #000000;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  width: calc(100% - 240px);
+  width: calc(100% - 220px);
   height: 60px;
   -webkit-box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.1);

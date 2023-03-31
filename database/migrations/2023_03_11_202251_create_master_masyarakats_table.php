@@ -33,7 +33,7 @@ class CreateMasterMasyarakatsTable extends Migration
             $table->string('nama_ayah', 60)->nullable()->default('text');
             $table->string('nama_ibu', 60)->nullable()->default('text');
             $table->unsignedBigInteger('id');
-            $table->Foreign('id')->references('id')->on('master_kks');
+            // $table->Foreign('id')->references('id')->on('master_kks');
         });
     }
 

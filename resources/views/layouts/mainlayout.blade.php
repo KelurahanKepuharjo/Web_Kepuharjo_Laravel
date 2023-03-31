@@ -39,7 +39,7 @@
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                     <span class="icon-menu"></span>
                 </button>
-                <ul class="navbar-nav mr-lg-2">
+                {{-- <ul class="navbar-nav mr-lg-2">
                     <li class="nav-item nav-search d-none d-lg-block">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -51,7 +51,7 @@
                                 aria-describedby="search">
                         </div>
                     </li>
-                </ul>
+                </ul> --}}
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item dropdown d-flex mr-4 ">
                         <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center"
@@ -80,7 +80,7 @@
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                <div class="user-profile">
+                {{-- <div class="user-profile">
                     <div class="user-image">
                         <img src="{{ asset('template/images/faces/face28.png') }}">
                     </div>
@@ -90,7 +90,7 @@
                     <div class="user-designation">
                         Admin
                     </div>
-                </div>
+                </div> --}}
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard">
@@ -107,10 +107,13 @@
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="suratmasuk">Surat Masuk</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="suratselesai">Surat Surat Selesai</a>
+                                <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
+                                        href="suratmasuk">Surat Masuk</a></li>
+                                <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
+                                        href="suratselesai">Surat Surat Selesai</a>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link" href="suratditolak">Surat Ditolak</a></li>
+                                <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
+                                        href="suratditolak">Surat Ditolak</a></li>
                             </ul>
                         </div>
                     </li>
@@ -124,6 +127,12 @@
                         <a class="nav-link" href="masterrtrw">
                             <i class="icon-paper menu-icon"></i>
                             <span class="menu-title">Master Rt Rw</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="masterkk">
+                            <i class="icon-paper menu-icon"></i>
+                            <span class="menu-title">Master KK</span>
                         </a>
                     </li>
                     <li class="nav-item">

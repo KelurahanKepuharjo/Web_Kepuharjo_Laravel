@@ -14,20 +14,21 @@ class CreateMasterKksTable extends Migration
     public function up()
     {
         Schema::create('master_kks', function (Blueprint $table) {
-            
+
             $table->id();
-            $table->uuid('uuid');            
+            // $table->uuid('uuid');
             $table->bigInteger('no_kk' ,)->nullable()->default(12);
             $table->string('nama_kepala_keluarga', 100)->nullable()->default('text');
             $table->string('alamat', 100)->nullable()->default('text');
             $table->tinyInteger('rt');
             $table->tinyInteger('rw');
-            $table->smallInteger('kode_pos');
+            $table->integer('kode_pos');
             $table->string('kelurahan', 60)->nullable()->default('text');
             $table->string('kecamatan', 60)->nullable()->default('text');
             $table->string('kabupaten', 60)->nullable()->default('text');
             $table->string('provinsi', 60)->nullable()->default('text');
-            $table->date('kk_tgl');
+            $table->string('kk_tgl');
+            $table->timestamps();
         });
     }
 
@@ -39,5 +40,6 @@ class CreateMasterKksTable extends Migration
     public function down()
     {
         Schema::dropIfExists('master_kks');
+        // $table->smallInteger('kode_pos')->change();
     }
 }

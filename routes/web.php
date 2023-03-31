@@ -38,11 +38,16 @@ Route::get('/suratselesai', [controller_kepuharjo::class, 'suratselesai'])->name
 
 Route::get('/masteruser', [controller_kepuharjo::class, 'masteruser'])->name('masteruser');
 Route::get('/masterrtrw', [controller_kepuharjo::class, 'master_rtrw'])->name('masterrtrw');
+
+Route::get('/masterkk', [controller_kepuharjo::class, 'master_kk'])->name('masterkk');
+
 Route::get('/berita', [controller_kepuharjo::class, 'berita'])->name('berita');
 Route::get('/tentang', [controller_kepuharjo::class, 'tentang'])->name('tentang');
 
 Route::get('/buttons', [controller_kepuharjo::class, 'buttons'])->name('buttons');
 
+
+Route::post('/simpankk',[controller_kepuharjo::class, 'simpanmasterkk'])->name('simpankk');
 
 // Route::get('/data_user', 'data');
 // Route::get('/data_user', [data_usercontroller::class, 'index']);
