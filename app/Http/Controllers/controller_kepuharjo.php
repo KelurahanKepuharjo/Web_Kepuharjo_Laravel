@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\berita;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\master_kks;
 use App\Models\master_rtrw;
 use App\Models\master_masyarakat;
+
+
 use Redirect;
 
 class controller_kepuharjo extends Controller
@@ -80,6 +84,20 @@ class controller_kepuharjo extends Controller
         return Redirect('masteruser');
     }
 
+    public function simpanmasterberita(Request $request)
+    {
+        $this->validate($request, [
+            // 'no_kk' => 'unique:master_kks'
+        ]);
+
+            $data = new berita();
+            $data->judul = $request->judul;
+            $data->sub_title = $request->sub_title;
+            $data->deskripsi = $request-> deskripsi;
+        $data->save();
+        return Redirect('berita');
+    }
+
     public function dashboard(){
         return view('dashboard');
     }
@@ -117,10 +135,16 @@ class controller_kepuharjo extends Controller
 
 
     public function berita(){
-        return view('berita');
+        $data = berita::all();
+        return view('berita', compact('data'));
     }
 
     public function tentang(){
         return view('tentang');
+    }
+
+    public function master_beritas(){
+        $data = berita::all();
+        return view('berita', compact('data'));
     }
 }
