@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\master_kks;
+use App\Models\master_rtrw;
+use App\Models\master_masyarakat;
 use Redirect;
 
 class controller_kepuharjo extends Controller
@@ -42,10 +44,41 @@ class controller_kepuharjo extends Controller
             $data->kk_tgl = $request->tglkk;
         $data->save();
         return Redirect('masterkk');
-
-
     }
 
+    public function simpanmasterrtrw(Request $request)
+    {
+        $this->validate($request, [
+            // 'no_kk' => 'unique:master_kks'
+        ]);
+
+            $data = new master_rtrw();
+            $data->nik = $request->nik;
+            $data->nama_lengkap = $request->nama_lengkap;
+            $data->alamat = $request-> alamatkk;
+            $data->no_hp = $request-> no_hp;
+            $data->rt = $request->rt;
+            $data->rw = $request->rw;
+        $data->save();
+        return Redirect('masterrtrw');
+    }
+
+    public function simpanmasteruser(Request $request)
+    {
+        $this->validate($request, [
+            // 'no_kk' => 'unique:master_kks'
+        ]);
+
+            $data = new master_masyarakat();
+            $data->nik = $request->nik;
+            $data->nama_lengkap = $request->nama_lengkap;
+            $data->tempat_lahir = $request-> tempat_lahir;
+            $data->tgl_lahir = $request-> tgl_lahir;
+            $data->jenis_kelamin = $request->jenis_kelamin;
+            $data->pekerjaan = $request->pekerjaan;
+        $data->save();
+        return Redirect('masteruser');
+    }
 
     public function dashboard(){
         return view('dashboard');
@@ -68,11 +101,13 @@ class controller_kepuharjo extends Controller
     }
 
     public function masteruser(){
-        return view('master_user');
+        $data = master_masyarakat::all();
+        return view('master_user', compact('data'));
     }
 
     public function master_rtrw(){
-        return view('master_rtrw');
+        $data = master_rtrw::all();
+        return view('master_rtrw', compact('data'));
     }
 
     public function master_kk(){

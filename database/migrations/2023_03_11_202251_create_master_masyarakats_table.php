@@ -15,24 +15,25 @@ class CreateMasterMasyarakatsTable extends Migration
     {
         Schema::create('master_masyarakats', function (Blueprint $table) {
             $table->bigInteger('nik')->primary();
-            $table->uuid('uuid');
-            $table->string('nama_lengkap', 100)->nullable()->default('text');
-            $table->string('jenis_kelamin', 16)->nullable()->default('text');
-            $table->string('tempat-lahir', 50)->nullable()->default('text');
+            // $table->uuid('uuid');
+            $table->string('nama_lengkap', 100)->nullable();
+            $table->string('jenis_kelamin', 16)->nullable();
+            $table->string('tempat_lahir', 50)->nullable();
             $table->date('tgl_lahir');
-            $table->string('agama', 20)->nullable()->default('text');
-            $table->string('pendidikan', 20)->nullable()->default('text');
-            $table->string('pekerjaan', 60)->nullable()->default('text');
-            $table->string('golongan_darah', 12)->nullable()->default('text');
-            $table->string('status_perkawinan', 20)->nullable()->default('text');
-            $table->date('tgl_perkawinan');
-            $table->string('status_keluarga', 20)->nullable()->default('text');
-            $table->string('kewarganegaraan', 20)->nullable()->default('text');
-            $table->integer('no_paspor')->unsigned()->nullable()->default(12);
-            $table->integer('no_kitab')->unsigned()->nullable()->default(12);
-            $table->string('nama_ayah', 60)->nullable()->default('text');
-            $table->string('nama_ibu', 60)->nullable()->default('text');
-            $table->unsignedBigInteger('id');
+            $table->string('agama', 20)->nullable();
+            $table->string('pendidikan', 20)->nullable();
+            $table->string('pekerjaan', 60)->nullable();
+            $table->string('golongan_darah', 12)->nullable();
+            $table->string('status_perkawinan', 20)->nullable();
+            $table->date('tgl_perkawinan')->nullable();
+            $table->string('status_keluarga', 20)->nullable();
+            $table->string('kewarganegaraan', 20)->nullable();
+            $table->integer('no_paspor')->unsigned()->nullable();
+            $table->integer('no_kitap')->unsigned()->nullable();
+            $table->string('nama_ayah', 60)->nullable();
+            $table->string('nama_ibu', 60)->nullable();
+            // $table->unsignedBigInteger('id');
+            $table->timestamps();
             // $table->Foreign('id')->references('id')->on('master_kks');
         });
     }

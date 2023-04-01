@@ -1,12 +1,12 @@
 @extends('layouts.mainlayout')
-@section('title', 'Master RT RW')
+@section('title', 'Master KK')
 <!-- partial -->
 @section('content')
     <div class="header-atas">
         <h4>Halaman Master KK</h4>
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button>
     </div>
-    <div class="table_wrapper" style="overflow-x: scroll;">
+    <div class="table_wrapper" style=" overflow-x: scroll;">
         <table id="myTable" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
