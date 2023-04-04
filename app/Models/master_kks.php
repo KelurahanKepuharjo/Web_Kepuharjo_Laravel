@@ -9,4 +9,5 @@ class master_kks extends Model
 {
     protected $table = 'master_kks';
     protected $fillable = ['*'];
+    // protected $primarykey = 'no_kk';
 }

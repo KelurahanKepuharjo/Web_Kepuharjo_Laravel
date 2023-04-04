@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\controller_kepuharjo;
 use App\Http\Controllers\logincontroller;
 use App\Http\Controllers\data_usercontroller;
+use App\Http\Controllers\DataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,9 @@ Route::post('/simpanrtrw',[controller_kepuharjo::class, 'simpanmasterrtrw'])->na
 Route::post('/simpanuser',[controller_kepuharjo::class, 'simpanmasteruser'])->name('simpanuser');
 Route::post('/simpanberita',[controller_kepuharjo::class, 'simpanmasterberita'])->name('simpanberita');
 
+
+Route::get('{id}/hapus-masterkk', [controller_kepuharjo::class, 'hapus']);
+Route::post('update-masterkk/{id}', [controller_kepuharjo::class, 'update']);
 // Route::get('/data_user', 'data');
 // Route::get('/data_user', [data_usercontroller::class, 'index']);
 // Route::get('/data_user/json', [data_usercontroller::class, 'json']);

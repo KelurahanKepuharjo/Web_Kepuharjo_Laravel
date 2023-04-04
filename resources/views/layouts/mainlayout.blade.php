@@ -21,6 +21,11 @@
     {{-- href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css') }}">
     <!-- endinject -->
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery 3 -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <link rel="shortcut icon" href="{{ asset('template/images/logo.png') }}" />
     <title>S-Kepuharjo | @yield('title')</title>
 </head>

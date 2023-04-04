@@ -50,6 +50,34 @@ class controller_kepuharjo extends Controller
         return Redirect('masterkk');
     }
 
+    public function edit(Request $request, $id){
+        $data= master_kks::where('no_kk', $id)->first();
+        return view('master_kk-edit', compact('data'));
+    }
+
+    public function update(Request $request, $id){
+        $data = master_kks::where('no_kk', $id)->first();
+        $data->no_kk = $request->nokk;
+        $data->nama_kepala_keluarga = $request->kepala_keluarga;
+        $data->alamat = $request-> alamatkk;
+        $data->rt = $request->rt;
+        $data->rw = $request->rw;
+        $data->kode_pos = $request->kdpos;
+        $data->kelurahan = $request->kel;
+        $data->kecamatan = $request->kec;
+        $data->kabupaten = $request->kab;
+        $data->provinsi = $request->prov;
+        $data->kk_tgl = $request->tglkk;
+    $data->save();
+    return Redirect('masterkk');
+    }
+
+    public function hapus(Request $request, $id){
+        $data = master_kks::where('no_kk', $id);
+        $data -> delete();
+        return Redirect('masterkk');
+    }
+
     public function simpanmasterrtrw(Request $request)
     {
         $this->validate($request, [
