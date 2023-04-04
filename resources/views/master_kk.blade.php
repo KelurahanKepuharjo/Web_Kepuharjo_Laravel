@@ -1,13 +1,14 @@
 @extends('layouts.mainlayout')
 @section('title', 'Master KK')
-<!-- partial -->
+
+{{-- Section Content --}}
 @section('content')
-    <div class="header-atas">
+    <div class="header-atas" style="display: flex; justify-content: space-between; align-items: center;">
         <h4>Halaman Master KK</h4>
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button>
     </div>
     <div class="table_wrapper" style=" overflow-x: scroll;">
-        <table id="myTable" class="table table-striped" style="width:100%">
+        <table id="myTable" class="table table-striped">
             <thead>
                 <tr>
                     <th>No</th>
@@ -33,12 +34,8 @@
                             <td>{{ $value->kelurahan }}</td>
                             <td>
                                 <a class="btn btn-warning fa fa-pencil" data-id="" href="" style="color: white"
-                                    data-toggle="modal" data-target="#myModal{{ $value->no_kk }}">
+                                    data-toggle="modal" data-target="#modal-edit{{ $value->no_kk }}">
                                 </a>
-                                {{-- <a class="btn btn-warning fa fa-pencil" href="" data-toggle="modal"
-                                    data-target="#modal-edit{{ $value->no_kk }}">
-                                    Preview Data
-                                </a> --}}
                                 <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
                                     data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->no_kk }}"
                                     href="{{ url('masterkk') }}"></a>
@@ -50,8 +47,10 @@
         </table>
     </div>
 
+
+    {{-- Modal Tambah --}}
     <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+        aria-hidden="true" autocomplete="off">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -64,27 +63,37 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" name="nokk" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Nomor KK">
+                            <label for="nomor-kartu">Nomor Kartu:</label>
+                            <input type="number" class="form-control" id="nomor-kartu" name="nomor-kartu" maxlength="16"
+                                max="9999999999999999">
+                        </div>
+                        <div class="form-group">
+                            <label for="nomor-kartu"></label>
+                            <input type="number" id="nomor-kartu" name="nokk" class="form-control" value=""
+                                maxlength="16" required="" placeholder="Nomor KK" max="9999999999999999"
+                                autocomplete="off">
                         </div>
                         <div class="form-group">
                             <input type="text" name="kepala_keluarga" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Nama Kepala Keluarga">
+                                required="" placeholder="Nama Kepala Keluarga" autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="alamatkk" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Alamat">
+                            <input type="text" name="alamatkk" class="form-control" value="" maxlength="100"
+                                required="" placeholder="Alamat" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" name="rt" class="form-control" placeholder="RT">
+                                    <input type="text" name="rt" class="form-control" placeholder="RT"
+                                        autocomplete="off">
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="rw" class="form-control" placeholder="RW">
+                                    <input type="text" name="rw" class="form-control" placeholder="RW"
+                                        autocomplete="off">
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="kdpos" class="form-control" placeholder="Kode Pos">
+                                    <input type="text" name="kdpos" class="form-control" placeholder="Kode Pos"
+                                        autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -92,11 +101,12 @@
                             <div class="row">
                                 <div class="col">
                                     <input type="text" name="kel" class="form-control" placeholder="Kelurahan"
-                                        value="" maxlength="50" required="">
+                                        value="" maxlength="50" required="" autocomplete="off">
                                 </div>
                                 <div class="col">
                                     <input type="text" name="kec" class="form-control"
-                                        placeholder="Kecamatan"value="" maxlength="50" required="">
+                                        placeholder="Kecamatan"value="" maxlength="50" required=""
+                                        autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -104,33 +114,37 @@
                             <div class="row">
                                 <div class="col">
                                     <input type="text" name="kab" class="form-control"
-                                        placeholder="Kabupaten"value="" maxlength="50" required="">
+                                        placeholder="Kabupaten"value="" maxlength="50" required=""
+                                        autocomplete="off">
                                 </div>
                                 <div class="col">
                                     <input type="text" name="prov" class="form-control"
-                                        placeholder="Provinsi"value="" maxlength="50" required="">
+                                        placeholder="Provinsi"value="" maxlength="50" required=""
+                                        autocomplete="off">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="">KK Tanggal</label>
-                            <!-- Input type date dengan format yyyy-mm-dd -->
                             <input type="date" class="form-control" name="tglkk" id="myDate" name="myDate"
-                                placeholder="yyyy-mm-dd" min="1000-01-01" max="9999-12-31">
+                                placeholder="yyyy-mm-dd" min="1000-01-01" max="9999-12-31" autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-Success">Simpan</button>
+                        <button type="submit" class="btn btn-Success"
+                            style="background-color: rgb(0, 189, 0); color: white;">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    {{-- Batas Modal Tambah --}}
 
+    {{-- Modal Hapus --}}
     @foreach ($data as $no => $value)
         <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+            aria-hidden="true" autocomplete="off">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -140,7 +154,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label for="">Yakin untuk Menghapus Data?</label>
+                        <label for="">Yakin untuk Menghapus Data {{ $value->nama_kepala_keluarga }} ?</label>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -151,9 +165,11 @@
             </div>
         </div>
     @endforeach
+    {{-- Batas Modal Hapus --}}
 
+    {{-- Modal Edit --}}
     @foreach ($data as $no => $value)
-        <div class="modal fade" id="myModal{{ $value->no_kk }}" tabindex="-1" role="dialog"
+        <div class="modal fade" id="modal-edit{{ $value->no_kk }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -170,23 +186,24 @@
                                 <div class="form-group">
                                     <input type="text" name="nokk" class="form-control"
                                         value="{{ $value->no_kk }}" maxlength="50" required=""
-                                        placeholder="Nomor KK">
+                                        placeholder="Nomor KK" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" name="kepala_keluarga" class="form-control"
                                         value="{{ $value->nama_kepala_keluarga }}" maxlength="50" required=""
-                                        placeholder="Nama Kepala Keluarga">
+                                        placeholder="Nama Kepala Keluarga" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" name="alamatkk" class="form-control"
-                                        value="{{ $value->alamat }}" maxlength="50" required=""
-                                        placeholder="Alamat">
+                                        value="{{ $value->alamat }}" maxlength="50" required="" placeholder="Alamat"
+                                        autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col">
                                             <input type="text" name="rt"
-                                                value="{{ $value->rt }} "class="form-control" placeholder="RT">
+                                                value="{{ $value->rt }} "class="form-control" placeholder="RT"
+                                                autocomplete="off">
                                         </div>
                                         <div class="col">
                                             <input type="text" name="rw" value="{{ $value->rw }}"
@@ -194,7 +211,7 @@
                                         </div>
                                         <div class="col">
                                             <input type="text" name="kdpos" value="{{ $value->kode_pos }}"
-                                                class="form-control" placeholder="Kode Pos">
+                                                class="form-control" placeholder="Kode Pos" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -203,12 +220,12 @@
                                         <div class="col">
                                             <input type="text" name="kel" class="form-control"
                                                 placeholder="Kelurahan" value="{{ $value->kelurahan }}" maxlength="50"
-                                                required="">
+                                                required="" autocomplete="off">
                                         </div>
                                         <div class="col">
                                             <input type="text" name="kec" class="form-control"
                                                 placeholder="Kecamatan"value="{{ $value->kecamatan }}" maxlength="50"
-                                                required="">
+                                                required="" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -217,26 +234,26 @@
                                         <div class="col">
                                             <input type="text" name="kab" class="form-control"
                                                 placeholder="Kabupaten"value="{{ $value->kabupaten }}" maxlength="50"
-                                                required="">
+                                                required="" autocomplete="off">
                                         </div>
                                         <div class="col">
                                             <input type="text" name="prov" class="form-control"
                                                 placeholder="Provinsi"value="{{ $value->provinsi }}" maxlength="50"
-                                                required="">
+                                                required="" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="">KK Tanggal</label>
-                                    <!-- Input type date dengan format yyyy-mm-dd -->
                                     <input type="date" class="form-control" value="{{ $value->kk_tgl }}"
                                         name="tglkk" id="myDate" name="myDate" placeholder="yyyy-mm-dd"
-                                        min="1000-01-01" max="9999-12-31">
+                                        min="1000-01-01" max="9999-12-31" autocomplete="off">
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-Success">Simpan</button>
+                                <button type="submit" class="btn btn-Success"
+                                    style="background-color: rgb(0, 189, 0); color: white;">Simpan</button>
                             </div>
                         </form>
                     </div>
@@ -244,77 +261,6 @@
             </div>
         </div>
     @endforeach
+    {{-- Batas Modal Edit --}}
 @endsection
-
-<style>
-    table {
-        border-collapse: collapse;
-        white-space: nowrap;
-        min-width: 100%;
-    }
-
-    .header-atas {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .header h4 {
-        margin: 0;
-    }
-
-    .header button {
-        margin-left: auto;
-    }
-</style>
-
-{{--
-<script>
-    $(document).ready(function() {
-        $('#myModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var id = button.data('no_kk');
-            var modal = $(this);
-
-            $.ajax({
-                url: '/data/' + id,
-                type: 'GET',
-                dataType: 'json',
-                success: function(response) {
-                    modal.find('.modal-body').html(response.data);
-                }
-            });
-        });
-    });
-</script> --}}
-
-<script>
-    function showNotification() {
-        // Buat elemen notifikasi
-        var notification = document.createElement("div");
-        notification.classList.add("notification");
-        notification.textContent = "Ini adalah notifikasi!";
-
-        // Tambahkan notifikasi ke dalam dokumen
-        document.body.appendChild(notification);
-
-        // Hilangkan notifikasi setelah 5 detik
-        setTimeout(function() {
-            notification.remove();
-        }, 5000);
-    }
-</script>
-<style>
-    .notification {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background-color: #ffcc00;
-        color: #333;
-        font-weight: bold;
-        padding: 10px;
-        text-align: center;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-</style>
+{{-- Batas Section Content --}}
