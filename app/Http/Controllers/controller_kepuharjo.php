@@ -147,6 +147,24 @@ class controller_kepuharjo extends Controller
         return Redirect('berita');
     }
 
+    public function updatemasterrtrw(Request $request, $id){
+    $data = master_rtrw::where('nik', $id)->first();
+    $data->nik = $request->nik;
+    $data->nama_lengkap = $request->nama_lengkap;
+    $data->alamat = $request->alamat;
+    $data->no_hp = $request->no_hp;
+    $data->rt = $request->rt;
+    $data->rw = $request->rw;
+    $data->save();
+    return Redirect('masterrtrw');
+    }
+
+    public function hapusmasterrtrw(Request $request, $id){
+        $data = master_rtrw::where('nik', $id);
+        $data -> delete();
+        return Redirect('masterrtrw');
+    }
+    
     public function dashboard(){
         return view('dashboard');
     }
