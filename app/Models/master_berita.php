@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class master_berita extends Model
 {
-    use HasFactory;
+    protected $table = 'master_berita';
+    protected $fillable = ['*'];
 }

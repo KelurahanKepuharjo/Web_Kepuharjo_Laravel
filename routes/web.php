@@ -54,8 +54,11 @@ Route::post('/simpanuser',[controller_kepuharjo::class, 'simpanmasteruser'])->na
 Route::post('/simpanberita',[controller_kepuharjo::class, 'simpanmasterberita'])->name('simpanberita');
 
 
-Route::get('{id}/hapus-masterkk', [controller_kepuharjo::class, 'hapus']);
+Route::get('{id}/hapus-masterkk', [controller_kepuharjo::class, 'hapusmasterkk']);
 Route::post('update-masterkk/{id}', [controller_kepuharjo::class, 'update']);
+
+Route::get('{id}/hapus-berita', [controller_kepuharjo::class, 'hapusberita']);
+Route::post('update-berita/{id}', [controller_kepuharjo::class, 'updateberita']);
 // Route::get('/data_user', 'data');
 // Route::get('/data_user', [data_usercontroller::class, 'index']);
 // Route::get('/data_user/json', [data_usercontroller::class, 'json']);

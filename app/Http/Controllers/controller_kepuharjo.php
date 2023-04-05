@@ -118,11 +118,32 @@ class controller_kepuharjo extends Controller
             // 'no_kk' => 'unique:master_kks'
         ]);
 
+
             $data = new berita();
             $data->judul = $request->judul;
-            $data->sub_title = $request->sub_title;
+            $data->sub_title = $request->subtitle;
             $data->deskripsi = $request-> deskripsi;
         $data->save();
+        return Redirect('berita');
+    }
+
+    public function editberita(Request $request, $id){
+        $data= berita::where('id_berita', $id)->first();
+        return view('berita', compact('data'));
+    }
+
+    public function updateberita(Request $request, $id){
+    $data = new berita();
+    $data->judul = $request->judul;
+    $data->sub_title = $request->subtitle;
+    $data->deskripsi = $request-> deskripsi;
+    $data->save();
+    return Redirect('berita');
+    }
+
+    public function hapusberita(Request $request, $id){
+        $data = berita::where('id_berita', $id);
+        $data -> delete();
         return Redirect('berita');
     }
 

@@ -63,11 +63,6 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nomor-kartu">Nomor Kartu:</label>
-                            <input type="number" class="form-control" id="nomor-kartu" name="nomor-kartu" maxlength="16"
-                                max="9999999999999999">
-                        </div>
-                        <div class="form-group">
                             <label for="nomor-kartu"></label>
                             <input type="number" id="nomor-kartu" name="nokk" class="form-control" value=""
                                 maxlength="16" required="" placeholder="Nomor KK" max="9999999999999999"
