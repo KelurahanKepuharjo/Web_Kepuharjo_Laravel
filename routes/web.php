@@ -63,6 +63,9 @@ Route::post('update-berita/{id}', [controller_kepuharjo::class, 'updateberita'])
 Route::get('{id}/hapus-masterrtrw', [controller_kepuharjo::class, 'hapusmasterrtrw']);
 Route::post('update-masterrtrw/{id}', [controller_kepuharjo::class, 'updatemasterrtrw']);
 
+Route::get('{id}/hapus-masteruser', [controller_kepuharjo::class, 'hapusmasteruser']);
+Route::post('update-masteruser/{id}', [controller_kepuharjo::class, 'updatemasteruser']);
+
 // Route::get('/data_user', 'data');
 // Route::get('/data_user', [data_usercontroller::class, 'index']);
 // Route::get('/data_user/json', [data_usercontroller::class, 'json']);

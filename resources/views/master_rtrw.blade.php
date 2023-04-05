@@ -33,11 +33,11 @@
                             <td>{{ $value->rw }}</td>
                             <td>
                                 
-                                <a class="btn btn-warning fa fa-pencil" href="" data-toggle="modal"
+                                <a class="btn btn-warning fa fa-pencil" style="color:white;" href="" data-toggle="modal"
                                     data-target="#modal-edit{{ $value->nik }}">
                                 </a>
                                 <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
-                                    data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->no_kk }}"
+                                    data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->nik}}"
                                     href="{{ url('masterrtrw') }}"></a>
                             </td>
                         </tr>
@@ -62,27 +62,27 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <input type="text" name="nik" class="form-control" value="" maxlength="50"
-                                required="" placeholder="NIK" autocomplete="off" name="nik">
+                                required="" placeholder="NIK" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <input type="text" name="nama_lengkap" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Nama Lengkap" autocomplete="off" name="NamaLengkap">
+                                required="" placeholder="Nama Lengkap" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <input type="text" name="alamatkk" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Alamat" autocomplete="off" name="alamat">
+                                required="" placeholder="Alamat" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <input type="text" name="no_hp" class="form-control" value="" maxlength="50"
-                                required="" placeholder="No HP" autocomplete="off" name="no_hp">
+                                required="" placeholder="No HP" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" name="rt" class="form-control" placeholder="RT" autocomplete="off" name="rt">
+                                    <input type="text" name="rt" class="form-control" placeholder="RT" autocomplete="off">
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="rw" class="form-control" placeholder="RW" autocomplete="off" name="rw">
+                                    <input type="text" name="rw" class="form-control" placeholder="RW" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -158,7 +158,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master RT RW</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Hapus Data Master RT RW</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

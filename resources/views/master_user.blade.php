@@ -30,45 +30,9 @@
                         <td>{{ $value->jenis_kelamin }}</td>
                         <td>{{ $value->pekerjaan }}</td>
                         <td>
-                            <a class="btn btn-success btn-sm btn-icon-text mr-3" data-id="{{ $value->nik }}"
-                                href="" data-toggle="modal" data-target="#myModal">
-                                Preview Data
+                            <a class="btn btn-warning fa fa-pencil" style="color:white;" href="" data-toggle="modal"
+                                data-target="#modal-edit{{ $value->nik }}">
                             </a>
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Edit Data Master User</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label>Tempat, Tanggal Lahir </label>
-                                                <input type="text" name="ttl" class="form-control" value=""
-                                                    maxlength="50" required="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Kartu Keluarga</label>
-                                                <input type="hidden" id="idsurat" value="{{ $value->kelurahan }}" />
-
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Tutup</button>
-                                            <button type="button" class="btn btn-Success">Simpan</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- <a class="btn btn-warning fa fa-pencil" href="" data-toggle="modal"
-                                data-target="#modal-edit{{ $value->no_kk }}">
-                                Preview Data
-                            </a> --}}
                             <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
                                 data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->nik }}"
                                 href="{{ url('masteruser') }}"></a>
@@ -95,27 +59,27 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="text" name="nik" class="form-control" value="" maxlength="50"
-                            required="" placeholder="NIK">
+                            required="" placeholder="NIK" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <input type="text" name="nama_lengkap" class="form-control" value="" maxlength="50"
-                            required="" placeholder="Nama Lengkap">
+                            required="" placeholder="Nama Lengkap" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <input type="text" name="tempat_lahir" class="form-control" value="" maxlength="50"
-                            required="" placeholder="Tempat Lahir">
+                            required="" placeholder="Tempat Lahir" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <input type="date" name="tgl_lahir" class="form-control" value="" maxlength="50"
-                            required="" placeholder="Tanggal Lahir">
+                            required="" placeholder="Tanggal Lahir" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <input type="text" name="jenis_kelamin" class="form-control" value="" maxlength="50"
-                            required="" placeholder="Jenis Kelamin">
+                            required="" placeholder="Jenis Kelamin" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <input type="text" name="pekerjaan" class="form-control" value="" maxlength="50"
-                            required="" placeholder="Pekerjaan">
+                            required="" placeholder="Pekerjaan" autocomplete="off">
                     </div>
                     
                 </div>
@@ -128,26 +92,82 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master RT dan RW</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <label for="">Yakin untuk Menghapus Data?</label>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-danger">Hapus</button>
+@foreach ($data as $no => $value)
+    <div class="modal fade" id="modal-edit{{ $value->nik }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Master User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ url('update-masteruser/' . $value->nik) }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" name="nik" class="form-control" value="{{ $value->nik }}" maxlength="50"
+                                required="" placeholder="NIK">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="nama_lengkap" class="form-control" value="{{ $value->nama_lengkap }}" maxlength="50"
+                                required="" placeholder="Nama Lengkap" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="tempat_lahir" class="form-control" value="{{ $value->tempat_lahir }}" maxlength="50"
+                                required="" placeholder="Tempat Lahir" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input type="date" name="tgl_lahir" class="form-control" value="{{ $value->tgl_lahir }}" maxlength="50"
+                                required="" placeholder="Tanggal Lahir" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="jenis_kelamin" class="form-control" value="{{ $value->jenis_kelamin }}" maxlength="50"
+                                required="" placeholder="Jenis Kelamin" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="pekerjaan" class="form-control" value="{{ $value->pekerjaan }}" maxlength="50"
+                                required="" placeholder="Pekerjaan" autocomplete="off">
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-Success">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
+@endforeach
+
+
+    {{-- Modal Hapus --}}
+    @foreach ($data as $no => $value)
+        <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" autocomplete="off">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Hapus Data Master User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="">Yakin untuk Menghapus Data {{ $value->nama_lengkap }} ?</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <a type="button" onclick="showNotification()"
+                            href="{{ url($value->nik . '/hapus-masteruser') }}" class="btn btn-danger">Hapus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    {{-- Batas Modal Hapus --}}
 @endsection
 
 <style>

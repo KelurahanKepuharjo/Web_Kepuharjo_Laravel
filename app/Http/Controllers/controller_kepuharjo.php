@@ -164,6 +164,24 @@ class controller_kepuharjo extends Controller
         $data -> delete();
         return Redirect('masterrtrw');
     }
+
+    public function updatemasteruser(Request $request, $id){
+        $data = master_masyarakat::where('nik', $id)->first();
+        $data->nik = $request->nik;
+        $data->nama_lengkap = $request->nama_lengkap;
+        $data->tempat_lahir = $request->tempat_lahir;
+        $data->tgl_lahir = $request->tgl_lahir;
+        $data->jenis_kelamin = $request->jenis_kelamin;
+        $data->pekerjaan = $request->pekerjaan;
+        $data->save();
+        return Redirect('masteruser');
+        }
+    
+        public function hapusmasteruser(Request $request, $id){
+            $data = master_masyarakat::where('nik', $id);
+            $data -> delete();
+            return Redirect('masteruser');
+        }
     
     public function dashboard(){
         return view('dashboard');
