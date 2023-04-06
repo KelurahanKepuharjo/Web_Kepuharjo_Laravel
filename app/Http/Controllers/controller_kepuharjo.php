@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\master_kks;
 use App\Models\master_rtrw;
 use App\Models\master_masyarakat;
+use Illuminate\Support\Facades\DB;
 
 
 use Redirect;
@@ -21,12 +22,6 @@ class controller_kepuharjo extends Controller
     public function login(){
         return view('login');
     }
-
-    // public function postlogin(Request $request){
-    //     if(Auth::attempt($request->only('nama', 'password'))){
-    //     return redirect('/dashboard');
-    //     }
-    // }
 
     public function simpanmasterkk(Request $request)
     {
@@ -127,13 +122,8 @@ class controller_kepuharjo extends Controller
         return Redirect('berita');
     }
 
-    public function editberita(Request $request, $id){
-        $data= berita::where('id_berita', $id)->first();
-        return view('berita', compact('data'));
-    }
-
     public function updateberita(Request $request, $id){
-    $data = new berita();
+    $data= berita::where('id', $id)->first();
     $data->judul = $request->judul;
     $data->sub_title = $request->subtitle;
     $data->deskripsi = $request-> deskripsi;
@@ -176,13 +166,33 @@ class controller_kepuharjo extends Controller
         $data->save();
         return Redirect('masteruser');
         }
-    
+
         public function hapusmasteruser(Request $request, $id){
             $data = master_masyarakat::where('nik', $id);
             $data -> delete();
             return Redirect('masteruser');
         }
-    
+
+    public function ajax(Request $request){
+        $nik = $request->nik;
+        $results = DB::table('master_masyarakats')->where('nama_lengkap', 'like' , '%'.$nik.'%')->get();
+        $c = count($results);
+        if($c == 0){
+            // jikaa data kosong
+            return '<p class="text-muted">Maaf, Data tidak ditemukan</p>';
+        }else{
+            // jika data ada
+            return view('ajaxpage')->with([
+                'data' => $results
+            ]);
+        }
+    }
+
+    public function read(){
+        return "Silahkan Melakukan Pencarian Data";
+
+    }
+
     public function dashboard(){
         return view('dashboard');
     }

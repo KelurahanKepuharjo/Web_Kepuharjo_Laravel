@@ -26,6 +26,7 @@
 
     <!-- jQuery 3 -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link rel="shortcut icon" href="{{ asset('template/images/logo.png') }}" />
     <title>S-Kepuharjo | @yield('title')</title>
 </head>

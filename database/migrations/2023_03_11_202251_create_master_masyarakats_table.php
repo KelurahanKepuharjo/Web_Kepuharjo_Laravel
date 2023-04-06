@@ -14,7 +14,8 @@ class CreateMasterMasyarakatsTable extends Migration
     public function up()
     {
         Schema::create('master_masyarakats', function (Blueprint $table) {
-            $table->bigInteger('nik')->primary();
+            $table->id();
+            $table->bigInteger('nik');
             // $table->uuid('uuid');
             $table->string('nama_lengkap', 100)->nullable();
             $table->string('jenis_kelamin', 16)->nullable();

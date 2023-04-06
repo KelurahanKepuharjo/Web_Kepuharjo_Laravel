@@ -21,7 +21,7 @@ class CreateMasterAkunsTable extends Migration
             $table->string('role', 20)->nullable()->default('text');
             $table->timestamps();
             $table->BigInteger('nik');
-            $table->Foreign('nik')->references('nik')->on('master_masyarakats');
+            // $table->Foreign('nik')->references('nik')->on('master_masyarakats');
         });
     }
 
