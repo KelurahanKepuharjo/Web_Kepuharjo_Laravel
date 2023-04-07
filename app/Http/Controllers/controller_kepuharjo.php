@@ -99,10 +99,21 @@ class controller_kepuharjo extends Controller
             $data = new master_masyarakat();
             $data->nik = $request->nik;
             $data->nama_lengkap = $request->nama_lengkap;
+            $data->jenis_kelamin = $request->jenis_kelamin;
             $data->tempat_lahir = $request-> tempat_lahir;
             $data->tgl_lahir = $request-> tgl_lahir;
-            $data->jenis_kelamin = $request->jenis_kelamin;
+            $data->agama = $request->agama;
+            $data->pendidikan = $request->pendidikan;
             $data->pekerjaan = $request->pekerjaan;
+            $data->golongan_darah = $request->gol_darah;
+            $data->status_perkawinan = $request->status_perkawinan;
+            $data->tgl_perkawinan = $request->tgl_perkawinan;
+            $data->status_keluarga = $request->status_keluarga;
+            $data->kewarganegaraan = $request->kewarganegaraan;
+            $data->no_paspor = $request->no_paspor;
+            $data->no_kitap = $request->no_kitap;
+            $data->nama_ayah = $request->nama_ayah;
+            $data->nama_ibu = $request->nama_ibu;
         $data->save();
         return Redirect('masteruser');
     }
@@ -159,10 +170,21 @@ class controller_kepuharjo extends Controller
         $data = master_masyarakat::where('nik', $id)->first();
         $data->nik = $request->nik;
         $data->nama_lengkap = $request->nama_lengkap;
-        $data->tempat_lahir = $request->tempat_lahir;
-        $data->tgl_lahir = $request->tgl_lahir;
         $data->jenis_kelamin = $request->jenis_kelamin;
+        $data->tempat_lahir = $request-> tempat_lahir;
+        $data->tgl_lahir = $request-> tgl_lahir;
+        $data->agama = $request->agama;
+        $data->pendidikan = $request->pendidikan;
         $data->pekerjaan = $request->pekerjaan;
+        $data->golongan_darah = $request->gol_darah;
+        $data->status_perkawinan = $request->status_perkawinan;
+        $data->tgl_perkawinan = $request->tgl_perkawinan;
+        $data->status_keluarga = $request->status_keluarga;
+        $data->kewarganegaraan = $request->kewarganegaraan;
+        $data->no_paspor = $request->no_paspor;
+        $data->no_kitap = $request->no_kitap;
+        $data->nama_ayah = $request->nama_ayah;
+        $data->nama_ibu = $request->nama_ibu;
         $data->save();
         return Redirect('masteruser');
         }
