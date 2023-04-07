@@ -3,50 +3,80 @@
 
 {{-- Section Content --}}
 @section('content')
-    <div class="header-atas" style="display: flex; justify-content: space-between; align-items: center;">
-        <h4>Halaman Master KK</h4>
-        <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button>
-    </div>
-    <div class="table_wrapper" style=" overflow-x: scroll;">
-        <table id="myTable" class="table table-striped">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>No KK</th>
-                    <th>Kepala Keluarga</th>
-                    <th>Alamat</th>
-                    <th>RT</th>
-                    <th>RW</th>
-                    <th>kelurahan</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <form action="masterkk" method="post">
-                    @foreach ($data as $no => $value)
-                        <tr>
-                            <td>{{ $no + 1 }}</td>
-                            <td>{{ $value->no_kk }}</td>
-                            <td>{{ $value->nama_kepala_keluarga }}</td>
-                            <td>{{ $value->alamat }}</td>
-                            <td>{{ $value->rt }}</td>
-                            <td>{{ $value->rw }}</td>
-                            <td>{{ $value->kelurahan }}</td>
-                            <td>
-                                <a class="btn btn-warning fa fa-pencil" data-id="" href="" style="color: white"
-                                    data-toggle="modal" data-target="#modal-edit{{ $value->no_kk }}">
-                                </a>
-                                <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
-                                    data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->no_kk }}"
-                                    href="{{ url('masterkk') }}"></a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </form>
-            </tbody>
-        </table>
+    <div id="myDiv1">
+        <div class="header-atas" style="display: flex; justify-content: space-between; align-items: center;">
+            <h4>Halaman Master KK</h4>
+            <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button>
+        </div>
+        <!-- isi div -->
+
+        <div class="table_wrapper" style=" overflow-x: scroll;">
+            <table id="myTable" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>No KK</th>
+                        <th>Kepala Keluarga</th>
+                        <th>Alamat</th>
+                        <th>RT</th>
+                        <th>RW</th>
+                        <th>kelurahan</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form action="masterkk" method="post">
+                        @foreach ($data as $no => $value)
+                            <tr>
+                                <td>{{ $no + 1 }}</td>
+                                <td>{{ $value->no_kk }}</td>
+                                <td>{{ $value->nama_kepala_keluarga }}</td>
+                                <td>{{ $value->alamat }}</td>
+                                <td>{{ $value->rt }}</td>
+                                <td>{{ $value->rw }}</td>
+                                <td>{{ $value->kelurahan }}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            style="background-color: #00AAAA; color: white;">
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" data-id="" href="" data-toggle="modal"
+                                                data-target="#modal-edit{{ $value->no_kk }}">Edit KK</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                                data-target="#modal-hapus{{ $value->no_kk }}" value="{{ $value->no_kk }}"
+                                                href="{{ url('masterkk') }}">Hapus KK</a>
+                                            <button class="dropdown-item" type="button" value="isi value button"
+                                                onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}.');"
+                                                value="{{ $value->no_kk }}">Tambah data
+                                                Keluarga</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </form>
+                </tbody>
+            </table>
+        </div>
     </div>
 
+
+
+    <div id="myDiv2" style="display:none;">
+        <h4>Halaman Kartu Keluarga</h4>
+        <div class="form-group d-inline-flex">
+            {{-- <form action="" method="post"> --}}
+            <label for="pencarian"></label>
+            <input type="text" id="input" class="form-control" placeholder="Ketikkan NIK...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+            </div>
+            {{-- </form> --}}
+        </div>
+        <div id="read"></div>
+    </div>
 
     {{-- Modal Tambah --}}
     <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -138,8 +168,8 @@
 
     {{-- Modal Hapus --}}
     @foreach ($data as $no => $value)
-        <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true" autocomplete="off">
+        <div class="modal fade" id="modal-hapus{{ $value->no_kk }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true" autocomplete="off">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -169,7 +199,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Master KK haloooo</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Master KK</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -256,6 +286,73 @@
             </div>
         </div>
     @endforeach
+
     {{-- Batas Modal Edit --}}
+
+    {{-- coba modal tambah rt rw --}}
+    {{-- batas modal --}}
+
 @endsection
 {{-- Batas Section Content --}}
+
+<script>
+    function showDiv1() {
+        var div = document.getElementById("myDiv1");
+        if (div.style.display === "none") {
+            div.style.display = "block";
+        } else {
+            div.style.display = "none";
+        }
+    }
+
+    function showDiv2() {
+        var div = document.getElementById("myDiv2");
+        if (div.style.display === "none") {
+            div.style.display = "block";
+        } else {
+            div.style.display = "none";
+        }
+    }
+</script>
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        readData()
+        $('#input').keyup(function() {
+            var strcari = $("#input").val();
+            if (strcari != "") {
+                $("#read").html('<p class="text-muted">Menunggu Mencari Data ...</p>')
+                $.ajax({
+                    type: "get",
+                    url: "{{ url('ajax') }}",
+                    data: "nik=" + strcari,
+                    success: function(data) {
+                        $("#read").html(data);
+                    }
+                });
+            } else {
+                readData()
+            }
+        });
+    });
+
+    function readData() {
+        $.get("{{ url('read') }}", {}, function(data, status) {
+            $("#read").html(data);
+        });
+    }
+
+    function isiTextfield(nilai) {
+        document.getElementById("input").value = nilai;
+    }
+
+    var input = document.querySelector('#input'); // mengambil elemen input
+
+    input.addEventListener('keyup', function(event) {
+        if (event.keyCode === 13) { // cek jika tombol yang ditekan adalah tombol "Enter"
+            event.preventDefault(); // membatalkan perilaku default tombol "Enter"
+            document.querySelector('form').submit(); // melakukan submit form
+        }
+    });
+</script>
