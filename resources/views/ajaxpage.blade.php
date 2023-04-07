@@ -2,32 +2,39 @@
     <form action="{{ url('simpanrtrw') }}" method="post">
         @csrf
         <div class="form-group">
+            <label>NIK</label>
             <input type="text" name="nik" class="form-control" value="{{ $item->nik }}" maxlength="50"
                 required="" placeholder="NIK" autocomplete="off" disabled>
         </div>
         <div class="form-group">
+            <label>Nama Lengkap</label>
             <input type="text" name="nama_lengkap" class="form-control" value="{{ $item->nama_lengkap }}"
                 maxlength="50" required="" placeholder="Nama Lengkap" autocomplete="off" disabled>
         </div>
         <div class="form-group">
+            <label>Alamat</label>
             <input type="text" name="alamatkk" class="form-control" value="{{ $item->tempat_lahir }}" maxlength="50"
                 required="" placeholder="Alamat" autocomplete="off" disabled>
         </div>
         <div class="form-group">
+            <label>No HP</label>
             <input type="text" name="no_hp" class="form-control" value="" maxlength="50" required=""
-                placeholder="No HP" autocomplete="off">
+                placeholder="Masukkan No HP" autocomplete="off">
         </div>
         <div class="form-group">
+            <label>Password</label>
             <input type="text" name="password" class="form-control" value="" maxlength="50" required=""
-                placeholder="Password" autocomplete="off">
+                placeholder="Masukkan Password" autocomplete="off">
         </div>
         <div class="form-group">
             <div class="row">
                 <div class="col">
+                    <label>RT</label>
                     <input type="text" name="rt" class="form-control" placeholder="RT" autocomplete="off"
                         disabled>
                 </div>
                 <div class="col">
+                    <label>RW</label>
                     <input type="text" name="rw" class="form-control" placeholder="RW" autocomplete="off"
                         disabled>
                 </div>

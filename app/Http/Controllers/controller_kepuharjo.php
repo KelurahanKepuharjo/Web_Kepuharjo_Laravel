@@ -175,7 +175,7 @@ class controller_kepuharjo extends Controller
 
     public function ajax(Request $request){
         $nik = $request->nik;
-        $results = DB::table('master_masyarakats')->where('nama_lengkap', 'like' , '%'.$nik.'%')->get();
+        $results = DB::table('master_masyarakats')->where('nik', 'like' , '%'.$nik.'%')->get();
         $c = count($results);
         if($c == 0){
             // jikaa data kosong

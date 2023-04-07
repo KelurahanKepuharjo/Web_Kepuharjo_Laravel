@@ -4,7 +4,7 @@
 @section('content')
     <div class="header-atas">
         <h4>Halaman Master RT dan RW</h4>
-        <button data-toggle="modal" name='tambah' data-target="#modal-tambahrtrw">+</button>
+        {{-- <button data-toggle="modal" name='tambah' data-target="#modal-tambahrtrw">+</button> --}}
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah Data</i></button>
 
     </div>
@@ -50,7 +50,7 @@
     </div>
 
     {{-- coba modal tambah rt rw --}}
-    <div class="modal fade" id="modal-tambahrtrw" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -64,10 +64,11 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-1">
-                                <label for="exampleFormControlSelect1">RW-</label>
+                                <label for="exampleFormControlSelect1">RW. </label>
                             </div>
-                            <div class="col">
+                            <div class="col-sm-5">
                                 <select class="form-control" id="exampleFormControlSelect1">
+                                    <option>Pilih</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -93,7 +94,7 @@
     </div>
     {{-- batas modal --}}
 
-    <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    {{-- <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -142,7 +143,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- modal edit --}}
     @foreach ($data as $no => $value)

@@ -34,7 +34,7 @@
                                 data-target="#modal-edit{{ $value->nik }}">
                             </a>
                             <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
-                                data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->nik }}"
+                                data-target="#modal-hapus{{ $value->nik }}" style="margin-left: 10px; "
                                 href="{{ url('masteruser') }}"></a>
                         </td>
                     </tr>
@@ -58,30 +58,40 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
+                        <label>NIK</label>
                         <input type="text" name="nik" class="form-control" value="" maxlength="50"
                             required="" placeholder="NIK" autocomplete="off">
                     </div>
                     <div class="form-group">
+                        <label>Nama Lengkap</label>
                         <input type="text" name="nama_lengkap" class="form-control" value="" maxlength="50"
                             required="" placeholder="Nama Lengkap" autocomplete="off">
                     </div>
                     <div class="form-group">
+                        <label>Tempat Lahir</label>
                         <input type="text" name="tempat_lahir" class="form-control" value="" maxlength="50"
                             required="" placeholder="Tempat Lahir" autocomplete="off">
                     </div>
                     <div class="form-group">
+                        <label>Tanggal Lahir</label>
                         <input type="date" name="tgl_lahir" class="form-control" value="" maxlength="50"
                             required="" placeholder="Tanggal Lahir" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="jenis_kelamin" class="form-control" value="" maxlength="50"
-                            required="" placeholder="Jenis Kelamin" autocomplete="off">
+                        <label>Jenis kelamin</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" name="jenis_kelamin" autocomplete="off" id="exampleFormControlSelect1">
+                                    <option>Pilih</option>
+                                    <option>Laki-Laki</option>
+                                    <option>Perempuan</option>
+                                </select>
+                            </div>
                     </div>
                     <div class="form-group">
+                        <label>Pekerjaan</label>
                         <input type="text" name="pekerjaan" class="form-control" value="" maxlength="50"
                             required="" placeholder="Pekerjaan" autocomplete="off">
                     </div>
-                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -107,30 +117,41 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
+                            <label>NIK</label>
                             <input type="text" name="nik" class="form-control" value="{{ $value->nik }}" maxlength="50"
                                 required="" placeholder="NIK">
                         </div>
                         <div class="form-group">
+                            <label>Nama Lengkap</label>
                             <input type="text" name="nama_lengkap" class="form-control" value="{{ $value->nama_lengkap }}" maxlength="50"
                                 required="" placeholder="Nama Lengkap" autocomplete="off">
                         </div>
                         <div class="form-group">
+                            <label>Tempat Lahir</label>
                             <input type="text" name="tempat_lahir" class="form-control" value="{{ $value->tempat_lahir }}" maxlength="50"
                                 required="" placeholder="Tempat Lahir" autocomplete="off">
                         </div>
                         <div class="form-group">
+                            <label>Tanggal Lahir</label>
                             <input type="date" name="tgl_lahir" class="form-control" value="{{ $value->tgl_lahir }}" maxlength="50"
                                 required="" placeholder="Tanggal Lahir" autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="jenis_kelamin" class="form-control" value="{{ $value->jenis_kelamin }}" maxlength="50"
-                                required="" placeholder="Jenis Kelamin" autocomplete="off">
+                            <label>Jenis Kelamin</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control" name="jenis_kelamin"  value="{{ $value->tgl_lahir }}" autocomplete="off" id="exampleFormControlSelect1">
+                                        <option>{{ $value->jenis_kelamin }}</option>
+                                        <option disabled></option>
+                                        <option>Laki-Laki</option>
+                                        <option>Perempuan</option>
+                                    </select>
+                                </div>
                         </div>
                         <div class="form-group">
+                            <label>Pekerjaan</label>
                             <input type="text" name="pekerjaan" class="form-control" value="{{ $value->pekerjaan }}" maxlength="50"
                                 required="" placeholder="Pekerjaan" autocomplete="off">
                         </div>
-                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -145,7 +166,7 @@
 
     {{-- Modal Hapus --}}
     @foreach ($data as $no => $value)
-        <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="modal-hapus{{ $value->nik }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true" autocomplete="off">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
