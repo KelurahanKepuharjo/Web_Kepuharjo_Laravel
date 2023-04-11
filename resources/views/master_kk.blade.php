@@ -127,25 +127,14 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>No Kartu Keluarga</label>
-                                <input type="text" id="input" name="no_kk" class="form-control" maxlength="50"
-                                    required="" autocomplete="off" disabled>
+                                <input type="number" id="input" name="nokk" class="form-control" maxlength="50"
+                                    required="" autocomplete="off" readonly>
                             </div>
                             <div class="form-group">
                                 <label>Nama Kepala Keluarga</label>
                                 <input type="text" id="input2" name="kepala_keluarga" class="form-control"
                                     maxlength="50" required="" autocomplete="off" disabled>
                             </div>
-                            {{-- <div class="form-group d-inline-flex">
-                            <label for="pencarian"></label>
-                            <input type="text" id="input" class="form-control" placeholder="Ketikkan NIK...">
-                            <button class="btn btn-primary"><i class="fa fa-search"></i></button>
-                        </div>
-                        <div class="form-group d-inline-flex">
-                            <label for="pencarian"></label>
-                            <input type="text" id="input2" class="form-control" placeholder="Ketikkan NIK...">
-                            <button class="btn btn-primary"><i class="fa fa-search"></i></button>
-                        </div> --}}
-                            {{-- <div id="read"></div> --}}
                             <div class="form-group">
                                 <label>NIK</label>
                                 <input type="text" name="nik" class="form-control" value="" maxlength="50"
@@ -155,6 +144,17 @@
                                 <label>Nama Lengkap</label>
                                 <input type="text" name="nama_lengkap" class="form-control" value=""
                                     maxlength="50" required="" placeholder="Nama Lengkap" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis Kelamin</label>
+                                <div class="col">
+                                    <select class="form-control" name="jns_kelamin" autocomplete="off"
+                                        id="exampleFormControlSelect1">
+                                        <option>Pilih</option>
+                                        <option>Laki Laki</option>
+                                        <option>Perempuan</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Tempat Lahir</label>
@@ -197,17 +197,6 @@
                                         <option>Diploma IV/Strata I</option>
                                         <option>Strata II</option>
                                         <option>Strata III</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Jenis kelamin</label>
-                                <div class="col">
-                                    <select class="form-control" name="jenis_kelamin" autocomplete="off"
-                                        id="exampleFormControlSelect1">
-                                        <option>Pilih</option>
-                                        <option>Laki-Laki</option>
-                                        <option>Perempuan</option>
                                     </select>
                                 </div>
                             </div>
