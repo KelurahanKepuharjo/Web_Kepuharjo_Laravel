@@ -14,9 +14,10 @@ class CreateMasterMasyarakatsTable extends Migration
     public function up()
     {
         Schema::create('master_masyarakats', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('nik');
-            // $table->uuid('uuid');
+            // // $table->id();
+
+            // $table->integer('id_kk');
+            // // $table->uuid('uuid');
             $table->string('nama_lengkap', 100)->nullable();
             $table->string('jenis_kelamin', 16)->nullable();
             $table->string('tempat_lahir', 50)->nullable();
@@ -33,9 +34,9 @@ class CreateMasterMasyarakatsTable extends Migration
             $table->integer('no_kitap')->unsigned()->nullable();
             $table->string('nama_ayah', 60)->nullable();
             $table->string('nama_ibu', 60)->nullable();
-            // $table->unsignedBigInteger('id');
+            $table->unsignedBigInteger('id');
             $table->timestamps();
-            // $table->Foreign('id')->references('id')->on('master_kks');
+            $table->Foreign('id')->references('id')->on('master_kks');
         });
     }
 

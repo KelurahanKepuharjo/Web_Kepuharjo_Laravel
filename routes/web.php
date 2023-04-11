@@ -25,8 +25,6 @@ Route::get('/home', function () {
     return view('home', ['name' => 'Edy Atthoillah', 'role' => 'user']);
 });
 
-
-
 Route::get('/', [controller_kepuharjo::class, 'index'])->name('index');
 Route::get('/login', [controller_kepuharjo::class, 'login'])->name('login');
 Route::get('/dashboard', [controller_kepuharjo::class, 'dashboard'])->name('dashboard');
@@ -39,6 +37,7 @@ Route::get('/suratselesai', [controller_kepuharjo::class, 'suratselesai'])->name
 
 Route::get('/masteruser', [controller_kepuharjo::class, 'masteruser'])->name('masteruser');
 Route::get('/masterrtrw', [controller_kepuharjo::class, 'master_rtrw'])->name('masterrtrw');
+Route::get('/mastersurat', [controller_kepuharjo::class, 'master_surat']);
 
 Route::get('/masterkk', [controller_kepuharjo::class, 'master_kk'])->name('masterkk');
 
@@ -47,12 +46,11 @@ Route::get('/tentang', [controller_kepuharjo::class, 'tentang'])->name('tentang'
 
 Route::get('/buttons', [controller_kepuharjo::class, 'buttons'])->name('buttons');
 
-
 Route::post('/simpankk',[controller_kepuharjo::class, 'simpanmasterkk'])->name('simpankk');
 Route::post('/simpanrtrw',[controller_kepuharjo::class, 'simpanmasterrtrw'])->name('simpanrtrw');
 Route::post('/simpanuser',[controller_kepuharjo::class, 'simpanmasteruser'])->name('simpanuser');
 Route::post('/simpanberita',[controller_kepuharjo::class, 'simpanmasterberita'])->name('simpanberita');
-
+Route::post('/simpansurat',[controller_kepuharjo::class, 'simpan_surat'])->name('simpansurat');
 
 Route::get('{id}/hapus-masterkk', [controller_kepuharjo::class, 'hapusmasterkk']);
 Route::post('update-masterkk/{id}', [controller_kepuharjo::class, 'update']);
@@ -66,10 +64,6 @@ Route::post('update-masterrtrw/{id}', [controller_kepuharjo::class, 'updatemaste
 Route::get('{id}/hapus-masteruser', [controller_kepuharjo::class, 'hapusmasteruser']);
 Route::post('update-masteruser/{id}', [controller_kepuharjo::class, 'updatemasteruser']);
 
-
 Route::get('/ajax', [controller_kepuharjo::class, 'ajax']);
+Route::get('/ajaxmasyarakat', [controller_kepuharjo::class, 'ajax_masyarakat']);
 Route::get('/read', [controller_kepuharjo::class, 'read']);
-
-// Route::get('/data_user', 'data');
-// Route::get('/data_user', [data_usercontroller::class, 'index']);
-// Route::get('/data_user/json', [data_usercontroller::class, 'json']);

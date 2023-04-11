@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\master_kks;
 use App\Models\master_rtrw;
 use App\Models\master_masyarakat;
+use App\Models\master_surat;
 use Illuminate\Support\Facades\DB;
 
 
@@ -123,8 +124,6 @@ class controller_kepuharjo extends Controller
         $this->validate($request, [
             // 'no_kk' => 'unique:master_kks'
         ]);
-
-
             $data = new berita();
             $data->judul = $request->judul;
             $data->sub_title = $request->subtitle;
@@ -132,6 +131,19 @@ class controller_kepuharjo extends Controller
         $data->save();
         return Redirect('berita');
     }
+
+    public function simpan_surat(Request $request)
+    {
+        $this->validate($request, [
+            // 'no_kk' => 'unique:master_kks'
+        ]);
+            $data = new master_surat();
+            $data->id_surat = $request->id_surat;
+            $data->nama_surat = $request->jenis_surat;
+        $data->save();
+        return Redirect('mastersurat');
+    }
+
 
     public function updateberita(Request $request, $id){
     $data= berita::where('id', $id)->first();
@@ -210,9 +222,23 @@ class controller_kepuharjo extends Controller
         }
     }
 
+    public function ajax_masyarakat(Request $request){
+        $no_kk = $request->nokk;
+        $results = DB::table('master_kks')->where('no_kk', 'like' , '%'.$no_kk.'%')->get();
+        $c = count($results);
+        if($c == 0){
+            // jikaa data kosong
+            return '<p class="text-muted">Maaf, Data tidak ditemukan</p>';
+        }else{
+            // jika data ada
+            return view('ajax_pagemasyarakat')->with([
+                'data' => $results
+            ]);
+        }
+    }
+
     public function read(){
         return "Silahkan Melakukan Pencarian Data";
-
     }
 
     public function dashboard(){
@@ -248,12 +274,31 @@ class controller_kepuharjo extends Controller
     public function master_kk(){
         $data = master_kks::all();
         return view('master_kk', compact('data'));
+
+        // $data = DB::table('master_kks')
+        // ->join('master_masyarakats', 'master_masyarakats.id', '=', 'master_kks.id' )
+        // ->get();
+        // return view('master_kk')->with('data', $data);
     }
+
+    // public function master_kk(){
+    //     $data=DB::table('master_kks')
+    //     ->join('master_masyarakats', function ($join) {
+    //     $join->on('master_kks.id', '=', 'master_masyarakats.id');
+    //     })
+    //     ->get();
+    // }
+
 
 
     public function berita(){
         $data = berita::all();
         return view('berita', compact('data'));
+    }
+
+    public function master_surat(){
+        $data = master_surat::all();
+        return view('master_surat', compact('data'));
     }
 
     public function tentang(){

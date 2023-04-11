@@ -142,6 +142,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/mastersurat">
+                            <i class="icon-paper menu-icon"></i>
+                            <span class="menu-title">Master Surat</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="berita">
                             <i class="icon-globe menu-icon"></i>
                             <span class="menu-title">Berita</span>
