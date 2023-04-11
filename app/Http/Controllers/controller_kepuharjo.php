@@ -90,7 +90,7 @@ class controller_kepuharjo extends Controller
         $this->validate($request, [
         ]);
             $data = new master_masyarakat();
-            $data->no_kk = $request->nokk;
+            $data->id = $request->nokk;
             $data->nik = $request->nik;
             $data->nama_lengkap = $request->nama_lengkap;
             $data->jenis_kelamin = $request->jns_kelamin;
@@ -109,7 +109,7 @@ class controller_kepuharjo extends Controller
             $data->nama_ayah = $request->nama_ayah;
             $data->nama_ibu = $request->nama_ibu;
         $data->save();
-        return Redirect('masterkk');
+        return Redirect('masterkkmas/'.$request->nokk);
     }
 
     public function updatemasteruser(Request $request, $id){
@@ -299,6 +299,16 @@ class controller_kepuharjo extends Controller
     public function master_kk(){
         $data = master_kks::all();
         return view('master_kk', compact('data'));
+        // $masyarakat = DB::table('master_masyarakats')->get();
+        // return view('master_kk', compact('masyarakat'));
+    }
+
+    public function master_kk_mas(Request $request, $id){
+        $data = DB::table('master_masyarakats')
+        ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+        ->where('master_kks.id','=', $id)
+        ->get();
+        return view('master_kk_mas', ['nomor_kk'=> $id] , compact('data'));
     }
 
 

@@ -32,6 +32,7 @@ Route::get('/masterrtrw', [controller_kepuharjo::class, 'master_rtrw'])->name('m
 Route::get('/mastersurat', [controller_kepuharjo::class, 'master_surat']);
 
 Route::get('/masterkk', [controller_kepuharjo::class, 'master_kk'])->name('masterkk');
+Route::get('/masterkkmas/{id}', [controller_kepuharjo::class, 'master_kk_mas']);
 
 Route::get('/berita', [controller_kepuharjo::class, 'berita'])->name('berita');
 Route::get('/tentang', [controller_kepuharjo::class, 'tentang'])->name('tentang');

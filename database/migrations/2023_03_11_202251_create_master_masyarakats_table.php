@@ -18,7 +18,9 @@ class CreateMasterMasyarakatsTable extends Migration
 
             // $table->integer('id_kk');
             // // $table->uuid('uuid');
-            $table->bigInteger('no_kk' ,)->nullable()->default(12);
+            // $table->foreignuuid('id');
+            $table->string('id', 100)->primary();
+            // $table->bigInteger('no_kk' ,)->nullable()->default(12);
             $table->bigInteger('nik' ,)->nullable()->default(12);
             $table->string('nama_lengkap', 100)->nullable();
             $table->string('jenis_kelamin', 16)->nullable();
@@ -36,7 +38,6 @@ class CreateMasterMasyarakatsTable extends Migration
             $table->integer('no_kitap')->unsigned()->nullable();
             $table->string('nama_ayah', 60)->nullable();
             $table->string('nama_ibu', 60)->nullable();
-            $table->unsignedBigInteger('id')->nullable();
             $table->timestamps();
             $table->Foreign('id')->references('id')->on('master_kks');
         });
