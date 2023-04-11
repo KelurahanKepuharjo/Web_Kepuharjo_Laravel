@@ -3,6 +3,8 @@
 
 {{-- Section Content --}}
 @section('content')
+
+    {{-- Page 1 halaman master KK --}}
     <div id="myDiv1">
         <div class="header-atas" style="display: flex; justify-content: space-between; align-items: center;">
             <h4>Halaman Master KK</h4>
@@ -48,7 +50,7 @@
                                                 data-target="#modal-hapus{{ $value->no_kk }}" value="{{ $value->no_kk }}"
                                                 href="{{ url('masterkk') }}">Hapus KK</a>
                                             <button class="dropdown-item" type="button" value="isi value button"
-                                                onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}.');"
+                                                onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}'); isiTextfield2('{{ $value->nama_kepala_keluarga }}');"
                                                 value="{{ $value->no_kk }}">Tambah data
                                                 Keluarga</button>
                                         </div>
@@ -61,9 +63,10 @@
             </table>
         </div>
     </div>
+    {{-- Batas Page 1 Halaman master KK --}}
 
 
-
+    {{-- Page 2 Halaman master Masyarakat --}}
     <div id="myDiv2" style="display:none;">
         <div class="header-atas">
             <h4>Halaman Master User</h4>
@@ -106,6 +109,7 @@
                 </tbody>
             </table>
         </div>
+        {{-- Batas Page 2  --}}
 
         {{-- modal tambah user --}}
         <div class="modal fade" id="modal-tambahmas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -120,17 +124,28 @@
                     </div>
                     <form action="{{ url('simpanuser') }}" method="post">
                         @csrf
-                        <div class="row mt-2">
-                            <div class="col-lg-12">
-                                <div class="form-group d-inline-flex">
-                                    <label for="pencarian"></label>
-                                    <input type="text" id="input" class="form-control" placeholder="Ketikkan NIK...">
-                                    <button class="btn btn-primary"><i class="fa fa-search"></i></button>
-                                </div>
-                                <div id="read"></div>
-                            </div>
-                        </div>
                         <div class="modal-body">
+                            <div class="form-group">
+                                <label>No Kartu Keluarga</label>
+                                <input type="text" id="input" name="no_kk" class="form-control" maxlength="50"
+                                    required="" autocomplete="off" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label>Nama Kepala Keluarga</label>
+                                <input type="text" id="input2" name="kepala_keluarga" class="form-control"
+                                    maxlength="50" required="" autocomplete="off" disabled>
+                            </div>
+                            {{-- <div class="form-group d-inline-flex">
+                            <label for="pencarian"></label>
+                            <input type="text" id="input" class="form-control" placeholder="Ketikkan NIK...">
+                            <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        </div>
+                        <div class="form-group d-inline-flex">
+                            <label for="pencarian"></label>
+                            <input type="text" id="input2" class="form-control" placeholder="Ketikkan NIK...">
+                            <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        </div> --}}
+                            {{-- <div id="read"></div> --}}
                             <div class="form-group">
                                 <label>NIK</label>
                                 <input type="text" name="nik" class="form-control" value="" maxlength="50"
@@ -752,34 +767,23 @@
 
 
 <script>
-    // $(document).ready(function() {
-    //     readData()
-    //     $('#input').keyup(function() {
-    //         var strcari = $("#input").val();
-    //         if (strcari != "") {
-    //             $("#read").html('<p class="text-muted">Menunggu Mencari Data ...</p>')
-    //             $.ajax({
-    //                 type: "get",
-    //                 url: "{{ url('ajax_masyarakat') }}",
-    //                 data: "nokk=" + strcari,
-    //                 success: function(data) {
-    //                     $("#read").html(data);
-    //                 }
-    //             });
-    //         } else {
-    //             readData()
-    //         }
-    //     });
-    // });
-
-    // function readData() {
-    //     $.get("{{ url('read') }}", {}, function(data, status) {
-    //         $("#read").html(data);
-    //     });
-    // }
-
     function isiTextfield(nilai) {
         document.getElementById("input").value = nilai;
+    }
+
+    var input = document.querySelector('#input'); // mengambil elemen input
+
+    input.addEventListener('keyup', function(event) {
+        if (event.keyCode === 13) { // cek jika tombol yang ditekan adalah tombol "Enter"
+            event.preventDefault(); // membatalkan perilaku default tombol "Enter"
+            document.querySelector('form').submit(); // melakukan submit form
+        }
+    });
+</script>
+
+<script>
+    function isiTextfield2(nilai) {
+        document.getElementById("input2").value = nilai;
     }
 
     var input = document.querySelector('#input'); // mengambil elemen input
@@ -814,23 +818,3 @@
         margin-left: auto;
     }
 </style>
-
-{{--
-<script>
-    $(document).ready(function() {
-        $('#myModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var id = button.data('no_kk');
-            var modal = $(this);
-
-            $.ajax({
-                url: '/data/' + id,
-                type: 'GET',
-                dataType: 'json',
-                success: function(response) {
-                    modal.find('.modal-body').html(response.data);
-                }
-            });
-        });
-    });
-</script> --}}

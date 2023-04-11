@@ -24,6 +24,11 @@ class controller_kepuharjo extends Controller
         return view('login');
     }
 
+
+
+
+
+    // Controller Master KK
     public function simpanmasterkk(Request $request)
     {
         $this->validate($request, [
@@ -73,30 +78,17 @@ class controller_kepuharjo extends Controller
         $data -> delete();
         return Redirect('masterkk');
     }
+    // Batas Controller Master KK
 
-    public function simpanmasterrtrw(Request $request)
-    {
-        $this->validate($request, [
-            // 'no_kk' => 'unique:master_kks'
-        ]);
 
-            $data = new master_rtrw();
-            $data->nik = $request->nik;
-            $data->nama_lengkap = $request->nama_lengkap;
-            $data->alamat = $request-> alamatkk;
-            $data->no_hp = $request-> no_hp;
-            $data->rt = $request->rt;
-            $data->rw = $request->rw;
-        $data->save();
-        return Redirect('masterrtrw');
-    }
 
+
+
+    // Controller Master Masyarakat
     public function simpanmasteruser(Request $request)
     {
         $this->validate($request, [
-            // 'no_kk' => 'unique:master_kks'
         ]);
-
             $data = new master_masyarakat();
             $data->nik = $request->nik;
             $data->nama_lengkap = $request->nama_lengkap;
@@ -119,65 +111,6 @@ class controller_kepuharjo extends Controller
         return Redirect('masteruser');
     }
 
-    public function simpanmasterberita(Request $request)
-    {
-        $this->validate($request, [
-            // 'no_kk' => 'unique:master_kks'
-        ]);
-            $data = new berita();
-            $data->judul = $request->judul;
-            $data->sub_title = $request->subtitle;
-            $data->deskripsi = $request-> deskripsi;
-        $data->save();
-        return Redirect('berita');
-    }
-
-    public function simpan_surat(Request $request)
-    {
-        $this->validate($request, [
-            // 'no_kk' => 'unique:master_kks'
-        ]);
-            $data = new master_surat();
-            $data->id_surat = $request->id_surat;
-            $data->nama_surat = $request->jenis_surat;
-        $data->save();
-        return Redirect('mastersurat');
-    }
-
-
-    public function updateberita(Request $request, $id){
-    $data= berita::where('id', $id)->first();
-    $data->judul = $request->judul;
-    $data->sub_title = $request->subtitle;
-    $data->deskripsi = $request-> deskripsi;
-    $data->save();
-    return Redirect('berita');
-    }
-
-    public function hapusberita(Request $request, $id){
-        $data = berita::where('id_berita', $id);
-        $data -> delete();
-        return Redirect('berita');
-    }
-
-    public function updatemasterrtrw(Request $request, $id){
-    $data = master_rtrw::where('nik', $id)->first();
-    $data->nik = $request->nik;
-    $data->nama_lengkap = $request->nama_lengkap;
-    $data->alamat = $request->alamat;
-    $data->no_hp = $request->no_hp;
-    $data->rt = $request->rt;
-    $data->rw = $request->rw;
-    $data->save();
-    return Redirect('masterrtrw');
-    }
-
-    public function hapusmasterrtrw(Request $request, $id){
-        $data = master_rtrw::where('nik', $id);
-        $data -> delete();
-        return Redirect('masterrtrw');
-    }
-
     public function updatemasteruser(Request $request, $id){
         $data = master_masyarakat::where('nik', $id)->first();
         $data->nik = $request->nik;
@@ -197,19 +130,19 @@ class controller_kepuharjo extends Controller
         $data->no_kitap = $request->no_kitap;
         $data->nama_ayah = $request->nama_ayah;
         $data->nama_ibu = $request->nama_ibu;
-        $data->save();
-        return Redirect('masteruser');
-        }
+    $data->save();
+    return Redirect('masteruser');
+    }
 
-        public function hapusmasteruser(Request $request, $id){
+    public function hapusmasteruser(Request $request, $id){
             $data = master_masyarakat::where('nik', $id);
             $data -> delete();
-            return Redirect('masteruser');
-        }
+        return Redirect('masteruser');
+    }
 
     public function ajax(Request $request){
         $nik = $request->nik;
-        $results = DB::table('master_masyarakats')->where('nik', 'like' , '%'.$nik.'%')->get();
+        $results = DB::table('master_kks')->where('no_kk', 'like' , '%'.$nik.'%')->get();
         $c = count($results);
         if($c == 0){
             // jikaa data kosong
@@ -220,6 +153,102 @@ class controller_kepuharjo extends Controller
                 'data' => $results
             ]);
         }
+    }
+
+    public function read(){
+        return "Silahkan Melakukan Pencarian Data";
+    }
+    // Batas Controller Master Masyarakat
+
+
+
+
+
+    // Controller Master RT RW
+    public function simpanmasterrtrw(Request $request)
+    {
+        $this->validate($request, [
+            // 'no_kk' => 'unique:master_kks'
+        ]);
+            $data = new master_rtrw();
+            $data->nik = $request->nik;
+            $data->nama_lengkap = $request->nama_lengkap;
+            $data->alamat = $request-> alamatkk;
+            $data->no_hp = $request-> no_hp;
+            $data->rt = $request->rt;
+            $data->rw = $request->rw;
+        $data->save();
+        return Redirect('masterrtrw');
+    }
+
+    public function updatemasterrtrw(Request $request, $id){
+        $data = master_rtrw::where('nik', $id)->first();
+        $data->nik = $request->nik;
+        $data->nama_lengkap = $request->nama_lengkap;
+        $data->alamat = $request->alamat;
+        $data->no_hp = $request->no_hp;
+        $data->rt = $request->rt;
+        $data->rw = $request->rw;
+        $data->save();
+        return Redirect('masterrtrw');
+        }
+
+        public function hapusmasterrtrw(Request $request, $id){
+            $data = master_rtrw::where('nik', $id);
+            $data -> delete();
+            return Redirect('masterrtrw');
+        }
+    // Batas Controller Master RT RW
+
+
+
+
+
+    // Controller Master Berita
+    public function simpanmasterberita(Request $request)
+    {
+        $this->validate($request, [
+            // 'no_kk' => 'unique:master_kks'
+        ]);
+            $data = new berita();
+            $data->judul = $request->judul;
+            $data->sub_title = $request->subtitle;
+            $data->deskripsi = $request-> deskripsi;
+        $data->save();
+        return Redirect('berita');
+    }
+
+    public function updateberita(Request $request, $id){
+        $data= berita::where('id', $id)->first();
+        $data->judul = $request->judul;
+        $data->sub_title = $request->subtitle;
+        $data->deskripsi = $request-> deskripsi;
+        $data->save();
+        return Redirect('berita');
+        }
+
+    public function hapusberita(Request $request, $id){
+        $data = berita::where('id_berita', $id);
+        $data -> delete();
+        return Redirect('berita');
+    }
+    // Batas Controller Master Berita
+
+
+
+
+
+    // Controller master Surat
+    public function simpan_surat(Request $request)
+    {
+        $this->validate($request, [
+            // 'no_kk' => 'unique:master_kks'
+        ]);
+            $data = new master_surat();
+            $data->id_surat = $request->id_surat;
+            $data->nama_surat = $request->jenis_surat;
+        $data->save();
+        return Redirect('mastersurat');
     }
 
     public function ajax_masyarakat(Request $request){
@@ -237,16 +266,10 @@ class controller_kepuharjo extends Controller
         }
     }
 
-    public function read(){
-        return "Silahkan Melakukan Pencarian Data";
-    }
+
 
     public function dashboard(){
         return view('dashboard');
-    }
-
-    public function buttons(){
-        return view('pages/ui-features/buttons');
     }
 
     public function suratmasuk(){
@@ -274,21 +297,7 @@ class controller_kepuharjo extends Controller
     public function master_kk(){
         $data = master_kks::all();
         return view('master_kk', compact('data'));
-
-        // $data = DB::table('master_kks')
-        // ->join('master_masyarakats', 'master_masyarakats.id', '=', 'master_kks.id' )
-        // ->get();
-        // return view('master_kk')->with('data', $data);
     }
-
-    // public function master_kk(){
-    //     $data=DB::table('master_kks')
-    //     ->join('master_masyarakats', function ($join) {
-    //     $join->on('master_kks.id', '=', 'master_masyarakats.id');
-    //     })
-    //     ->get();
-    // }
-
 
 
     public function berita(){

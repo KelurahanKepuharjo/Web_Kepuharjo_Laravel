@@ -17,14 +17,6 @@ use App\Http\Controllers\DataController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
-
-Route::get('/home', function () {
-    return view('home', ['name' => 'Edy Atthoillah', 'role' => 'user']);
-});
-
 Route::get('/', [controller_kepuharjo::class, 'index'])->name('index');
 Route::get('/login', [controller_kepuharjo::class, 'login'])->name('login');
 Route::get('/dashboard', [controller_kepuharjo::class, 'dashboard'])->name('dashboard');
