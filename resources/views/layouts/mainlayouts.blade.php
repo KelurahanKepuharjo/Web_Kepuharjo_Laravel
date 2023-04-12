@@ -114,47 +114,47 @@
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
-                                        href="suratmasuk">Surat Masuk</a></li>
+                                        href="../suratmasuk">Surat Masuk</a></li>
                                 <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
-                                        href="suratselesai">Surat Surat Selesai</a>
+                                        href="../suratselesai">Surat Surat Selesai</a>
                                 </li>
                                 <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
-                                        href="suratditolak">Surat Ditolak</a></li>
+                                        href="../suratditolak">Surat Ditolak</a></li>
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="masteruser">
+                        <a class="nav-link" href="../masteruser">
                             <i class="icon-file menu-icon"></i>
                             <span class="menu-title">Master User</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="masterrtrw">
+                        <a class="nav-link" href="../masterrtrw">
                             <i class="icon-paper menu-icon"></i>
                             <span class="menu-title">Master Rt Rw</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="masterkk">
+                        <a class="nav-link" href="../masterkk">
                             <i class="icon-paper menu-icon"></i>
                             <span class="menu-title">Master KK</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/mastersurat">
+                        <a class="nav-link" href="../mastersurat">
                             <i class="icon-paper menu-icon"></i>
                             <span class="menu-title">Master Surat</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="berita">
+                        <a class="nav-link" href="../berita">
                             <i class="icon-globe menu-icon"></i>
                             <span class="menu-title">Berita</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tentang">
+                        <a class="nav-link" href="../tentang">
                             <i class="icon-book menu-icon"></i>
                             <span class="menu-title">Tentang</span>
                         </a>

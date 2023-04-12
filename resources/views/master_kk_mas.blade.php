@@ -1,4 +1,4 @@
-@extends('layouts.mainlayout')
+@extends('layouts.mainlayouts')
 @section('title', 'Master KK')
 
 {{-- Section Content --}}

@@ -10,6 +10,8 @@ use App\Models\master_rtrw;
 use App\Models\master_masyarakat;
 use App\Models\master_surat;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Alert;
 
 
 use Redirect;
@@ -31,10 +33,7 @@ class controller_kepuharjo extends Controller
     // Controller Master KK
     public function simpanmasterkk(Request $request)
     {
-        $this->validate($request, [
-            'no_kk' => 'unique:master_kks'
-        ]);
-
+        try {
             $data = new master_kks();
             $data->no_kk = $request->nokk;
             $data->nama_kepala_keluarga = $request->kepala_keluarga;
@@ -47,8 +46,11 @@ class controller_kepuharjo extends Controller
             $data->kabupaten = $request->kab;
             $data->provinsi = $request->prov;
             $data->kk_tgl = $request->tglkk;
-        $data->save();
-        return Redirect('masterkk');
+            $data->save();
+            return redirect()->back()->with('message', 'Data Berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            echo "<script>alert('Data Gagal Ditambahkan.');window.location='masterkk';</script>";
+        }
     }
 
     public function edit(Request $request, $id){
@@ -90,6 +92,8 @@ class controller_kepuharjo extends Controller
         $this->validate($request, [
         ]);
             $data = new master_masyarakat();
+            $uuid = Str::uuid()->toString();
+            $data->id_masyarakat = $uuid;
             $data->id = $request->nokk;
             $data->nik = $request->nik;
             $data->nama_lengkap = $request->nama_lengkap;
@@ -109,12 +113,13 @@ class controller_kepuharjo extends Controller
             $data->nama_ayah = $request->nama_ayah;
             $data->nama_ibu = $request->nama_ibu;
         $data->save();
+        // mas/'.$request->nokk
         return Redirect('masterkkmas/'.$request->nokk);
     }
 
     public function updatemasteruser(Request $request, $id){
         $data = master_masyarakat::where('nik', $id)->first();
-        $data->no_kk = $request->nokk;
+        // $data->no_kk = $request->nokk;
             $data->nik = $request->nik;
             $data->nama_lengkap = $request->nama_lengkap;
             $data->jenis_kelamin = $request->jns_kelamin;
@@ -133,13 +138,13 @@ class controller_kepuharjo extends Controller
             $data->nama_ayah = $request->nama_ayah;
             $data->nama_ibu = $request->nama_ibu;
     $data->save();
-    return Redirect('masteruser');
+    return Redirect('masterkkmas/'.$request->nokk);
     }
 
     public function hapusmasteruser(Request $request, $id){
             $data = master_masyarakat::where('nik', $id);
             $data -> delete();
-        return Redirect('masteruser');
+        return Redirect('masterkkmas/'.$request->nokk);
     }
 
     public function ajax(Request $request){

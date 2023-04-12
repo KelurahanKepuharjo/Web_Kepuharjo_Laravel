@@ -1,9 +1,9 @@
 @extends('layouts.mainlayout')
 @section('title', 'Master KK')
+@include('sweetalert::alert')
 
 {{-- Section Content --}}
 @section('content')
-
     {{-- Page 1 halaman master KK --}}
     <div id="myDiv1">
         <div class="header-atas" style="display: flex; justify-content: space-between; align-items: center;">
@@ -11,7 +11,14 @@
             <button data-toggle="modal" name='tambah' data-target="#modal-tambahkk">Tambah data</button>
         </div>
         <!-- isi div -->
-
+        <div>
+            @if (session()->has('message'))
+                <div class="alert alert-success" id="alert">
+                    {{ session()->get('message') }}
+                    <button type="button" class="close" data-dismiss="alert">X</button>
+                </div>
+            @endif
+        </div>
         <div class="table_wrapper" style=" overflow-x: scroll;">
             <table id="myTable" class="table table-striped">
                 <thead>
@@ -312,6 +319,14 @@
     }
 </script>
 
+<script type="text/javascript">
+    $("document").ready(function() {
+        setTimeout(function() {
+            $("alert").remove();
+        }, 1);
+    });
+</script>
+
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -371,7 +386,6 @@
         }
     });
 </script>
-
 
 <style>
     table {
