@@ -14,7 +14,7 @@ class CreateMasterSuratsTable extends Migration
     public function up()
     {
         Schema::create('master_surats', function (Blueprint $table) {
-            $table->id('id_surat');
+            $table->smallInteger('id_surat')->primary();
             // $table->uuid('uuid');
             $table->string('nama_surat', 20)->nullable()->default('text');
             $table->timestamps();

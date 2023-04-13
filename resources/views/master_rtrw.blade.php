@@ -13,12 +13,9 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>NIK</th>
-                    <th>Nama Lengkap</th>
-                    <th>Alamat</th>
-                    <th>No Hp </th>
-                    <th>RT</th>
+                    <th>Nama RW</th>
                     <th>RW</th>
+                    <th>RT Yang Terdaftar</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -27,12 +24,14 @@
                     @foreach ($data as $no => $value)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td>{{ $value->nik }}</td>
+                            {{-- <td>{{ $value->nik }}</td> --}}
                             <td>{{ $value->nama_lengkap }}</td>
-                            <td>{{ $value->alamat }}</td>
-                            <td>{{ $value->no_hp }}</td>
-                            <td>{{ $value->rt }}</td>
                             <td>{{ $value->rw }}</td>
+                            <td>{{ $value->rt }}</td>
+                            {{-- <td>{{ $value->alamat }}</td>
+                            <td>{{ $value->no_hp }}</td>
+                            <td>{{ $value->rt }}</td> --}}
+                            {{-- <td>{{ $value->rw }}</td> --}}
                             <td>
 
                                 <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
@@ -162,16 +161,16 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="text" name="nik" class="form-control" value="{{ $value->nik }}"
-                                    maxlength="50" required="" placeholder="NIK" autocomplete="off">
+                                    maxlength="50" required="" placeholder="NIK" autocomplete="off" disabled>
                             </div>
                             <div class="form-group">
                                 <input type="text" name="nama_lengkap" class="form-control"
                                     value="{{ $value->nama_lengkap }}" maxlength="50" required=""
-                                    placeholder="Nama Lengkap" autocomplete="off">
+                                    placeholder="Nama Lengkap" autocomplete="off" disabled>
                             </div>
                             <div class="form-group">
                                 <input type="text" name="alamat" class="form-control" value="{{ $value->alamat }}"
-                                    maxlength="50" required="" placeholder="Alamat" autocomplete="off">
+                                    maxlength="50" required="" placeholder="Alamat" autocomplete="off" disabled>
                             </div>
                             <div class="form-group">
                                 <input type="text" name="no_hp" class="form-control" value="{{ $value->no_hp }}"

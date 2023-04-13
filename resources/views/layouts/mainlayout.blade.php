@@ -116,7 +116,7 @@
                                 <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
                                         href="suratmasuk">Surat Masuk</a></li>
                                 <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
-                                        href="suratselesai">Surat Surat Selesai</a>
+                                        href="suratselesai">Surat Selesai</a>
                                 </li>
                                 <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
                                         href="suratditolak">Surat Ditolak</a></li>

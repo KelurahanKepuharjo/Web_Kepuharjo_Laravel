@@ -14,8 +14,9 @@ class CreateMasterAkunsTable extends Migration
     public function up()
     {
         Schema::create('master_akuns', function ($table) {
-            $table->string('id_akun', 20)->primary();
+            $table->uuid('id')->primary();
             $table->string('password', 20)->nullable()->default('text');
+            $table->Biginteger('no_hp')->unsigned()->nullable()->default(13);
             $table->string('role', 20)->nullable()->default('text');
             $table->timestamps();
             $table->uuid('id_masyarakat');

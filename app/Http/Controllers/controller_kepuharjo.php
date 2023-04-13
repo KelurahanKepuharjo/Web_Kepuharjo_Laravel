@@ -9,6 +9,7 @@ use App\Models\master_kks;
 use App\Models\master_rtrw;
 use App\Models\master_masyarakat;
 use App\Models\master_surat;
+use App\Models\master_akun;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Alert;
@@ -149,7 +150,9 @@ class controller_kepuharjo extends Controller
 
     public function ajax(Request $request){
         $nik = $request->nik;
-        $results = DB::table('master_kks')->where('no_kk', 'like' , '%'.$nik.'%')->get();
+        $results = DB::table('master_masyarakats')
+        ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+        ->where('master_masyarakats.nik', 'like' , '%'.$nik.'%')->get();
         $c = count($results);
         if($c == 0){
             // jikaa data kosong
@@ -177,13 +180,13 @@ class controller_kepuharjo extends Controller
         $this->validate($request, [
             // 'no_kk' => 'unique:master_kks'
         ]);
-            $data = new master_rtrw();
-            $data->nik = $request->nik;
-            $data->nama_lengkap = $request->nama_lengkap;
-            $data->alamat = $request-> alamatkk;
-            $data->no_hp = $request-> no_hp;
-            $data->rt = $request->rt;
-            $data->rw = $request->rw;
+            $data = new master_akun();
+            $uuid = Str::uuid()->toString();
+            $data->id = $uuid;
+            $data->no_hp = $request->no_hp;
+            $data->password = $request->password;
+            $data->role = "RW";
+            $data->id_masyarakat = $request->id_masyarakat;
         $data->save();
         return Redirect('masterrtrw');
     }
@@ -260,7 +263,7 @@ class controller_kepuharjo extends Controller
 
     public function ajax_masyarakat(Request $request){
         $no_kk = $request->nokk;
-        $results = DB::table('master_kks')->where('no_kk', 'like' , '%'.$no_kk.'%')->get();
+        $results = DB::table('master_kks')->where('nik', 'like' , '%'.$no_kk.'%')->get();
         $c = count($results);
         if($c == 0){
             // jikaa data kosong
@@ -297,7 +300,16 @@ class controller_kepuharjo extends Controller
     }
 
     public function master_rtrw(){
-        $data = master_rtrw::all();
+        // $data = master_rtrw::all();
+        $data = DB::table('master_masyarakats')
+        ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+        ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+        // ->where('master_akuns.id','=', $id)
+        ->get();
+        // $reserves = DB::table('reserves')
+        //                ->select(DB::raw('count(*) as reserves_count'))           
+        //                ->groupBy('day')
+        //                ->get();
         return view('master_rtrw', compact('data'));
     }
 
