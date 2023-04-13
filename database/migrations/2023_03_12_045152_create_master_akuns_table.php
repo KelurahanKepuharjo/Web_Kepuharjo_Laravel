@@ -14,14 +14,12 @@ class CreateMasterAkunsTable extends Migration
     public function up()
     {
         Schema::create('master_akuns', function ($table) {
-            // $table->id();
-            // $table->string('nama', 100)->nullable()->default('text');
-            // $table->uuid('uuid');
+            $table->string('id_akun', 20)->primary();
             $table->string('password', 20)->nullable()->default('text');
             $table->string('role', 20)->nullable()->default('text');
             $table->timestamps();
-            $table->BigInteger('nik');
-            // $table->Foreign('nik')->references('nik')->on('master_masyarakats');
+            $table->uuid('id_masyarakat');
+            $table->Foreign('id_masyarakat')->references('id_masyarakat')->on('master_masyarakats');
         });
     }
 

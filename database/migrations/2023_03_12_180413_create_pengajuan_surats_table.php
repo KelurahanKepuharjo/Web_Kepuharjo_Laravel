@@ -21,7 +21,8 @@ class CreatePengajuanSuratsTable extends Migration
             $table->text('keterangan')->nullable()->default('text');
             $table->dateTime('created_at', $precision = 0);
             $table->bigInteger('id')->unsigned();
-            // $table->foreign('id')->references('id')->on('master_akuns')->onDelete('cascade');
+            $table->string('id_akun',20);
+            $table->Foreign('id_akun')->references('id_akun')->on('master_akuns');
             $table->bigInteger('id_surat')->unsigned();
             $table->foreign('id_surat')->references('id_surat')->on('master_surats')->onDelete('cascade');
 

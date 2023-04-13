@@ -16,7 +16,7 @@ class CreateMasterKksTable extends Migration
         Schema::create('master_kks', function (Blueprint $table) {
             // $table->id();
             // $table->uuid('uuid');
-            $table->string('id', 100)->primary();
+            $table->uuid('id')->primary();
              $table->bigInteger('no_kk')->nullable()->default(12);
             $table->unique('no_kk');
             $table->string('nama_kepala_keluarga', 100)->nullable()->default('text');

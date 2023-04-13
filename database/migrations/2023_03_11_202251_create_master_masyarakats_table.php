@@ -39,8 +39,8 @@ class CreateMasterMasyarakatsTable extends Migration
             $table->integer('no_kitap')->unsigned()->nullable();
             $table->string('nama_ayah', 60)->nullable();
             $table->string('nama_ibu', 60)->nullable();
-            $table->string('id', 100);
             $table->timestamps();
+            $table->uuid('id');
             $table->Foreign('id')->references('id')->on('master_kks');
         });
     }
