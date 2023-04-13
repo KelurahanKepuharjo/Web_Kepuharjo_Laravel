@@ -59,7 +59,7 @@
                                             <form action="" method="get">
                                                 <a class="dropdown-item" name="kk" value="{{ $value->no_kk }}"
                                                     href="{{ url('masterkkmas/' . $value->id) }}">Tambah
-                                                    KK</a>
+                                                    Anggota KK</a>
                                             </form>
                                             {{-- <button class="dropdown-item" type="button" value="isi value button"
                                                 onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}'); isiTextfield2('{{ $value->nama_kepala_keluarga }}');">Tambah

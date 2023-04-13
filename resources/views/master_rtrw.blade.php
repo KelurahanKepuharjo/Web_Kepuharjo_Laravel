@@ -33,13 +33,33 @@
                             <td>{{ $value->rt }}</td> --}}
                             {{-- <td>{{ $value->rw }}</td> --}}
                             <td>
-
-                                <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
+                                {{-- <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
                                     data-toggle="modal" data-target="#modal-edit{{ $value->nik }}">
                                 </a>
                                 <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
                                     data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->nik }}"
-                                    href="{{ url('masterrtrw') }}"></a>
+                                    href="{{ url('masterrtrw') }}"></a> --}}
+                                    <div class="dropdown">
+                                        <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            style="background-color: #00AAAA; color: white;">
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" data-id="" href="" data-toggle="modal"
+                                                data-target="#modal-edit{{ $value->no_kk }}">Edit</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                                data-target="#modal-hapus{{ $value->no_kk }}" value="{{ $value->no_kk }}"
+                                                href="{{ url('masterkk') }}">Hapus</a>
+                                            <form action="" method="get">
+                                                <a class="dropdown-item" name="kk" value="{{ $value->no_kk }}"
+                                                    href="{{ url('masterkkmas/' . $value->id) }}">RT</a>
+                                            </form>
+                                            {{-- <button class="dropdown-item" type="button" value="isi value button"
+                                                onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}'); isiTextfield2('{{ $value->nama_kepala_keluarga }}');">Tambah
+                                                data
+                                                Keluarga</button> --}}
+                                        </div>
+                                    </div>
                             </td>
                         </tr>
                     @endforeach
