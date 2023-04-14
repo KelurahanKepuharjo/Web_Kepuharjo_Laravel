@@ -21,7 +21,7 @@
             </thead>
             <tbody>
                 <form action="" method="post">
-                    @foreach ($data as $no => $value)
+                    @foreach ($datartrw as $no => $value)
                         <tr>
                             <td>{{ $no + 1 }}</td>
                             {{-- <td>{{ $value->nik }}</td> --}}
@@ -39,27 +39,27 @@
                                 <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
                                     data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->nik }}"
                                     href="{{ url('masterrtrw') }}"></a> --}}
-                                    <div class="dropdown">
-                                        <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                            style="background-color: #00AAAA; color: white;">
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" data-id="" href="" data-toggle="modal"
-                                                data-target="#modal-edit{{ $value->no_kk }}">Edit</a>
-                                            <a class="dropdown-item" href="#" data-toggle="modal"
-                                                data-target="#modal-hapus{{ $value->no_kk }}" value="{{ $value->no_kk }}"
-                                                href="{{ url('masterkk') }}">Hapus</a>
-                                            <form action="" method="get">
-                                                <a class="dropdown-item" name="kk" value="{{ $value->no_kk }}"
-                                                    href="{{ url('masterkkmas/' . $value->id) }}">RT</a>
-                                            </form>
-                                            {{-- <button class="dropdown-item" type="button" value="isi value button"
+                                <div class="dropdown">
+                                    <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        style="background-color: #00AAAA; color: white;">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" data-id="" href="" data-toggle="modal"
+                                            data-target="#modal-edit{{ $value->no_kk }}">Edit</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal"
+                                            data-target="#modal-hapus{{ $value->no_kk }}" value="{{ $value->no_kk }}"
+                                            href="{{ url('masterkk') }}">Hapus</a>
+                                        <form action="" method="get">
+                                            <a class="dropdown-item" name="kk" value="{{ $value->no_kk }}"
+                                                href="{{ url('masterkkmas/' . $value->id) }}">RT</a>
+                                        </form>
+                                        {{-- <button class="dropdown-item" type="button" value="isi value button"
                                                 onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}'); isiTextfield2('{{ $value->nama_kepala_keluarga }}');">Tambah
                                                 data
                                                 Keluarga</button> --}}
-                                        </div>
                                     </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -111,61 +111,9 @@
             </div>
         </div>
     </div>
-    {{-- batas modal --}}
-
-    {{-- <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master RT dan RW</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="{{ url('simpanrtrw') }}" method="post">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input type="text" name="nik" class="form-control" value="" maxlength="50"
-                                required="" placeholder="NIK" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="nama_lengkap" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Nama Lengkap" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="alamatkk" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Alamat" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="no_hp" class="form-control" value="" maxlength="50"
-                                required="" placeholder="No HP" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col">
-                                    <input type="text" name="rt" class="form-control" placeholder="RT"
-                                        autocomplete="off">
-                                </div>
-                                <div class="col">
-                                    <input type="text" name="rw" class="form-control" placeholder="RW"
-                                        autocomplete="off">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-Success">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
 
     {{-- modal edit --}}
-    @foreach ($data as $no => $value)
+    @foreach ($datartrw as $no => $value)
         <div class="modal fade" id="modal-edit{{ $value->nik }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -222,7 +170,7 @@
     {{-- batas modal edit --}}
 
     {{-- Modal Hapus --}}
-    @foreach ($data as $no => $value)
+    @foreach ($datartrw as $no => $value)
         <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true" autocomplete="off">
             <div class="modal-dialog" role="document">

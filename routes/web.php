@@ -5,6 +5,7 @@ use App\Http\Controllers\controller_kepuharjo;
 use App\Http\Controllers\logincontroller;
 use App\Http\Controllers\data_usercontroller;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ use App\Http\Controllers\DataController;
 
 Route::get('/', [controller_kepuharjo::class, 'index'])->name('index');
 Route::get('/login', [controller_kepuharjo::class, 'login'])->name('login');
+Route::post('/loginauth', [controller_kepuharjo::class, 'loginauth'])->name('loginauth');
 Route::get('/dashboard', [controller_kepuharjo::class, 'dashboard'])->name('dashboard');
 Route::post('/postlogin',[controller_kepuharjo::class, 'customLogin'])->name('postlogin');
 
@@ -60,3 +62,6 @@ Route::post('update-masteruser/{id}', [controller_kepuharjo::class, 'updatemaste
 Route::get('/ajax', [controller_kepuharjo::class, 'ajax']);
 Route::get('/ajaxmasyarakat', [controller_kepuharjo::class, 'ajax_masyarakat']);
 Route::get('/read', [controller_kepuharjo::class, 'read']);
+
+// Route::get('/login', [AuthController::class, 'showLoginForm']);
+// Route::post('/login',[AuthController::class, 'login']);

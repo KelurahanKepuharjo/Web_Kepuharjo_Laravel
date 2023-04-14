@@ -10,8 +10,13 @@ use App\Models\master_rtrw;
 use App\Models\master_masyarakat;
 use App\Models\master_surat;
 use App\Models\master_akun;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+// use App\Http\Controllers\Hash;
+use Illuminate\Support\Facades\Hash;
+// use Illuminate\Support\Facades\Hash;
+
 use Alert;
 
 
@@ -28,7 +33,39 @@ class controller_kepuharjo extends Controller
     }
 
 
+    public function loginauth(Request $request)
+    {
+    $username = $request->input('username');
+    $password = $request->input('password');
 
+        if (!empty(trim($username)) && !empty(trim($password))) {
+            $user = DB::table('master_masyarakats')
+            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+            ->where('nik', $username)->first();
+
+            if ($user && $password == $user->password) {
+                // Jika username dan password benar, maka redirect ke halaman dashboard
+                return redirect('dashboard');
+            } else {
+                // Jika username dan password salah, maka redirect ke halaman login dengan pesan error
+                echo "<script>alert('Username atau Password Salah');window.location='login';</script>";
+                // return redirect('login')->with('error', 'Username atau password salah');
+            }
+            // if ($user->nik != $username  ) {
+            //     echo "<script>alert('Username Salah');window.location='login';</script>";
+            //     if ($user->password != $password  ) {
+            //         echo "<script>alert('Password Salah');window.location='login';</script>";
+            //         if ($user && $password == $user->password) {
+            //             // Jika username dan password benar, maka redirect ke halaman dashboard
+            //             return redirect('dashboard');
+            //         } else {
+            //             // Jika username dan password salah, maka redirect ke halaman login dengan pesan error
+            //             return redirect('login')->with('error', 'Username atau password salah');
+            //         }
+            //     }
+            // }
+        }
+    }
 
 
     // Controller Master KK
@@ -301,16 +338,11 @@ class controller_kepuharjo extends Controller
 
     public function master_rtrw(){
         // $data = master_rtrw::all();
-        $data = DB::table('master_masyarakats')
+        $datartrw = DB::table('master_masyarakats')
         ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
         ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-        // ->where('master_akuns.id','=', $id)
         ->get();
-        // $reserves = DB::table('reserves')
-        //                ->select(DB::raw('count(*) as reserves_count'))           
-        //                ->groupBy('day')
-        //                ->get();
-        return view('master_rtrw', compact('data'));
+        return view('master_rtrw', compact('datartrw'));
     }
 
     public function master_kk(){
