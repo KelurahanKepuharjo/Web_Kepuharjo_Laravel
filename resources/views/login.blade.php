@@ -39,7 +39,7 @@
                                     <input type="password" name="password" class="form-control" placeholder="Password">
                                 </div>
                                 <div class="mt-3">
-                                    <button type="submit">Login</button>
+                                    <button class="btn btn-primary" type="submit">Login</button>
                                 </div>
                             </form>
                             <div class="my-2 d-flex justify-content-between align-items-center">

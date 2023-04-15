@@ -100,6 +100,9 @@
                         <div class="form-group">
                             <input type="text" name="kepala_keluarga" class="form-control" value="" maxlength="50"
                                 required="" placeholder="Nama Kepala Keluarga" autocomplete="off">
+                            @error('kepala_keluarga')
+                                {{ $message }}
+                            @enderror
                         </div>
                         <div class="form-group">
                             <input type="text" name="alamatkk" class="form-control" value="" maxlength="100"

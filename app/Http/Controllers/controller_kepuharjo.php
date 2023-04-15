@@ -71,6 +71,12 @@ class controller_kepuharjo extends Controller
     // Controller Master KK
     public function simpanmasterkk(Request $request)
     {
+        $request->validate([
+            'kepala_keluarga' => 'required|alpha',
+        ], [
+            'kepala_keluarga.required' => 'Kolom nama harus diisi.',
+            'kepala_keluarga.alpha' => 'Kolom nama hanya boleh mengandung huruf alfabet.'
+        ]);
         try {
             $data = new master_kks();
             $data->no_kk = $request->nokk;
@@ -129,30 +135,47 @@ class controller_kepuharjo extends Controller
     {
         $this->validate($request, [
         ]);
-            $data = new master_masyarakat();
-            $uuid = Str::uuid()->toString();
-            $data->id_masyarakat = $uuid;
-            $data->id = $request->nokk;
-            $data->nik = $request->nik;
-            $data->nama_lengkap = $request->nama_lengkap;
-            $data->jenis_kelamin = $request->jns_kelamin;
-            $data->tempat_lahir = $request-> tempat_lahir;
-            $data->tgl_lahir = $request-> tgl_lahir;
-            $data->agama = $request->agama;
-            $data->pendidikan = $request->pendidikan;
-            $data->pekerjaan = $request->pekerjaan;
-            $data->golongan_darah = $request->gol_darah;
-            $data->status_perkawinan = $request->status_perkawinan;
-            $data->tgl_perkawinan = $request->tgl_perkawinan;
-            $data->status_keluarga = $request->status_keluarga;
-            $data->kewarganegaraan = $request->kewarganegaraan;
-            $data->no_paspor = $request->no_paspor;
-            $data->no_kitap = $request->no_kitap;
-            $data->nama_ayah = $request->nama_ayah;
-            $data->nama_ibu = $request->nama_ibu;
-        $data->save();
-        // mas/'.$request->nokk
-        return Redirect('masterkkmas/'.$request->nokk);
+            try {
+                $data = new master_masyarakat();
+                $uuid = Str::uuid()->toString();
+                $data->id_masyarakat = $uuid;
+                $data->id = $request->nokk;
+                $data->nik = $request->nik;
+                $data->nama_lengkap = $request->nama_lengkap;
+                $data->jenis_kelamin = $request->jns_kelamin;
+                $data->tempat_lahir = $request-> tempat_lahir;
+                $data->tgl_lahir = $request-> tgl_lahir;
+                $data->agama = $request->agama;
+                $data->pendidikan = $request->pendidikan;
+                $data->pekerjaan = $request->pekerjaan;
+                $data->golongan_darah = $request->gol_darah;
+                $data->status_perkawinan = $request->status_perkawinan;
+                $data->tgl_perkawinan = $request->tgl_perkawinan;
+                $data->status_keluarga = $request->status_keluarga;
+                $data->kewarganegaraan = $request->kewarganegaraan;
+                $data->no_paspor = $request->no_paspor;
+                $data->no_kitap = $request->no_kitap;
+                $data->nama_ayah = $request->nama_ayah;
+                $data->nama_ibu = $request->nama_ibu;
+                $data->save();
+                    try {
+                        $data = new master_akun();
+                        $uuid = Str::uuid()->toString();
+                        $data->id = $uuid;
+                        $data->no_hp = "";
+                        $data->password = "kepuharjobermantra";
+                        $data->role = "user";
+                        $data->id_masyarakat = $request->id_masyarakat;
+                    $data->save();
+                    return Redirect('masterkkmas/'.$request->nokk);
+                    } catch (\Throwable $th) {
+                        //throw $th;
+                }
+            } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+
     }
 
     public function updatemasteruser(Request $request, $id){
