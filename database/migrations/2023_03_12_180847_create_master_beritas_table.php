@@ -16,13 +16,9 @@ class CreateMasterBeritasTable extends Migration
         Schema::create('master_beritas', function (Blueprint $table) {
             $table->id();
             $table->text('judul')->nullable()->default('text');
-
             $table->text('sub_title')->nullable()->default('text');
-
             $table->text('deskripsi')->nullable()->default('text');
-
             $table->timestamps();
-            // $table->dateTime('created_at', $precision = 0);
         });
     }
 

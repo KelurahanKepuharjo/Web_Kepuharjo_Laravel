@@ -51,19 +51,6 @@ class controller_kepuharjo extends Controller
                 echo "<script>alert('Username atau Password Salah');window.location='login';</script>";
                 // return redirect('login')->with('error', 'Username atau password salah');
             }
-            // if ($user->nik != $username  ) {
-            //     echo "<script>alert('Username Salah');window.location='login';</script>";
-            //     if ($user->password != $password  ) {
-            //         echo "<script>alert('Password Salah');window.location='login';</script>";
-            //         if ($user && $password == $user->password) {
-            //             // Jika username dan password benar, maka redirect ke halaman dashboard
-            //             return redirect('dashboard');
-            //         } else {
-            //             // Jika username dan password salah, maka redirect ke halaman login dengan pesan error
-            //             return redirect('login')->with('error', 'Username atau password salah');
-            //         }
-            //     }
-            // }
         }
     }
 
@@ -71,12 +58,6 @@ class controller_kepuharjo extends Controller
     // Controller Master KK
     public function simpanmasterkk(Request $request)
     {
-        $request->validate([
-            'kepala_keluarga' => 'required|alpha',
-        ], [
-            'kepala_keluarga.required' => 'Kolom nama harus diisi.',
-            'kepala_keluarga.alpha' => 'Kolom nama hanya boleh mengandung huruf alfabet.'
-        ]);
         try {
             $data = new master_kks();
             $data->no_kk = $request->nokk;
@@ -142,7 +123,7 @@ class controller_kepuharjo extends Controller
                 $data->id = $request->nokk;
                 $data->nik = $request->nik;
                 $data->nama_lengkap = $request->nama_lengkap;
-                $data->jenis_kelamin = $request->jns_kelamin;
+                $data->jenis_kelamin = $request->kelamin;
                 $data->tempat_lahir = $request-> tempat_lahir;
                 $data->tgl_lahir = $request-> tgl_lahir;
                 $data->agama = $request->agama;
@@ -158,48 +139,98 @@ class controller_kepuharjo extends Controller
                 $data->nama_ayah = $request->nama_ayah;
                 $data->nama_ibu = $request->nama_ibu;
                 $data->save();
-                    try {
-                        $data = new master_akun();
-                        $uuid = Str::uuid()->toString();
-                        $data->id = $uuid;
-                        $data->no_hp = "";
-                        $data->password = "kepuharjobermantra";
-                        $data->role = "user";
-                        $data->id_masyarakat = $request->id_masyarakat;
-                    $data->save();
-                    return Redirect('masterkkmas/'.$request->nokk);
-                    } catch (\Throwable $th) {
-                        //throw $th;
-                }
+                return Redirect('masterkkmas/'.$data->id);
             } catch (\Throwable $th) {
-            //throw $th;
-        }
+                //throw $th;
+            }
+
+            try {
+                $data = DB::table('master_masyarakats')
+                ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+                ->orderBy('created_at', 'desc')
+                ->limit(1)
+                ->select('master_kks.id')
+                ->first();
+                // return Redirect('simpanuserakuns/'.$data->id_masyarakat);
+                // return Redirect('simpanakuns'.$data->id_masyarakat);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
 
 
     }
 
+    public function simpanmasteruserakun(Request $request, $id){
+        try {
+            $data = new master_akun();
+            $uuid = Str::uuid()->toString();
+            $data->id = $uuid;
+            $data->no_hp = 62;
+            $data->password = "KepuharjoBermantra";
+            $data->role = "masyarakat";
+            $data->id_masyarakat = $id;
+            $data->save();
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        try {
+            $data = DB::table('master_masyarakats')
+            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->join('master_akuns', 'master_masyarakats.id_masyarakat', '=', 'master_akuns.id_masyarakat')
+            ->where('id_masyarakat','=', $id )
+            ->get();
+            return Redirect('masterkkmas/'.$data->no_kk);
+
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+    }
+
     public function updatemasteruser(Request $request, $id){
-        $data = master_masyarakat::where('nik', $id)->first();
-        // $data->no_kk = $request->nokk;
-            $data->nik = $request->nik;
-            $data->nama_lengkap = $request->nama_lengkap;
-            $data->jenis_kelamin = $request->jns_kelamin;
-            $data->tempat_lahir = $request-> tempat_lahir;
-            $data->tgl_lahir = $request-> tgl_lahir;
-            $data->agama = $request->agama;
-            $data->pendidikan = $request->pendidikan;
-            $data->pekerjaan = $request->pekerjaan;
-            $data->golongan_darah = $request->gol_darah;
-            $data->status_perkawinan = $request->status_perkawinan;
-            $data->tgl_perkawinan = $request->tgl_perkawinan;
-            $data->status_keluarga = $request->status_keluarga;
-            $data->kewarganegaraan = $request->kewarganegaraan;
-            $data->no_paspor = $request->no_paspor;
-            $data->no_kitap = $request->no_kitap;
-            $data->nama_ayah = $request->nama_ayah;
-            $data->nama_ibu = $request->nama_ibu;
-    $data->save();
-    return Redirect('masterkkmas/'.$request->nokk);
+        try {
+                $data = DB::table('master_masyarakats')->where('nik', $id)->update([
+                    // $data->nik = $request->nik,
+                    'nama_lengkap' => $request->nama_lengkap,
+                    'jenis_kelamin' => $request->kelamin,
+                    'tempat_lahir' => $request-> tempat_lahir,
+                    'tgl_lahir' => $request-> tgl_lahir,
+                    'agama' => $request->agama,
+                    'pendidikan' => $request->pendidikan,
+                    'pekerjaan' => $request->pekerjaan,
+                    'golongan_darah' => $request->gol_darah,
+                    'status_perkawinan' => $request->status_perkawinan,
+                    'tgl_perkawinan' => $request->tgl_perkawinan,
+                    'status_keluarga' => $request->status_keluarga,
+                    'kewarganegaraan' => $request->kewarganegaraan,
+                    'no_paspor' => $request->no_paspor,
+                    'no_kitap' => $request->no_kitap,
+                    'nama_ayah' => $request->nama_ayah,
+                    'nama_ibu' => $request->nama_ibu
+                ]);
+            // $data->no_kk = $request->nokk;
+
+                // $data->save();
+
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        try {
+            $data = DB::table('master_masyarakats')
+            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->where('nik','=', $request->nik)
+            ->select('master_kks.id')
+            ->first();
+            return Redirect('masterkkmas/'.$data->id);
+            // return Redirect('simpanuserakuns/'.$data->id_masyarakat);
+            // return Redirect('simpanakuns'.$data->id_masyarakat);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     public function hapusmasteruser(Request $request, $id){
@@ -355,7 +386,10 @@ class controller_kepuharjo extends Controller
     }
 
     public function masteruser(){
-        $data = master_masyarakat::all();
+        $data = DB::table('master_masyarakats')
+        ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+        ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+        ->get();
         return view('master_user', compact('data'));
     }
 

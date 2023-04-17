@@ -44,10 +44,14 @@ Route::get('/buttons', [controller_kepuharjo::class, 'buttons'])->name('buttons'
 Route::post('/simpankk',[controller_kepuharjo::class, 'simpanmasterkk'])->name('simpankk');
 Route::post('/simpanrtrw',[controller_kepuharjo::class, 'simpanmasterrtrw'])->name('simpanrtrw');
 Route::post('/simpanuser',[controller_kepuharjo::class, 'simpanmasteruser'])->name('simpanuser');
+// Route::post('/simpanuserakun/{id}',[controller_kepuharjo::class, 'simpanmasteruserakun']);
+// Route::post('/simpanuserakuns/{id}',[controller_kepuharjo::class, 'simpanmasteruserakun
+Route::post('/simpanuserakuns/{id}', 'controller_kepuharjo@simpanmasteruserakun');
+Route::get('simpanakuns/{id}', [controller_kepuharjo::class, 'simpanmasteruserakun']);
 Route::post('/simpanberita',[controller_kepuharjo::class, 'simpanmasterberita'])->name('simpanberita');
 Route::post('/simpansurat',[controller_kepuharjo::class, 'simpan_surat'])->name('simpansurat');
 
-Route::get('{id}/hapus-masterkk', [controller_kepuharjo::class, 'hapusmasterkk']);
+Route::get('{id}/hapus-masterkk', [controller_kepuharjo::class, 'hapus']);
 Route::post('update-masterkk/{id}', [controller_kepuharjo::class, 'update']);
 
 Route::get('{id}/hapus-berita', [controller_kepuharjo::class, 'hapusberita']);

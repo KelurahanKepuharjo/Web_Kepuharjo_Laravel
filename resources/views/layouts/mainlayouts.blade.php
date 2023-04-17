@@ -70,7 +70,7 @@
                             <a class="dropdown-item preview-item">
                                 <i class="icon-head"></i> Profile
                             </a>
-                            <a class="dropdown-item preview-item">
+                            <a class="dropdown-item preview-item" href="/">
                                 <i class="icon-inbox"></i> Logout
                             </a>
                         </div>
@@ -99,7 +99,7 @@
                 </div> --}}
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard">
+                        <a class="nav-link" href="../dashboard">
                             <i class="icon-box menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>

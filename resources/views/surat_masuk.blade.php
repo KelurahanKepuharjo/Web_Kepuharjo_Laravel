@@ -46,6 +46,34 @@
                 </td>
             </tr>
             <tr>
+                <td>Faisal Oktabrian</td>
+                <td>Web Dev</td>
+                <td>Jember</td>
+                <td>19</td>
+                <td>2003-12-26</td>
+                <td>Politeknik Negeri Jember</td>
+                <td>
+                    <a class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#exampleModal"
+                        style="color: white;" href="#"></a>
+                    <a class="btn btn-danger icon-trash" data-toggle="modal" data-target="#exampleModal" href="#"
+                        style="margin-left: 10px; "></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Achmad Fawaid</td>
+                <td>Web Dev</td>
+                <td>Jember</td>
+                <td>19</td>
+                <td>2003-12-26</td>
+                <td>Politeknik Negeri Jember</td>
+                <td>
+                    <a class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#exampleModal"
+                        style="color: white;" href="#"></a>
+                    <a class="btn btn-danger icon-trash" data-toggle="modal" data-target="#exampleModal" href="#"
+                        style="margin-left: 10px; "></a>
+                </td>
+            </tr>
+            <tr>
                 <td>Kurrota Akyun</td>
                 <td>Web Dev</td>
                 <td>Jember</td>

@@ -78,7 +78,7 @@
                             <div class="form-group">
                                 <label>Jenis Kelamin</label>
                                 <div class="col">
-                                    <select class="form-control" name="jns_kelamin" autocomplete="off"
+                                    <select class="form-control" name="kelamin" autocomplete="off"
                                         id="exampleFormControlSelect1">
                                         <option>Pilih</option>
                                         <option>Laki Laki</option>
@@ -308,13 +308,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Jenis Kelamin</label>
-                                    <div class="col-sm-5">
-                                        <select class="form-control" name="jenis_kelamin"
-                                            value="{{ $value->tgl_lahir }}" autocomplete="off"
-                                            id="exampleFormControlSelect1">
+                                    <div class="col">
+                                        <select class="form-control" name="kelamin" value="{{ $value->jenis_kelamin }}"
+                                            autocomplete="off" id="exampleFormControlSelect1">
                                             <option>{{ $value->jenis_kelamin }}</option>
-                                            <option disabled></option>
-                                            <option>Laki-Laki</option>
+                                            <option>Laki Laki</option>
                                             <option>Perempuan</option>
                                         </select>
                                     </div>
