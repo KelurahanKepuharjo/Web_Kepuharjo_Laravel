@@ -329,10 +329,12 @@ class controller_kepuharjo extends Controller
         }
 
     public function hapusberita(Request $request, $id){
-        $data = berita::where('id_berita', $id);
+        $data = berita::where('id', $id);
         $data -> delete();
         return Redirect('berita');
     }
+
+
     // Batas Controller Master Berita
 
 

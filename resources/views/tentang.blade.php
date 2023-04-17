@@ -4,49 +4,41 @@
 @section('content')
     <div class="main-panel">
         <h4 class="font-weight-bold text-dark">Ini Halaman Tentang</h4>
-    </div>
-    <!-- tombol untuk membuka modal -->
-    <button onclick="openModal()">Buka Modal</button>
-
-    <!-- modal -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Kartu Keluarga</h2>
-            <div class="row">
-                <div class="col-25">
-                    <label for="nama">Nama:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="nama" name="nama">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="alamat">Alamat:</label>
-                </div>
-                <div class="col-75">
-                    <textarea id="alamat" name="alamat"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="pekerjaan">Pekerjaan:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="pekerjaan" name="pekerjaan">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="telepon">Telepon:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="telepon" name="telepon">
-                </div>
-            </div>
+        <div class="title">
+            <h1>Tentang</h1>
         </div>
+
+            <h3>Sistem Informasi Pengajuan Surat</h3>
+            <p style="align=justify;" > S-kepuharjo merupakan aplikasi berbasis website dan mobile kepuharjo ini dapat
+                digunakan oleh pihak masyarakat,
+                RT, dan RW serta website khusus untuk
+                pihak Admin Kelurahan yang digunakan untuk menampung surat sekaligus digunakan untuk data master
+                dari masyarakat, dan
+                diharapkan juga aplikasi pengajuan surat untuk masyarakat ini dapat dilakukan dimanapun dan
+                kapanpun sehingga menjadi
+                lebih efektif dan efisien.</p>
+            <p style="align=justify;"> S-Kepuharjo termasuk upaya meningkatkan transparansi, kontrol serta
+                akuntabilitas kinerja kelurahan dalam
+                proses penanganan surat pengajuan dari
+                masyarakat. Memperbaiki kualitas pelayanan publik untuk pengajuan surat pada tahap RT/RW,
+                terutama dalam hal
+                efektivitas dan efisiensi yang bisa memakan waktu berhari hari karena situasi pandemi.
+                Mempermudah masyarakat dalam melakukan pengajuan berbagai macam jenis surat kepada pihak
+                kelurahan</p>
+
+
+    <div class="image-section">
+        {{-- <img src="images/icon-laman-tentang.png"> --}}
     </div>
+    <div class="image-section">
+        {{-- <img src="images/icon-laman-tentang.png"> --}}
+    </div>
+</div>
+</div>
+    </div>
+
+
+
 
 @endsection
 

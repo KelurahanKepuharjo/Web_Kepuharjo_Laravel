@@ -54,7 +54,7 @@ Route::post('/simpansurat',[controller_kepuharjo::class, 'simpan_surat'])->name(
 Route::get('{id}/hapus-masterkk', [controller_kepuharjo::class, 'hapus']);
 Route::post('update-masterkk/{id}', [controller_kepuharjo::class, 'update']);
 
-Route::get('{id}/hapus-berita', [controller_kepuharjo::class, 'hapusberita']);
+Route::get('hapus-berita/{id}', [controller_kepuharjo::class, 'hapusberita']);
 Route::post('update-berita/{id}', [controller_kepuharjo::class, 'updateberita']);
 
 Route::get('{id}/hapus-masterrtrw', [controller_kepuharjo::class, 'hapusmasterrtrw']);
