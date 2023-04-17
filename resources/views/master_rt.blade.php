@@ -1,12 +1,18 @@
-@extends('layouts.mainlayout')
+@extends('layouts.mainlayouts')
 @section('title', 'Master RT RW')
 <!-- partial -->
 @section('content')
     <div class="header-atas">
-        <h4>Halaman Master RT dan RW</h4>
-        {{-- <button data-toggle="modal" name='tambah' data-target="#modal-tambahrtrw">+</button> --}}
+        <h4>Halaman Master RT</h4>
+        {{-- <button data-toggle="modal" name='tambah' data-target="#modal-tambahrtrw">+</button>  --}}
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah Data</i></button>
-
+        <a class="btn" href="../masterrtrw">Kembali</a>
+        {{-- <div class="button">
+        <ul class="right">
+            <a href="#">Tambah Data</a>
+            <a href="#">Kembali</a>
+        </ul>
+        </div> --}}
     </div>
     <div class="table_wrapper" style="overflow-x: scroll;">
         <table id="myTable" class="table table-striped" style="width:100%">
@@ -25,9 +31,9 @@
                         <tr>
                             <td>{{ $no + 1 }}</td>
                             {{-- <td>{{ $value->nik }}</td> --}}
-                            <td></td>
+                            <td>{{ $value->nama_lengkap }}</td>
                             <td>{{ $value->rw }}</td>
-                            <td></td>
+                            <td>{{ $value->rt }}</td>
                             {{-- <td>{{ $value->alamat }}</td>
                             <td>{{ $value->no_hp }}</td>
                             <td>{{ $value->rt }}</td> --}}
@@ -39,21 +45,17 @@
                                 <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
                                     data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->nik }}"
                                     href="{{ url('masterrtrw') }}"></a> --}}
-                                    <div class="dropdown">
-                                        <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                            style="background-color: #00AAAA; color: white;">
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" data-id="" href="../ajaxpage" data-toggle="modal"
-                                                data-target="#modal-edit{{ $value->no_kk }}">Edit</a>
-                                            <a class="dropdown-item" href="#" data-toggle="modal"
-                                                data-target="#modal-hapus{{ $value->no_kk }}" value="{{ $value->no_kk }}"
-                                                href="{{ url('masterkk') }}">Hapus</a>
-                                            <form action="" method="get">
-                                                    <a class="dropdown-item" name="kk" value="{{ $value->no_kk }}"
-                                                        href="{{ url('masterrt/' . $value->id) }}">RT</a>
-                                            </form>
+                                <div class="dropdown">
+                                    <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        style="background-color: #00AAAA; color: white;">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" data-id="" href="" data-toggle="modal"
+                                            data-target="#modal-edit{{ $value->no_kk }}">Edit</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal"
+                                            data-target="#modal-hapus{{ $value->no_kk }}" value="{{ $value->no_kk }}"
+                                            href="{{ url('masterkk') }}">Hapus</a>
                                         {{-- <button class="dropdown-item" type="button" value="isi value button"
                                                 onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}'); isiTextfield2('{{ $value->nama_kepala_keluarga }}');">Tambah
                                                 data
@@ -195,6 +197,27 @@
     @endforeach
     {{-- Batas Modal Hapus --}}
 @endsection
+
+<style media="screen">
+    .button{
+      width: 100%;
+      height: 50px;
+    }
+    .left{
+      float: left;
+      display: block;
+    }
+    .right{
+      float: right;
+      display: block;
+    }
+  .button ul a{
+    margin: 10px;
+    padding: 10px;
+    background: rgb(116, 181, 12);
+    color: white;
+  }
+  </style>
 
 <style>
     table {

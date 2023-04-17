@@ -139,7 +139,8 @@ class controller_kepuharjo extends Controller
                 $data->nama_ayah = $request->nama_ayah;
                 $data->nama_ibu = $request->nama_ibu;
                 $data->save();
-                return Redirect('masterkkmas/'.$data->id);
+                // return Redirect('masterkkmas/'.$data->id);
+                return Redirect('simpanakuns/'.$data->id_masyarakat);
             } catch (\Throwable $th) {
                 //throw $th;
             }
@@ -170,7 +171,7 @@ class controller_kepuharjo extends Controller
             $data->role = "masyarakat";
             $data->id_masyarakat = $id;
             $data->save();
-
+            
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -181,8 +182,7 @@ class controller_kepuharjo extends Controller
             ->where('id_masyarakat','=', $id )
             ->get();
             return Redirect('masterkkmas/'.$data->no_kk);
-
-
+           
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -299,6 +299,29 @@ class controller_kepuharjo extends Controller
             $data -> delete();
             return Redirect('masterrtrw');
         }
+
+        public function master_rt(){
+            $datartrw = DB::table('master_masyarakats')
+            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->where('role', '=', 'RT')
+            ->get();
+            return view('master_rt', compact('datartrw'));
+        }
+        
+        public function master_rtrw(){
+            // $data = master_rtrw::all();
+            $datartrw = DB::table('master_kks')
+            ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+            ->select(DB::raw('master_kks.rw'))
+            ->where('master_akuns.role','=','RW')
+            ->groupBy('master_kks.rw') 
+            ->orderBy('master_kks.rw', 'ASC')
+            // ->select(DB::raw('count(master_masyarakats.nik)'))
+            ->get();
+            return view('master_rtrw', compact('datartrw'));
+        }
     // Batas Controller Master RT RW
 
 
@@ -395,14 +418,7 @@ class controller_kepuharjo extends Controller
         return view('master_user', compact('data'));
     }
 
-    public function master_rtrw(){
-        // $data = master_rtrw::all();
-        $datartrw = DB::table('master_masyarakats')
-        ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
-        ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-        ->get();
-        return view('master_rtrw', compact('datartrw'));
-    }
+    
 
     public function master_kk(){
         $data = master_kks::all();

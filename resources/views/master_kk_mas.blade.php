@@ -146,6 +146,7 @@
                                         <select class="form-control" name="gol_darah" autocomplete="off"
                                             id="exampleFormControlSelect1">
                                             <option>Pilih</option>
+                                            <option>-</option>
                                             <option>A</option>
                                             <option>B</option>
                                             <option>O</option>
@@ -169,7 +170,7 @@
                             <div class="form-group">
                                 <label>Tanggal Perkawinan</label>
                                 <input type="date" name="tgl_perkawinan" class="form-control" value=""
-                                    maxlength="50" required="" placeholder="Tanggal Perkawinan" autocomplete="off">
+                                    maxlength="50" placeholder="Tanggal Perkawinan" autocomplete="off">
                             </div>
                             <div class="row form-group">
                                 <div class="col">
@@ -201,12 +202,12 @@
                                 <div class="col">
                                     <label>No Paspor</label>
                                     <input type="text" name="no_paspor" class="form-control" value=""
-                                        maxlength="50" required="" placeholder="No Paspor" autocomplete="off">
+                                        maxlength="50" placeholder="No Paspor" autocomplete="off">
                                 </div>
                                 <div class="col">
                                     <label>No KITAP</label>
                                     <input type="text" name="no_kitap" class="form-control" value=""
-                                        maxlength="50" required="" placeholder="No KITAP" autocomplete="off">
+                                        maxlength="50" placeholder="No KITAP" autocomplete="off">
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -355,7 +356,7 @@
                                 <div class="form-group">
                                     <label>Tanggal Perkawinan</label>
                                     <input type="date" name="tgl_perkawinan" class="form-control"
-                                        value="{{ $value->tgl_perkawinan }}" maxlength="50" required=""
+                                        value="{{ $value->tgl_perkawinan }}" maxlength="50" 
                                         placeholder="Tanggal Perkawinan" autocomplete="off">
                                 </div>
                                 <div class="form-group">

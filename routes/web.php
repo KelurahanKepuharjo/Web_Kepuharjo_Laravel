@@ -51,6 +51,11 @@ Route::get('simpanakuns/{id}', [controller_kepuharjo::class, 'simpanmasteruserak
 Route::post('/simpanberita',[controller_kepuharjo::class, 'simpanmasterberita'])->name('simpanberita');
 Route::post('/simpansurat',[controller_kepuharjo::class, 'simpan_surat'])->name('simpansurat');
 
+Route::get('/masterrt/{id}', [controller_kepuharjo::class, 'master_rt'])->name('masterrt');
+Route::post('/simpanrt',[controller_kepuharjo::class, 'simpanmasterrt'])->name('simpanrt');
+Route::get('{id}/hapus-masterrt', [controller_kepuharjo::class, 'hapusmasterrt']);
+Route::post('update-masterrt/{id}', [controller_kepuharjo::class, 'updatemasterrt']);
+
 Route::get('{id}/hapus-masterkk', [controller_kepuharjo::class, 'hapus']);
 Route::post('update-masterkk/{id}', [controller_kepuharjo::class, 'update']);
 
