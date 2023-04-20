@@ -14,8 +14,8 @@
                     <th>Judul</th>
                     <th>Sub title</th>
                     <th>Deskripsi</th>
-                    <th>Created_at</th>
                     <th>Aksi</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,12 +26,13 @@
                             <td>{{ $value->judul }}</td>
                             <td>{{ $value->sub_title }}</td>
                             <td>{{ $value->deskripsi }}</td>
-                            <td>{{ $value->created_at }}</td>
                             <td>
                                 <a class="btn btn-warning fa fa-pencil" style="color:white;"
                                     data-id="{{ $value->id_berita }}" href="" data-toggle="modal"
                                     data-target="#modal-editberita{{ $value->id }}">
                                 </a>
+                            </td>
+                            <td>
                                 <a class="btn btn-danger icon-trash" name='Hapus' data-toggle="modal"
                                     data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->id_berita }}"
                                     href="{{ url('masterberita') }}"></a>
@@ -57,16 +58,16 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" name="judul" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Judul Berita" autocomplete="off" name="judul">
+                            <input type="text" name="judul" class="form-control" value="" required=""
+                                placeholder="Judul Berita" autocomplete="off" name="judul">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="subtitle" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Sub Title" autocomplete="off" name="subtitle">
+                            <input type="text" name="subtitle" class="form-control" value="" required=""
+                                placeholder="Sub Title" autocomplete="off" name="subtitle">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="deskripsi" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Deskripsi" autocomplete="off" name="deskripsi">
+                            <input type="text" name="deskripsi" class="form-control" value="" required=""
+                                placeholder="Deskripsi" autocomplete="off" name="deskripsi">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -95,8 +96,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <a type="button" onclick="showNotification()"
-                            href="{{ url( 'hapus-berita/' .$value->id) }}" class="btn btn-danger">Hapus</a>
+                        <a type="button" onclick="showNotification()" href="{{ url('hapus-berita/' . $value->id) }}"
+                            class="btn btn-danger">Hapus</a>
                     </div>
                 </div>
             </div>

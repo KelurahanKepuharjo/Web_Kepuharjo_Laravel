@@ -58,11 +58,14 @@
                             <input type="number" name="id_surat" class="form-control" value="" maxlength="50"
                                 required="" placeholder="Id Surat" autocomplete="off">
                         </div>
+                        <input type="hidden" name="surat" class="form-control" required="" value="Surat Keterangan "
+                            autocomplete="off" readonly>
                         <div class="form-group">
                             <label for="nomor-kartu"></label>
                             <input type="text" name="jenis_surat" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Jenis Surat" autocomplete="off">
+                                required="" placeholder="Masukkan Nama Surat Contoh : Domisili" autocomplete="off">
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -88,13 +91,14 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ url('editsurat') }}" method="post">
+                    <form action="{{ url('editsurat/' . $value->id_surat) }}" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="nomor-kartu"></label>
-                                <input type="number" name="id_surat" class="form-control" value="{{ $value->id_surat }}"
-                                    maxlength="50" required="" placeholder="Id Surat" autocomplete="off">
+                                <input type="number" name="id_surat" class="form-control"
+                                    value="{{ $value->id_surat }}" maxlength="50" required="" placeholder="Id Surat"
+                                    autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="nomor-kartu"></label>
@@ -121,20 +125,21 @@
             aria-labelledby="exampleModalLabel" aria-hidden="true" autocomplete="off">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Hapus Data Master KK</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <label for="">Yakin untuk Menghapus Jenis {{ $value->nama_surat }} ?</label>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <a type="button" onclick="showNotification()"
-                            href="{{ url($value->no_kk . '/hapus-masterkk') }}" class="btn btn-danger">Hapus</a>
-                    </div>
+                    <form action="{{ url('hapussurat/' . $value->id_surat) }}" method="get">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Hapus Data Master KK</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="">Yakin untuk Menghapus Jenis {{ $value->nama_surat }} ?</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

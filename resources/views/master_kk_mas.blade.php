@@ -356,7 +356,7 @@
                                 <div class="form-group">
                                     <label>Tanggal Perkawinan</label>
                                     <input type="date" name="tgl_perkawinan" class="form-control"
-                                        value="{{ $value->tgl_perkawinan }}" maxlength="50" 
+                                        value="{{ $value->tgl_perkawinan }}" maxlength="50"
                                         placeholder="Tanggal Perkawinan" autocomplete="off">
                                 </div>
                                 <div class="form-group">
@@ -381,14 +381,14 @@
                                 <div class="form-group">
                                     <label>No Paspor</label>
                                     <input type="text" name="no_paspor" class="form-control"
-                                        value="{{ $value->no_paspor }}" maxlength="50" required=""
-                                        placeholder="No Paspor" autocomplete="off">
+                                        value="{{ $value->no_paspor }}" maxlength="50" placeholder="No Paspor"
+                                        autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <label>No KITAP</label>
                                     <input type="text" name="no_kitap" class="form-control"
-                                        value="{{ $value->no_kitap }}" maxlength="50" required=""
-                                        placeholder="No KITAP" autocomplete="off">
+                                        value="{{ $value->no_kitap }}" maxlength="50" placeholder="No KITAP"
+                                        autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Ayah</label>
