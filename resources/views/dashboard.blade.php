@@ -1,10 +1,17 @@
 @extends('layouts.mainlayout')
 @section('title', 'Dashboard')
 <!-- partial -->
+@php
+    $nama = session()->get('nama');
+    $akses = session()->get('hak_akses');
+    $rt = session()->get('rt');
+    $rw = session()->get('rw');
+@endphp
+
 @section('content')
+    <h4>{{ $nama }}</h4>
     <div class="row">
         <div class="col-sm-12 mb-4 mb-xl-0">
-            <h4 class="font-weight-bold text-dark">Dashboard S-Kepuharjo</h4>
             <p class="font-weight-normal mb-2 text-muted">APRIL 1, 2019</p>
         </div>
     </div>

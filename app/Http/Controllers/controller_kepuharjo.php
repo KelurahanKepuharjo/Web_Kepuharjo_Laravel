@@ -265,12 +265,12 @@ class controller_kepuharjo extends Controller
             ->get();
             // dd($datartrw);
             return view('master_rtrw', compact('datartrw'));
-            
+
             } catch (\Throwable $th) {
                 //throw $th;
             }
-            
-            
+
+
         }
 
 

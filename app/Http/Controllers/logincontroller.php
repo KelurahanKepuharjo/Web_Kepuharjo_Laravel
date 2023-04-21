@@ -31,11 +31,18 @@ class LoginController extends Controller
         // $hashedPassword = Hash::make($request->password);
         // dd($hashedPassword);
         // dd($user->password);
-        
+
         if ($user) {
             if (Hash::check($request->password, $user->password) ) {
                 // dd($user);
                 // Auth::login($user);
+                $session = [
+                    'nama' => $user->nama_lengkap,
+                    'hak_akses' =>  $user->role,
+                    'rt' =>  $user->rt,
+                    'rw' =>  $user->rw,
+                ];
+                session()->put($session);
                 return redirect('dashboard');
                 # code...
             }

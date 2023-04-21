@@ -31,6 +31,15 @@
     <title>S-Kepuharjo | @yield('title')</title>
 </head>
 
+
+@php
+    $nama = session()->get('nama');
+    $akses = session()->get('hak_akses');
+    $rt = session()->get('rt');
+    $rw = session()->get('rw');
+@endphp</h4>
+
+
 <body>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
@@ -45,19 +54,6 @@
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                     <span class="icon-menu"></span>
                 </button>
-                {{-- <ul class="navbar-nav mr-lg-2">
-                    <li class="nav-item nav-search d-none d-lg-block">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="search">
-                                    <i class="icon-search"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Cari Akun.." aria-label="search"
-                                aria-describedby="search">
-                        </div>
-                    </li>
-                </ul> --}}
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item dropdown d-flex mr-4 ">
                         <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center"
@@ -82,21 +78,8 @@
                 </button>
             </div>
         </nav>
-        <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                {{-- <div class="user-profile">
-                    <div class="user-image">
-                        <img src="{{ asset('template/images/faces/face28.png') }}">
-                    </div>
-                    <div class="user-name">
-                        Selamat Datang
-                    </div>
-                    <div class="user-designation">
-                        Admin
-                    </div>
-                </div> --}}
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard">
@@ -123,36 +106,39 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="masteruser">
-                            <i class="icon-file menu-icon"></i>
-                            <span class="menu-title">Master User</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="masterrtrw">
-                            <i class="icon-paper menu-icon"></i>
-                            <span class="menu-title">Master Rt Rw</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="masterkk">
-                            <i class="icon-paper menu-icon"></i>
-                            <span class="menu-title">Master KK</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/mastersurat">
-                            <i class="icon-paper menu-icon"></i>
-                            <span class="menu-title">Master Surat</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="berita">
-                            <i class="icon-globe menu-icon"></i>
-                            <span class="menu-title">Berita</span>
-                        </a>
-                    </li>
+                    @if ($akses == 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="masteruser">
+                                <i class="icon-file menu-icon"></i>
+                                <span class="menu-title">Master User</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="masterrtrw">
+                                <i class="icon-paper menu-icon"></i>
+                                <span class="menu-title">Master Rt Rw</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="masterkk">
+                                <i class="icon-paper menu-icon"></i>
+                                <span class="menu-title">Master KK</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/mastersurat">
+                                <i class="icon-paper menu-icon"></i>
+                                <span class="menu-title">Master Surat</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="berita">
+                                <i class="icon-globe menu-icon"></i>
+                                <span class="menu-title">Berita</span>
+                            </a>
+                        </li>
+                    @else
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="tentang">
                             <i class="icon-book menu-icon"></i>
@@ -161,7 +147,6 @@
                     </li>
                 </ul>
             </nav>
-            <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="row">
@@ -170,8 +155,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
                         <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">S-Kepuharjo</span>
@@ -179,30 +162,19 @@
                             Surat Kelurahan Kepuharjo</span>
                     </div>
                 </footer>
-                <!-- partial -->
             </div>
-            <!-- main-panel ends -->
         </div>
-        <!-- page-body-wrapper ends -->
     </div>
 </body>
 
 </html>
 
 <script src="{{ asset('template/vendors/base/vendor.bundle.base.js') }}"></script>
-<!-- endinject -->
-<!-- Plugin js for this page-->
-<!-- End plugin js for this page-->
-<!-- inject:js -->
 <script src="{{ asset('template/js/off-canvas.js') }}"></script>
 <script src="{{ asset('template/js/hoverable-collapse.js') }}"></script>
 <script src="{{ asset('template/js/template.js') }}"></script>
-<!-- endinject -->
-<!-- plugin js for this page -->
 <script src="{{ asset('template/vendors/chart.js/Chart.min.js') }}"></script>
 <script src="{{ asset('template/vendors/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
-<!-- End plugin js for this page -->
-<!-- Custom js for this page-->
 <script src="{{ asset('template/js/dashboard.js') }}"></script>
 <script src="{{ asset('https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js') }}"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
@@ -212,7 +184,6 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function() {
