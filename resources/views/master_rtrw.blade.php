@@ -15,8 +15,8 @@
                     <th>No</th>
                     <th>Nama RW</th>
                     <th>RW</th>
-                    <th>RT Yang Terdaftar</th>
                     <th>Aksi</th>
+                    {{-- <th>Jumlah RT Yang Terdaftar</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -24,14 +24,10 @@
                     @foreach ($datartrw as $no => $value)
                         <tr>
                             <td>{{ $no + 1 }}</td>
+
                             {{-- <td>{{ $value->nik }}</td> --}}
-                            <td></td>
+                            <td>{{ $value->nama_lengkap }}</td>
                             <td>{{ $value->rw }}</td>
-                            <td></td>
-                            {{-- <td>{{ $value->alamat }}</td>
-                            <td>{{ $value->no_hp }}</td>
-                            <td>{{ $value->rt }}</td> --}}
-                            {{-- <td>{{ $value->rw }}</td> --}}
                             <td>
                                 {{-- <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
                                     data-toggle="modal" data-target="#modal-edit{{ $value->nik }}">
@@ -46,13 +42,13 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" data-id="" href="../ajaxpage" data-toggle="modal"
-                                                data-target="#modal-edit{{ $value->no_kk }}">Edit</a>
+                                                data-target="#modal-edit">Edit</a>
                                             <a class="dropdown-item" href="#" data-toggle="modal"
-                                                data-target="#modal-hapus{{ $value->no_kk }}" value="{{ $value->no_kk }}"
+                                                data-target="#modal-hapus"
                                                 href="{{ url('masterkk') }}">Hapus</a>
                                             <form action="" method="get">
-                                                    <a class="dropdown-item" name="kk" value="{{ $value->no_kk }}"
-                                                        href="{{ url('masterrt/' . $value->id) }}">RT</a>
+                                                    <a class="dropdown-item" name="kk" value=""
+                                                        href="{{ url('masterrt/') }}">RT</a>
                                             </form>
                                         {{-- <button class="dropdown-item" type="button" value="isi value button"
                                                 onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}'); isiTextfield2('{{ $value->nama_kepala_keluarga }}');">Tambah
@@ -61,6 +57,12 @@
                                     </div>
                                 </div>
                             </td>
+                            {{-- <td></td> --}}
+                            {{-- <td>{{ $value->alamat }}</td>
+                            <td>{{ $value->no_hp }}</td>
+                            <td>{{ $value->rt }}</td> --}}
+                            {{-- <td>{{ $value->rw }}</td> --}}
+                            
                         </tr>
                     @endforeach
                 </form>
@@ -74,7 +76,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master RT dan RW</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master RW</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -82,10 +84,10 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-sm-1">
+                            {{-- <div class="col-sm-1">
                                 <label for="exampleFormControlSelect1">RW. </label>
-                            </div>
-                            <div class="col-sm-5">
+                            </div> --}}
+                            {{-- <div class="col-sm-5">
                                 <select class="form-control" id="exampleFormControlSelect1">
                                     <option>Pilih</option>
                                     <option>1</option>
@@ -94,7 +96,7 @@
                                     <option>4</option>
                                     <option>5</option>
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="row mt-2">
@@ -113,8 +115,8 @@
     </div>
 
     {{-- modal edit --}}
-    @foreach ($datartrw as $no => $value)
-        <div class="modal fade" id="modal-edit{{ $value->nik }}" tabindex="-1" role="dialog"
+    {{-- @foreach ($datartrw as $no => $value)
+        <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -124,7 +126,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ url('update-masterrtrw/' . $value->nik) }}" method="post">
+                    <form action="" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
@@ -166,11 +168,11 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
     {{-- batas modal edit --}}
 
     {{-- Modal Hapus --}}
-    @foreach ($datartrw as $no => $value)
+    {{-- @foreach ($datartrw as $no => $value)
         <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true" autocomplete="off">
             <div class="modal-dialog" role="document">
@@ -192,7 +194,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
     {{-- Batas Modal Hapus --}}
 @endsection
 

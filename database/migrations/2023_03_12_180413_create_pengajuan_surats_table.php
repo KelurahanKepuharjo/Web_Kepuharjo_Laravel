@@ -15,8 +15,8 @@ class CreatePengajuanSuratsTable extends Migration
     public function up()
     {
         Schema::create('pengajuan_surats', function (Blueprint $table) {
-            $table->integerIncrements('id_pengajuan');
-            $table->uuid('uuid');
+            // $table->integerIncrements('id_pengajuan');
+            $table->uuid('uuid')->primary();
             $table->string('status', 20)->nullable()->default('text');
             $table->text('keterangan')->nullable()->default('text');
             $table->dateTime('created_at', $precision = 0);

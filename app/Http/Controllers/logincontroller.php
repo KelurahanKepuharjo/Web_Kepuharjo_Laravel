@@ -28,10 +28,15 @@ class LoginController extends Controller
         ->where('master_masyarakats.nik', '=', $request->username)
         ->first();
 
+        // $hashedPassword = Hash::make($request->password);
+        // dd($hashedPassword);
+        // dd($user->password);
+        
         if ($user) {
-            if ($request->password==$user->password ) {
-                dd($user);
+            if (Hash::check($request->password, $user->password) ) {
+                // dd($user);
                 // Auth::login($user);
+                return redirect('dashboard');
                 # code...
             }
         }

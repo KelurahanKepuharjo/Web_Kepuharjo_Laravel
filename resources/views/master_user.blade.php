@@ -12,7 +12,6 @@
                 <tr>
                     <th>No</th>
                     <th>Username</th>
-                    <th>Password</th>
                     <th>Nama Lengkap</th>
                     <th>RT</th>
                     <th>RW</th>
@@ -26,7 +25,6 @@
                         <tr>
                             <td>{{ $no + 1 }}</td>
                             <td>{{ $value->nik }}</td>
-                            <td>{{ $value->password }}</td>
                             <td>{{ $value->nama_lengkap }}</td>
                             <td>{{ $value->rt }}</td>
                             <td>{{ $value->rw }}</td>

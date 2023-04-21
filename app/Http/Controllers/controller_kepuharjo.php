@@ -114,7 +114,8 @@ class controller_kepuharjo extends Controller
                 $uuid = Str::uuid()->toString();
                 $data->id = $uuid;
                 $data->no_hp = 62;
-                $data->password = "KepuharjoBermantra";
+                $passwordhash = "KepuharjoBermantra";
+                $data->password = Hash::make($passwordhash);
                 $data->role = "masyarakat";
                 $data->id_masyarakat = $id;
                 $data->save();
@@ -214,7 +215,8 @@ class controller_kepuharjo extends Controller
             $uuid = Str::uuid()->toString();
             $data->id = $uuid;
             $data->no_hp = $request->no_hp;
-            $data->password = $request->password;
+            $passwordhash = $request->password;
+            $data->password = Hash::make($passwordhash);
             $data->role = "RW";
             $data->id_masyarakat = $request->id_masyarakat;
         $data->save();
@@ -250,17 +252,27 @@ class controller_kepuharjo extends Controller
 
         public function master_rtrw(){
             // $data = master_rtrw::all();
-            $datartrw = DB::table('master_kks')
+            try {
+                $datartrw = DB::table('master_kks')
             ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
             ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
-            ->select(DB::raw('master_kks.rw'))
+            // ->select(DB::raw('master_kks.rw, master_masyarakats.nik'))
+            // ->select(DB::raw('master_kks.rw, master_masyarakats.nik, count(master_akuns.role = RT)'))
             ->where('master_akuns.role','=','RW')
-            ->groupBy('master_kks.rw')
+            // ->groupBy('master_kks.rw')
             ->orderBy('master_kks.rw', 'ASC')
             // ->select(DB::raw('count(master_masyarakats.nik)'))
             ->get();
+            // dd($datartrw);
             return view('master_rtrw', compact('datartrw'));
+            
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+            
+            
         }
+
 
 
     public function ajax_masyarakat(Request $request){

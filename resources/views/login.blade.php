@@ -38,10 +38,7 @@
                                 <div class="form-group">
                                     <input type="password" name="password" class="form-control" placeholder="Password">
                                 </div>
-                                <div class="mt-3">
-                                    <button class="btn btn-primary" type="submit">Login</button>
-                                </div>
-                            </form>
+                                
                             <div class="my-2 d-flex justify-content-between align-items-center">
                                 <div class="form-check">
                                     <label class="form-check-label text-muted">
@@ -51,6 +48,10 @@
                                 </div>
                                 <a href="#" class="auth-link text-black">Forgot password?</a>
                             </div>
+                            <div class="mt-3">
+                                <button class="btn btn-primary" type="submit">Login</button>
+                            </div>
+                        </form>
                             <div class="text-center mt-4 font-weight-light">
                                 Belum punya akun? <a href="register.html" class="text-primary">Buat Akun</a>
                             </div>
