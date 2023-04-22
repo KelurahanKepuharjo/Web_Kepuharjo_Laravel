@@ -17,8 +17,9 @@
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('template/css/style.css') }}">
-    {{-- <link rel="stylesheet" --}}
-    {{-- href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css') }}"> --}}
+    {{--
+    <link rel="stylesheet" --}} {{--
+        href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css') }}">
     <!-- endinject -->
 
@@ -33,10 +34,10 @@
 
 
 @php
-    $nama = session()->get('nama');
-    $akses = session()->get('hak_akses');
-    $rt = session()->get('rt');
-    $rw = session()->get('rw');
+$nama = session()->get('nama');
+$akses = session()->get('hak_akses');
+$rt = session()->get('rt');
+$rw = session()->get('rw');
 @endphp</h4>
 
 
@@ -63,7 +64,7 @@
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                             aria-labelledby="notificationDropdown">
                             <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
-                            <a class="dropdown-item preview-item">
+                            <a class="dropdown-item preview-item" data-toggle="modal" data-target="#modal-profile">
                                 <i class="icon-head"></i> Profile
                             </a>
                             <a class="dropdown-item preview-item" href="/">
@@ -107,36 +108,36 @@
                         </div>
                     </li>
                     @if ($akses == 'admin')
-                        <li class="nav-item">
-                            <a class="nav-link" href="masteruser">
-                                <i class="icon-file menu-icon"></i>
-                                <span class="menu-title">Master User</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="masterrtrw">
-                                <i class="icon-paper menu-icon"></i>
-                                <span class="menu-title">Master Rt Rw</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="masterkk">
-                                <i class="icon-paper menu-icon"></i>
-                                <span class="menu-title">Master KK</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/mastersurat">
-                                <i class="icon-paper menu-icon"></i>
-                                <span class="menu-title">Master Surat</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="berita">
-                                <i class="icon-globe menu-icon"></i>
-                                <span class="menu-title">Berita</span>
-                            </a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="masteruser">
+                            <i class="icon-file menu-icon"></i>
+                            <span class="menu-title">Master User</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="masterrtrw">
+                            <i class="icon-paper menu-icon"></i>
+                            <span class="menu-title">Master Rt Rw</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="masterkk">
+                            <i class="icon-paper menu-icon"></i>
+                            <span class="menu-title">Master KK</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/mastersurat">
+                            <i class="icon-paper menu-icon"></i>
+                            <span class="menu-title">Master Surat</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="berita">
+                            <i class="icon-globe menu-icon"></i>
+                            <span class="menu-title">Berita</span>
+                        </a>
+                    </li>
                     @else
                     @endif
                     <li class="nav-item">
@@ -165,6 +166,65 @@
             </div>
         </div>
     </div>
+    {{-- Modal edit profile --}}
+    <div class="modal fade" id="modal-profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" autocomplete="off">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="profile">
+                        <img class="img-profile rounded-circle" src="assets/img/logoprofile.png" style="">
+                    </div>
+                    <style>
+                        .profile {
+                            display: table-cell;
+                            vertical-align: middle;
+                            text-align: center;
+                        }
+
+                        .profile img {
+                            margin: auto;
+                            display: block;
+                            width: 150px;
+                            height: 150px;
+                        }
+                    </style>
+                    <div class="form-group">
+                        <input type="file" name="image">
+                        <button type="submit">Upload</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" name="namalengkap" class="form-control" value=" " maxlength="50"
+                            placeholder="Nama Lengkap" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="text" name="Password" class="form-control" value=" " maxlength="50"
+                            placeholder="Password" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <input type="text" name="status" class="form-control" value=" " maxlength="50"
+                            placeholder="Status" autocomplete="off">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-danger"> simpan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    {{-- batad modal edit profile --}}
 </body>
 
 </html>
