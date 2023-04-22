@@ -179,7 +179,7 @@ $rw = session()->get('rw');
                 </div>
                 <div class="modal-body">
                     <div class="profile">
-                        <img class="img-profile rounded-circle" src="assets/img/logoprofile.png" style="">
+                        <img class="img-profile rounded-circle" src="images/1682171772.jpg" style="">
                     </div>
                     <style>
                         .profile {
@@ -195,10 +195,13 @@ $rw = session()->get('rw');
                             height: 150px;
                         }
                     </style>
+                    <form action="/image-upload" method="POST" enctype="multipart/form-data">
+                        @csrf
                     <div class="form-group">
                         <input type="file" name="image">
                         <button type="submit">Upload</button>
                     </div>
+                    </form>
                     <div class="form-group">
                         <label>Nama Lengkap</label>
                         <input type="text" name="namalengkap" class="form-control" value=" " maxlength="50"

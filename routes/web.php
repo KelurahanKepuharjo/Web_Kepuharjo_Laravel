@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\data_usercontroller;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ImageUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,3 +98,7 @@ Route::get('/mastersurat', [controller_mastersurat::class, 'master_surat']);
 Route::post('/simpansurat',[controller_mastersurat::class, 'simpan_surat'])->name('simpansurat');
 Route::post('/editsurat/{id}',[controller_mastersurat::class, 'updatesurat']);
 Route::get('hapussurat/{id}', [controller_mastersurat::class, 'hapusmastersurat']);
+
+
+//Route img profile
+Route::post('image-upload', [ImageUploadController::class, 'imageUploadPost']);
