@@ -22,24 +22,25 @@ class controller_masterkk extends Controller
       // Untuk Simpan Master KK
       public function simpanmasterkk(Request $request)
       {
-          try {
-              $data = new master_kks();
-              $data->no_kk = $request->nokk;
-              $data->nama_kepala_keluarga = $request->kepala_keluarga;
-              $data->alamat = $request-> alamatkk;
-              $data->rt = $request->rt;
-              $data->rw = $request->rw;
-              $data->kode_pos = $request->kdpos;
-              $data->kelurahan = $request->kel;
-              $data->kecamatan = $request->kec;
-              $data->kabupaten = $request->kab;
-              $data->provinsi = $request->prov;
-              $data->kk_tgl = $request->tglkk;
-              $data->save();
-              return redirect()->back()->with('message', 'Data Berhasil ditambahkan');
-          } catch (\Throwable $th) {
-              echo "<script>alert('Data Gagal Ditambahkan.');window.location='masterkk';</script>";
-          }
+        $data = new master_kks();
+        $data->no_kk = $request->nokk;
+        $data->nama_kepala_keluarga = $request->kepala_keluarga;
+        $data->alamat = $request-> alamatkk;
+        $data->rt = $request->rt;
+        $data->rw = $request->rw;
+        $data->kode_pos = $request->kdpos;
+        $data->kelurahan = $request->kel;
+        $data->kecamatan = $request->kec;
+        $data->kabupaten = $request->kab;
+        $data->provinsi = $request->prov;
+        $data->kk_tgl = $request->tglkk;
+        $data->save();
+        return redirect()->back()->with('message', 'Data Berhasil ditambahkan');
+        //   try {
+
+        //   } catch (\Throwable $th) {
+        //       echo "<script>alert('Data Gagal Ditambahkan.');window.location='masterkk';</script>";
+        //   }
       }
 
       //Untuk Edit Master KK

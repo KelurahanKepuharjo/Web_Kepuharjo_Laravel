@@ -15,8 +15,9 @@
                     <th>No</th>
                     <th>Nama RW</th>
                     <th>RW</th>
+                    <th>Jumlah RT Yang Terdaftar</th>
                     <th>Aksi</th>
-                    {{-- <th>Jumlah RT Yang Terdaftar</th> --}}
+
                 </tr>
             </thead>
             <tbody>
@@ -25,9 +26,10 @@
                         <tr>
                             <td>{{ $no + 1 }}</td>
 
-                            {{-- <td>{{ $value->nik }}</td> --}}
-                            <td>{{ $value->nama_lengkap }}</td>
+
+                            <td>{{ $value->nama_kepala_keluarga }}</td>
                             <td>{{ $value->rw }}</td>
+                            <td>{{ $value->rt }}</td>
                             <td>
                                 {{-- <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
                                     data-toggle="modal" data-target="#modal-edit{{ $value->nik }}">
@@ -35,21 +37,20 @@
                                 <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
                                     data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->nik }}"
                                     href="{{ url('masterrtrw') }}"></a> --}}
-                                    <div class="dropdown">
-                                        <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                            style="background-color: #00AAAA; color: white;">
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" data-id="" href="../ajaxpage" data-toggle="modal"
-                                                data-target="#modal-edit">Edit</a>
-                                            <a class="dropdown-item" href="#" data-toggle="modal"
-                                                data-target="#modal-hapus"
-                                                href="{{ url('masterkk') }}">Hapus</a>
-                                            <form action="" method="get">
-                                                    <a class="dropdown-item" name="kk" value=""
-                                                        href="{{ url('masterrt/') }}">RT</a>
-                                            </form>
+                                <div class="dropdown">
+                                    <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        style="background-color: #00AAAA; color: white;">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" data-id="" href="../ajaxpage" data-toggle="modal"
+                                            data-target="#modal-edit">Edit</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal"
+                                            data-target="#modal-hapus" href="{{ url('masterkk') }}">Hapus</a>
+                                        <form action="" method="get">
+                                            <a class="dropdown-item" name="kk" value=""
+                                                href="{{ url('masterrt/') }}">RT</a>
+                                        </form>
                                         {{-- <button class="dropdown-item" type="button" value="isi value button"
                                                 onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}'); isiTextfield2('{{ $value->nama_kepala_keluarga }}');">Tambah
                                                 data
@@ -62,7 +63,7 @@
                             <td>{{ $value->no_hp }}</td>
                             <td>{{ $value->rt }}</td> --}}
                             {{-- <td>{{ $value->rw }}</td> --}}
-                            
+
                         </tr>
                     @endforeach
                 </form>

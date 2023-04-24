@@ -28,6 +28,10 @@ class controller_kepuharjo extends Controller
         return view('index');
     }
 
+    public function superadmin(){
+        return view('superadmin');
+    }
+
     public function login(){
         return view('login');
     }
@@ -251,7 +255,8 @@ class controller_kepuharjo extends Controller
         }
 
         public function master_rtrw(){
-            // $data = master_rtrw::all();
+            // $data = master_rtrw::all()
+            // ->groupBy('master_kks.rw');
             try {
                 $datartrw = DB::table('master_kks')
             ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
@@ -260,7 +265,7 @@ class controller_kepuharjo extends Controller
             // ->select(DB::raw('master_kks.rw, master_masyarakats.nik, count(master_akuns.role = RT)'))
             ->where('master_akuns.role','=','RW')
             // ->groupBy('master_kks.rw')
-            ->orderBy('master_kks.rw', 'ASC')
+            // ->orderBy('master_kks.rw', 'ASC')
             // ->select(DB::raw('count(master_masyarakats.nik)'))
             ->get();
             // dd($datartrw);
@@ -270,7 +275,14 @@ class controller_kepuharjo extends Controller
                 //throw $th;
             }
 
+                // $datartrw = master_rtrw::all()
+                // // ->count('rt')
+                // ->groupBy('rw');
+                // // ->get();
+                // // return view('master_rtrw', compact('datartrw'));
 
+                // // // ->get();
+                // dd($datartrw);
         }
 
 

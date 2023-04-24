@@ -118,43 +118,82 @@
                                     <input type="text" name="rw" class="form-control" placeholder="RW"
                                         autocomplete="off">
                                 </div>
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+
                                 <div class="col">
-                                    <input type="text" name="kdpos" class="form-control" placeholder="Kode Pos"
-                                        autocomplete="off">
+                                    <label for="">Kelurahan</label>
+                                    <select class="form-control" name="kel" autocomplete="off"
+                                        id="exampleFormControlSelect1" required="">
+                                        <option>- Pilih Kelurahan -</option>
+                                        <option>Tompokersan</option>
+                                        <option>Citrodiwangsan</option>
+                                        <option>Ditotrunan</option>
+                                        <option>Jogotrunan</option>
+                                        <option>Jogoyudan</option>
+                                        <option>Banjarwaru</option>
+                                        <option>Blukon</option>
+                                        <option>Boreng </option>
+                                        <option>Kepuharjo </option>
+                                        <option>Labruk Lor</option>
+                                        <option>Rogotrunan</option>
+                                        <option>Denok</option>
+
+                                    </select>
                                 </div>
+                                <div class="col">
+                                    <label for="">Kode Pos</label>
+                                    <select class="form-control" name="kdpos" autocomplete="off"
+                                        id="exampleFormControlSelect1" required="">
+                                        <option>- Pilih Kode Pos -</option>
+                                        <option>67311</option>
+                                        <option>67312</option>
+                                        <option>67313</option>
+                                        <option>67314</option>
+                                        <option>67315</option>
+                                        <option>67316</option>
+                                    </select>
+                                </div>
+
+
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" name="kel" class="form-control" placeholder="Kelurahan"
-                                        value="" maxlength="50" required="" autocomplete="off">
-                                </div>
-                                <div class="col">
-                                    <input type="text" name="kec" class="form-control"
-                                        placeholder="Kecamatan"value="" maxlength="50" required=""
-                                        autocomplete="off">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col">
+                                    <label for="">Kabupaten</label>
                                     <input type="text" name="kab" class="form-control"
-                                        placeholder="Kabupaten"value="" maxlength="50" required=""
-                                        autocomplete="off">
+                                        placeholder="Kabupaten"value="Lumajang" maxlength="50" required=""
+                                        autocomplete="off" readonly>
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="prov" class="form-control"
-                                        placeholder="Provinsi"value="" maxlength="50" required=""
-                                        autocomplete="off">
+                                    <label for="">Kecamatan</label>
+                                    <input type="text" name="kec" class="form-control"
+                                        placeholder="Kecamatan"value="Lumajang" maxlength="50" required=""
+                                        autocomplete="off" readonly>
                                 </div>
+
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="">KK Tanggal</label>
-                            <input type="date" class="form-control" name="tglkk" id="myDate" name="myDate"
-                                placeholder="yyyy-mm-dd" min="1000-01-01" max="9999-12-31" autocomplete="off">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="">Provinsi</label>
+                                    <input type="text" name="prov" class="form-control"
+                                        placeholder="Provinsi"value="Jawa Timur" maxlength="50" required=""
+                                        autocomplete="off" readonly>
+                                </div>
+                                <div class="col">
+                                    <label for="">KK Tanggal</label>
+                                    <input type="date" class="form-control" name="tglkk" id="myDate"
+                                        name="myDate" placeholder="yyyy-mm-dd" min="1000-01-01" max="9999-12-31"
+                                        autocomplete="off">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -34,10 +34,10 @@
 
 
 @php
-$nama = session()->get('nama');
-$akses = session()->get('hak_akses');
-$rt = session()->get('rt');
-$rw = session()->get('rw');
+    $nama = session()->get('nama');
+    $akses = session()->get('hak_akses');
+    $rt = session()->get('rt');
+    $rw = session()->get('rw');
 @endphp</h4>
 
 
@@ -108,36 +108,36 @@ $rw = session()->get('rw');
                         </div>
                     </li>
                     @if ($akses == 'admin')
-                    <li class="nav-item">
-                        <a class="nav-link" href="masteruser">
-                            <i class="icon-file menu-icon"></i>
-                            <span class="menu-title">Master User</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="masterrtrw">
-                            <i class="icon-paper menu-icon"></i>
-                            <span class="menu-title">Master Rt Rw</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="masterkk">
-                            <i class="icon-paper menu-icon"></i>
-                            <span class="menu-title">Master KK</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/mastersurat">
-                            <i class="icon-paper menu-icon"></i>
-                            <span class="menu-title">Master Surat</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="berita">
-                            <i class="icon-globe menu-icon"></i>
-                            <span class="menu-title">Berita</span>
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="masteruser">
+                                <i class="icon-file menu-icon"></i>
+                                <span class="menu-title">Master User</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="masterrtrw">
+                                <i class="icon-paper menu-icon"></i>
+                                <span class="menu-title">Master Rt Rw</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="masterkk">
+                                <i class="icon-paper menu-icon"></i>
+                                <span class="menu-title">Master KK</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/mastersurat">
+                                <i class="icon-paper menu-icon"></i>
+                                <span class="menu-title">Master Surat</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="berita">
+                                <i class="icon-globe menu-icon"></i>
+                                <span class="menu-title">Berita</span>
+                            </a>
+                        </li>
                     @else
                     @endif
                     <li class="nav-item">
@@ -197,10 +197,10 @@ $rw = session()->get('rw');
                     </style>
                     <form action="/image-upload" method="POST" enctype="multipart/form-data">
                         @csrf
-                    <div class="form-group">
-                        <input type="file" name="image">
-                        <button type="submit">Upload</button>
-                    </div>
+                        <div class="form-group">
+                            <input type="file" name="image">
+                            <button type="submit">Upload</button>
+                        </div>
                     </form>
                     <div class="form-group">
                         <label>Nama Lengkap</label>

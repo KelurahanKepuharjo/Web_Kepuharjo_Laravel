@@ -102,3 +102,6 @@ Route::get('hapussurat/{id}', [controller_mastersurat::class, 'hapusmastersurat'
 
 //Route img profile
 Route::post('image-upload', [ImageUploadController::class, 'imageUploadPost']);
+
+//Route img profile
+Route::get('superadmin', [controller_kepuharjo::class, 'superadmin']);
