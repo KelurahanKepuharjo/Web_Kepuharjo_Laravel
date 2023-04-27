@@ -17,6 +17,7 @@ class controller_mastermasyarakat extends Controller
     // Controller Master Masyarakat
 
     public function master_kk_mas(Request $request, $id){
+
         $data = DB::table('master_masyarakats')
         ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
         ->where('master_kks.id','=', $id)

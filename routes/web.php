@@ -80,7 +80,7 @@ Route::get('simpanakuns/{id}', [controller_kepuharjo::class, 'simpanmasteruserak
 // Route Master KK
 Route::get('/masterkk', [controller_masterkk::class, 'master_kk'])->name('masterkk');
 Route::post('/simpankk',[controller_masterkk::class, 'simpanmasterkk'])->name('simpankk');
-Route::get('/simpankepala/{id}' ,[controller_masterkk::class, 'simpankepalakeluarga']);
+Route::get('/simpankepala/{id}/{other_id}/{nik}' ,[controller_masterkk::class, 'simpankepalakeluarga']);
 Route::get('{id}/hapus-masterkk', [controller_masterkk::class, 'hapus']);
 Route::post('update-masterkk/{id}', [controller_masterkk::class, 'update']);
 

@@ -39,7 +39,7 @@
                             <tr>
                                 <td>{{ $no + 1 }}</td>
                                 <td>{{ $value->no_kk }}</td>
-                                <td>{{ $value->nama_kepala_keluarga }}</td>
+                                <td>{{ $value->nama_lengkap }}</td>
                                 <td>{{ $value->alamat }}</td>
                                 <td>{{ $value->rw }}</td>
                                 <td>{{ $value->rt }}</td>
@@ -95,6 +95,12 @@
                             <label for="nomor-kartu"></label>
                             <input type="number" id="nomor-kartu" name="nokk" class="form-control" value=""
                                 maxlength="16" required="" placeholder="Nomor KK" max="9999999999999999"
+                                autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="nomor-kartu"></label>
+                            <input type="number" id="nomor-kartu" name="nik" class="form-control" value=""
+                                maxlength="16" required="" placeholder="NIK Kepala Keluuarga" max="9999999999999999"
                                 autocomplete="off">
                         </div>
                         <div class="form-group">
@@ -237,7 +243,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label for="">Yakin untuk Menghapus Data {{ $value->nama_kepala_keluarga }} ?</label>
+                        <label for="">Yakin untuk Menghapus Data {{ $value->nama_lengkap }} ?</label>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -275,7 +281,7 @@
                                 <div class="form-group">
                                     <label for="">Kepala Keluarga</label>
                                     <input type="text" name="kepala_keluarga" class="form-control"
-                                        value="{{ $value->nama_kepala_keluarga }}" maxlength="50" required=""
+                                        value="{{ $value->nama_lengkap }}" maxlength="50" required=""
                                         placeholder="Nama Kepala Keluarga" autocomplete="off">
                                 </div>
                                 <div class="form-group">

@@ -19,7 +19,7 @@ class CreateMasterKksTable extends Migration
             $table->uuid('id')->primary();
              $table->bigInteger('no_kk')->nullable()->default(12);
             $table->unique('no_kk');
-            $table->string('nama_kepala_keluarga', 100)->nullable()->default('text');
+            // $table->string('nama_kepala_keluarga', 100)->nullable()->default('text');
             $table->string('alamat', 100)->nullable()->default('text');
             $table->tinyInteger('rt');
             $table->tinyInteger('rw');

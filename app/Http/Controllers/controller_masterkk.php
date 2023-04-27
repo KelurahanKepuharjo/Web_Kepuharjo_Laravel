@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use App\Models\master_masyarakat;
 use Alert;
 use Redirect;
 
@@ -26,15 +27,23 @@ class controller_masterkk extends Controller
         return view('master_kk', compact('data'));
     }
 
-    public function simpankepalakeluarga(Request $request, $id){
+    public function simpankepalakeluarga(Request $request, $id, $other_id, $nik){
         $datakepala = DB::table('master_kks')
         ->select('master_kks.id')
         ->where('master_kks.no_kk','=', $id)
-        ->get();
+        ->first();
+
         // dd($datakepala);
-        $datainsert =DB::insert('insert into master_masyrakats (id) values ('.$datakepala.')');
-        $datainsert->save();
-        // dd($datakepala);
+        // dd($other_id);
+        $data = new master_masyarakat();
+        $uuid = Str::uuid()->toString();
+        $data->id_masyarakat = $uuid;
+        $data->id = $datakepala->id;
+        $data->nik = $nik;
+        $data->nama_lengkap = $other_id;
+        $data->status_keluarga = 'Kepala Keluarga';
+        $data->save();
+
     }
 
       // Untuk Simpan Master KK
@@ -42,7 +51,7 @@ class controller_masterkk extends Controller
       {
         $data = new master_kks();
         $data->no_kk = $request->nokk;
-        $data->nama_kepala_keluarga = $request->kepala_keluarga;
+        // $data->nama_kepala_keluarga = $request->kepala_keluarga;
         $data->alamat = $request-> alamatkk;
         $data->rt = $request->rt;
         $data->rw = $request->rw;
@@ -53,7 +62,7 @@ class controller_masterkk extends Controller
         $data->provinsi = $request->prov;
         $data->kk_tgl = $request->tglkk;
         $data->save();
-        return redirect('simpankepala/'.$request->nokk);
+        return redirect('simpankepala/'.$request->nokk.'/'.$request->kepala_keluarga.'/'.$request->nik);
         //   try {
 
         //   } catch (\Throwable $th) {
