@@ -27,8 +27,8 @@
                         <th>No KK</th>
                         <th>Kepala Keluarga</th>
                         <th>Alamat</th>
-                        <th>RT</th>
                         <th>RW</th>
+                        <th>RT</th>
                         <th>kelurahan</th>
                         <th>Aksi</th>
                     </tr>
@@ -41,8 +41,8 @@
                                 <td>{{ $value->no_kk }}</td>
                                 <td>{{ $value->nama_kepala_keluarga }}</td>
                                 <td>{{ $value->alamat }}</td>
-                                <td>{{ $value->rt }}</td>
                                 <td>{{ $value->rw }}</td>
+                                <td>{{ $value->rt }}</td>
                                 <td>{{ $value->kelurahan }}</td>
                                 <td>
                                     <div class="dropdown">
@@ -122,7 +122,7 @@
 
                             </div>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <div class="row">
 
                                 <div class="col">
@@ -159,6 +159,23 @@
                                     </select>
                                 </div>
 
+
+                            </div>
+                        </div> --}}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="">Kelurahan</label>
+                                    <input type="text" name="kel" class="form-control"
+                                        placeholder="Kabupaten"value="Kepuharjo" maxlength="50" required=""
+                                        autocomplete="off" readonly>
+                                </div>
+                                <div class="col">
+                                    <label for="">Kode Pos</label>
+                                    <input type="text" name="kdpos" class="form-control"
+                                        placeholder="Kecamatan"value="67316" maxlength="50" required=""
+                                        autocomplete="off" readonly>
+                                </div>
 
                             </div>
                         </div>

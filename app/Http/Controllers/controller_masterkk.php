@@ -15,8 +15,26 @@ class controller_masterkk extends Controller
 {
     //Untuk Menampilkan data KK
     public function master_kk(){
-        $data = master_kks::all();
+        // $data = master_kks::all();
+        $data = DB::table('master_kks')
+        ->join('master_masyarakats','master_masyarakats.id','=','master_kks.id')
+        ->where('master_masyarakats.status_keluarga','=','Kepala Keluarga')
+        // ->orWhere('master_masyarakats.status_keluarga','=', '')
+        ->orderBy('master_kks.rw','asc')
+        ->orderBy('master_kks.rt','asc')
+        ->get();
         return view('master_kk', compact('data'));
+    }
+
+    public function simpankepalakeluarga(Request $request, $id){
+        $datakepala = DB::table('master_kks')
+        ->select('master_kks.id')
+        ->where('master_kks.no_kk','=', $id)
+        ->get();
+        // dd($datakepala);
+        $datainsert =DB::insert('insert into master_masyrakats (id) values ('.$datakepala.')');
+        $datainsert->save();
+        // dd($datakepala);
     }
 
       // Untuk Simpan Master KK
@@ -35,7 +53,7 @@ class controller_masterkk extends Controller
         $data->provinsi = $request->prov;
         $data->kk_tgl = $request->tglkk;
         $data->save();
-        return redirect()->back()->with('message', 'Data Berhasil ditambahkan');
+        return redirect('simpankepala/'.$request->nokk);
         //   try {
 
         //   } catch (\Throwable $th) {
