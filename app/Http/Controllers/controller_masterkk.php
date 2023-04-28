@@ -44,6 +44,16 @@ class controller_masterkk extends Controller
         $data->status_keluarga = 'Kepala Keluarga';
         $data->save();
 
+
+         $data = DB::table('master_kks')
+        ->join('master_masyarakats','master_masyarakats.id','=','master_kks.id')
+        ->where('master_masyarakats.status_keluarga','=','Kepala Keluarga')
+        // ->orWhere('master_masyarakats.status_keluarga','=', '')
+        ->orderBy('master_kks.rw','asc')
+        ->orderBy('master_kks.rt','asc')
+        ->get();
+        return view('master_kk', compact('data'));
+
     }
 
       // Untuk Simpan Master KK
@@ -81,7 +91,7 @@ class controller_masterkk extends Controller
       public function update(Request $request, $id){
           $data = master_kks::where('no_kk', $id)->first();
           $data->no_kk = $request->nokk;
-          $data->nama_kepala_keluarga = $request->kepala_keluarga;
+        //   $data->nama_kepala_keluarga = $request->kepala_keluarga;
           $data->alamat = $request-> alamatkk;
           $data->rt = $request->rt;
           $data->rw = $request->rw;

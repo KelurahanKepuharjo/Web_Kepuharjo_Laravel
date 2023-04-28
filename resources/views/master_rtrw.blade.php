@@ -4,7 +4,6 @@
 @section('content')
     <div class="header-atas">
         <h4>Halaman Master RT dan RW</h4>
-        {{-- <button data-toggle="modal" name='tambah' data-target="#modal-tambahrtrw">+</button> --}}
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah Data</i></button>
 
     </div>
@@ -15,7 +14,8 @@
                     <th>No</th>
                     <th>Nama RW</th>
                     <th>RW</th>
-                    <th>Jumlah RT Yang Terdaftar</th>
+                    <th>RT</th>
+                    <th>Status</th>
                     <th>Aksi</th>
 
                 </tr>
@@ -27,16 +27,11 @@
                             <td>{{ $no + 1 }}</td>
 
 
-                            <td>{{ $value->nama_kepala_keluarga }}</td>
+                            <td>{{ $value->nama_lengkap }}</td>
                             <td>{{ $value->rw }}</td>
                             <td>{{ $value->rt }}</td>
+                            <td>Ketua RW</td>
                             <td>
-                                {{-- <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
-                                    data-toggle="modal" data-target="#modal-edit{{ $value->nik }}">
-                                </a>
-                                <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
-                                    data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->nik }}"
-                                    href="{{ url('masterrtrw') }}"></a> --}}
                                 <div class="dropdown">
                                     <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -49,21 +44,11 @@
                                             data-target="#modal-hapus" href="{{ url('masterkk') }}">Hapus</a>
                                         <form action="" method="get">
                                             <a class="dropdown-item" name="kk" value=""
-                                                href="{{ url('masterrt/') }}">RT</a>
+                                                href="{{ url('masterrt/' . $value->rw) }}">RT</a>
                                         </form>
-                                        {{-- <button class="dropdown-item" type="button" value="isi value button"
-                                                onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}'); isiTextfield2('{{ $value->nama_kepala_keluarga }}');">Tambah
-                                                data
-                                                Keluarga</button> --}}
                                     </div>
                                 </div>
                             </td>
-                            {{-- <td></td> --}}
-                            {{-- <td>{{ $value->alamat }}</td>
-                            <td>{{ $value->no_hp }}</td>
-                            <td>{{ $value->rt }}</td> --}}
-                            {{-- <td>{{ $value->rw }}</td> --}}
-
                         </tr>
                     @endforeach
                 </form>

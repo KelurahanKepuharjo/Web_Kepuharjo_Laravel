@@ -179,7 +179,7 @@
                                         <select class="form-control" name="status_keluarga" autocomplete="off"
                                             id="exampleFormControlSelect1">
                                             <option>Pilih</option>
-                                            <option>Kepala Keluarga</option>
+                                            {{-- <option>Kepala Keluarga</option> --}}
                                             <option>Istri</option>
                                             <option>Anak</option>
                                             <option>Wali</option>

@@ -149,6 +149,7 @@ class controller_mastermasyarakat extends Controller
     public function hapusmasteruser(Request $request, $id){
             $data = master_masyarakat::where('nik', $id);
             $data -> delete();
+            // $query = 'Delete master_kks, master_masyarakats from master_kks INNER JOIN master_masyarakats ON mas';
         return Redirect('masterkkmas/'.$request->nokk);
     }
 
