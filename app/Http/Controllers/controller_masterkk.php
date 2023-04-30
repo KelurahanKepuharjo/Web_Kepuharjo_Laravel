@@ -59,6 +59,26 @@ class controller_masterkk extends Controller
       // Untuk Simpan Master KK
       public function simpanmasterkk(Request $request)
       {
+        $request->validate([
+            'nokk' => 'required|max:16|min:16',
+            'nik' => 'required|max:16|min:16',
+            'kepala_keluarga' => 'required',
+            'alamatkk' => 'required',
+            'rt' => 'required',
+            'rw' => 'required',
+        ],[
+            'nokk.required' => 'Nomor kartu keluarga tidak boleh kosong',
+            'nokk.min' => 'Nomor kartu keluarga miniman 16 angka',
+            'nokk.max' => 'Nomor kartu keluarga maximal 16 angka',
+            'nik.required' => 'Nik tidak boleh kosong',
+            'nik.min' => 'Nik minimal 16 angka',
+            'nik.max' => 'Nik maximal 16 angka',
+            'kepala_keluarga.required' => 'Nama Kepala Keluarga tidak boleh kosong',
+            'alamat.required' => 'Alamat tidak boleh kosong',
+            'Rt.required' => 'Rt tidak boleh kosong',
+            'Rw.required' => 'Rw tidak boleh kosong',
+
+        ]);
         $data = new master_kks();
         $data->no_kk = $request->nokk;
         // $data->nama_kepala_keluarga = $request->kepala_keluarga;
@@ -89,6 +109,25 @@ class controller_masterkk extends Controller
 
     //Untuk Update Master KK
       public function update(Request $request, $id){
+        $request->validate([
+            'nokk' => 'required|max:16|min:16',
+            'nik' => 'required|max:16|min:16',
+            'kepala_keluarga' => 'required',
+            'alamatkk' => 'required',
+            'rt' => 'required',
+            'rw' => 'required',
+        ],[
+            'nokk.required' => 'Nomor kartu keluarga tidak boleh kosong',
+            'nokk.min' => 'Nomor kartu keluarga miniman 16 angka',
+            'nokk.max' => 'Nomor kartu keluarga maximal 16 angka',
+            'nik.required' => 'Nik tidak boleh kosong',
+            'nik.min' => 'Nik minimal 16 angka',
+            'nik.max' => 'Nik maximal 16 angka',
+            'kepala_keluarga.required' => 'Nama Kepala Keluarga tidak boleh kosong',
+            'alamat.required' => 'Alamat tidak boleh kosong',
+            'Rt.required' => 'Rt tidak boleh kosong',
+            'Rw.required' => 'Rw tidak boleh kosong',
+        ]);
           $data = master_kks::where('no_kk', $id)->first();
           $data->no_kk = $request->nokk;
         //   $data->nama_kepala_keluarga = $request->kepala_keluarga;

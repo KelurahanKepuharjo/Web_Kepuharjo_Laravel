@@ -93,38 +93,75 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nomor-kartu"></label>
-                            <input type="number" id="nomor-kartu" name="nokk" class="form-control" value=""
-                                maxlength="16" required="" placeholder="Nomor KK" max="9999999999999999"
-                                autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="nomor-kartu"></label>
-                            <input type="number" id="nomor-kartu" name="nik" class="form-control" value=""
-                                maxlength="16" required="" placeholder="NIK Kepala Keluuarga" max="9999999999999999"
-                                autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="kepala_keluarga" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Nama Kepala Keluarga" autocomplete="off">
-                            @error('kepala_keluarga')
-                                {{ $message }}
+                            <input type="number" id="nomor-kartu" name="nokk"
+                                class="form-control
+                            @error('nokk') is-invalid
+
+                            @enderror"
+                                value="{{ old('nokk') }}" placeholder="Nomor KK" autocomplete="off"> @error('nokk')
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input type="text" name="alamatkk" class="form-control" value="" maxlength="100"
-                                required="" placeholder="Alamat" autocomplete="off">
+                            <label for="nomor-kartu"></label>
+                            <input type="number" id="nomor-kartu" name="nik"
+                                class="form-control
+                            @error('nik') is-invalid
+
+                            @enderror"
+                                value="{{ old('nik') }}" required=""
+                                placeholder="NIK Kepala Keluuarga"autocomplete="off">
+                            @error('nik')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="kepala_keluarga"
+                                class="form-control
+                            @error('kepala_keluarga') is-invalid
+
+                            @enderror"
+                                value="{{ old('kepala_keluarga') }}" required="" placeholder="Nama Kepala Keluarga"
+                                autocomplete="off">
+                            @error('kepala_keluarga')
+                                <div class="invalid-feedback">{{ $message }}></div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="alamatkk"
+                                class="form-control
+                            @error('alamat') is-invalid
+
+                            @enderror"
+                                value="{{ old('alamatkk') }}" required="" placeholder="Alamat" autocomplete="off">
+                            @error('alamatkk')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" name="rt" class="form-control" placeholder="RT"
-                                        autocomplete="off">
+                                    <input type="text" name="rt"
+                                        class="form-control
+                                    @error('rt') is-invalid
+
+                                    @enderror"
+                                        value="{{ old('rt') }}" placeholder="RT" autocomplete="off">
+                                    @error('rt')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="rw" class="form-control" placeholder="RW"
-                                        autocomplete="off">
-                                </div>
+                                    <input type="text" name="rw"
+                                        class="form-control
+                                    @error('rw') is-invalid
 
+                                    @enderror"
+                                        value="{{ old('Rw') }}" placeholder="RW" autocomplete="off">
+                                    @error('rw')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
                             </div>
                         </div>
@@ -274,39 +311,69 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="">No Kartu Keluarga</label>
-                                    <input type="text" name="nokk" class="form-control"
-                                        value="{{ $value->no_kk }}" maxlength="50" required=""
+                                    <input type="text" name="nokk"
+                                        class="form-control
+                                    @error('nokk')is-invalid
+
+                                    @enderror"
+                                        value="{{ old('nokk', $value->no_kk) }}" maxlength="50" required=""
                                         placeholder="Nomor KK" autocomplete="off">
+                                    @error('nokk')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">Kepala Keluarga</label>
-                                    <input type="text" name="kepala_keluarga" class="form-control"
-                                        value="{{ $value->nama_lengkap }}" maxlength="50" required=""
+                                    <input type="text" name="kepala_keluarga"
+                                        class="form-control
+                                    @error('kepala_keluarga')is-invalid
+
+                                    @enderror"
+                                        value="{{ old('kepala_keluarga', $value->nama_lengkap) }}"
                                         placeholder="Nama Kepala Keluarga" autocomplete="off">
+                                    @error('kepala_keluarga')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">Alamat</label>
-                                    <input type="text" name="alamatkk" class="form-control"
-                                        value="{{ $value->alamat }}" maxlength="50" required="" placeholder="Alamat"
-                                        autocomplete="off">
+                                    <input type="text" name="alamatkk"
+                                        class="form-control
+                                    @error('alamatkk')is-invalid
+
+                                    @enderror"
+                                        value="{{ old('alamat', $value->alamat) }}" maxlength="50" required=""
+                                        placeholder="Alamat" autocomplete="off">
+                                    @error('alamatkk')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col">
                                             <label for="">RT</label>
                                             <input type="text" name="rt"
-                                                value="{{ $value->rt }} "class="form-control" placeholder="RT"
-                                                autocomplete="off">
+                                                value="{{ old('rt', $value->rt) }} "class="form-control
+                                                @error('rt')is-invalid
+
+                                                @enderror"
+                                                placeholder="RT" autocomplete="off">
+                                            @error('rt')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col">
                                             <label for="">RW</label>
-                                            <input type="text" name="rw" value="{{ $value->rw }}"
+                                            <input type="text" name="rw" value="{{ old('rw', $value->rw) }}"
                                                 class="form-control" placeholder="RW">
                                         </div>
                                         <div class="col">
                                             <label for="">Kode Pos</label>
                                             <input type="text" name="kdpos" value="{{ $value->kode_pos }}"
                                                 class="form-control" placeholder="Kode Pos" autocomplete="off">
+                                            @error('rw')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
