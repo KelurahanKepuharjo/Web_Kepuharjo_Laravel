@@ -28,6 +28,11 @@
     <!-- jQuery 3 -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    {{-- css toast --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="{{ asset('template/images/logo.png') }}" />
     <title>S-Kepuharjo | @yield('title')</title>
 </head>
@@ -111,13 +116,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="masteruser">
                                 <i class="icon-file menu-icon"></i>
-                                <span class="menu-title">Master User</span>
+                                <span class="menu-title">Master Akun User</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="masterrtrw">
                                 <i class="icon-paper menu-icon"></i>
-                                <span class="menu-title">Master Rt Rw</span>
+                                <span class="menu-title">Master Akun Rt Rw</span>
                             </a>
                         </li>
                         <li class="nav-item">

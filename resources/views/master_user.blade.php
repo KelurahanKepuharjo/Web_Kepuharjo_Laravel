@@ -3,8 +3,8 @@
 <!-- partial -->
 @section('content')
     <div class="header-atas">
-        <h4>Halaman Master User</h4>
-        <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button>
+        <h4>Halaman Master Akun User</h4>
+        {{-- <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button> --}}
     </div>
     <div class="table_wrapper" style="overflow-x: scroll;">
         <table id="myTable" class="table table-striped" style="width:100%">
@@ -43,7 +43,7 @@
             </tbody>
         </table>
     </div>
-
+    {{--
     <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -201,9 +201,9 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    @foreach ($data as $no => $value)
+    {{-- @foreach ($data as $no => $value)
         <div class="modal fade" id="modal-edit{{ $value->nik }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -224,7 +224,7 @@
                                 @error('nik') is-invalid
 
                                 @enderror"
-                                    value="{{ old('nik', $value->nik) }}" required="" placeholder="NIK">
+                                    value="{{ $value->nik }}" required="" placeholder="NIK">
                                 @error('nik')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -334,8 +334,8 @@
                                     @error('jenis_kelamin')is-invalid
 
                                     @enderror"
-                                        name="jenis_kelamin" value="{{ old('jkl', $value->tgl_lahir) }}"
-                                        autocomplete="off" id="exampleFormControlSelect1">
+                                        name="jenis_kelamin" value="{{ old('jkl', $value->tgl_lahir) }}" autocomplete="off"
+                                        id="exampleFormControlSelect1">
                                         <option>{{ $value->jenis_kelamin }}</option>
                                         <option disabled></option>
                                         <option>Laki-Laki</option>
@@ -519,7 +519,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
 
 
     {{-- Modal Hapus --}}
@@ -539,8 +539,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <a type="button" onclick="showNotification()"
-                            href="{{ url($value->nik . '/hapus-masteruser') }}" class="btn btn-danger">Hapus</a>
+                        <a type="button" onclick="showNotification()" href="{{ url($value->nik . '/hapus-masteruser') }}"
+                            class="btn btn-danger">Hapus</a>
                     </div>
                 </div>
             </div>

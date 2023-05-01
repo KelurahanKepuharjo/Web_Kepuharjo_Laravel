@@ -126,13 +126,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../masteruser">
                             <i class="icon-file menu-icon"></i>
-                            <span class="menu-title">Master User</span>
+                            <span class="menu-title">Master Akun User</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../masterrtrw">
                             <i class="icon-paper menu-icon"></i>
-                            <span class="menu-title">Master Rt Rw</span>
+                            <span class="menu-title">Master Akun Rt Rw</span>
                         </a>
                     </li>
                     <li class="nav-item">

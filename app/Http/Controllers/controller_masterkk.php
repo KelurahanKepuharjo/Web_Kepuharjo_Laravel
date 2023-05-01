@@ -52,7 +52,8 @@ class controller_masterkk extends Controller
         ->orderBy('master_kks.rw','asc')
         ->orderBy('master_kks.rt','asc')
         ->get();
-        return view('master_kk', compact('data'));
+        return redirect()->route('masterkk')->with('success', 'Data Berhasil Ditambahkan');
+        // return view('master_kk', compact('data'))->with('success', 'Data Berhasil Ditambahkan');
 
     }
 

@@ -12,12 +12,12 @@
         </div>
         <!-- isi div -->
         <div>
-            @if (session()->has('message'))
-                <div class="alert alert-success" id="alert">
-                    {{ session()->get('message') }}
-                    <button type="button" class="close" data-dismiss="alert">X</button>
-                </div>
+            @if (session::has('success'))
+                <script>
+                    toastr.success('Data Berhasil Ditambahkan', '')
+                </script>
             @endif
+
         </div>
         <div class="table_wrapper" style=" overflow-x: scroll;">
             <table id="myTable" class="table table-striped">
@@ -29,7 +29,7 @@
                         <th>Alamat</th>
                         <th>RW</th>
                         <th>RT</th>
-                        <th>kelurahan</th>
+                        {{-- <th>kelurahan</th> --}}
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -43,7 +43,7 @@
                                 <td>{{ $value->alamat }}</td>
                                 <td>{{ $value->rw }}</td>
                                 <td>{{ $value->rt }}</td>
-                                <td>{{ $value->kelurahan }}</td>
+                                {{-- <td>{{ $value->kelurahan }}</td> --}}
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -62,9 +62,9 @@
                                                     Anggota KK</a>
                                             </form>
                                             {{-- <button class="dropdown-item" type="button" value="isi value button"
-                                                onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}'); isiTextfield2('{{ $value->nama_kepala_keluarga }}');">Tambah
-                                                data
-                                                Keluarga</button> --}}
+                                        onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}'); isiTextfield2('{{ $value->nama_kepala_keluarga }}');">Tambah
+                                        data
+                                        Keluarga</button> --}}
                                         </div>
                                     </div>
                                 </td>
@@ -74,7 +74,12 @@
                 </tbody>
             </table>
         </div>
+
+
     </div>
+
+
+
     {{-- Batas Page 1 Halaman master KK --}}
 
     {{-- Modal Tambah kk --}}
@@ -98,7 +103,8 @@
                             @error('nokk') is-invalid
 
                             @enderror"
-                                value="{{ old('nokk') }}" placeholder="Nomor KK" autocomplete="off"> @error('nokk')
+                                value="{{ old('nokk') }}" placeholder="Nomor KK" autocomplete="off">
+                            @error('nokk')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -109,8 +115,8 @@
                             @error('nik') is-invalid
 
                             @enderror"
-                                value="{{ old('nik') }}" required=""
-                                placeholder="NIK Kepala Keluuarga"autocomplete="off">
+                                value="{{ old('nik') }}" required="" placeholder="NIK Kepala Keluuarga"
+                                autocomplete="off">
                             @error('nik')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -166,58 +172,56 @@
                             </div>
                         </div>
                         {{-- <div class="form-group">
-                            <div class="row">
+                        <div class="row">
 
-                                <div class="col">
-                                    <label for="">Kelurahan</label>
-                                    <select class="form-control" name="kel" autocomplete="off"
-                                        id="exampleFormControlSelect1" required="">
-                                        <option>- Pilih Kelurahan -</option>
-                                        <option>Tompokersan</option>
-                                        <option>Citrodiwangsan</option>
-                                        <option>Ditotrunan</option>
-                                        <option>Jogotrunan</option>
-                                        <option>Jogoyudan</option>
-                                        <option>Banjarwaru</option>
-                                        <option>Blukon</option>
-                                        <option>Boreng </option>
-                                        <option>Kepuharjo </option>
-                                        <option>Labruk Lor</option>
-                                        <option>Rogotrunan</option>
-                                        <option>Denok</option>
+                            <div class="col">
+                                <label for="">Kelurahan</label>
+                                <select class="form-control" name="kel" autocomplete="off"
+                                    id="exampleFormControlSelect1" required="">
+                                    <option>- Pilih Kelurahan -</option>
+                                    <option>Tompokersan</option>
+                                    <option>Citrodiwangsan</option>
+                                    <option>Ditotrunan</option>
+                                    <option>Jogotrunan</option>
+                                    <option>Jogoyudan</option>
+                                    <option>Banjarwaru</option>
+                                    <option>Blukon</option>
+                                    <option>Boreng </option>
+                                    <option>Kepuharjo </option>
+                                    <option>Labruk Lor</option>
+                                    <option>Rogotrunan</option>
+                                    <option>Denok</option>
 
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <label for="">Kode Pos</label>
-                                    <select class="form-control" name="kdpos" autocomplete="off"
-                                        id="exampleFormControlSelect1" required="">
-                                        <option>- Pilih Kode Pos -</option>
-                                        <option>67311</option>
-                                        <option>67312</option>
-                                        <option>67313</option>
-                                        <option>67314</option>
-                                        <option>67315</option>
-                                        <option>67316</option>
-                                    </select>
-                                </div>
-
-
+                                </select>
                             </div>
-                        </div> --}}
+                            <div class="col">
+                                <label for="">Kode Pos</label>
+                                <select class="form-control" name="kdpos" autocomplete="off"
+                                    id="exampleFormControlSelect1" required="">
+                                    <option>- Pilih Kode Pos -</option>
+                                    <option>67311</option>
+                                    <option>67312</option>
+                                    <option>67313</option>
+                                    <option>67314</option>
+                                    <option>67315</option>
+                                    <option>67316</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+                    </div> --}}
                         <div class="form-group">
                             <div class="row">
                                 <div class="col">
                                     <label for="">Kelurahan</label>
-                                    <input type="text" name="kel" class="form-control"
-                                        placeholder="Kabupaten"value="Kepuharjo" maxlength="50" required=""
-                                        autocomplete="off" readonly>
+                                    <input type="text" name="kel" class="form-control" placeholder="Kabupaten"
+                                        value="Kepuharjo" maxlength="50" required="" autocomplete="off" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="">Kode Pos</label>
-                                    <input type="text" name="kdpos" class="form-control"
-                                        placeholder="Kecamatan"value="67316" maxlength="50" required=""
-                                        autocomplete="off" readonly>
+                                    <input type="text" name="kdpos" class="form-control" placeholder="Kecamatan"
+                                        value="67316" maxlength="50" required="" autocomplete="off" readonly>
                                 </div>
 
                             </div>
@@ -226,15 +230,13 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="">Kabupaten</label>
-                                    <input type="text" name="kab" class="form-control"
-                                        placeholder="Kabupaten"value="Lumajang" maxlength="50" required=""
-                                        autocomplete="off" readonly>
+                                    <input type="text" name="kab" class="form-control" placeholder="Kabupaten"
+                                        value="Lumajang" maxlength="50" required="" autocomplete="off" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="">Kecamatan</label>
-                                    <input type="text" name="kec" class="form-control"
-                                        placeholder="Kecamatan"value="Lumajang" maxlength="50" required=""
-                                        autocomplete="off" readonly>
+                                    <input type="text" name="kec" class="form-control" placeholder="Kecamatan"
+                                        value="Lumajang" maxlength="50" required="" autocomplete="off" readonly>
                                 </div>
 
                             </div>
@@ -243,9 +245,8 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="">Provinsi</label>
-                                    <input type="text" name="prov" class="form-control"
-                                        placeholder="Provinsi"value="Jawa Timur" maxlength="50" required=""
-                                        autocomplete="off" readonly>
+                                    <input type="text" name="prov" class="form-control" placeholder="Provinsi"
+                                        value="Jawa Timur" maxlength="50" required="" autocomplete="off" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="">KK Tanggal</label>
@@ -352,8 +353,8 @@
                                     <div class="row">
                                         <div class="col">
                                             <label for="">RT</label>
-                                            <input type="text" name="rt"
-                                                value="{{ old('rt', $value->rt) }} "class="form-control
+                                            <input type="text" name="rt" value="{{ old('rt', $value->rt) }} "
+                                                class="form-control
                                                 @error('rt')is-invalid
 
                                                 @enderror"
@@ -388,7 +389,7 @@
                                         <div class="col">
                                             <label for="">Kecamatan</label>
                                             <input type="text" name="kec" class="form-control"
-                                                placeholder="Kecamatan"value="{{ $value->kecamatan }}" maxlength="50"
+                                                placeholder="Kecamatan" value="{{ $value->kecamatan }}" maxlength="50"
                                                 required="" autocomplete="off">
                                         </div>
                                     </div>
@@ -398,13 +399,13 @@
                                         <div class="col">
                                             <label for="">Kabupaten</label>
                                             <input type="text" name="kab" class="form-control"
-                                                placeholder="Kabupaten"value="{{ $value->kabupaten }}" maxlength="50"
+                                                placeholder="Kabupaten" value="{{ $value->kabupaten }}" maxlength="50"
                                                 required="" autocomplete="off">
                                         </div>
                                         <div class="col">
                                             <label for="">Provinsi</label>
                                             <input type="text" name="prov" class="form-control"
-                                                placeholder="Provinsi"value="{{ $value->provinsi }}" maxlength="50"
+                                                placeholder="Provinsi" value="{{ $value->provinsi }}" maxlength="50"
                                                 required="" autocomplete="off">
                                         </div>
                                     </div>
@@ -540,3 +541,12 @@
         margin-left: auto;
     }
 </style>
+
+
+{{-- toast cdn --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{-- jquery cdn --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
