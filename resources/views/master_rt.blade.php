@@ -6,7 +6,7 @@
         <h4>Halaman Master RT</h4>
         {{-- <button data-toggle="modal" name='tambah' data-target="#modal-tambahrtrw">+</button>  --}}
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah Data</i></button>
-        <a class="btn" href="../masterrtrw">Kembali</a>
+        {{-- <a class="btn" href="../masterrtrw">Kembali</a> --}}
         {{-- <div class="button">
         <ul class="right">
             <a href="#">Tambah Data</a>
@@ -20,8 +20,8 @@
                 <tr>
                     <th>No</th>
                     <th>Nama RW</th>
-                    <th>RW</th>
-                    <th>RT Yang Terdaftar</th>
+                    <th>RT</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -32,8 +32,8 @@
                             <td>{{ $no + 1 }}</td>
                             {{-- <td>{{ $value->nik }}</td> --}}
                             <td>{{ $value->nama_lengkap }}</td>
-                            <td>{{ $value->rw }}</td>
-                            <td>{{ $value->rt }}</td>
+                            <td>{{ $value->rt}}</td>
+                            <td>Ketua RT</td>
                             {{-- <td>{{ $value->alamat }}</td>
                             <td>{{ $value->no_hp }}</td>
                             <td>{{ $value->rt }}</td> --}}
@@ -83,7 +83,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-sm-1">
                                 <label for="exampleFormControlSelect1">RW. </label>
                             </div>
@@ -97,7 +97,7 @@
                                     <option>5</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="row mt-2">
                         <div class="col-lg-12">

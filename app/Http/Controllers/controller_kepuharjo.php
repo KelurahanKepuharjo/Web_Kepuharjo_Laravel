@@ -277,7 +277,7 @@ class controller_kepuharjo extends Controller
     }
     // Batas Controller Master Masyarakat
 
-    // Controller Master RT RW
+    // Controller Master RW
     public function simpanmasterrtrw(Request $request)
     {
         $this->validate($request, [
@@ -352,6 +352,25 @@ class controller_kepuharjo extends Controller
                 // // // ->get();
                 // dd($datartrw);
         }
+
+        //Controller Master RT
+
+        public function simpanmasterrt(Request $request)
+    {
+        $this->validate($request, [
+            // 'no_kk' => 'unique:master_kks'
+        ]);
+            $data = new master_akun();
+            $uuid = Str::uuid()->toString();
+            $data->id = $uuid;
+            $data->no_hp = $request->no_hp;
+            $passwordhash = $request->password;
+            $data->password = Hash::make($passwordhash);
+            $data->role = "RT";
+            $data->id_masyarakat = $request->id_masyarakat;
+        $data->save();
+        return Redirect('masterrt');
+    }
 
 
 

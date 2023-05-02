@@ -3,7 +3,7 @@
 <!-- partial -->
 @section('content')
     <div class="header-atas">
-        <h4>Halaman Master RT dan RW</h4>
+        <h4>Halaman Master RW</h4>
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah Data</i></button>
 
     </div>
