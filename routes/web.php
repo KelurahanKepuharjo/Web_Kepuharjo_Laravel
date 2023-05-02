@@ -83,6 +83,7 @@ Route::post('/simpankk',[controller_masterkk::class, 'simpanmasterkk'])->name('s
 Route::get('/simpankepala/{id}/{other_id}/{nik}' ,[controller_masterkk::class, 'simpankepalakeluarga']);
 Route::get('{id}/hapus-masterkk', [controller_masterkk::class, 'hapus']);
 Route::post('update-masterkk/{id}', [controller_masterkk::class, 'update']);
+Route::get('simpanakunskk/{id}', [controller_masterkk::class, 'simpanmasteruserakunkk']);
 
 
 

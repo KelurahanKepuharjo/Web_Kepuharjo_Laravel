@@ -17,6 +17,16 @@
                     toastr.success('Data Berhasil Ditambahkan', '')
                 </script>
             @endif
+            @if (session::has('successedit'))
+                <script>
+                    toastr.success('Data Berhasil Diperbarui', '')
+                </script>
+            @endif
+            @if ($errors->any())
+                <script>
+                    toastr.error('Cek Kembali Data yang Anda Input', 'Data Gagal Ditambahkan')
+                </script>
+            @endif
 
         </div>
         <div class="table_wrapper" style=" overflow-x: scroll;">
@@ -171,46 +181,6 @@
 
                             </div>
                         </div>
-                        {{-- <div class="form-group">
-                        <div class="row">
-
-                            <div class="col">
-                                <label for="">Kelurahan</label>
-                                <select class="form-control" name="kel" autocomplete="off"
-                                    id="exampleFormControlSelect1" required="">
-                                    <option>- Pilih Kelurahan -</option>
-                                    <option>Tompokersan</option>
-                                    <option>Citrodiwangsan</option>
-                                    <option>Ditotrunan</option>
-                                    <option>Jogotrunan</option>
-                                    <option>Jogoyudan</option>
-                                    <option>Banjarwaru</option>
-                                    <option>Blukon</option>
-                                    <option>Boreng </option>
-                                    <option>Kepuharjo </option>
-                                    <option>Labruk Lor</option>
-                                    <option>Rogotrunan</option>
-                                    <option>Denok</option>
-
-                                </select>
-                            </div>
-                            <div class="col">
-                                <label for="">Kode Pos</label>
-                                <select class="form-control" name="kdpos" autocomplete="off"
-                                    id="exampleFormControlSelect1" required="">
-                                    <option>- Pilih Kode Pos -</option>
-                                    <option>67311</option>
-                                    <option>67312</option>
-                                    <option>67313</option>
-                                    <option>67314</option>
-                                    <option>67315</option>
-                                    <option>67316</option>
-                                </select>
-                            </div>
-
-
-                        </div>
-                    </div> --}}
                         <div class="form-group">
                             <div class="row">
                                 <div class="col">
@@ -320,6 +290,19 @@
                                         value="{{ old('nokk', $value->no_kk) }}" maxlength="50" required=""
                                         placeholder="Nomor KK" autocomplete="off">
                                     @error('nokk')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="nomor-kartu"></label>
+                                    <input type="number" id="nomor-kartu" name="nik"
+                                        class="form-control
+                                    @error('nik') is-invalid
+
+                                    @enderror"
+                                        value="{{ old('nik', $value->nik) }}" required=""
+                                        placeholder="NIK Kepala Keluuarga" autocomplete="off">
+                                    @error('nik')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -451,6 +434,7 @@
         }
     }
 </script>
+
 
 <script type="text/javascript">
     $("document").ready(function() {
