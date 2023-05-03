@@ -23,6 +23,7 @@ class CreateMasterAkunsTable extends Migration
             $table->timestamps();
             $table->uuid('id_masyarakat');
             $table->Foreign('id_masyarakat')->references('id_masyarakat')->on('master_masyarakats');
+            // $table->Foreign('id_masyarakat')->references('id_masyarakat')->on('master_masyarakats')->constrained('master_akuns')->cascadeOnDelete()->cascadeOnUpdate();
 
         });
     }

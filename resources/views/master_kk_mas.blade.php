@@ -108,9 +108,9 @@
                                     autocomplete="off" id="exampleFormControlSelect1">
                                     <option value="pilih" {{ 'pilih'===old('kelamin') ? 'selected' : '' }}>Pilih
                                     </option>
-                                    <option value="lk" {{ 'lk'===old('kelamin') ? 'selected' : '' }}>Laki-Laki
+                                    <option value="Laki-Laki" {{ 'Laki-Laki'===old('kelamin') ? 'selected' : '' }}>Laki-Laki
                                     </option>
-                                    <option value="pr" {{ 'pr'===old('kelamin') ? 'selected' : '' }}>Perempuan
+                                    <option value="Perempuan" {{ 'Perempuan'===old('kelamin') ? 'selected' : '' }}>Perempuan
                                     </option>
                                 </select>
                                 @error('kelamin')
@@ -149,17 +149,17 @@
                                         id="exampleFormControlSelect1">
                                         <option value="pilih" {{ 'pilih'===old('agama') ? 'selected' : '' }}>Pilih
                                         </option>
-                                        <option value="islam" {{ 'islam'===old('agama') ? 'selected' : '' }}>Islam
+                                        <option value="Islam" {{ 'Islam'===old('agama') ? 'selected' : '' }}>Islam
                                         </option>
-                                        <option value="kristen" {{ 'kristen'===old('agama') ? 'selected' : '' }}>
+                                        <option value="Kristen Protestan" {{ 'Kristen Protestan'===old('agama') ? 'selected' : '' }}>
                                             Kristen Protestan</option>
-                                        <option value="katolik" {{ 'katolik'===old('agama') ? 'selected' : '' }}>
+                                        <option value="Katolik" {{ 'Katolik'===old('agama') ? 'selected' : '' }}>
                                             Katolik</option>
-                                        <option value="hindu" {{ 'hindu'===old('agama') ? 'selected' : '' }}>Hindu
+                                        <option value="Hindu" {{ 'Hindu'===old('agama') ? 'selected' : '' }}>Hindu
                                         </option>
-                                        <option value="buddha" {{ 'buddha'===old('agama') ? 'selected' : '' }}>
+                                        <option value="Buddha" {{ 'Buddha'===old('agama') ? 'selected' : '' }}>
                                             Buddha</option>
-                                        <option value="konghucu" {{ 'konghucu'===old('agama') ? 'selected' : '' }}>
+                                        <option value="Konghucu" {{ 'Konghucu'===old('agama') ? 'selected' : '' }}>
                                             Konghucu</option>
                                     </select>
                                     @error('agama')
@@ -175,31 +175,31 @@
                                         id="exampleFormControlSelect1">
                                         <option value="pilih" {{ 'pilih'===old('pendidikan') ? 'selected' : '' }}>
                                             Pilih</option>
-                                        <option value="tdk/blmsekolah" {{ 'tdk/blmsekolah'===old('pendidikan')
+                                        <option value="Tidak/Belum Sekolah" {{ 'Tidak/Belum Sekolah'===old('pendidikan')
                                             ? 'selected' : '' }}>
                                             Tidak/Belum
                                             Sekolah</option>
-                                        <option value="blmtmtSD/sederajat" {{ 'blmtmtSD/sederajat'===old('pendidikan')
+                                        <option value="Belum Tamat SD/Sederajat" {{ 'Belum Tamat SD/Sederajat'===old('pendidikan')
                                             ? 'selected' : '' }}>
                                             Belum
                                             Tamat SD/Sederajat</option>
-                                        <option value="tmtSD/sederajat" {{ 'tmtSD/sederajat'===old('pendidikan')
+                                        <option value="Tamat SD/Sederajat" {{ 'Tamat SD/Sederajat'===old('pendidikan')
                                             ? 'selected' : '' }}>
                                             Tamat
                                             SD/Sederajat</option>
-                                        <option value="sltp" {{ 'sltp'===old('pendidikan') ? 'selected' : '' }}>
+                                        <option value="SLTP/Sederajat" {{ 'SLTP/Sederajat'===old('pendidikan') ? 'selected' : '' }}>
                                             SLTP/Sederajat</option>
-                                        <option value="slta" {{ 'slta'===old('pendidikan') ? 'selected' : '' }}>
+                                        <option value="SLTA/Sederajat" {{ 'SLTA/Sederajat'===old('pendidikan') ? 'selected' : '' }}>
                                             SLTA/Sederajat</option>
-                                        <option value="d1/2" {{ 'd1/2'===old('pendidikan') ? 'selected' : '' }}>
+                                        <option value="Diploma I/II" {{ 'Diploma I/II'===old('pendidikan') ? 'selected' : '' }}>
                                             Diploma I/II</option>
-                                        <option value="d3" {{ 'd3'===old('pendidikan') ? 'selected' : '' }}>
+                                        <option value="Diploma III" {{ 'Diploma III'===old('pendidikan') ? 'selected' : '' }}>
                                             Diploma III/S.Muda</option>
-                                        <option value="d4" {{ 'd4'===old('pendidikan') ? 'selected' : '' }}>
+                                        <option value="Diploma IV/Strata I" {{ 'Diploma IV/Strata I'===old('pendidikan') ? 'selected' : '' }}>
                                             Diploma IV/Strata I</option>
-                                        <option value="s1" {{ 's1'===old('pendidikan') ? 'selected' : '' }}>
+                                        <option value="Strata II" {{ 'Strata II'===old('pendidikan') ? 'selected' : '' }}>
                                             Strata II</option>
-                                        <option value="s2" {{ 's2'===old('pendidikan') ? 'selected' : '' }}>
+                                        <option value="Strata III" {{ 'Strata III'===old('pendidikan') ? 'selected' : '' }}>
                                             Strata III</option>
                                     </select>
                                     @error('pendidikan')
@@ -229,13 +229,13 @@
                                             Pilih</option>
                                         <option value="-" {{ '-'===old('gol_darah') ? 'selected' : '' }}>-
                                         </option>
-                                        <option value="a" {{ 'a'===old('gol_darah') ? 'selected' : '' }}>A
+                                        <option value="A" {{ 'A'===old('gol_darah') ? 'selected' : '' }}>A
                                         </option>
-                                        <option value="b" {{ 'b'===old('gol_darah') ? 'selected' : '' }}>B
+                                        <option value="B" {{ 'B'===old('gol_darah') ? 'selected' : '' }}>B
                                         </option>
-                                        <option value="o" {{ 'o'===old('gol_darah') ? 'selected' : '' }}>O
+                                        <option value="O" {{ 'O'===old('gol_darah') ? 'selected' : '' }}>O
                                         </option>
-                                        <option value="ab" {{ 'ab'===old('gol_darah') ? 'selected' : '' }}>AB
+                                        <option value="AB" {{ 'AB'===old('gol_darah') ? 'selected' : '' }}>AB
                                         </option>
                                     </select>
                                     @error('gol_darah')
@@ -251,13 +251,13 @@
                                         autocomplete="off" id="exampleFormControlSelect1">
                                         <option value="pilih" {{ 'pilih'===old('status_perkawinan') ? 'selected' : ''
                                             }}>Pilih</option>
-                                        <option value="belumkawin" {{ 'belumkawin'===old('status_perkawinan')
+                                        <option value="Belum Kawin" {{ 'Belum Kawin'===old('status_perkawinan')
                                             ? 'selected' : '' }}>
                                             Belum
                                             Kawin</option>
-                                        <option value="kawin" {{ 'kawin'===old('status_perkawinan') ? 'selected' : ''
+                                        <option value="Kawin" {{ 'Kawin'===old('status_perkawinan') ? 'selected' : ''
                                             }}>Kawin</option>
-                                        <option value="cerai" {{ 'cerai'===old('status_perkawinan') ? 'selected' : ''
+                                        <option value="Cerai" {{ 'Cerai'===old('status_perkawinan') ? 'selected' : ''
                                             }}>Cerai</option>
                                     </select>
                                     @error('status_perkawinan')
@@ -283,11 +283,11 @@
                                         <option value="pilih" {{ 'pilih'===old('status_keluarga') ? 'selected' : '' }}>
                                             Pilih</option>
                                         {{-- <option>Kepala Keluarga</option> --}}
-                                        <option value="istri" {{ 'istri'===old('status_keluarga') ? 'selected' : '' }}>
+                                        <option value="Istri" {{ 'Istri'===old('status_keluarga') ? 'selected' : '' }}>
                                             Istri</option>
-                                        <option value="anak" {{ 'anak'===old('status_keluarga') ? 'selected' : '' }}>
+                                        <option value="Anak" {{ 'Anak'===old('status_keluarga') ? 'selected' : '' }}>
                                             Anak</option>
-                                        <option value="wali" {{ 'wali'===old('status_keluarga') ? 'selected' : '' }}>
+                                        <option value="Wali" {{ 'Wali'===old('status_keluarga') ? 'selected' : '' }}>
                                             Wali</option>
                                     </select>
                                     @error('status_keluarga')
@@ -303,10 +303,10 @@
                                         id="exampleFormControlSelect1">
                                         <option value="pilih" {{ 'pilih'===old('kewarganegaraan') ? 'selected' : '' }}>
                                             Pilih</option>
-                                        <option value="wni" {{ 'wni'===old('kewarganegaraan') ? 'selected' : '' }}>
+                                        <option value="WNI" {{ 'WNI'===old('kewarganegaraan') ? 'selected' : '' }}>
                                             WNI
                                         </option>
-                                        <option value="wna" {{ 'wna'===old('kewarganegaraan') ? 'selected' : '' }}>
+                                        <option value="WNA" {{ 'WNA'===old('kewarganegaraan') ? 'selected' : '' }}>
                                             WNA
                                         </option>
                                     </select>
@@ -410,10 +410,10 @@
                                 <select class="form-control @error('kelamin') is-invalid
                                 @enderror" name="kelamin"
                                     autocomplete="off" id="exampleFormControlSelect1">
-                                    <option value="pilih" {{ "pilih"===old('kelamin') ? 'selected' : '' }}>{{
+                                    <option >{{
                                         $value->jenis_kelamin }}</option>
-                                    <option value="lk" {{ "lk"===old('kelamin') ? 'selected' : '' }}>Laki Laki</option>
-                                    <option value="pr" {{ "pr"===old('kelamin') ? 'selected' : '' }}>Perempuan</option>
+                                    <option value="Laki-Laki" {{ 'Laki-Laki'===old('kelamin') ? 'selected' : '' }}>Laki Laki</option>
+                                    <option value="Perempuan" {{ 'Perempuan'===old('kelamin') ? 'selected' : '' }}>Perempuan</option>
                                 </select>
 
                             </div>
@@ -449,19 +449,19 @@
                                     <select class="form-control @error('agama') is-invalid
                                     @enderror" name="agama"
                                         autocomplete="off" id="exampleFormControlSelect1">
-                                        <option value="pilih" {{ "pilih"===old('agama') ? 'selected' : '' }}>{{
+                                        <option >{{
                                             $value->agama }}</option>
-                                        <option value="islam" {{ "islam"===old('agama') ? 'selected' : '' }}>Islam
+                                        <option value="Islam" {{ 'Islam'===old('agama') ? 'selected' : '' }}>Islam
                                         </option>
-                                        <option value="kristen" {{ "kristen"===old('agama') ? 'selected' : '' }}>Kristen
+                                        <option value="Kristen Protestan" {{ 'Kristen Protestan'===old('agama') ? 'selected' : '' }}>Kristen
                                             Protestan</option>
-                                        <option value="katolik" {{ "katolik"===old('agama') ? 'selected' : '' }}>Katolik
+                                        <option value="Katolik" {{ 'Katolik'===old('agama') ? 'selected' : '' }}>Katolik
                                         </option>
-                                        <option value="hindu" {{ "hindu"===old('agama') ? 'selected' : '' }}>Hindu
+                                        <option value="Hindu" {{ 'Hindu'===old('agama') ? 'selected' : '' }}>Hindu
                                         </option>
-                                        <option value="buddha" {{ "buddha"===old('agama') ? 'selected' : '' }}>Buddha
+                                        <option value="Buddha" {{ 'Buddha'===old('agama') ? 'selected' : '' }}>Buddha
                                         </option>
-                                        <option value="konghucu" {{ "konghucu"===old('agama') ? 'selected' : '' }}>
+                                        <option value="Konghucu" {{ 'Konghucu'===old('agama') ? 'selected' : '' }}>
                                             Konghucu</option>
                                     </select>
                                     @error('agama')
@@ -475,27 +475,27 @@
                                     <select class="form-control @error('pendidikan') is-invalid
                                     @enderror"
                                         name="pendidikan" autocomplete="off" id="exampleFormControlSelect1">
-                                        <option value="pilih" {{ "pilih"===old('pendidikan') ? 'selected' : '' }}>{{
+                                        <option >{{
                                             $value->pendidikan }}</option>
-                                        <option value="tdk/blmsekolah" {{ "tdk/blmsekolah"===old('pendidikan')
+                                        <option value="Tidak/Belum Sekolah" {{ 'Tidak/Belum Sekolah'===old('pendidikan')
                                             ? 'selected' : '' }}>Tidak/Belum Sekolah</option>
-                                        <option value="blmtmtSD/sederajat" {{ "blmtmtSD/sederajat"===old('pendidikan')
+                                        <option value="Belum Tamat SD/Sederajat" {{ 'Belum Tamat SD/Sederajat'===old('pendidikan')
                                             ? 'selected' : '' }}>Belum Tamat SD/Sederajat</option>
-                                        <option value="tmtSD/sederajat" {{ "tmtSD/sederajat"===old('pendidikan')
+                                        <option value="Tamat SD/Sederajat" {{ 'Tamat SD/Sederajat'===old('pendidikan')
                                             ? 'selected' : '' }}>Tamat SD/Sederajat</option>
-                                        <option value="sltp" {{ "sltp"===old('pendidikan') ? 'selected' : '' }}>
+                                        <option value="SLTP" {{ 'SLTP'===old('pendidikan') ? 'selected' : '' }}>
                                             SLTP/Sederajat</option>
-                                        <option value="slta" {{ "slta"===old('pendidikan') ? 'selected' : '' }}>
+                                        <option value="SLTA" {{ 'SLTA'===old('pendidikan') ? 'selected' : '' }}>
                                             SLTA/Sederajat</option>
-                                        <option value="d1/2" {{ "d1/2"===old('pendidikan') ? 'selected' : '' }}>Diploma
+                                        <option value="Diploma I/II" {{ 'Diploma I/II'===old('pendidikan') ? 'selected' : '' }}>Diploma
                                             I/II</option>
-                                        <option value="d3" {{ "d3"===old('pendidikan') ? 'selected' : '' }}>Diploma
+                                        <option value="Diploma III/S.Muda" {{ 'Diploma III/S.Muda'===old('pendidikan') ? 'selected' : '' }}>Diploma
                                             III/S.Muda</option>
-                                        <option value="d4" {{ "d4"===old('pendidikan') ? 'selected' : '' }}>Diploma
+                                        <option value="Diploma IV/Strata I" {{ 'Diploma IV/Strata I'===old('pendidikan') ? 'selected' : '' }}>Diploma
                                             IV/Strata I</option>
-                                        <option value="s1" {{ "s1"===old('pendidikan') ? 'selected' : '' }}>Strata II
+                                        <option value="Strata II" {{ 'Strata II'===old('pendidikan') ? 'selected' : '' }}>Strata II
                                         </option>
-                                        <option value="s2" {{ "s2"===old('pendidikan') ? 'selected' : '' }}>Strata III
+                                        <option value="Strata III" {{ 'Strata III'===old('pendidikan') ? 'selected' : '' }}>Strata III
                                         </option>
                                     </select>
                                     @error('pendidikan')
@@ -522,13 +522,13 @@
                                     <select class="form-control @error('gol_darah') is-invalid
                                     @enderror"
                                         name="gol_darah" autocomplete="off" id="exampleFormControlSelect1">
-                                        <option value="pilih" {{ "pilih"===old('gol_darah') ? 'selected' : '' }}>{{
+                                        <option >{{
                                             $value->golongan_darah }}</option>
-                                        <option value="-" {{ "-"===old('gol_darah') ? 'selected' : '' }}>-</option>
-                                        <option value="a" {{ "a"===old('gol_darah') ? 'selected' : '' }}>A</option>
-                                        <option value="b" {{ "b"===old('gol_darah') ? 'selected' : '' }}>B</option>
-                                        <option value="o" {{ "o"===old('gol_darah') ? 'selected' : '' }}>O</option>
-                                        <option value="ab" {{ "ab"===old('gol_darah') ? 'selected' : '' }}>AB</option>
+                                        <option value="-" {{ '-'===old('gol_darah') ? 'selected' : '' }}>-</option>
+                                        <option value="A" {{ 'A'===old('gol_darah') ? 'selected' : '' }}>A</option>
+                                        <option value="B" {{ 'B'===old('gol_darah') ? 'selected' : '' }}>B</option>
+                                        <option value="O" {{ 'O'===old('gol_darah') ? 'selected' : '' }}>O</option>
+                                        <option value="AB" {{ 'AB'===old('gol_darah') ? 'selected' : '' }}>AB</option>
                                     </select>
                                     @error('gol_darah')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -541,13 +541,12 @@
                                     <select class="form-control @error('status_perkawinan') is-invalid
                                     @enderror"
                                         name="status_perkawinan" autocomplete="off" id="exampleFormControlSelect1">
-                                        <option value="pilih" {{ "pilih"===old('status_perkawinan') ? 'selected' : ''
-                                            }}>{{ $value->status_perkawinan }}</option>
-                                        <option value="belumkawin" {{ "belumkawin"===old('status_perkawinan')
+                                        <option >{{ $value->status_perkawinan }}</option>
+                                        <option value="Belum Kawin" {{ 'Belum Kawin'===old('status_perkawinan')
                                             ? 'selected' : '' }}>Belum Kawin</option>
-                                        <option value="kawin" {{ "kawin"===old('status_perkawinan') ? 'selected' : ''
+                                        <option value="Kawin" {{ 'Kawin'===old('status_perkawinan') ? 'selected' : ''
                                             }}>Kawin</option>
-                                        <option value="cerai" {{ "cerai"===old('status_perkawinan') ? 'selected' : ''
+                                        <option value="Cerai" {{ 'Cerai'===old('status_perkawinan') ? 'selected' : ''
                                             }}>Cerai</option>
                                     </select>
                                     @error('status_perkawinan')
@@ -572,15 +571,15 @@
 
                                     @enderror" name="status_keluarga" autocomplete="off"
                                         id="exampleFormControlSelect1">
-                                        <option value="pilih" {{ "pilih"===old('status_keluarga') ? 'selected' : '' }}>
+                                        <option>
                                             {{ $value->status_keluarga }}</option>
-                                        <option value="kepalakeluarga" {{ "kepala keluarga"===old('status_keluarga')
+                                        <option value="Kepala Keluarga" {{ 'Kepala Keluarga'===old('status_keluarga')
                                             ? 'selected' : '' }}>Kepala Keluarga</option>
-                                        <option value="istri" {{ "istri"===old('status_keluarga') ? 'selected' : '' }}>
+                                        <option value="Istri" {{ 'Istri'===old('status_keluarga') ? 'selected' : '' }}>
                                             Istri</option>
-                                        <option value="anak" {{ "anak"===old('status_keluarga') ? 'selected' : '' }}>
+                                        <option value="Anak" {{ 'Anak'===old('status_keluarga') ? 'selected' : '' }}>
                                             Anak</option>
-                                        <option value="wali" {{ "wali"===old('status_keluarga') ? 'selected' : '' }}>
+                                        <option value="Wali" {{ 'Wali'===old('status_keluarga') ? 'selected' : '' }}>
                                             Wali</option>
                                     </select>
                                     @error('status_keluarga')
@@ -594,11 +593,11 @@
                                     <select class="form-control @error('kewarganegaraan') is-invalid
                                     @enderror"
                                         name="kewarganegaraan" autocomplete="off" id="exampleFormControlSelect1">
-                                        <option value="pilih" {{ "pilih"===old('kewarganegaraan') ? 'selected' : '' }}>
+                                        <option>
                                             {{ $value->kewarganegaraan }}</option>
-                                        <option value="wni" {{ "wni"===old('kewarganegaraan') ? 'selected' : '' }}>WNI
+                                        <option value="WNI" {{ 'WNI'===old('kewarganegaraan') ? 'selected' : '' }}>WNI
                                         </option>
-                                        <option value="wna" {{ "wna"===old('kewarganegaraan') ? 'selected' : '' }}>WNA
+                                        <option value="WNA" {{ 'WNA'===old('kewarganegaraan') ? 'selected' : '' }}>WNA
                                         </option>
                                     </select>
                                     @error('kewarganegaraan')
