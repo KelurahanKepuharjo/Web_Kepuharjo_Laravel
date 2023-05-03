@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class master_akun extends Model
 {
     protected $table = 'master_akuns';
+
     protected $fillable = [
-         'id_akun', 'password', 'no_hp', 'role', 'created_at', 'updated_at', 'id_masyarakat'
+        'id_akun', 'password', 'no_hp', 'role', 'created_at', 'updated_at', 'id_masyarakat',
     ];
 
     protected static function boot()

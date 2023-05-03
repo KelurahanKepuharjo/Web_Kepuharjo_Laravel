@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\master_kk;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-      $this->call([
+        $this->call([
 
-        input_berita_seeder::class,
-      ]);
-       //  \App\Models\User::factory(100)->create();
-      //  \App\Models\master_kk::factory(10)->create();
+            input_berita_seeder::class,
+        ]);
+        //  \App\Models\User::factory(100)->create();
+        //  \App\Models\master_kk::factory(10)->create();
     }
 }

@@ -23,45 +23,46 @@ class LoginController extends Controller
         ]);
 
         $user = DB::table('master_masyarakats')
-        ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
-        ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-        ->where('master_masyarakats.nik', '=', $request->username)
+            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->where('master_masyarakats.nik', '=', $request->username)
         // ->and('master_akuns.role','=','RT')
         // ->or('master_akuns.role','=','RW')
-        ->first();
+            ->first();
 
         // $hashedPassword = Hash::make($request->password);
         // dd($hashedPassword);
         // dd($user->password);
 
         if ($user) {
-            if (Hash::check($request->password, $user->password) ) {
+            if (Hash::check($request->password, $user->password)) {
                 // dd($user);
                 // Auth::login($user);
                 $session = [
                     'nama' => $user->nama_lengkap,
-                    'hak_akses' =>  $user->role,
-                    'rt' =>  $user->rt,
-                    'rw' =>  $user->rw,
+                    'hak_akses' => $user->role,
+                    'rt' => $user->rt,
+                    'rw' => $user->rw,
                 ];
                 session()->put($session);
+
                 return redirect('dashboard');
-                # code...
+                // code...
             }
-        }elseif($request->username == "admin" && $request->password =="admin") {
+        } elseif ($request->username == 'admin' && $request->password == 'admin') {
             $session = [
                 'nama' => 'Admin Kepuharjo',
-                'hak_akses' =>  'admin',
-                'rt' =>  '',
-                'rw' =>  '$user->rw',
+                'hak_akses' => 'admin',
+                'rt' => '',
+                'rw' => '$user->rw',
             ];
             session()->put($session);
+
             return redirect('dashboard');
         }
 
     }
 }
-
 
 //password hash
 

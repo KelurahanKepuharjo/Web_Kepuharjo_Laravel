@@ -21,7 +21,7 @@ class CreateMasterMasyarakatsTable extends Migration
             // $table->foreignuuid('id');
             $table->uuid('id_masyarakat')->primary();
             // $table->bigInteger('no_kk' ,)->nullable()->default(12);
-            $table->bigInteger('nik' ,)->nullable();
+            $table->bigInteger('nik')->nullable();
             $table->unique('nik');
             $table->string('nama_lengkap', 100)->nullable();
             $table->string('jenis_kelamin', 16)->nullable();

@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\master_akun;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class input_master_akun extends Seeder
@@ -19,8 +17,8 @@ class input_master_akun extends Seeder
         master_akun::truncate();
         master_akun::create([
             // 'id' => 2,
-            'nama'=> 'Edy',
-            'password'=>'123',
+            'nama' => 'Edy',
+            'password' => '123',
             // 'role'=>'admin',
 
         ]);

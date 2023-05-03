@@ -1,21 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\berita;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
-use Alert;
-use Redirect;
 
 class controller_berita extends Controller
 {
     //Untuk Menampilkan Berita
-    public function berita(){
+    public function berita()
+    {
         $data = berita::all();
+
         return view('berita', compact('data'));
     }
 
@@ -25,29 +21,33 @@ class controller_berita extends Controller
         $this->validate($request, [
             // 'no_kk' => 'unique:master_kks'
         ]);
-            $data = new berita();
-            $data->judul = $request->judul;
-            $data->sub_title = $request->subtitle;
-            $data->deskripsi = $request-> deskripsi;
+        $data = new berita();
+        $data->judul = $request->judul;
+        $data->sub_title = $request->subtitle;
+        $data->deskripsi = $request->deskripsi;
         $data->save();
+
         return Redirect('berita');
     }
 
     // Untuk Update Berita
-    public function updateberita(Request $request, $id){
-        $data= berita::where('id', $id)->first();
+    public function updateberita(Request $request, $id)
+    {
+        $data = berita::where('id', $id)->first();
         $data->judul = $request->judul;
         $data->sub_title = $request->subtitle;
-        $data->deskripsi = $request-> deskripsi;
+        $data->deskripsi = $request->deskripsi;
         $data->save();
-        return Redirect('berita');
-        }
 
-    // Untuk Hapus Berita
-    public function hapusberita(Request $request, $id){
-        $data = berita::where('id', $id);
-        $data -> delete();
         return Redirect('berita');
     }
 
+    // Untuk Hapus Berita
+    public function hapusberita(Request $request, $id)
+    {
+        $data = berita::where('id', $id);
+        $data->delete();
+
+        return Redirect('berita');
+    }
 }

@@ -2,50 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\berita;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Models\master_kks;
-use App\Models\master_rtrw;
-use App\Models\master_masyarakat;
-use App\Models\master_surat;
 use App\Models\master_akun;
-use App\Models\User;
+use App\Models\master_kks;
+use App\Models\master_masyarakat;
+use App\Models\master_rtrw;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-// use App\Http\Controllers\Hash;
 use Illuminate\Support\Facades\Hash;
+// use App\Http\Controllers\Hash;
+use Illuminate\Support\Str;
 // use Illuminate\Support\Facades\Hash;
-
-use Alert;
-
 
 use Redirect;
 
 class controller_kepuharjo extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('index');
     }
 
-    public function superadmin(){
+    public function superadmin()
+    {
         return view('superadmin');
     }
 
-    public function login(){
+    public function login()
+    {
         return view('login');
     }
 
-
     public function loginauth(Request $request)
     {
-    $username = $request->input('username');
-    $password = $request->input('password');
+        $username = $request->input('username');
+        $password = $request->input('password');
 
-        if (!empty(trim($username)) && !empty(trim($password))) {
+        if (! empty(trim($username)) && ! empty(trim($password))) {
             $user = DB::table('master_masyarakats')
-            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
-            ->where('nik', $username)->first();
+                ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+                ->where('nik', $username)->first();
 
             if ($user && $password == $user->password) {
                 // Jika username dan password benar, maka redirect ke halaman dashboard
@@ -59,14 +54,15 @@ class controller_kepuharjo extends Controller
     }
 
     // Controller Master Masyarakat
-    public function master_kk_mas(Request $request, $id){
+    public function master_kk_mas(Request $request, $id)
+    {
         $data = DB::table('master_masyarakats')
-        ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-        ->where('master_kks.id','=', $id)
-        ->get();
-        return view('master_kk_mas', ['nomor_kk'=> $id] , compact('data'));
-    }
+            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->where('master_kks.id', '=', $id)
+            ->get();
 
+        return view('master_kk_mas', ['nomor_kk' => $id], compact('data'));
+    }
 
     public function simpanmasteruser(Request $request)
     {
@@ -80,20 +76,20 @@ class controller_kepuharjo extends Controller
             'tgl_lahir' => 'required',
             'agama' => 'required',
             'pendidikan' => 'required',
-            'pekerjaan' =>'required',
+            'pekerjaan' => 'required',
             'gol_darah' => 'required',
             'status_perkawinan' => 'required',
             'status_keluarga' => 'required',
             'kewarganegaraan' => 'required',
             'nama_ayah' => 'required',
-            'nama_ibu' => 'required'
-        ],[
+            'nama_ibu' => 'required',
+        ], [
             'nik.required' => 'NIK Tidak Boleh Kosong',
             'nik.max' => 'NIK Maksimal 16 Angka',
             'nik.min' => 'NIK Minimal 16 Angka',
             'nama_lengkap.required' => 'Nama Lengkap Tidak Boleh Kosong',
             'kelamin.required' => 'Jenis Kelamin Tidak Boleh Kosong',
-            'tempat_lahir.required'=> 'Tempat Lahir Tidak Boleh Kosong',
+            'tempat_lahir.required' => 'Tempat Lahir Tidak Boleh Kosong',
             'tgl_lahir.required' => 'Tanggal Lahir Tidak Boleh Kosong',
             'agama.required' => 'Agama Tidak Boleh Kosong',
             'pendidikan.required' => 'Pendidikan Tidak Boleh Kosong',
@@ -103,77 +99,81 @@ class controller_kepuharjo extends Controller
             'status_keluarga.required' => 'Status Keluarga Tidak Boleh Kosong',
             'kewarganegaraan.required' => 'Kewarganegaraan Tidak Boleh Kosong',
             'nama_ayah.required' => 'Nama Ayah Tidak Boleh Kosong',
-            'nama_ibu.required' => 'Nama Ibu Tidak Boleh Kosong'
+            'nama_ibu.required' => 'Nama Ibu Tidak Boleh Kosong',
         ]);
-            try {
-                $data = new master_masyarakat();
-                $uuid = Str::uuid()->toString();
-                $data->id_masyarakat = $uuid;
-                $data->id = $request->nokk;
-                $data->nik = $request->nik;
-                $data->nama_lengkap = $request->nama_lengkap;
-                $data->jenis_kelamin = $request->kelamin;
-                $data->tempat_lahir = $request-> tempat_lahir;
-                $data->tgl_lahir = $request-> tgl_lahir;
-                $data->agama = $request->agama;
-                $data->pendidikan = $request->pendidikan;
-                $data->pekerjaan = $request->pekerjaan;
-                $data->golongan_darah = $request->gol_darah;
-                $data->status_perkawinan = $request->status_perkawinan;
-                $data->tgl_perkawinan = $request->tgl_perkawinan;
-                $data->status_keluarga = $request->status_keluarga;
-                $data->kewarganegaraan = $request->kewarganegaraan;
-                $data->no_paspor = $request->no_paspor;
-                $data->no_kitap = $request->no_kitap;
-                $data->nama_ayah = $request->nama_ayah;
-                $data->nama_ibu = $request->nama_ibu;
-                $data->save();
-                return Redirect('simpanakuns/'.$data->id_masyarakat);
-            } catch (\Throwable $th) {
-                throw $th;
+        try {
+            $data = new master_masyarakat();
+            $uuid = Str::uuid()->toString();
+            $data->id_masyarakat = $uuid;
+            $data->id = $request->nokk;
+            $data->nik = $request->nik;
+            $data->nama_lengkap = $request->nama_lengkap;
+            $data->jenis_kelamin = $request->kelamin;
+            $data->tempat_lahir = $request->tempat_lahir;
+            $data->tgl_lahir = $request->tgl_lahir;
+            $data->agama = $request->agama;
+            $data->pendidikan = $request->pendidikan;
+            $data->pekerjaan = $request->pekerjaan;
+            $data->golongan_darah = $request->gol_darah;
+            $data->status_perkawinan = $request->status_perkawinan;
+            $data->tgl_perkawinan = $request->tgl_perkawinan;
+            $data->status_keluarga = $request->status_keluarga;
+            $data->kewarganegaraan = $request->kewarganegaraan;
+            $data->no_paspor = $request->no_paspor;
+            $data->no_kitap = $request->no_kitap;
+            $data->nama_ayah = $request->nama_ayah;
+            $data->nama_ibu = $request->nama_ibu;
+            $data->save();
+
+            return Redirect('simpanakuns/'.$data->id_masyarakat);
+        } catch (\Throwable $th) {
+            throw $th;
         }
 
-            try {
-                $data = DB::table('master_masyarakats')
+        try {
+            $data = DB::table('master_masyarakats')
                 ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
                 ->orderBy('created_at', 'desc')
                 ->limit(1)
                 ->select('master_kks.id')
                 ->first();
-            } catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-    public function simpanmasteruserakun(Request $request, $id){
-            try {
-                $data = new master_akun();
-                $uuid = Str::uuid()->toString();
-                $data->id = $uuid;
-                $data->no_hp = 62;
-                $passwordhash = "KepuharjoBermantra";
-                $data->password = Hash::make($passwordhash);
-                $data->role = "masyarakat";
-                $data->id_masyarakat = $id;
-                $data->save();
+    public function simpanmasteruserakun(Request $request, $id)
+    {
+        try {
+            $data = new master_akun();
+            $uuid = Str::uuid()->toString();
+            $data->id = $uuid;
+            $data->no_hp = 62;
+            $passwordhash = 'KepuharjoBermantra';
+            $data->password = Hash::make($passwordhash);
+            $data->role = 'masyarakat';
+            $data->id_masyarakat = $id;
+            $data->save();
 
-            } catch (\Throwable $th) {
-                throw $th;
+        } catch (\Throwable $th) {
+            throw $th;
         }
 
-            try {
-                $data = DB::table('master_masyarakats')
+        try {
+            $data = DB::table('master_masyarakats')
                 ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-                ->where('master_masyarakats.id_masyarakat','=', $id )
+                ->where('master_masyarakats.id_masyarakat', '=', $id)
                 ->first();
-                return Redirect('masterkkmas/'.$data->id);
-            } catch (\Throwable $th) {
-                throw $th;
+
+            return Redirect('masterkkmas/'.$data->id);
+        } catch (\Throwable $th) {
+            throw $th;
         }
 
     }
 
-    public function updatemasteruser(Request $request, $id){
+    public function updatemasteruser(Request $request, $id)
+    {
         $this->validate($request, [
         ]);
         $request->validate([
@@ -184,20 +184,20 @@ class controller_kepuharjo extends Controller
             'tgl_lahir' => 'required',
             'agama' => 'required',
             'pendidikan' => 'required',
-            'pekerjaan' =>'required',
+            'pekerjaan' => 'required',
             'gol_darah' => 'required',
             'status_perkawinan' => 'required',
             'status_keluarga' => 'required',
             'kewarganegaraan' => 'required',
             'nama_ayah' => 'required',
-            'nama_ibu' => 'required'
-        ],[
+            'nama_ibu' => 'required',
+        ], [
             'nik.required' => 'NIK Tidak Boleh Kosong',
             'nik.max' => 'NIK Maksimal 16 Angka',
             'nik.min' => 'NIK Minimal 16 Angka',
             'nama_lengkap.required' => 'Nama Lengkap Tidak Boleh Kosong',
             'kelamin.required' => 'Jenis Kelamin Tidak Boleh Kosong',
-            'tempat_lahir.required'=> 'Tempat Lahir Tidak Boleh Kosong',
+            'tempat_lahir.required' => 'Tempat Lahir Tidak Boleh Kosong',
             'tgl_lahir.required' => 'Tanggal Lahir Tidak Boleh Kosong',
             'agama.required' => 'Agama Tidak Boleh Kosong',
             'pendidikan.required' => 'Pendidikan Tidak Boleh Kosong',
@@ -207,73 +207,78 @@ class controller_kepuharjo extends Controller
             'status_keluarga.required' => 'Status Keluarga Tidak Boleh Kosong',
             'kewarganegaraan.required' => 'Kewarganegaraan Tidak Boleh Kosong',
             'nama_ayah.required' => 'Nama Ayah Tidak Boleh Kosong',
-            'nama_ibu.required' => 'Nama Ibu Tidak Boleh Kosong'
+            'nama_ibu.required' => 'Nama Ibu Tidak Boleh Kosong',
         ]);
         try {
-                $data = DB::table('master_masyarakats')->where('nik', $id)->update([
-                    // $data->nik = $request->nik,
-                    'nama_lengkap' => $request->nama_lengkap,
-                    'jenis_kelamin' => $request->kelamin,
-                    'tempat_lahir' => $request-> tempat_lahir,
-                    'tgl_lahir' => $request-> tgl_lahir,
-                    'agama' => $request->agama,
-                    'pendidikan' => $request->pendidikan,
-                    'pekerjaan' => $request->pekerjaan,
-                    'golongan_darah' => $request->gol_darah,
-                    'status_perkawinan' => $request->status_perkawinan,
-                    'tgl_perkawinan' => $request->tgl_perkawinan,
-                    'status_keluarga' => $request->status_keluarga,
-                    'kewarganegaraan' => $request->kewarganegaraan,
-                    'no_paspor' => $request->no_paspor,
-                    'no_kitap' => $request->no_kitap,
-                    'nama_ayah' => $request->nama_ayah,
-                    'nama_ibu' => $request->nama_ibu
-                ]);
-            } catch (\Throwable $th) {
-                throw $th;
+            $data = DB::table('master_masyarakats')->where('nik', $id)->update([
+                // $data->nik = $request->nik,
+                'nama_lengkap' => $request->nama_lengkap,
+                'jenis_kelamin' => $request->kelamin,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tgl_lahir' => $request->tgl_lahir,
+                'agama' => $request->agama,
+                'pendidikan' => $request->pendidikan,
+                'pekerjaan' => $request->pekerjaan,
+                'golongan_darah' => $request->gol_darah,
+                'status_perkawinan' => $request->status_perkawinan,
+                'tgl_perkawinan' => $request->tgl_perkawinan,
+                'status_keluarga' => $request->status_keluarga,
+                'kewarganegaraan' => $request->kewarganegaraan,
+                'no_paspor' => $request->no_paspor,
+                'no_kitap' => $request->no_kitap,
+                'nama_ayah' => $request->nama_ayah,
+                'nama_ibu' => $request->nama_ibu,
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
         }
 
-            try {
-                $data = DB::table('master_masyarakats')
+        try {
+            $data = DB::table('master_masyarakats')
                 ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-                ->where('nik','=', $request->nik)
+                ->where('nik', '=', $request->nik)
                 ->select('master_kks.id')
                 ->first();
-                return Redirect('masterkkmas/'.$data->id);
-            } catch (\Throwable $th) {
-                throw $th;
+
+            return Redirect('masterkkmas/'.$data->id);
+        } catch (\Throwable $th) {
+            throw $th;
         }
     }
 
-    public function hapusmasteruser(Request $request, $id){
+    public function hapusmasteruser(Request $request, $id)
+    {
         try {
             $data = master_masyarakat::where('nik', $id);
-            $data -> delete();
+            $data->delete();
+
             return Redirect('masterkkmas/'.$request->nokk);
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-    public function ajax(Request $request){
+    public function ajax(Request $request)
+    {
         $nik = $request->nik;
         $results = DB::table('master_masyarakats')
-        ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-        ->where('master_masyarakats.nik', 'like' , '%'.$nik.'%')->get();
+            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->where('master_masyarakats.nik', 'like', '%'.$nik.'%')->get();
         $c = count($results);
-        if($c == 0){
+        if ($c == 0) {
             // jikaa data kosong
             return '<p class="text-muted">Maaf, Data tidak ditemukan</p>';
-        }else{
+        } else {
             // jika data ada
             return view('ajaxpage')->with([
-                'data' => $results
+                'data' => $results,
             ]);
         }
     }
 
-    public function read(){
-        return "Silahkan Melakukan Pencarian Data";
+    public function read()
+    {
+        return 'Silahkan Melakukan Pencarian Data';
     }
     // Batas Controller Master Masyarakat
 
@@ -283,19 +288,21 @@ class controller_kepuharjo extends Controller
         $this->validate($request, [
             // 'no_kk' => 'unique:master_kks'
         ]);
-            $data = new master_akun();
-            $uuid = Str::uuid()->toString();
-            $data->id = $uuid;
-            $data->no_hp = $request->no_hp;
-            $passwordhash = $request->password;
-            $data->password = Hash::make($passwordhash);
-            $data->role = "RW";
-            $data->id_masyarakat = $request->id_masyarakat;
+        $data = new master_akun();
+        $uuid = Str::uuid()->toString();
+        $data->id = $uuid;
+        $data->no_hp = $request->no_hp;
+        $passwordhash = $request->password;
+        $data->password = Hash::make($passwordhash);
+        $data->role = 'RW';
+        $data->id_masyarakat = $request->id_masyarakat;
         $data->save();
+
         return Redirect('masterrtrw');
     }
 
-    public function updatemasterrtrw(Request $request, $id){
+    public function updatemasterrtrw(Request $request, $id)
+    {
         $data = master_rtrw::where('nik', $id)->first();
         $data->nik = $request->nik;
         $data->nama_lengkap = $request->nama_lengkap;
@@ -304,40 +311,46 @@ class controller_kepuharjo extends Controller
         $data->rt = $request->rt;
         $data->rw = $request->rw;
         $data->save();
-        return Redirect('masterrtrw');
-        }
 
-        public function hapusmasterrtrw(Request $request, $id){
+        return Redirect('masterrtrw');
+    }
+
+        public function hapusmasterrtrw(Request $request, $id)
+        {
             $data = master_rtrw::where('nik', $id);
-            $data -> delete();
+            $data->delete();
+
             return Redirect('masterrtrw');
         }
 
-        public function master_rt(){
+        public function master_rt()
+        {
             $datartrw = DB::table('master_masyarakats')
-            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
-            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-            ->where('role', '=', 'RT')
-            ->get();
+                ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+                ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+                ->where('role', '=', 'RT')
+                ->get();
+
             return view('master_rt', compact('datartrw'));
         }
 
-        public function master_rtrw(){
+        public function master_rtrw()
+        {
             // $data = master_rtrw::all()
             // ->groupBy('master_kks.rw');
             try {
                 $datartrw = DB::table('master_kks')
-            ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
-            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+                    ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
+                    ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
             // ->select(DB::raw('master_kks.rw, master_masyarakats.nik'))
             // ->select(DB::raw('master_kks.rw, master_masyarakats.nik, count(master_akuns.role = RT)'))
-            ->where('master_akuns.role','=','RW')
+                    ->where('master_akuns.role', '=', 'RW')
             // ->groupBy('master_kks.rw')
             // ->orderBy('master_kks.rw', 'ASC')
             // ->select(DB::raw('count(master_masyarakats.nik)'))
-            ->get();
-            // dd($datartrw);
-            return view('master_rtrw', compact('datartrw'));
+                    ->get();
+                // dd($datartrw);
+                return view('master_rtrw', compact('datartrw'));
 
             } catch (\Throwable $th) {
                 //throw $th;
@@ -356,67 +369,71 @@ class controller_kepuharjo extends Controller
         //Controller Master RT
 
         public function simpanmasterrt(Request $request)
-    {
-        $this->validate($request, [
-            // 'no_kk' => 'unique:master_kks'
-        ]);
+        {
+            $this->validate($request, [
+                // 'no_kk' => 'unique:master_kks'
+            ]);
             $data = new master_akun();
             $uuid = Str::uuid()->toString();
             $data->id = $uuid;
             $data->no_hp = $request->no_hp;
             $passwordhash = $request->password;
             $data->password = Hash::make($passwordhash);
-            $data->role = "RT";
+            $data->role = 'RT';
             $data->id_masyarakat = $request->id_masyarakat;
-        $data->save();
-        return Redirect('masterrt');
-    }
+            $data->save();
 
+            return Redirect('masterrt');
+        }
 
-
-    public function ajax_masyarakat(Request $request){
+    public function ajax_masyarakat(Request $request)
+    {
         $no_kk = $request->nokk;
-        $results = DB::table('master_kks')->where('nik', 'like' , '%'.$no_kk.'%')->get();
+        $results = DB::table('master_kks')->where('nik', 'like', '%'.$no_kk.'%')->get();
         $c = count($results);
-        if($c == 0){
+        if ($c == 0) {
             // jikaa data kosong
             return '<p class="text-muted">Maaf, Data tidak ditemukan</p>';
-        }else{
+        } else {
             // jika data ada
             return view('ajax_pagemasyarakat')->with([
-                'data' => $results
+                'data' => $results,
             ]);
         }
     }
 
-
-    public function dashboard(){
+    public function dashboard()
+    {
         return view('dashboard');
     }
 
-    public function suratmasuk(){
+    public function suratmasuk()
+    {
         return view('surat_masuk');
     }
 
-    public function suratditolak(){
+    public function suratditolak()
+    {
         return view('surat_ditolak');
     }
 
-    public function suratselesai(){
+    public function suratselesai()
+    {
         return view('surat_selesai');
     }
 
-    public function masteruser(){
+    public function masteruser()
+    {
         $data = DB::table('master_masyarakats')
-        ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
-        ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-        ->get();
+            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->get();
+
         return view('master_user', compact('data'));
     }
 
-    public function tentang(){
+    public function tentang()
+    {
         return view('tentang');
     }
-
-
 }

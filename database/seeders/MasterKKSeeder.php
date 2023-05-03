@@ -1,12 +1,10 @@
 <?php
 
 namespace Database\Seeders;
-use DB;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB as FacadesDB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Models\master_kk;
 
 class MasterKKSeeder extends Seeder
 {

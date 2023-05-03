@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class ImageUploadController extends Controller
 {
-    public function imageUploadPost(){
+    public function imageUploadPost()
+    {
         request()->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);

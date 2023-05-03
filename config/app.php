@@ -234,7 +234,6 @@ return [
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 
-
     ],
 
 ];
