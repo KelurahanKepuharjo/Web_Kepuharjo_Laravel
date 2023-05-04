@@ -3,6 +3,13 @@
 <!-- partial -->
 @section('content')
     <div class="header-atas">
+        @php
+            $nama = session()->get('nama');
+            $akses = session()->get('hak_akses');
+            $rt = session()->get('rt');
+            $rw = session()->get('rw');
+        @endphp
+        <h4>{{ $nama }}</h4>
         <h4>Halaman Master Akun User</h4>
         {{-- <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button> --}}
     </div>

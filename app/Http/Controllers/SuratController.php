@@ -6,9 +6,8 @@ use App\Models\master_surat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class controller_mastersurat extends Controller
+class SuratController extends Controller
 {
-    //Untuk Menampilkan Data Master surat
     public function master_surat()
     {
         $data = master_surat::all();

@@ -1,11 +1,15 @@
 <?php
 
-use App\Http\Controllers\controller_berita;
-use App\Http\Controllers\controller_kepuharjo;
-use App\Http\Controllers\controller_masterkk;
-use App\Http\Controllers\controller_mastersurat;
-use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\KartukkController;
+use App\Http\Controllers\KepuharjoController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MasyarakatController;
+use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\RtController;
+use App\Http\Controllers\RwController;
+use App\Http\Controllers\SuratController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,74 +23,89 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [controller_kepuharjo::class, 'index'])->name('index');
-Route::get('/login', [controller_kepuharjo::class, 'login'])->name('login');
-// Route::post('/loginauth', [controller_kepuharjo::class, 'loginauth'])->name('loginauth');
-Route::get('/dashboard', [controller_kepuharjo::class, 'dashboard'])->name('dashboard');
-Route::post('/postlogin', [controller_kepuharjo::class, 'customLogin'])->name('postlogin');
+Route::controller(KepuharjoController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+});
 
-Route::get('/suratmasuk', [controller_kepuharjo::class, 'suratmasuk'])->name('suratmasuk');
-Route::get('/suratditolak', [controller_kepuharjo::class, 'suratditolak'])->name('suratditolak');
-Route::get('/suratselesai', [controller_kepuharjo::class, 'suratselesai'])->name('suratselesai');
+// Route Login
+Route::controller(LoginController::class)->group(function () {
+    Route::get('login', 'index')->name('login');
+    Route::post('login/auth', 'store');
+});
 
-Route::get('/masteruser', [controller_kepuharjo::class, 'masteruser'])->name('masteruser');
-Route::get('/masterrtrw', [controller_kepuharjo::class, 'master_rtrw'])->name('masterrtrw');
+Route::middleware(['auth'])->group(function () {
 
-Route::get('/tentang', [controller_kepuharjo::class, 'tentang'])->name('tentang');
-Route::get('/buttons', [controller_kepuharjo::class, 'buttons'])->name('buttons');
+    Route::controller(KepuharjoController::class)->group(function () {
+        Route::get('/dashboard', 'dashboard')->name('dashboard')->middleware('auth');
+        Route::get('/tentang', 'tentang')->name('tentang');
+        Route::post('image-upload', 'updateprofil');
+        Route::get('/logout', 'logout')->name('logout');
+    });
 
-Route::post('/simpanrtrw', [controller_kepuharjo::class, 'simpanmasterrtrw'])->name('simpanrtrw');
+    // Route User Akun
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/masteruser', 'masteruser')->name('masteruser');
+    });
 
-// Route::post('/simpanuserakun/{id}',[controller_kepuharjo::class, 'simpanmasteruserakun']);
-// Route::post('/simpanuserakuns/{id}',[controller_kepuharjo::class, 'simpanmasteruserakun]);
+    // Route Rt
+    Route::controller(RtController::class)->group(function () {
+        Route::get('/masterrt/{id}', 'master_rt')->name('masterrt');
+        Route::get('{id}/hapus-masterrt', 'hapusmasterrt');
+        Route::get('/ajaxrt', 'ajax_rt');
+        Route::post('/simpanrt', 'simpanmasterrt')->name('simpanrt');
+        Route::post('update-masterrt/{id}', 'updatemasterrt');
+    });
 
-Route::get('/masterrt/{id}', [controller_kepuharjo::class, 'master_rt'])->name('masterrt');
-Route::post('/simpanrt', [controller_kepuharjo::class, 'simpanmasterrt'])->name('simpanrt');
-Route::get('{id}/hapus-masterrt', [controller_kepuharjo::class, 'hapusmasterrt']);
-Route::post('update-masterrt/{id}', [controller_kepuharjo::class, 'updatemasterrt']);
+    // Router RW
+    Route::controller(RwController::class)->group(function () {
+        Route::get('/masterrw', 'master_rw')->name('masterrw');
+        Route::get('{id}/hapus-masterrw', 'hapusmasterrw');
+        Route::get('/ajax', 'ajax');
+        Route::get('/read', 'read');
+        Route::post('/simpanrw', 'simpanmasterrw')->name('simpanrw');
+        Route::post('update-masterw/{id}', '')->name('updatemasterrw');
+    });
 
-Route::get('{id}/hapus-masterrtrw', [controller_kepuharjo::class, 'hapusmasterrtrw']);
-Route::post('update-mastertrw/{id}', [controller_kepuharjo::class, 'updatemasterrtrw']);
+    // Route Pengajuan Surat
+    Route::controller(PengajuanController::class)->group(function () {
+        Route::get('/suratmasuk', 'suratmasuk')->name('suratmasuk');
+        Route::get('/suratditolak', 'suratditolak')->name('suratditolak');
+        Route::get('/suratselesai', 'suratselesai')->name('suratselesai');
+    });
 
-Route::get('{id}/hapus-masteruser', [controller_kepuharjo::class, 'hapusmasteruser']);
-Route::post('update-masteruser/{id}', [controller_kepuharjo::class, 'updatemasteruser']);
+    // Route Masyarakat
+    Route::controller(MasyarakatController::class)->group(function () {
+        Route::get('/masterkkmas/{id}', 'master_kk_mas');
+        Route::get('simpanakuns/{id}', 'simpanmasteruserakun');
+        Route::get('{id}/hapus-masteruser', 'hapusmasteruser');
+        Route::post('/simpanuser', 'simpanmasteruser');
+        Route::post('/simpanuserakuns/{id}', 'simpanmasteruserakun');
+        Route::post('update-masteruser/{id}', 'updatemasteruser');
+    });
 
-Route::get('/ajax', [controller_kepuharjo::class, 'ajax']);
-Route::get('/ajaxrt', [controller_kepuharjo::class, 'ajax_rt']);
-Route::get('/read', [controller_kepuharjo::class, 'read']);
+    // Route Master KK
+    Route::controller(KartukkController::class)->group(function () {
+        Route::get('/masterkk', 'master_kk')->name('masterkk');
+        Route::get('/simpankepala/{id}/{other_id}/{nik}', 'simpankepalakeluarga');
+        Route::get('{id}/hapus-masterkk', 'hapus');
+        Route::get('simpanakunskk/{id}', 'simpanmasteruserakunkk');
+        Route::post('/simpankk', 'simpanmasterkk')->name('simpankk');
+        Route::post('update-masterkk/{id}', 'update');
+    });
 
-//Route Login
-Route::get('login', [LoginController::class, 'create'])->name('login');
-Route::post('loginauth', [LoginController::class, 'store']);
+    // Route Master Berita
+    Route::controller(BeritaController::class)->group(function () {
+        Route::get('/berita', 'berita')->name('berita');
+        Route::get('hapus-berita/{id}', 'hapusberita');
+        Route::post('update-berita/{id}', 'updateberita');
+        Route::post('/simpanberita', 'simpanmasterberita')->name('simpanberita');
+    });
 
-//Route Master KK Bagian Masyarakat
-Route::get('/masterkkmas/{id}', [controller_kepuharjo::class, 'master_kk_mas']);
-Route::post('/simpanuser', [controller_kepuharjo::class, 'simpanmasteruser'])->name('simpanuser');
-Route::post('/simpanuserakuns/{id}', 'controller_kepuharjo@simpanmasteruserakun');
-Route::get('simpanakuns/{id}', [controller_kepuharjo::class, 'simpanmasteruserakun']);
-
-// Route Master KK
-Route::get('/masterkk', [controller_masterkk::class, 'master_kk'])->name('masterkk');
-Route::post('/simpankk', [controller_masterkk::class, 'simpanmasterkk'])->name('simpankk');
-Route::get('/simpankepala/{id}/{other_id}/{nik}', [controller_masterkk::class, 'simpankepalakeluarga']);
-Route::get('{id}/hapus-masterkk', [controller_masterkk::class, 'hapus']);
-Route::post('update-masterkk/{id}', [controller_masterkk::class, 'update']);
-Route::get('simpanakunskk/{id}', [controller_masterkk::class, 'simpanmasteruserakunkk']);
-
-// Route Berita
-Route::get('/berita', [controller_berita::class, 'berita'])->name('berita');
-Route::get('hapus-berita/{id}', [controller_berita::class, 'hapusberita']);
-Route::post('update-berita/{id}', [controller_berita::class, 'updateberita']);
-Route::post('/simpanberita', [controller_berita::class, 'simpanmasterberita'])->name('simpanberita');
-
-// Route Master Surat
-Route::get('/mastersurat', [controller_mastersurat::class, 'master_surat']);
-Route::post('/simpansurat', [controller_mastersurat::class, 'simpan_surat'])->name('simpansurat');
-Route::post('/editsurat/{id}', [controller_mastersurat::class, 'updatesurat']);
-Route::get('hapussurat/{id}', [controller_mastersurat::class, 'hapusmastersurat']);
-
-//Route img profile
-Route::post('image-upload', [ImageUploadController::class, 'imageUploadPost']);
-
-//Route img profile
-Route::get('superadmin', [controller_kepuharjo::class, 'superadmin']);
+    // Route Master Surat
+    Route::controller(SuratController::class)->group(function () {
+        Route::get('/mastersurat', 'master_surat');
+        Route::get('hapussurat/{id}', 'hapusmastersurat');
+        Route::post('/simpansurat', 'simpan_surat')->name('simpansurat');
+        Route::post('/editsurat/{id}', 'updatesurat');
+    });
+});

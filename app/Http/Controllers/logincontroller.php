@@ -3,79 +3,78 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
-    public function create()
+    public function index()
     {
+        session()->flush();
+
         return view('login');
     }
 
     public function store(Request $request)
     {
-        // dd('success');
-        $request->validate([
-            'username' => ['required'],
-            'password' => ['required'],
-        ],[
+        // Validasi input
+        // dd($request->session()->get('_token'));
+        $validator = Validator::make($request->all(), [
+            'username' => 'required',
+            'password' => 'required',
+        ], [
             'username.required' => 'Username harus diisi',
-            'password.required' => 'Password harus diisi'
+            'password.required' => 'Password harus diisi',
         ]);
 
-        $user = DB::table('master_masyarakats')
-            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
-            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-            ->where('master_masyarakats.nik', '=', $request->username)
-        // ->and('master_akuns.role','=','RT')
-        // ->or('master_akuns.role','=','RW')
-            ->first();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-        // $hashedPassword = Hash::make($request->password);
-        // dd($hashedPassword);
-        // dd($user->password);
-
-        if ($user) {
-            if (Hash::check($request->password, $user->password)) {
-                // dd($user);
-                // Auth::login($user);
-                $session = [
-                    'nama' => $user->nama_lengkap,
-                    'hak_akses' => $user->role,
-                    'rt' => $user->rt,
-                    'rw' => $user->rw,
-                ];
-                session()->put($session);
-
-                return redirect('dashboard');
-                // code...
-            }
-        } elseif ($request->username == 'admin' && $request->password == 'admin') {
+        // Memeriksa apakah user adalah admin
+        if ($request->username == 'admin' && $request->password == 'admin') {
             $session = [
                 'nama' => 'Admin Kepuharjo',
                 'hak_akses' => 'admin',
                 'rt' => '',
-                'rw' => '$user->rw',
+                'rw' => '',
             ];
             session()->put($session);
+
+            // Menambahkan CSRF token ke dalam session
+            $token = csrf_token();
+            Session::put('_token', $token);
 
             return redirect('dashboard');
         }
 
+        // Memeriksa apakah user adalah masyarakat
+        $user = DB::table('master_masyarakats')
+            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->where('master_masyarakats.nik', '=', $request->username)
+            ->first();
+
+        if (! $user) {
+            return redirect()->back()->withErrors(['username' => 'Username yang anda masukkan salah'])->withInput();
+        } elseif (! is_null($user->password) && Hash::check($request->password, $user->password)) {
+            $session = [
+                'nama' => $user->nama_lengkap,
+                'hak_akses' => $user->role,
+                'rt' => $user->rt,
+                'rw' => $user->rw,
+            ];
+            session()->put($session);
+
+            // Menambahkan CSRF token ke dalam session
+            $token = csrf_token();
+            Session::put('_token', $token);
+
+            return redirect('dashboard');
+        } else {
+            return redirect()->back()->withErrors(['password' => 'Password yang anda masukkan salah'])->withInput();
+        }
     }
 }
-
-//password hash
-
-// use Illuminate\Support\Facades\Hash;
-
-// $password = 'password123';
-// $hashedPassword = Hash::make($password);
-
-// if (Hash::check($password, $hashedPassword)) {
-//     // Password cocok
-// } else {
-//     // Password tidak cocok
-// }

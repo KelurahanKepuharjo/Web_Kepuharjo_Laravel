@@ -3,38 +3,45 @@
 <!-- partial -->
 @section('content')
     <div class="main-panel">
+        @php
+            $nama = session()->get('nama');
+            $akses = session()->get('hak_akses');
+            $rt = session()->get('rt');
+            $rw = session()->get('rw');
+        @endphp
+        <h4>{{ $nama }}</h4>
         <h4 class="font-weight-bold text-dark">Ini Halaman Tentang</h4>
         <div class="title">
             <h1>Tentang</h1>
         </div>
 
-            <h3>Sistem Informasi Pengajuan Surat</h3>
-            <p style="align=justify;" > S-kepuharjo merupakan aplikasi berbasis website dan mobile kepuharjo ini dapat
-                digunakan oleh pihak masyarakat,
-                RT, dan RW serta website khusus untuk
-                pihak Admin Kelurahan yang digunakan untuk menampung surat sekaligus digunakan untuk data master
-                dari masyarakat, dan
-                diharapkan juga aplikasi pengajuan surat untuk masyarakat ini dapat dilakukan dimanapun dan
-                kapanpun sehingga menjadi
-                lebih efektif dan efisien.</p>
-            <p style="align=justify;"> S-Kepuharjo termasuk upaya meningkatkan transparansi, kontrol serta
-                akuntabilitas kinerja kelurahan dalam
-                proses penanganan surat pengajuan dari
-                masyarakat. Memperbaiki kualitas pelayanan publik untuk pengajuan surat pada tahap RT/RW,
-                terutama dalam hal
-                efektivitas dan efisiensi yang bisa memakan waktu berhari hari karena situasi pandemi.
-                Mempermudah masyarakat dalam melakukan pengajuan berbagai macam jenis surat kepada pihak
-                kelurahan</p>
+        <h3>Sistem Informasi Pengajuan Surat</h3>
+        <p style="align=justify;"> S-kepuharjo merupakan aplikasi berbasis website dan mobile kepuharjo ini dapat
+            digunakan oleh pihak masyarakat,
+            RT, dan RW serta website khusus untuk
+            pihak Admin Kelurahan yang digunakan untuk menampung surat sekaligus digunakan untuk data master
+            dari masyarakat, dan
+            diharapkan juga aplikasi pengajuan surat untuk masyarakat ini dapat dilakukan dimanapun dan
+            kapanpun sehingga menjadi
+            lebih efektif dan efisien.</p>
+        <p style="align=justify;"> S-Kepuharjo termasuk upaya meningkatkan transparansi, kontrol serta
+            akuntabilitas kinerja kelurahan dalam
+            proses penanganan surat pengajuan dari
+            masyarakat. Memperbaiki kualitas pelayanan publik untuk pengajuan surat pada tahap RT/RW,
+            terutama dalam hal
+            efektivitas dan efisiensi yang bisa memakan waktu berhari hari karena situasi pandemi.
+            Mempermudah masyarakat dalam melakukan pengajuan berbagai macam jenis surat kepada pihak
+            kelurahan</p>
 
 
-    <div class="image-section">
-        {{-- <img src="images/icon-laman-tentang.png"> --}}
+        <div class="image-section">
+            {{-- <img src="images/icon-laman-tentang.png"> --}}
+        </div>
+        <div class="image-section">
+            {{-- <img src="images/icon-laman-tentang.png"> --}}
+        </div>
     </div>
-    <div class="image-section">
-        {{-- <img src="images/icon-laman-tentang.png"> --}}
     </div>
-</div>
-</div>
     </div>
 
 

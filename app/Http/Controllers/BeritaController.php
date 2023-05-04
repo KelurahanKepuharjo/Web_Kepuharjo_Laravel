@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\berita;
 use Illuminate\Http\Request;
 
-class controller_berita extends Controller
+class BeritaController extends Controller
 {
-    //Untuk Menampilkan Berita
     public function berita()
     {
         $data = berita::all();
@@ -21,13 +20,18 @@ class controller_berita extends Controller
         $this->validate($request, [
             // 'no_kk' => 'unique:master_kks'
         ]);
-        $data = new berita();
-        $data->judul = $request->judul;
-        $data->sub_title = $request->subtitle;
-        $data->deskripsi = $request->deskripsi;
-        $data->save();
+        try {
+            $data = new berita();
+            $data->judul = $request->judul;
+            $data->sub_title = $request->subtitle;
+            $data->deskripsi = $request->deskripsi;
+            $data->save();
 
-        return Redirect('berita');
+            return Redirect('berita')->with('success', '');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
     }
 
     // Untuk Update Berita
@@ -39,7 +43,7 @@ class controller_berita extends Controller
         $data->deskripsi = $request->deskripsi;
         $data->save();
 
-        return Redirect('berita');
+        return Redirect('berita')->with('successedit', '');
     }
 
     // Untuk Hapus Berita
@@ -48,6 +52,6 @@ class controller_berita extends Controller
         $data = berita::where('id', $id);
         $data->delete();
 
-        return Redirect('berita');
+        return Redirect('berita')->with('successhapus', '');
     }
 }

@@ -2,7 +2,13 @@
 @section('title', 'Surat Masuk')
 <!-- partial -->
 @section('content')
-
+    @php
+        $nama = session()->get('nama');
+        $akses = session()->get('hak_akses');
+        $rt = session()->get('rt');
+        $rw = session()->get('rw');
+    @endphp
+    <h4>{{ $nama }}</h4>
     <h4 class="font-weight-bold text-dark">Ini Halaman Surat Masuk</h4>
     <table id="myTable" class="table table-striped" style="width:100%">
         <thead>

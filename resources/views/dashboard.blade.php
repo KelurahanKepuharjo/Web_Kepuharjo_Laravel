@@ -10,6 +10,7 @@
 
 @section('content')
     <h4>{{ $nama }}</h4>
+    @csrf
     <div class="row">
         <div class="col-sm-12 mb-4 mb-xl-0">
             <p class="font-weight-normal mb-2 text-muted">APRIL 1, 2019</p>

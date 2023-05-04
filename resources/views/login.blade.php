@@ -1,25 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+@include('sweetalert::alert')
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>S-Kepuharjo</title>
-    <!-- base:css -->
     <link rel="stylesheet" href="{{ asset('template/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('template/vendors/feather/feather.css') }}">
     <link rel="stylesheet" href="{{ asset('template/vendors/base/vendor.bundle.base.css') }}">
-    <!-- endinject -->
-    <!-- plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('template/css/style.css') }}">
-    <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('template/images/logo.png') }}" />
 </head>
-
-
 
 <body>
     <div class="container-scroller">
@@ -28,63 +20,54 @@
                 <div class="row w-100 mx-0">
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-
                             <h4>Login S-Kepuharjo </h4>
                             <h6 class="font-weight-light">Sign in untuk melanjutkan</h6>
 
-                            <form action="{{ url('loginauth') }}" method="post">
+                            <form action="{{ url('login/auth') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="text" name="username" class="form-control @error('username') is-invalid
-
-                                    @enderror" value="{{ old('username') }}" placeholder="Username">
+                                    <input type="text" name="username"
+                                        class="form-control @error('username') is-invalid
+                                    @enderror"
+                                        value="{{ old('username') }}" placeholder="Username">
                                     @error('username')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" class="form-control @error('password') is-invalid
+                                    <input type="password" name="password"
+                                        class="form-control @error('password') is-invalid
 
-                                    @enderror" value="{{ old('password') }}" placeholder="Password">
+                                    @enderror"
+                                        value="{{ old('password') }}" placeholder="Password">
                                     @error('password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-
-                                {{-- <div class="my-2 d-flex justify-content-between align-items-center">
-                                    <div class="form-check">
-                                        <label class="form-check-label text-muted">
-                                            <input type="checkbox" class="form-check-input">
-
-                                        </label>
-                                    </div>
-                                    <a href="#" class="auth-link text-black">Forgot password?</a>
-                                </div> --}}
-                                <div class="mt-3">
-                                    <button class="btn btn-primary" type="submit">Login</button>
+                                <div class="mt-3  row d-flex justify-content-center align-content-center">
+                                    <button class="btn btn-secondary .btn-{color} d-grid gap-2 col-6 mx-auto"
+                                        type="submit" style="background:#102286; color:white;">Login</button>
                                 </div>
                             </form>
-                            {{-- <div class="text-center mt-4 font-weight-light">
-                                Belum punya akun? <a href="register.html" class="text-primary">Buat Akun</a>
-                            </div> --}}
-
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- content-wrapper ends -->
         </div>
-        <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
-    <!-- base:js -->
     <script src="{{ asset('template/vendors/base/vendor.bundle.base.js') }}"></script>
-    <!-- endinject -->
-    <!-- inject:js -->
     <script src="{{ asset('template/js/off-canvas.js') }}"></script>
     <script src="{{ asset('template/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('template/js/template.js') }}"></script>
-    <!-- endinject -->
 </body>
 
 </html>
+
+
+{{-- toast cdn --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{-- jquery cdn --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>

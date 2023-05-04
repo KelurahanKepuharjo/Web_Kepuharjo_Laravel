@@ -70,7 +70,7 @@
                             <a class="dropdown-item preview-item" data-toggle="modal" data-target="#modal-profile">
                                 <i class="icon-head"></i> Profile
                             </a>
-                            <a class="dropdown-item preview-item" href="/">
+                            <a class="dropdown-item preview-item" href="logout">
                                 <i class="icon-inbox"></i> Logout
                             </a>
                         </div>
@@ -130,7 +130,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../masterrtrw">
+                        <a class="nav-link" href="../masterrw">
                             <i class="icon-paper menu-icon"></i>
                             <span class="menu-title">Master Akun Rt Rw</span>
                         </a>

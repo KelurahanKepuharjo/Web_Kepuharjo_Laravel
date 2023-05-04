@@ -3,16 +3,16 @@
 <!-- partial -->
 @section('content')
     <div class="header-atas">
+        @php
+            $nama = session()->get('nama');
+            $akses = session()->get('hak_akses');
+            $rt = session()->get('rt');
+            $rw = session()->get('rw');
+        @endphp
+        <h4>{{ $nama }}</h4>
         <h4>Halaman Master RT</h4>
-        {{-- <button data-toggle="modal" name='tambah' data-target="#modal-tambahrtrw">+</button>  --}}
+
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah Data</i></button>
-        {{-- <a class="btn" href="../masterrtrw">Kembali</a> --}}
-        {{-- <div class="button">
-        <ul class="right">
-            <a href="#">Tambah Data</a>
-            <a href="#">Kembali</a>
-        </ul>
-        </div> --}}
     </div>
     <div class="table_wrapper" style="overflow-x: scroll;">
         <table id="myTable" class="table table-striped" style="width:100%">
@@ -30,9 +30,8 @@
                     @foreach ($datartrw as $no => $value)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            {{-- <td>{{ $value->nik }}</td> --}}
                             <td>{{ $value->nama_lengkap }}</td>
-                            <td>{{ $value->rt}}</td>
+                            <td>{{ $value->rt }}</td>
                             <td>Ketua RT</td>
                             {{-- <td>{{ $value->alamat }}</td>
                             <td>{{ $value->no_hp }}</td>
@@ -82,23 +81,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        {{-- <div class="row">
-                            <div class="col-sm-1">
-                                <label for="exampleFormControlSelect1">RW. </label>
-                            </div>
-                            <div class="col-sm-5">
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>Pilih</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div> --}}
-                    </div>
                     <div class="row mt-2">
                         <div class="col-lg-12">
                             <div class="form-group d-inline-flex">
@@ -199,25 +181,28 @@
 @endsection
 
 <style media="screen">
-    .button{
-      width: 100%;
-      height: 50px;
+    .button {
+        width: 100%;
+        height: 50px;
     }
-    .left{
-      float: left;
-      display: block;
+
+    .left {
+        float: left;
+        display: block;
     }
-    .right{
-      float: right;
-      display: block;
+
+    .right {
+        float: right;
+        display: block;
     }
-  .button ul a{
-    margin: 10px;
-    padding: 10px;
-    background: rgb(116, 181, 12);
-    color: white;
-  }
-  </style>
+
+    .button ul a {
+        margin: 10px;
+        padding: 10px;
+        background: rgb(116, 181, 12);
+        color: white;
+    }
+</style>
 
 <style>
     table {

@@ -3,6 +3,13 @@
 <!-- partial -->
 @section('content')
     <div class="header-atas">
+        @php
+            $nama = session()->get('nama');
+            $akses = session()->get('hak_akses');
+            $rt = session()->get('rt');
+            $rw = session()->get('rw');
+        @endphp
+        <h4>{{ $nama }}</h4>
         <h4>Halaman Master RW</h4>
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah Data</i></button>
 
@@ -41,7 +48,7 @@
                                         <a class="dropdown-item" data-id="modal-edit" href="" data-toggle="modal"
                                             data-target="#modal-edit">Edit</a>
                                         <a class="dropdown-item" href="#" data-toggle="modal"
-                                            data-target="#modal-hapus" href="{{ url('masterkk') }}">Hapus</a>
+                                            data-target="#modal-hapus">Hapus</a>
                                         <form action="" method="get">
                                             <a class="dropdown-item" name="kk" value=""
                                                 href="{{ url('masterrt/' . $value->rw) }}">RT</a>
@@ -56,7 +63,7 @@
         </table>
     </div>
 
-    {{-- coba modal tambah rt rw --}}
+    {{-- coba modal tambah rw --}}
     <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -68,23 +75,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <div class="row">
-                            {{-- <div class="col-sm-1">
-                                <label for="exampleFormControlSelect1">RW. </label>
-                            </div> --}}
-                            {{-- <div class="col-sm-5">
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>Pilih</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div> --}}
-                        </div>
-                    </div>
                     <div class="row mt-2">
                         <div class="col-lg-12">
                             <div class="form-group d-inline-flex">
@@ -102,8 +92,8 @@
 
     {{-- modal edit --}}
     @foreach ($datartrw as $no => $value)
-        <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -112,7 +102,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ url('update-mastertrw/' . $value->nik) }}" method="post">
+                    <form action="{{ url('update-masterw/' . $value->nik) }}" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
@@ -152,9 +142,10 @@
                             </div>
                             <div class="form-group">
                                 <label>Kata Sandi</label>
-                                <input type="password" name="password" class="form-control @error('password') is-invalid
-                                @enderror" value="" maxlength="50"
-                                    autocomplete="off" >
+                                <input type="password" name="password"
+                                    class="form-control @error('password') is-invalid
+                                @enderror"
+                                    value="" maxlength="50" autocomplete="off">
                             </div>
                         </div>
                         <div class="modal-footer">

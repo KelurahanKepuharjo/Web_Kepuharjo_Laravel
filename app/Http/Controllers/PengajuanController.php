@@ -2,8 +2,23 @@
 
 namespace App\Http\Controllers;
 
-class controller_pengajuan_surat extends Controller
+class PengajuanController extends Controller
 {
+    public function suratmasuk()
+    {
+        return view('surat_masuk');
+    }
+
+    public function suratditolak()
+    {
+        return view('surat_ditolak');
+    }
+
+    public function suratselesai()
+    {
+        return view('surat_selesai');
+    }
+
     public function surat_masuk()
     {
         //jika ada session hak akses = RT

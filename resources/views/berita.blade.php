@@ -1,11 +1,37 @@
 @extends('layouts.mainlayout')
 @section('title', 'Berita')
+@include('sweetalert::alert')
 <!-- partial -->
 @section('content')
     <div class="header-atas">
+        @php
+            $nama = session()->get('nama');
+            $akses = session()->get('hak_akses');
+            $rt = session()->get('rt');
+            $rw = session()->get('rw');
+        @endphp
+        <h4>{{ $nama }}</h4>
         <h4 class="font-weight-bold text-dark">Ini Halaman Berita</h4>
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button>
     </div>
+    <div>
+        @if (session::has('success'))
+            <script>
+                toastr.success('Data Berhasil Ditambahkan', '')
+            </script>
+        @endif
+        @if (session::has('successedit'))
+            <script>
+                toastr.success('Data Berhasil Diperbarui', '')
+            </script>
+        @endif
+        @if ($errors->any())
+            <script>
+                toastr.error('Cek Kembali Data yang Anda Input', 'Data Gagal Ditambahkan')
+            </script>
+        @endif
+    </div>
+
     <div class="table_wrapper" style="overflow-x: scroll;">
         <table id="myTable" class="table table-striped" style="width:100%">
             <thead>
@@ -181,3 +207,20 @@
         margin-left: auto;
     }
 </style>
+
+
+<script type="text/javascript">
+    $("document").ready(function() {
+        setTimeout(function() {
+            $("alert").remove();
+        }, 1);
+    });
+</script>
+
+{{-- toast cdn --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{-- jquery cdn --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
