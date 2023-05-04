@@ -20,6 +20,9 @@ class LoginController extends Controller
         $request->validate([
             'username' => ['required'],
             'password' => ['required'],
+        ],[
+            'username.required' => 'Username harus diisi',
+            'password.required' => 'Password harus diisi'
         ]);
 
         $user = DB::table('master_masyarakats')

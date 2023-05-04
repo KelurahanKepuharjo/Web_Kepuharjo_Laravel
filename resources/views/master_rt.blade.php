@@ -249,9 +249,9 @@
             var strcari = $("#input").val();
             if (strcari != "") {
                 $("#read").html('<p class="text-muted">Menunggu Mencari Data ...</p>')
-                $.ajax({
+                $.ajax_rt({
                     type: "get",
-                    url: "{{ url('ajax') }}",
+                    url: "{{ url('ajaxrt') }}",
                     data: "nik=" + strcari,
                     success: function(data) {
                         $("#read").html(data);

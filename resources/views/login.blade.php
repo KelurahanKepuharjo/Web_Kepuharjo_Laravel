@@ -35,10 +35,20 @@
                             <form action="{{ url('loginauth') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="text" name="username" class="form-control" placeholder="Username">
+                                    <input type="text" name="username" class="form-control @error('username') is-invalid
+
+                                    @enderror" value="{{ old('username') }}" placeholder="Username">
+                                    @error('username')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" class="form-control" placeholder="Password">
+                                    <input type="password" name="password" class="form-control @error('password') is-invalid
+
+                                    @enderror" value="{{ old('password') }}" placeholder="Password">
+                                    @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 {{-- <div class="my-2 d-flex justify-content-between align-items-center">

@@ -46,13 +46,13 @@ Route::get('{id}/hapus-masterrt', [controller_kepuharjo::class, 'hapusmasterrt']
 Route::post('update-masterrt/{id}', [controller_kepuharjo::class, 'updatemasterrt']);
 
 Route::get('{id}/hapus-masterrtrw', [controller_kepuharjo::class, 'hapusmasterrtrw']);
-Route::post('update-masterrtrw/{id}', [controller_kepuharjo::class, 'updatemasterrtrw']);
+Route::post('update-mastertrw/{id}', [controller_kepuharjo::class, 'updatemasterrtrw']);
 
 Route::get('{id}/hapus-masteruser', [controller_kepuharjo::class, 'hapusmasteruser']);
 Route::post('update-masteruser/{id}', [controller_kepuharjo::class, 'updatemasteruser']);
 
 Route::get('/ajax', [controller_kepuharjo::class, 'ajax']);
-Route::get('/ajaxmasyarakat', [controller_kepuharjo::class, 'ajax_masyarakat']);
+Route::get('/ajaxrt', [controller_kepuharjo::class, 'ajax_rt']);
 Route::get('/read', [controller_kepuharjo::class, 'read']);
 
 //Route Login

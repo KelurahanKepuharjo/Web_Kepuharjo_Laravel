@@ -288,6 +288,14 @@ class controller_kepuharjo extends Controller
         $this->validate($request, [
             // 'no_kk' => 'unique:master_kks'
         ]);
+        $request->validate([
+            'no_hp' => 'required|min:10|max:13'
+        ],[
+            'no_hp.required' => 'Nomor Telepon Tidak Boleh Kosong',
+            'no_hp.min' => 'Nomor Telepon Minimal 10 Angka',
+            'no_hp.max' => 'Nomor Telepon Maksimal 13 Angka'
+
+        ]);
         $data = new master_akun();
         $uuid = Str::uuid()->toString();
         $data->id = $uuid;
@@ -386,17 +394,19 @@ class controller_kepuharjo extends Controller
             return Redirect('masterrt');
         }
 
-    public function ajax_masyarakat(Request $request)
+    public function ajax_rt(Request $request)
     {
-        $no_kk = $request->nokk;
-        $results = DB::table('master_kks')->where('nik', 'like', '%'.$no_kk.'%')->get();
+        $nik = $request->nik;
+        $results = DB::table('master_masyarakats')
+            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->where('master_masyarakats.nik', 'like', '%'.$nik.'%')->get();
         $c = count($results);
         if ($c == 0) {
             // jikaa data kosong
             return '<p class="text-muted">Maaf, Data tidak ditemukan</p>';
         } else {
             // jika data ada
-            return view('ajax_pagemasyarakat')->with([
+            return view('ajax_pagert')->with([
                 'data' => $results,
             ]);
         }

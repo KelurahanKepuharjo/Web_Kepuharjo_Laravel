@@ -1,5 +1,5 @@
 @foreach ($data as $item)
-    <form action="{{ url('simpanrtrw') }}" method="post">
+    <form action="{{ url('simpanrt') }}" method="post">
         @csrf
         <div class="modal-body">
             <input type="hidden" name="id_masyarakat" class="form-control" value="{{ $item->id_masyarakat }}" maxlength="50"
@@ -57,4 +57,3 @@
 
     </form>
 @endforeach
-

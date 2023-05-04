@@ -38,7 +38,7 @@
                                         style="background-color: #00AAAA; color: white;">
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" data-id="" href="../ajaxpage" data-toggle="modal"
+                                        <a class="dropdown-item" data-id="modal-edit" href="" data-toggle="modal"
                                             data-target="#modal-edit">Edit</a>
                                         <a class="dropdown-item" href="#" data-toggle="modal"
                                             data-target="#modal-hapus" href="{{ url('masterkk') }}">Hapus</a>
@@ -101,7 +101,7 @@
     </div>
 
     {{-- modal edit --}}
-    {{-- @foreach ($datartrw as $no => $value)
+    @foreach ($datartrw as $no => $value)
         <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -112,39 +112,50 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="" method="post">
+                    <form action="{{ url('update-mastertrw/' . $value->nik) }}" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
+                                <label for="">NIK</label>
                                 <input type="text" name="nik" class="form-control" value="{{ $value->nik }}"
                                     maxlength="50" required="" placeholder="NIK" autocomplete="off" disabled>
                             </div>
                             <div class="form-group">
+                                <label for="">Nama Lengkap</label>
                                 <input type="text" name="nama_lengkap" class="form-control"
                                     value="{{ $value->nama_lengkap }}" maxlength="50" required=""
                                     placeholder="Nama Lengkap" autocomplete="off" disabled>
                             </div>
                             <div class="form-group">
+                                <label for="">Alamat</label>
                                 <input type="text" name="alamat" class="form-control" value="{{ $value->alamat }}"
                                     maxlength="50" required="" placeholder="Alamat" autocomplete="off" disabled>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="no_hp" class="form-control" value="{{ $value->no_hp }}"
-                                    maxlength="50" required="" placeholder="No HP" autocomplete="off">
-                            </div>
-                            <div class="form-group">
                                 <div class="row">
                                     <div class="col">
+                                        <label for="">RT</label>
                                         <input type="text" name="rt" class="form-control"
                                             value="{{ $value->rt }}" placeholder="RT" autocomplete="off">
                                     </div>
                                     <div class="col">
+                                        <label for="">RW</label>
                                         <input type="text" name="rw" class="form-control"
                                             value="{{ $value->rw }}" placeholder="RW" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label for="">No Telepon</label>
+                                <input type="text" name="no_hp" class="form-control" value="{{ $value->no_hp }}"
+                                    maxlength="50" required="" placeholder="No HP" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label>Kata Sandi</label>
+                                <input type="password" name="password" class="form-control @error('password') is-invalid
+                                @enderror" value="" maxlength="50"
+                                    autocomplete="off" >
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -154,7 +165,7 @@
                 </div>
             </div>
         </div>
-    @endforeach --}}
+    @endforeach
     {{-- batas modal edit --}}
 
     {{-- Modal Hapus --}}
