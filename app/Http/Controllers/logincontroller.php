@@ -59,7 +59,8 @@ class LoginController extends Controller
 
         if (! $user) {
             return redirect()->back()->withErrors(['username' => 'Username yang anda masukkan salah'])->withInput();
-        } elseif (! is_null($user->password) && Hash::check($request->password, $user->password)) {
+        } elseif ($request->password != null) {
+            Hash::check($request->password, $user->password);
             $session = [
                 'nama' => $user->nama_lengkap,
                 'hak_akses' => $user->role,

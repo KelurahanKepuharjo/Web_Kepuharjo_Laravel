@@ -68,9 +68,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Route Pengajuan Surat
     Route::controller(PengajuanController::class)->group(function () {
-        Route::get('/suratmasuk', 'suratmasuk')->name('suratmasuk');
-        Route::get('/suratditolak', 'suratditolak')->name('suratditolak');
-        Route::get('/suratselesai', 'suratselesai')->name('suratselesai');
+        Route::get('/suratmasuk', 'surat_masuk')->name('suratmasuk');
+        Route::get('/suratditolak', 'surat_ditolak')->name('suratditolak');
+        Route::get('/suratselesai', 'surat_selesai')->name('suratselesai');
     });
 
     // Route Masyarakat

@@ -8,76 +8,39 @@
         $rt = session()->get('rt');
         $rw = session()->get('rw');
     @endphp
-    <h4>{{ $nama }}</h4>
     <h4 class="font-weight-bold text-dark">Ini Halaman Surat Masuk</h4>
     <table id="myTable" class="table table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Kampus</th>
-                <th>Aksi</th>
+                <th>No</th>
+                <th>NIK</th>
+                <th>Nama</th>
+                <th>Jenis Surat</th>
+                <th>Tanggal </th>
+                <th>Status</th>
+                <th>Detail</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Edy Atthoillah</td>
-                <td>Web Dev</td>
-                <td>Lumajang</td>
-                <td>20</td>
-                <td>2002-10-20</td>
-                <td>Politeknik Negeri Jember</td>
-                <td>
-                    <a class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#exampleModal"
-                        style="color: white;" href="#"></a>
-                    <a class="btn btn-danger icon-trash" href="#" data-toggle="modal" data-target="#exampleModal"
-                        style="margin-left: 10px; "></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Nadia Ayu</td>
-                <td>Web Dev</td>
-                <td>Jember</td>
-                <td>19</td>
-                <td>2003-12-26</td>
-                <td>Politeknik Negeri Jember</td>
-                <td>
-                    <a class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#exampleModal"
-                        style="color: white;" href="#"></a>
-                    <a class="btn btn-danger icon-trash" data-toggle="modal" data-target="#exampleModal" href="#"
-                        style="margin-left: 10px; "></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Kurrota Akyun</td>
-                <td>Web Dev</td>
-                <td>Jember</td>
-                <td>20</td>
-                <td>2003-12-26</td>
-                <td>Politeknik Negeri Jember</td>
-                <td>
-                    <a class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#exampleModal"
-                        style="color: white;" href="#"></a>
-                    <a class="btn btn-danger icon-trash" data-toggle="modal" data-target="#exampleModal" href="#"
-                        style="margin-left: 10px; "></a>
-                </td>
-            </tr>
+            @foreach ($data as $no => $value)
+                <tr>
+                    <td>{{ $no + 1 }}</td>
+                    <td>{{ $value->nik }}</td>
+                    <td>{{ $value->nama_lengkap }}</td>
+                    <td>{{ $value->nama_surat }}</td>
+                    <td>{{ $value->keterangan }}</td>
+                    <td>{{ $value->status }}</td>
+                    <td>
+                        <a class="btn btn-secondary" style="background: #00AAAA; color: white;" data-toggle="modal"
+                            data-target="#exampleModal" style="color: white;" href="#">Detail</a>
+                    </td>
+                </tr>
+            @endforeach
+
         </tbody>
         <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-                <th>Aksi</th>
-            </tr>
-        </tfoot>
     </table>
+
 
 
 

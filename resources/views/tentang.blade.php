@@ -9,7 +9,6 @@
             $rt = session()->get('rt');
             $rw = session()->get('rw');
         @endphp
-        <h4>{{ $nama }}</h4>
         <h4 class="font-weight-bold text-dark">Ini Halaman Tentang</h4>
         <div class="title">
             <h1>Tentang</h1>

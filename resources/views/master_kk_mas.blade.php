@@ -13,7 +13,6 @@
                 $rt = session()->get('rt');
                 $rw = session()->get('rw');
             @endphp
-            <h4>{{ $nama }}</h4>
             <h4>Halaman Master User</h4>
             <button data-toggle="modal" data-target="#modal-tambahmas">Tambah data</button>
         </div>
@@ -196,7 +195,8 @@
                                         <option value="Diploma IV/Strata I"
                                             {{ 'Diploma IV/Strata I' === old('pendidikan') ? 'selected' : '' }}>
                                             Diploma IV/Strata I</option>
-                                        <option value="Strata II" {{ 'Strata II' === old('pendidikan') ? 'selected' : '' }}>
+                                        <option value="Strata II"
+                                            {{ 'Strata II' === old('pendidikan') ? 'selected' : '' }}>
                                             Strata II</option>
                                         <option value="Strata III"
                                             {{ 'Strata III' === old('pendidikan') ? 'selected' : '' }}>
@@ -249,15 +249,18 @@
                                     <select class="form-control @error('status_perkawinan') is-invalid @enderror"
                                         value="{{ old('status_perkawinan') }}" name="status_perkawinan"
                                         autocomplete="off" id="exampleFormControlSelect1">
-                                        <option value="pilih" {{ 'pilih' === old('status_perkawinan') ? 'selected' : '' }}>
+                                        <option value="pilih"
+                                            {{ 'pilih' === old('status_perkawinan') ? 'selected' : '' }}>
                                             Pilih</option>
                                         <option value="Belum Kawin"
                                             {{ 'Belum Kawin' === old('status_perkawinan') ? 'selected' : '' }}>
                                             Belum
                                             Kawin</option>
-                                        <option value="Kawin" {{ 'Kawin' === old('status_perkawinan') ? 'selected' : '' }}>
+                                        <option value="Kawin"
+                                            {{ 'Kawin' === old('status_perkawinan') ? 'selected' : '' }}>
                                             Kawin</option>
-                                        <option value="Cerai" {{ 'Cerai' === old('status_perkawinan') ? 'selected' : '' }}>
+                                        <option value="Cerai"
+                                            {{ 'Cerai' === old('status_perkawinan') ? 'selected' : '' }}>
                                             Cerai</option>
                                     </select>
                                     @error('status_perkawinan')
@@ -468,7 +471,8 @@
                                             </option>
                                             <option value="Hindu" {{ 'Hindu' === old('agama') ? 'selected' : '' }}>Hindu
                                             </option>
-                                            <option value="Buddha" {{ 'Buddha' === old('agama') ? 'selected' : '' }}>Buddha
+                                            <option value="Buddha" {{ 'Buddha' === old('agama') ? 'selected' : '' }}>
+                                                Buddha
                                             </option>
                                             <option value="Konghucu" {{ 'Konghucu' === old('agama') ? 'selected' : '' }}>
                                                 Konghucu</option>

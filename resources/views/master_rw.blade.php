@@ -9,7 +9,6 @@
             $rt = session()->get('rt');
             $rw = session()->get('rw');
         @endphp
-        <h4>{{ $nama }}</h4>
         <h4>Halaman Master RW</h4>
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah Data</i></button>
 
