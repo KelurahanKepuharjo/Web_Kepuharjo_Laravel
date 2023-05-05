@@ -4,35 +4,33 @@
 <!-- partial -->
 @section('content')
     <div class="header-atas">
-        @php
-            $nama = session()->get('nama');
-            $akses = session()->get('hak_akses');
-            $rt = session()->get('rt');
-            $rw = session()->get('rw');
-        @endphp
         <h4 class="font-weight-bold text-dark">Ini Halaman Berita</h4>
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button>
     </div>
-    <div>
-        @if (session::has('success'))
-            <script>
-                toastr.success('Data Berhasil Ditambahkan', '')
-            </script>
-        @endif
-        @if (session::has('successedit'))
-            <script>
-                toastr.success('Data Berhasil Diperbarui', '')
-            </script>
-        @endif
-        @if ($errors->any())
-            <script>
-                toastr.error('Cek Kembali Data yang Anda Input', 'Data Gagal Ditambahkan')
-            </script>
-        @endif
-    </div>
 
-    <div class="table_wrapper" style="overflow-x: scroll;">
-        <table id="myTable" class="table table-striped" style="width:100%">
+    @if (session::has('success'))
+        <script>
+            toastr.success('Berita Berhasil Ditambahkan', '')
+        </script>
+    @endif
+    @if (session::has('successedit'))
+        <script>
+            toastr.success('Berita Berhasil Diedit', '')
+        </script>
+    @endif
+    @if (session::has('successhapus'))
+        <script>
+            toastr.success('Berita Berhasil Dihapus', '')
+        </script>
+    @endif
+    @if ($errors->any())
+        <script>
+            toastr.error('Cek Kembali Data yang Anda Input', 'Data Gagal Ditambahkan')
+        </script>
+    @endif
+
+    <div class="table_wrapper" style="overflow-x:auto; margin: 10px; padding: 10px;">
+        <table id="myTable" class="table table-striped">
             <thead>
                 <tr>
                     <th>Id berita</th>
@@ -40,7 +38,6 @@
                     <th>Sub title</th>
                     <th>Deskripsi</th>
                     <th>Aksi</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -56,10 +53,9 @@
                                     data-id="{{ $value->id_berita }}" href="" data-toggle="modal"
                                     data-target="#modal-editberita{{ $value->id }}">
                                 </a>
-                            </td>
-                            <td>
-                                <a class="btn btn-danger icon-trash" name='Hapus' data-toggle="modal"
-                                    data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->id_berita }}"
+                                <a class="btn
+                                    btn-danger icon-trash" name='Hapus'
+                                    data-toggle="modal" data-target="#modal-hapus" value="{{ $value->id_berita }}"
                                     href="{{ url('masterberita') }}"></a>
                             </td>
                         </tr>
@@ -191,6 +187,8 @@
     @endforeach
 
 @endsection
+
+
 <style>
     .header-atas {
         display: flex;
@@ -205,16 +203,25 @@
     .header button {
         margin-left: auto;
     }
+
+    a {
+        style="margin-top: 10px;
+
+    }
+
+    /* table {
+        width: 100%;
+        table-layout: fixed;
+        word-wrap: break-word;
+        overflow: hidden;
+    } */
 </style>
 
 
-<script type="text/javascript">
-    $("document").ready(function() {
-        setTimeout(function() {
-            $("alert").remove();
-        }, 1);
-    });
-</script>
+
+
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
 {{-- toast cdn --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"

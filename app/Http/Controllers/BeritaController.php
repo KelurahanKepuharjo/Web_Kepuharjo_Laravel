@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\berita;
 use Illuminate\Http\Request;
+use Toastr;
 
 class BeritaController extends Controller
 {
@@ -27,10 +28,11 @@ class BeritaController extends Controller
             $data->deskripsi = $request->deskripsi;
             $data->save();
 
-            return Redirect('berita')->with('success', '');
         } catch (\Throwable $th) {
             //throw $th;
         }
+        Toastr::success('Data berhasil disimpan', 'Sukses');
+        return Redirect('berita')->with('success', 'success');
 
     }
 
