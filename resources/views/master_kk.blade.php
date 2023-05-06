@@ -105,7 +105,6 @@
                             <input type="number" id="nomor-kartu" name="nokk"
                                 class="form-control
                             @error('nokk') is-invalid
-
                             @enderror"
                                 value="{{ old('nokk') }}" placeholder="Nomor KK" autocomplete="off">
                             @error('nokk')
@@ -282,7 +281,6 @@
                                     <input type="text" name="nokkedit"
                                         class="form-control
                                     @error('nokkedit')is-invalid
-
                                     @enderror"
                                         value="{{ old('nokkedit', $value->no_kk) }}" placeholder="Nomor KK"
                                         autocomplete="off">

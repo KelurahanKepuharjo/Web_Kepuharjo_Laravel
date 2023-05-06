@@ -95,10 +95,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Route Master Berita
     Route::controller(BeritaController::class)->group(function () {
-        Route::get('/berita', 'berita')->name('berita');
-        Route::get('hapus-berita/{id}', 'hapusberita');
-        Route::post('update-berita/{id}', 'updateberita');
-        Route::post('/simpanberita', 'simpanmasterberita')->name('simpanberita');
+        Route::get('/berita', 'index')->name('berita');
+        Route::get('hapus-berita/{id}', 'delete');
+        Route::post('update-berita/{id}', 'update');
+        Route::post('/simpanberita', 'store')->name('simpanberita');
     });
 
     // Route Master Surat

@@ -1,5 +1,6 @@
 @extends('layouts.mainlayout')
 @section('title', 'Master Surat')
+@include('sweetalert::alert')
 <!-- partial -->
 @section('content')
     <div class="header-atas" style="display: flex; justify-content: space-between; align-items: center;">
@@ -12,6 +13,26 @@
         <h4>Halaman Master Surat</h4>
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button>
     </div>
+    @if (session::has('success'))
+        <script>
+            toastr.success('Berita Berhasil Ditambahkan', '')
+        </script>
+    @endif
+    @if (session::has('successedit'))
+        <script>
+            toastr.success('Berita Berhasil Diedit', '')
+        </script>
+    @endif
+    @if (session::has('successhapus'))
+        <script>
+            toastr.success('Berita Berhasil Dihapus', '')
+        </script>
+    @endif
+    @if ($errors->any())
+        <script>
+            toastr.error('Cek Kembali Data yang Anda Input', 'Berita Gagal Ditambahkan')
+        </script>
+    @endif
     <div class="table_wrapper" style="overflow-x: scroll;">
         <table id="myTable" class="table table-striped" style="width:100%">
             <thead>
@@ -61,14 +82,12 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nomor-kartu"></label>
-                            <input type="number" name="id_surat" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Id Surat" autocomplete="off">
+                            <input type="number" name="id_surat" class="form-control" value="" placeholder="Id Surat"
+                                autocomplete="off">
                         </div>
-                        <input type="hidden" name="surat" class="form-control" required="" value="Surat Keterangan "
-                            autocomplete="off" readonly>
                         <div class="form-group">
                             <label for="nomor-kartu"></label>
-                            <input type="text" name="jenis_surat" class="form-control" value="" maxlength="50"
+                            <input type="text" name="nama_surat" class="form-control" value="" maxlength="50"
                                 required="" placeholder="Masukkan Nama Surat Contoh : Domisili" autocomplete="off">
                         </div>
 
@@ -102,15 +121,13 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="nomor-kartu"></label>
-                                <input type="number" name="id_surat" class="form-control"
-                                    value="{{ $value->id_surat }}" maxlength="50" required="" placeholder="Id Surat"
-                                    autocomplete="off">
+                                <input type="number" name="id_surat" class="form-control" value="{{ $value->id_surat }}"
+                                    placeholder="Id Surat" autocomplete="off" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="nomor-kartu"></label>
-                                <input type="text" name="jenis_surat" class="form-control"
-                                    value="{{ $value->nama_surat }}" maxlength="50" required=""
-                                    placeholder="Jenis Surat" autocomplete="off">
+                                <input type="text" name="nama_surat" class="form-control"
+                                    value="{{ $value->nama_surat }}" placeholder="Jenis Surat" autocomplete="off">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -153,3 +170,13 @@
     {{-- Batas Modal Hapus --}}
 
 @endsection
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+{{-- toast cdn --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{-- jquery cdn --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>

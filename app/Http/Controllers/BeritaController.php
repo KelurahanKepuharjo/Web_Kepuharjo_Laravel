@@ -2,54 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BeritaRequest;
 use App\Models\berita;
 use Illuminate\Http\Request;
-use Toastr;
 
 class BeritaController extends Controller
 {
-    public function berita()
+    public function index()
     {
         $data = berita::all();
 
         return view('berita', compact('data'));
     }
 
-    // Untuk Simpan Berita
-    public function simpanmasterberita(Request $request)
+    public function store(BeritaRequest $beritaRequest)
     {
-        $this->validate($request, [
-            // 'no_kk' => 'unique:master_kks'
-        ]);
-        try {
-            $data = new berita();
-            $data->judul = $request->judul;
-            $data->sub_title = $request->subtitle;
-            $data->deskripsi = $request->deskripsi;
-            $data->save();
+        $validated = $beritaRequest->validated();
+        $Berita = berita::create($validated);
 
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
-        Toastr::success('Data berhasil disimpan', 'Sukses');
-        return Redirect('berita')->with('success', 'success');
-
+        return Redirect('berita')->with('success', '');
     }
 
-    // Untuk Update Berita
-    public function updateberita(Request $request, $id)
+    public function update(BeritaRequest $request, $id, berita $berita)
     {
-        $data = berita::where('id', $id)->first();
-        $data->judul = $request->judul;
-        $data->sub_title = $request->subtitle;
-        $data->deskripsi = $request->deskripsi;
-        $data->save();
+        $berita = Berita::find($id);
+        $validated = $request->validated();
+        $berita->update($validated);
 
-        return Redirect('berita')->with('successedit', '');
+        return back()->with('successedit', '');
     }
 
-    // Untuk Hapus Berita
-    public function hapusberita(Request $request, $id)
+    public function delete(Request $request, $id)
     {
         $data = berita::where('id', $id);
         $data->delete();

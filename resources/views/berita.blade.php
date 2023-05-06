@@ -25,7 +25,7 @@
     @endif
     @if ($errors->any())
         <script>
-            toastr.error('Cek Kembali Data yang Anda Input', 'Data Gagal Ditambahkan')
+            toastr.error('Cek Kembali Data yang Anda Input', 'Berita Gagal Ditambahkan')
         </script>
     @endif
 
@@ -79,16 +79,31 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" name="judul" class="form-control" value="" required=""
-                                placeholder="Judul Berita" autocomplete="off" name="judul">
+                            <input type="text" name="judul"
+                                class="form-control  @error('judul') is-invalid
+                            @enderror"
+                                value="{{ old('judul') }}" placeholder="Judul Berita" autocomplete="off">
+                            @error('judul')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <input type="text" name="subtitle" class="form-control" value="" required=""
-                                placeholder="Sub Title" autocomplete="off" name="subtitle">
+                            <input type="text" name="sub_title"
+                                class="form-control  @error('sub_title') is-invalid
+                            @enderror"
+                                value="{{ old('sub_title') }}" placeholder="Sub Judul" autocomplete="off">
+                            @error('sub_title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <input type="text" name="deskripsi" class="form-control" value="" required=""
-                                placeholder="Deskripsi" autocomplete="off" name="deskripsi">
+                            <input type="text" name="deskripsi"
+                                class="form-control @error('deskripsi') is-invalid
+                            @enderror"
+                                value="{{ old('deskripsi') }}" placeholder="Deskripsi" autocomplete="off">
+                            @error('deskripsi')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -126,27 +141,6 @@
     @endforeach
     {{-- Batas Modal Hapus --}}
 
-    <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master Berita</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <label for="">Yakin untuk Menghapus Data?</label>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-danger">Hapus</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     @foreach ($data as $no => $value)
         <div class="modal fade" id="modal-editberita{{ $value->id }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -166,7 +160,7 @@
                                     maxlength="50" required="" placeholder="Judul Berita" autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <input type="text" name="subtitle" class="form-control"
+                                <input type="text" name="sub_title" class="form-control"
                                     value="{{ $value->sub_title }}" maxlength="50" required=""
                                     placeholder="Sub Title" autocomplete="off">
                             </div>
