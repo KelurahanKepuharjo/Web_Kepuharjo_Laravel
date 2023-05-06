@@ -18,6 +18,7 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Nik</th>
                     <th>Nama RW</th>
                     <th>RW</th>
                     <th>RT</th>
@@ -31,8 +32,7 @@
                     @foreach ($datartrw as $no => $value)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-
-
+                            <td>{{ $value->nik }}</td>
                             <td>{{ $value->nama_lengkap }}</td>
                             <td>{{ $value->rw }}</td>
                             <td>{{ $value->rt }}</td>
@@ -45,7 +45,7 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" data-id="modal-edit" href="" data-toggle="modal"
-                                            data-target="#modal-edit">Edit</a>
+                                            data-target="#modal-edit{{ $value->nik }}">Edit</a>
                                         <a class="dropdown-item" href="#" data-toggle="modal"
                                             data-target="#modal-hapus">Hapus</a>
                                         <form action="" method="get">
@@ -91,12 +91,12 @@
 
     {{-- modal edit --}}
     @foreach ($datartrw as $no => $value)
-        <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="modal-edit{{ $value->nik }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Master RT dan RW</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Akun RT dan RW</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -125,12 +125,12 @@
                                     <div class="col">
                                         <label for="">RT</label>
                                         <input type="text" name="rt" class="form-control"
-                                            value="{{ $value->rt }}" placeholder="RT" autocomplete="off">
+                                            value="{{ $value->rt }}" placeholder="RT" autocomplete="off" readonly>
                                     </div>
                                     <div class="col">
                                         <label for="">RW</label>
                                         <input type="text" name="rw" class="form-control"
-                                            value="{{ $value->rw }}" placeholder="RW" autocomplete="off">
+                                            value="{{ $value->rw }}" placeholder="RW" autocomplete="off" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +159,7 @@
     {{-- batas modal edit --}}
 
     {{-- Modal Hapus --}}
-    {{-- @foreach ($datartrw as $no => $value)
+    @foreach ($datartrw as $no => $value)
         <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true" autocomplete="off">
             <div class="modal-dialog" role="document">
@@ -181,7 +181,7 @@
                 </div>
             </div>
         </div>
-    @endforeach --}}
+    @endforeach
     {{-- Batas Modal Hapus --}}
 @endsection
 
