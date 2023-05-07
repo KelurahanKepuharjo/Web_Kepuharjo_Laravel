@@ -11,7 +11,7 @@
                 $rt = session()->get('rt');
                 $rw = session()->get('rw');
             @endphp
-            <h4>Halaman Master KK</h4>
+            <h4 class="font-weight-bold text-dark" >Master KK</h4>
             <button data-toggle="modal" name='tambah' data-target="#modal-tambahkk">Tambah data</button>
         </div>
         <!-- isi div -->
@@ -92,7 +92,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master KK</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Kartu Keluarga</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -241,7 +241,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master KK</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Hapus Kartu Keluarga</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

@@ -9,7 +9,7 @@
             $rt = session()->get('rt');
             $rw = session()->get('rw');
         @endphp
-        <h4>Halaman Master RT</h4>
+        <h4 class="font-weight-bold text-dark">Master RT</h4>
 
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah Data</i></button>
     </div>
@@ -74,7 +74,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master RT dan RW</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Akun RT</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -102,7 +102,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Master RT dan RW</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Akun RT</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -159,7 +159,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Hapus Data Master RT RW</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Hapus Data Akun RT</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

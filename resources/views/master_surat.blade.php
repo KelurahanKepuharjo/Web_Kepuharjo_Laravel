@@ -10,7 +10,7 @@
             $rt = session()->get('rt');
             $rw = session()->get('rw');
         @endphp
-        <h4>Halaman Master Surat</h4>
+        <h4 class="font-weight-bold text-dark" >Master Surat</h4>
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button>
     </div>
     @if (session::has('success'))
@@ -72,7 +72,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master KK</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master Surat</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -150,7 +150,7 @@
                 <div class="modal-content">
                     <form action="{{ url('hapussurat/' . $value->id_surat) }}" method="get">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Hapus Data Master KK</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Hapus Data Master Surat</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

@@ -9,7 +9,7 @@
             $rt = session()->get('rt');
             $rw = session()->get('rw');
         @endphp
-        <h4>Halaman Master Akun User</h4>
+        <h4 class="font-weight-bold text-dark" >Master Akun User</h4>
     </div>
     <div class="table_wrapper" style="overflow-x: scroll;">
         <table id="myTable" class="table table-striped" style="width:100%">

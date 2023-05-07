@@ -9,7 +9,8 @@
 @endphp
 
 @section('content')
-    <h4 class="mt-3">Selamat Datang {{ $nama }}</h4>
+    <h4 class="font-weight-bold text-dark">Dashboard</h4>
+    <h6 class="mt-3">Selamat Datang {{ $nama }}</h6>
     @csrf
     <!-- Content Row -->
     <div class="row">

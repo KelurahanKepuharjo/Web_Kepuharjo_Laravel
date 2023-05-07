@@ -213,14 +213,14 @@
                             placeholder="Nama Lengkap" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label>Password</label>
-                        <input type="text" name="Password" class="form-control" value=" " maxlength="50"
-                            placeholder="Password" autocomplete="off">
-                    </div>
-                    <div class="form-group">
                         <label>Status</label>
                         <input type="text" name="status" class="form-control" value=" " maxlength="50"
                             placeholder="Status" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="text" name="Password" class="form-control" value=" " maxlength="50"
+                            placeholder="Password" autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer">

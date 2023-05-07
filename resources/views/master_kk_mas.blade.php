@@ -13,7 +13,7 @@
                 $rt = session()->get('rt');
                 $rw = session()->get('rw');
             @endphp
-            <h4>Halaman Master User</h4>
+            <h4 class="font-weight-bold text-dark" >Anggota Kartu Keluaga </h4>
             <button data-toggle="modal" data-target="#modal-tambahmas">Tambah data</button>
         </div>
         <div class="table_wrapper" style="overflow-x: scroll;">
@@ -63,7 +63,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master User</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Anggota Kartu Keluarga</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -377,7 +377,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Master User</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Anggota Kartu Keluarga</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -710,7 +710,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Hapus Data Master User</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Hapus Data Anggota Kartu Keluarga</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
