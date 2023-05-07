@@ -12,12 +12,13 @@ use Illuminate\Support\Str;
 
 class RtController extends Controller
 {
-    public function master_rt()
+    public function master_rt(Request $request, $id)
     {
         $datartrw = DB::table('master_masyarakats')
             ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
             ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
             ->where('role', '=', 'RT')
+            ->where('RW', $id)
             ->get();
 
         return view('master_rt', compact('datartrw'));

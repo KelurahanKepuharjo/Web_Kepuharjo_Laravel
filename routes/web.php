@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     // Route User Akun
     Route::controller(UserController::class)->group(function () {
         Route::get('/masteruser', 'masteruser')->name('masteruser');
+        Route::post('/masteruser/{id}', 'update');
     });
 
     // Route Rt

@@ -32,10 +32,6 @@
                             <td>{{ $value->nama_lengkap }}</td>
                             <td>{{ $value->rt }}</td>
                             <td>Ketua RT</td>
-                            {{-- <td>{{ $value->alamat }}</td>
-                            <td>{{ $value->no_hp }}</td>
-                            <td>{{ $value->rt }}</td> --}}
-                            {{-- <td>{{ $value->rw }}</td> --}}
                             <td>
                                 {{-- <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
                                     data-toggle="modal" data-target="#modal-edit{{ $value->nik }}">

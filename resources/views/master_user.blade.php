@@ -1,5 +1,6 @@
 @extends('layouts.mainlayout')
 @section('title', 'Master User')
+@include('sweetalert::alert')
 <!-- partial -->
 @section('content')
     <div class="header-atas">
@@ -9,7 +10,25 @@
             $rt = session()->get('rt');
             $rw = session()->get('rw');
         @endphp
-        <h4 class="font-weight-bold text-dark" >Master Akun User</h4>
+        <h4 class="font-weight-bold text-dark">Master Akun User</h4>
+    </div>
+    <div>
+        @if (session::has('success'))
+            <script>
+                toastr.success('Data Berhasil Ditambahkan', '')
+            </script>
+        @endif
+        @if (session::has('successedit'))
+            <script>
+                toastr.success('Data Berhasil Diperbarui', '')
+            </script>
+        @endif
+        @if ($errors->any())
+            <script>
+                toastr.error('Cek Kembali Data yang Anda Input', 'Data Gagal Ditambahkan')
+            </script>
+        @endif
+
     </div>
     <div class="table_wrapper" style="overflow-x: scroll;">
         <table id="myTable" class="table table-striped" style="width:100%">
@@ -18,8 +37,8 @@
                     <th>No</th>
                     <th>Username</th>
                     <th>Nama Lengkap</th>
-                    <th>RT</th>
                     <th>RW</th>
+                    <th>RT</th>
                     <th>Tempat, Tanggal Lahir</th>
                     <th>Aksi</th>
                 </tr>
@@ -31,8 +50,8 @@
                             <td>{{ $no + 1 }}</td>
                             <td>{{ $value->nik }}</td>
                             <td>{{ $value->nama_lengkap }}</td>
-                            <td>{{ $value->rt }}</td>
                             <td>{{ $value->rw }}</td>
+                            <td>{{ $value->rt }}</td>
                             <td>{{ $value->tempat_lahir }}, {{ $value->tgl_lahir }}</td>
                             <td>
                                 <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
@@ -48,6 +67,53 @@
             </tbody>
         </table>
     </div>
+
+
+    @foreach ($data as $no => $value)
+        <div class="modal fade" id="modal-edit{{ $value->nik }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit User Akun</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ url('masteruser/' . $value->id_masyarakat) }}" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="">NIK</label>
+                                <input type="text" name="nik" class="form-control" value="{{ $value->nik }}"
+                                    placeholder="" autocomplete="off" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Nama Lengkap</label>
+                                <input type="text" name="editnama" class="form-control"
+                                    value="{{ $value->nama_lengkap }}" placeholder="" autocomplete="off" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input type="text" name="password"
+                                    class="form-control  @error('password')is-invalid
+                                @enderror"
+                                    value="{{ old('nokkedit') }}" placeholder="" autocomplete="off">
+                                @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-Success">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
     {{-- Modal Hapus --}}
     @foreach ($data as $no => $value)
@@ -117,3 +183,13 @@
         });
     });
 </script>
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+{{-- toast cdn --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{-- jquery cdn --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
