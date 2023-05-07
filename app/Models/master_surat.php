@@ -8,5 +8,7 @@ class master_surat extends Model
 {
     protected $table = 'master_surats';
 
-    protected $fillable = ['*'];
+    protected $primaryKey = 'id_surat';
+
+    protected $fillable = ['id_surat', 'nama_surat'];
 }

@@ -13,13 +13,13 @@ class RwController extends Controller
 {
     public function master_rw()
     {
-            $datartrw = DB::table('master_kks')
-                ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
-                ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
-                ->where('master_akuns.role', '=', 'RW')
-                ->get();
+        $datartrw = DB::table('master_kks')
+            ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+            ->where('master_akuns.role', '=', 'RW')
+            ->get();
 
-            return view('master_rw', compact('datartrw'));
+        return view('master_rw', compact('datartrw'));
     }
 
     public function hapusmasterrw(Request $request, $id)

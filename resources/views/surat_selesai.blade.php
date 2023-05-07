@@ -16,9 +16,9 @@
                 <th>NIK</th>
                 <th>Nama</th>
                 <th>Jenis Surat</th>
-                <th>Tanggal </th>
+                <th>Waktu Pengajuan</th>
                 <th>Status</th>
-                <th>Detail</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -28,14 +28,16 @@
                     <td>{{ $value->nik }}</td>
                     <td>{{ $value->nama_lengkap }}</td>
                     <td>{{ $value->nama_surat }}</td>
-                    <td>{{ $value->keterangan }}</td>
+                    <td>{{ $value->created_at->format('d-m-Y') }} Pukul {{ $value->created_at->format('H:i') }}</td>
                     <td>{{ $value->status }}</td>
                     <td>
                         <a class="btn btn-secondary" style="background: #00AAAA; color: white;" data-toggle="modal"
-                            data-target="#exampleModal" style="color: white;" href="#">Detail</a>
+                            data-target="#exampleModal{{ $value->nik }}" style="color: white;" href="#">Detail
+                            Surat</a>
                     </td>
                 </tr>
             @endforeach
+
 
         </tbody>
         <tfoot>

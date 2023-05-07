@@ -11,5 +11,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Model
 {
     protected $table = 'master_akuns';
+
     protected $fillable = ['password'];
 }

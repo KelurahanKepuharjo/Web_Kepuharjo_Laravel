@@ -164,7 +164,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Brian2694\Toastr\ToastrServiceProvider::class,
-
+        // App\Providers\BadgeServiceProvider::class,
         /*
          * Package Service Providers...
          */

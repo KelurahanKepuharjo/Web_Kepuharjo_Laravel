@@ -11,7 +11,7 @@
                 $rt = session()->get('rt');
                 $rw = session()->get('rw');
             @endphp
-            <h4 class="font-weight-bold text-dark" >Master KK</h4>
+            <h4 class="font-weight-bold text-dark">Master KK</h4>
             <button data-toggle="modal" name='tambah' data-target="#modal-tambahkk">Tambah data</button>
         </div>
         <!-- isi div -->
@@ -102,12 +102,12 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nomor-kartu"></label>
-                            <input type="number" id="nomor-kartu" name="nokk"
+                            <input type="number" id="nomor-kartu" name="no_kk"
                                 class="form-control
-                            @error('nokk') is-invalid
+                            @error('no_kk') is-invalid
                             @enderror"
-                                value="{{ old('nokk') }}" placeholder="Nomor KK" autocomplete="off">
-                            @error('nokk')
+                                value="{{ old('no_kk') }}" placeholder="Nomor KK" autocomplete="off">
+                            @error('no_kk')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -135,13 +135,13 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input type="text" name="alamatkk"
+                            <input type="text" name="alamat"
                                 class="form-control
-                            @error('alamatkk') is-invalid
+                            @error('alamat') is-invalid
 
                             @enderror"
-                                value="{{ old('alamatkk') }}" placeholder="Alamat" autocomplete="off">
-                            @error('alamatkk')
+                                value="{{ old('alamat') }}" placeholder="Alamat" autocomplete="off">
+                            @error('alamat')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -176,12 +176,12 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="">Kelurahan</label>
-                                    <input type="text" name="kel" class="form-control" placeholder="Kabupaten"
+                                    <input type="text" name="kelurahan" class="form-control" placeholder="Kabupaten"
                                         value="Kepuharjo" maxlength="50" required="" autocomplete="off" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="">Kode Pos</label>
-                                    <input type="text" name="kdpos" class="form-control" placeholder="Kecamatan"
+                                    <input type="text" name="kode_pos" class="form-control" placeholder="Kecamatan"
                                         value="67316" maxlength="50" required="" autocomplete="off" readonly>
                                 </div>
 
@@ -191,12 +191,12 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="">Kabupaten</label>
-                                    <input type="text" name="kab" class="form-control" placeholder="Kabupaten"
+                                    <input type="text" name="kabupaten" class="form-control" placeholder="Kabupaten"
                                         value="Lumajang" maxlength="50" required="" autocomplete="off" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="">Kecamatan</label>
-                                    <input type="text" name="kec" class="form-control" placeholder="Kecamatan"
+                                    <input type="text" name="kecamatan" class="form-control" placeholder="Kecamatan"
                                         value="Lumajang" maxlength="50" required="" autocomplete="off" readonly>
                                 </div>
 
@@ -206,17 +206,17 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="">Provinsi</label>
-                                    <input type="text" name="prov" class="form-control" placeholder="Provinsi"
+                                    <input type="text" name="provinsi" class="form-control" placeholder="Provinsi"
                                         value="Jawa Timur" maxlength="50" required="" autocomplete="off" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="">KK Tanggal</label>
                                     <input type="date"
-                                        class="form-control  @error('tglkk') is-invalid
+                                        class="form-control  @error('kk_tgl') is-invalid
                                     @enderror"
-                                        value="{{ old('tglkk') }}" name="tglkk" id="myDate"
+                                        value="{{ old('kk_tgl') }}" name="kk_tgl" id="myDate"
                                         placeholder="yyyy-mm-dd" min="1000-01-01" max="9999-12-31" autocomplete="off">
-                                    @error('tglkk')
+                                    @error('kk_tgl')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -289,14 +289,14 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="nomor-kartu"></label>
+                                    <label for="">NIK</label>
                                     <input type="number" id="nomor-kartu" name="nikedit"
                                         class="form-control
                                     @error('nikedit') is-invalid
 
                                     @enderror"
                                         value="{{ old('nikedit', $value->nik) }}" required=""
-                                        placeholder="NIK Kepala Keluuarga" autocomplete="off">
+                                        placeholder="NIK Kepala Keluuarga" autocomplete="off" readonly>
                                     @error('nikedit')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -321,7 +321,7 @@
                                     @error('alamatkkedit')is-invalid
 
                                     @enderror"
-                                        value="{{ old('alamatedit', $value->alamat) }}" placeholder="Alamat"
+                                        value="{{ old('alamatkkedit', $value->alamat) }}" placeholder="Alamat"
                                         autocomplete="off">
                                     @error('alamatkkedit')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -346,12 +346,15 @@
                                             <label for="">RW</label>
                                             <input type="text" name="rwedit" value="{{ old('rwedit', $value->rw) }}"
                                                 class="form-control" placeholder="RW">
+                                            @error('rwedit')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col">
                                             <label for="">Kode Pos</label>
                                             <input type="text" name="kdposedit" value="{{ $value->kode_pos }}"
                                                 class="form-control" placeholder="Kode Pos" autocomplete="off" readonly>
-                                            @error('rwedit')
+                                            @error('kdposedit')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>

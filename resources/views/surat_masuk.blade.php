@@ -17,7 +17,7 @@
                 <th>NIK</th>
                 <th>Nama</th>
                 <th>Jenis Surat</th>
-                <th>Tanggal </th>
+                <th>Waktu Pengajuan</th>
                 <th>Status</th>
                 <th>Aksi</th>
             </tr>
@@ -29,11 +29,12 @@
                     <td>{{ $value->nik }}</td>
                     <td>{{ $value->nama_lengkap }}</td>
                     <td>{{ $value->nama_surat }}</td>
-                    <td>{{ $value->keterangan }}</td>
+                    <td>{{ $value->created_at->format('d-m-Y') }} Pukul {{ $value->created_at->format('H:i') }}</td>
                     <td>{{ $value->status }}</td>
                     <td>
                         <a class="btn btn-secondary" style="background: #00AAAA; color: white;" data-toggle="modal"
-                            data-target="#exampleModal" style="color: white;" href="#">Proses Surat</a>
+                            data-target="#exampleModal{{ $value->nik }}" style="color: white;" href="#">Proses
+                            Surat</a>
                     </td>
                 </tr>
             @endforeach
@@ -45,24 +46,84 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+    @foreach ($data as $no => $value)
+        <div class="modal fade" id="exampleModal{{ $value->nik }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>NIK</label>
+                            <input type="text" name="nik" class="form-control" value="{{ $value->nik }}"
+                                maxlength="50" required="">
+                            <span class="text-danger">
+                        </div>
+                        <div class="form-group">
+                            <label>Nama </label>
+                            <input type="text" name="nama" class="form-control" value="{{ $value->nama_lengkap }}"
+                                maxlength="50" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Tempat, Tanggal Lahir </label>
+                            <input type="text" name="ttl" class="form-control"
+                                value="{{ $value->tempat_lahir }}, {{ $value->tgl_lahir }}" maxlength="50" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Jenis kelamin</label>
+                            <input type="text" name="kelamin" class="form-control" value="{{ $value->jenis_kelamin }}"
+                                maxlength="50" required="">
+                        </div>
+                        <div class="form-group ">
+                            <label>Kebangsaan/Agama</label>
+                            <input type="text" name="kebangsaan" class="form-control"
+                                value="{{ $value->kewarganegaraan }} / {{ $value->agama }}" maxlength="30" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <input type="text" name="status" class="form-control"
+                                value="{{ $value->status_perkawinan }}" maxlength="50" required="">
+                            <span class="text-danger">
+                        </div>
+                        <div class="form-group">
+                            <label>Pekerjaan</label>
+                            <input type="text" name="pekerjaan" class="form-control" value="{{ $value->pekerjaan }}"
+                                maxlength="50" required="">
+                            <span class="text-danger">
+                        </div>
+                        <div class="form-group">
+                            <label>Alamat</label>
+                            <input type="text" name="alamat" class="form-control" value="{{ $value->alamat }}"
+                                maxlength="50" required="">
+                            <span class="text-danger">
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal Pengajuan</label>
+                            <input type="text" name="tglpengajuan" class="form-control"
+                                value="{{ $value->created_at->format('d-m-Y ') }}" maxlength="50" required="">
+                            <span class="text-danger">
+                        </div>
+                        <div class="form-group">
+                            <label>Keperluan Surat</label>
+                            <input type="text" name="keperluan" class="form-control" value="{{ $value->keterangan }}"
+                                maxlength="50" required="">
+                            <span class="text-danger">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            style="background-color: rgb(0, 189, 0); color: white;">Setujui</button>
+                        <button type="button" class="btn btn-danger">Tolak</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endforeach
 @endsection

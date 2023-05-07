@@ -9,10 +9,9 @@ class master_kks extends Model
 {
     protected $table = 'master_kks';
 
-    protected $fillable = ['no_kk', 'nama_kepala_keluarga',
+    protected $fillable = ['no_kk',
         'alamat', 'rt', 'rw', 'kode_pos', 'kelurahan', 'kecamatan', 'kabupaten',
-        'provinsi', 'kk_tgl', 'created_at', 'updated_at'];
-    // protected $primarykey = 'no_kk';
+        'provinsi', 'kk_tgl'];
 
     protected static function boot()
     {

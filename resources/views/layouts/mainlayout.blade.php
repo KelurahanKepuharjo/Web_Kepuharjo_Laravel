@@ -90,32 +90,73 @@
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard">
                             <i class="icon-box menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
+                            <span class="menu-title">Dashboard
+                            </span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                            aria-controls="ui-basic">
-                            <i class="icon-file menu-icon"></i>
-                            <span class="menu-title">Pengajuan Surat</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
-                                        href="suratmasuk">Surat Masuk</a></li>
-                                <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
-                                        href="suratselesai">Surat Selesai</a>
-                                </li>
-                                <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
-                                        href="suratditolak">Surat Ditolak</a></li>
-                            </ul>
-                        </div>
-                    </li>
+                    @if ($akses == 'RT')
+                        <li class="nav-item">
+                            <a class="nav-link" href="suratmasuk">
+                                <i class="icon-inbox menu-icon"></i>
+                                <span class="menu-title">Surat Masuk </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="suratselesai">
+                                <i class="icon-outbox menu-icon"></i>
+                                <span class="menu-title">Surat Selesai</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="suratditolak">
+                                <i class="icon-file menu-icon"></i>
+                                <span class="menu-title">Surat Ditolak</span>
+                            </a>
+                        </li>
+                    @endif
+
+                    @if ($akses == 'RW')
+                        <li class="nav-item">
+                            <a class="nav-link" href="suratmasuk">
+                                <i class="icon-inbox menu-icon"></i>
+                                <span class="menu-title">Surat Masuk </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="suratselesai">
+                                <i class="icon-outbox menu-icon"></i>
+                                <span class="menu-title">Surat Selesai</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="suratditolak">
+                                <i class="icon-file menu-icon"></i>
+                                <span class="menu-title">Surat Ditolak</span>
+                            </a>
+                        </li>
+                    @endif
+
                     @if ($akses == 'admin')
                         <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                                aria-controls="ui-basic">
+                                <i class="icon-mail menu-icon"></i>
+                                <span class="menu-title">Pengajuan Surat</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="ui-basic">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
+                                            href="suratmasuk">Surat Masuk</a></li>
+                                    <li class="nav-item"> <a class="nav-link" style="font-size: 0.78rem;"
+                                            href="suratselesai">Surat Selesai</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="masteruser">
-                                <i class="icon-file menu-icon"></i>
+                                <i class="icon-head menu-icon"></i>
                                 <span class="menu-title">Master Akun User</span>
                             </a>
                         </li>
