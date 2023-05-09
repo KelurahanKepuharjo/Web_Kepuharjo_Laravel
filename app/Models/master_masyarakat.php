@@ -11,6 +11,11 @@ class master_masyarakat extends Model
     use HasFactory;
 
     protected $table = 'master_masyarakats';
+    // public function masyarakat(){
+    //     $this->join('master_kks','master_kks.id','master_masyarakats.id');
+    // }
+
+
 
     protected $fillable = ['id_masyarakat', 'nik', 'nama_lengkap', 'jenis_kelamin', 'tempat_lahir',
         'tgl_lahir', 'agama', 'pendidikan', 'pekerjaan', 'golongan_darah', 'status_perkawinan', 'tgl_perkawinan',

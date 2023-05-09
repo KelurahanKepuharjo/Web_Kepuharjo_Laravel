@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\master_akun;
 use App\Models\master_masyarakat;
+use App\Http\Requests\MasyarakatRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -82,7 +83,7 @@ class MasyarakatController extends Controller
             $data->nama_ibu = $request->nama_ibu;
             $data->save();
 
-            return Redirect('simpanakuns/'.$data->id_masyarakat);
+            return Redirect('masterkkmas/'.$data->id)->with('success','');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -99,76 +100,12 @@ class MasyarakatController extends Controller
         }
     }
 
-    public function simpanmasteruserakun(Request $request, $id)
+
+    public function updatemasteruser(MasyarakatRequest $request, $id)
     {
-        try {
-            $data = new master_akun();
-            $uuid = Str::uuid()->toString();
-            $data->id = $uuid;
-            $data->no_hp = 62;
-            $passwordhash = 'KepuharjoBermantra';
-            $data->password = Hash::make($passwordhash);
-            $data->role = 'masyarakat';
-            $data->id_masyarakat = $id;
-            $data->save();
-
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-
-        try {
-            $data = DB::table('master_masyarakats')
-                ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-                ->where('master_masyarakats.id_masyarakat', '=', $id)
-                ->first();
-
-            return Redirect('masterkkmas/'.$data->id);
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-
-    }
-
-    public function updatemasteruser(Request $request, $id)
-    {
-        $this->validate($request, [
-        ]);
-        $request->validate([
-            'nik' => 'required|max:16|min:16',
-            'nama_lengkap' => 'required',
-            'kelamin' => 'required',
-            'tempat_lahir' => 'required',
-            'tgl_lahir' => 'required',
-            'agama' => 'required',
-            'pendidikan' => 'required',
-            'pekerjaan' => 'required',
-            'gol_darah' => 'required',
-            'status_perkawinan' => 'required',
-            'status_keluarga' => 'required',
-            'kewarganegaraan' => 'required',
-            'nama_ayah' => 'required',
-            'nama_ibu' => 'required',
-        ], [
-            'nik.required' => 'NIK Tidak Boleh Kosong',
-            'nik.max' => 'NIK Maksimal 16 Angka',
-            'nik.min' => 'NIK Minimal 16 Angka',
-            'nama_lengkap.required' => 'Nama Lengkap Tidak Boleh Kosong',
-            'kelamin.required' => 'Jenis Kelamin Tidak Boleh Kosong',
-            'tempat_lahir.required' => 'Tempat Lahir Tidak Boleh Kosong',
-            'tgl_lahir.required' => 'Tanggal Lahir Tidak Boleh Kosong',
-            'agama.required' => 'Agama Tidak Boleh Kosong',
-            'pendidikan.required' => 'Pendidikan Tidak Boleh Kosong',
-            'pekerjaan.required' => 'Pekerjaan Tidak Boleh Kosong',
-            'gol_darah.required' => 'Golongan Darah Tidak Boleh Kosong',
-            'status_perkawinan.required' => 'Status Perkawinan Tidak Boleh Kosong',
-            'status_keluarga.required' => 'Status Keluarga Tidak Boleh Kosong',
-            'kewarganegaraan.required' => 'Kewarganegaraan Tidak Boleh Kosong',
-            'nama_ayah.required' => 'Nama Ayah Tidak Boleh Kosong',
-            'nama_ibu.required' => 'Nama Ibu Tidak Boleh Kosong',
-        ]);
+        $validated = $request->validated();
         try {
             $data = DB::table('master_masyarakats')->where('nik', $id)->update([
-                // $data->nik = $request->nik,
                 'nama_lengkap' => $request->nama_lengkap,
                 'jenis_kelamin' => $request->kelamin,
                 'tempat_lahir' => $request->tempat_lahir,
@@ -197,7 +134,7 @@ class MasyarakatController extends Controller
                 ->select('master_kks.id')
                 ->first();
 
-            return Redirect('masterkkmas/'.$data->id);
+            return Redirect('masterkkmas/'.$data->id)->with('successedit','');
         } catch (\Throwable $th) {
             throw $th;
         }

@@ -62,24 +62,6 @@ class KartukkController extends Controller
           return redirect('simpankepala/'.$request->no_kk.'/'.$request->kepala_keluarga.'/'.$request->nik);
       }
 
-      public function simpanmasteruserakunkk(Request $request, $id)
-      {
-          try {
-              $data = new master_akun();
-              $uuid = Str::uuid()->toString();
-              $data->id = $uuid;
-              $data->no_hp = 62;
-              $data->password = 'KepuharjoBermantra';
-              $data->role = 'masyarakat';
-              $data->id_masyarakat = $id;
-              $data->save();
-
-              return Redirect('masterkk')->with('success', '');
-
-          } catch (\Throwable $th) {
-          }
-      }
-
     public function simpankepalakeluarga(Request $request, $id, $other_id, $nik)
     {
         try {
@@ -95,8 +77,8 @@ class KartukkController extends Controller
             $data->nama_lengkap = $other_id;
             $data->status_keluarga = 'Kepala Keluarga';
             $data->save();
-
-            return Redirect('simpanakunskk/'.$data->id_masyarakat);
+            return Redirect('masterkk')->with('success', '');
+            // return Redirect('simpanakunskk/'.$data->id_masyarakat);
         } catch (\Throwable $th) {
         }
 
