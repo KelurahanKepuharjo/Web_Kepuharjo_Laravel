@@ -1,5 +1,6 @@
 @extends('layouts.mainlayouts')
 @section('title', 'Master RT RW')
+@include('sweetalert::alert')
 <!-- partial -->
 @section('content')
     <div class="header-atas">
@@ -13,11 +14,45 @@
 
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah Data</i></button>
     </div>
+    <div>
+        @if (session::has('success'))
+            <script>
+                toastr.success('Data Berhasil Ditambahkan', '')
+            </script>
+        @endif
+        @if (session::has('successedit'))
+            <script>
+                toastr.success('Data Berhasil Diperbarui', '')
+            </script>
+        @endif
+        @if (session::has('errorrt'))
+            <script>
+                toastr.error('Akun Sudah terdaftar sebagai RT', 'Data Gagal Ditambahkan')
+            </script>
+        @endif
+        @if (session::has('errorissetrt'))
+            <script>
+                toastr.error('Data Akun RT Sudah ada', 'Data Gagal Ditambahkan')
+            </script>
+        @endif
+        @if (session::has('errorrw'))
+            <script>
+                toastr.error('Akun sudah terdaftar sebagai RW', 'Data Gagal Ditambahkan')
+            </script>
+        @endif
+        @if ($errors->any())
+            <script>
+                toastr.error('Data Yang anda masukkan salah', 'Data Gagal Ditambahkan')
+            </script>
+        @endif
+
+    </div>
     <div class="table_wrapper" style="overflow-x: scroll;">
         <table id="myTable" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>NIK</th>
                     <th>Nama RW</th>
                     <th>RT</th>
                     <th>Status</th>
@@ -29,16 +64,11 @@
                     @foreach ($datartrw as $no => $value)
                         <tr>
                             <td>{{ $no + 1 }}</td>
+                            <td>{{ $value->nik }}</td>
                             <td>{{ $value->nama_lengkap }}</td>
                             <td>{{ $value->rt }}</td>
                             <td>Ketua RT</td>
                             <td>
-                                {{-- <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
-                                    data-toggle="modal" data-target="#modal-edit{{ $value->nik }}">
-                                </a>
-                                <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
-                                    data-target="#modal-hapus" style="margin-left: 10px; " value="{{ $value->nik }}"
-                                    href="{{ url('masterrtrw') }}"></a> --}}
                                 <div class="dropdown">
                                     <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -50,10 +80,6 @@
                                         <a class="dropdown-item" href="#" data-toggle="modal"
                                             data-target="#modal-hapus{{ $value->no_kk }}" value="{{ $value->no_kk }}"
                                             href="{{ url('masterkk') }}">Hapus</a>
-                                        {{-- <button class="dropdown-item" type="button" value="isi value button"
-                                                onclick="showDiv1(); showDiv2(); isiTextfield('{{ $value->no_kk }}'); isiTextfield2('{{ $value->nama_kepala_keluarga }}');">Tambah
-                                                data
-                                                Keluarga</button> --}}
                                     </div>
                                 </div>
                             </td>
@@ -64,7 +90,7 @@
         </table>
     </div>
 
-    {{-- coba modal tambah rt rw --}}
+
     <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -90,6 +116,7 @@
             </div>
         </div>
     </div>
+
 
     {{-- modal edit --}}
     @foreach ($datartrw as $no => $value)
@@ -229,7 +256,7 @@
             var strcari = $("#input").val();
             if (strcari != "") {
                 $("#read").html('<p class="text-muted">Menunggu Mencari Data ...</p>')
-                $.ajax_rt({
+                $.ajax({
                     type: "get",
                     url: "{{ url('ajaxrt') }}",
                     data: "nik=" + strcari,
@@ -244,8 +271,18 @@
     });
 
     function readData() {
-        $.get("{{ url('read') }}", {}, function(data, status) {
+        $.get("{{ url('readrt') }}", {}, function(data, status) {
             $("#read").html(data);
         });
     }
 </script>
+
+
+
+{{-- toast cdn --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{-- jquery cdn --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>

@@ -27,12 +27,17 @@
         @endif
         @if (session::has('errorrt'))
             <script>
-                toastr.error('Data Akun RT Sudah ada', '')
+                toastr.error('Akun Sudah terdaftar sebagai RT', 'Data Gagal Ditambahkan')
+            </script>
+        @endif
+        @if (session::has('errorissetrw'))
+            <script>
+                toastr.error('Data Akun RW Sudah ada', 'Data Gagal Ditambahkan')
             </script>
         @endif
         @if (session::has('errorrw'))
             <script>
-                toastr.error('Data Akun RW Sudah ada', '')
+                toastr.error('Akun sudah terdaftar sebagai RW', 'Data Gagal Ditambahkan')
             </script>
         @endif
         @if ($errors->any())

@@ -6,29 +6,29 @@
             <div class="form-group">
                 <label>NIK</label>
                 <input type="text" name="nik" class="form-control" value="{{ $item->nik }}" maxlength="50"
-                    required="" placeholder="NIK" autocomplete="off" disabled>
+                    required="" placeholder="NIK" autocomplete="off" readonly>
             </div>
             <div class="form-group">
                 <label>Nama Lengkap</label>
                 <input type="text" name="nama_lengkap" class="form-control" value="{{ $item->nama_lengkap }}"
-                    maxlength="50" required="" autocomplete="off" disabled>
+                    maxlength="50" required="" autocomplete="off" readonly>
             </div>
             <div class="form-group">
                 <label>Alamat</label>
                 <input type="text" name="alamat" class="form-control" value="{{ $item->alamat }}" maxlength="50"
-                    required="" autocomplete="off" disabled>
+                    required="" autocomplete="off" readonly>
             </div>
             <div class="form-group">
                 <div class="row">
                     <div class="col">
                         <label for="">RT</label>
                         <input type="text" name="rt" value="{{ $item->rt }} "class="form-control"
-                            placeholder="RT" autocomplete="off" disabled>
+                            placeholder="RT" autocomplete="off" readonly>
                     </div>
                     <div class="col">
                         <label for="">RW</label>
                         <input type="text" name="rw" value="{{ $item->rw }}" class="form-control"
-                            placeholder="RW" disabled>
+                            placeholder="RW" readonly>
                     </div>
                 </div>
                 <div class="form-group">

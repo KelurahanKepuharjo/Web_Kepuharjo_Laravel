@@ -70,35 +70,53 @@ class RwController extends Controller
 
     public function simpanmasterrw(Request $request, $id)
     {
-        $rw = new RwaksesModal();
-        $data = $rw->Rw()
-            ->where('nik', $id)
+        $datacheck = DB::table('master_kks')
+            ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->join('master_akuns', 'master_akuns.id_masyarakat', 'master_masyarakats.id_masyarakat')
+            ->where('master_kks.rw', $request->rw)
+            ->where('master_akuns.role', 'RW')
             ->first();
-        // dd($data->role);
-        if ($data) {
-            if ($data->role == 'RT') {
-                return Redirect('masterrw')->with('errorrt', '');
-            } elseif ($data->role == 'RW') {
-                return Redirect('masterrw')->with('errorrw', '');
-            } elseif ($data->role == '4') {
-                $request->validate([
-                    'no_hp' => 'required|min:10|max:13',
-                ], [
-                    'no_hp.required' => 'Nomor Telepon Tidak Boleh Kosong',
-                    'no_hp.min' => 'Nomor Telepon Minimal 10 Angka',
-                    'no_hp.max' => 'Nomor Telepon Maksimal 13 Angka',
-                ]);
-                $data = new master_akun();
-                $uuid = Str::uuid()->toString();
-                $data->id = $uuid;
-                $data->no_hp = $request->no_hp;
-                $passwordhash = $request->password;
-                $data->password = Hash::make($passwordhash);
-                $data->role = 'RW';
-                $data->id_masyarakat = $request->id_masyarakat;
-                $data->save();
+        // $datacheck2 = DB::table('master_kks')
+        //     ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
+        //     ->join('master_akuns','master_akuns.id_masyarakat','master_masyarakats.id_masyarakat')
+        //     ->where('master_kks.rt', $request->rt)
+        //     ->where('master_akuns.role', 'RT')
+        //     ->get();
+        if ($datacheck !== null) {
+            return Redirect('masterrw')->with('errorissetrw', '');
+        // }elseif($datacheck2 !== null){
+        //     return Redirect('masterrw')->with('errorrt', '');
+        } else {
+            // dd('data bisa ditamabhkan');
+            $rw = new RwaksesModal();
+            $data = $rw->Rw()
+                ->where('nik', $id)
+                ->first();
+            if ($data) {
+                if ($data->role == 'RT') {
+                    return Redirect('masterrw')->with('errorrt', '');
+                } elseif ($data->role == 'RW') {
+                    return Redirect('masterrw')->with('errorrw', '');
+                } elseif ($data->role == '4') {
+                    $request->validate([
+                        'no_hp' => 'required|min:10|max:13',
+                    ], [
+                        'no_hp.required' => 'Nomor Telepon Tidak Boleh Kosong',
+                        'no_hp.min' => 'Nomor Telepon Minimal 10 Angka',
+                        'no_hp.max' => 'Nomor Telepon Maksimal 13 Angka',
+                    ]);
+                    $data = new master_akun();
+                    $uuid = Str::uuid()->toString();
+                    $data->id = $uuid;
+                    $data->no_hp = $request->no_hp;
+                    $passwordhash = $request->password;
+                    $data->password = Hash::make($passwordhash);
+                    $data->role = 'RW';
+                    $data->id_masyarakat = $request->id_masyarakat;
+                    $data->save();
 
-                return Redirect('masterrw')->with('success', '');
+                    return Redirect('masterrw')->with('success', '');
+                }
             } else {
                 $data = DB::table('master_masyarakats')
                     ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
