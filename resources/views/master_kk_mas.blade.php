@@ -13,7 +13,7 @@
                 $rt = session()->get('rt');
                 $rw = session()->get('rw');
             @endphp
-            <h4 class="font-weight-bold text-dark">Anggota Kartu Keluaga </h4>
+            <h4 class="font-weight-bold text-dark">Anggota Kartu Keluarga </h4>
             <button data-toggle="modal" data-target="#modal-tambahmas">Tambah data</button>
         </div>
         @if (session::has('success'))
