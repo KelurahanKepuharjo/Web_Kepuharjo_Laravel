@@ -1,5 +1,6 @@
 @extends('layouts.mainlayout')
 @section('title', 'Master RT RW')
+@include('sweetalert::alert')
 <!-- partial -->
 @section('content')
     <div class="header-atas">
@@ -9,8 +10,36 @@
             $rt = session()->get('rt');
             $rw = session()->get('rw');
         @endphp
-        <h4 class="font-weight-bold text-dark" >Master RW</h4>
+        <h4 class="font-weight-bold text-dark">Master RW</h4>
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah Data</i></button>
+
+    </div>
+    <div>
+        @if (session::has('success'))
+            <script>
+                toastr.success('Data Berhasil Ditambahkan', '')
+            </script>
+        @endif
+        @if (session::has('successedit'))
+            <script>
+                toastr.success('Data Berhasil Diperbarui', '')
+            </script>
+        @endif
+        @if (session::has('errorrt'))
+            <script>
+                toastr.error('Data Akun RT Sudah ada', '')
+            </script>
+        @endif
+        @if (session::has('errorrw'))
+            <script>
+                toastr.error('Data Akun RW Sudah ada', '')
+            </script>
+        @endif
+        @if ($errors->any())
+            <script>
+                toastr.error('Data Yang anda masukkan salah', 'Data Gagal Ditambahkan')
+            </script>
+        @endif
 
     </div>
     <div class="table_wrapper" style="overflow-x: scroll;">
@@ -235,3 +264,11 @@
         });
     }
 </script>
+
+{{-- toast cdn --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{-- jquery cdn --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>

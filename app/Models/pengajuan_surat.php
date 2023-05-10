@@ -14,6 +14,6 @@ class pengajuan_surat extends Model
             ->join('master_akuns', 'master_akuns.id', '=', 'pengajuan_surats.id')
             ->join('master_masyarakats', 'master_masyarakats.id_masyarakat', '=', 'master_akuns.id_masyarakat')
             ->join('master_kks', 'master_masyarakats.id', '=', 'master_kks.id')
-            ->select('master_kks.*', 'master_masyarakats.*', 'pengajuan_surats.status','pengajuan_surats.keterangan','pengajuan_surats.created_at', 'master_surats.id_surat','master_surats.nama_surat');
+            ->select('master_kks.*', 'master_masyarakats.*', 'pengajuan_surats.status', 'pengajuan_surats.keterangan', 'pengajuan_surats.created_at', 'master_surats.id_surat', 'master_surats.nama_surat');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\pengajuan_surat;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -25,6 +26,7 @@ class KepuharjoController extends Controller
                 ->where('pengajuan_surats.status', '=', 'Disetujui RW')
                 ->count();
             $suratditolak = '';
+
             return view('dashboard', ['suratmasuk' => $suratmasuk], ['suratselesai' => $suratselesai], ['suratditolak' => $suratditolak]);
 
         } elseif (session('hak_akses') == 'RT') {
@@ -50,6 +52,7 @@ class KepuharjoController extends Controller
                 ->orWhere('pengajuan_surats.status', '=', 'Disetujui RW')
                 ->orWhere('pengajuan_surats.status', '=', 'Selesai')
                 ->count();
+
             return view('dashboard', ['suratmasuk' => $suratmasuk, 'suratselesai' => $suratselesai, 'suratditolak' => $suratditolak]);
         } elseif (session('hak_akses') == 'RW') {
             $RW = session('rw');
@@ -69,6 +72,7 @@ class KepuharjoController extends Controller
                 ->Where('pengajuan_surats.status', '=', 'Disetujui RW')
                 ->orWhere('pengajuan_surats.status', '=', 'Selesai')
                 ->count();
+
             return view('dashboard', ['suratmasuk' => $suratmasuk, 'suratselesai' => $suratselesai, 'suratditolak' => $suratditolak]);
         }
     }

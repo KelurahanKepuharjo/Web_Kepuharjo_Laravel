@@ -88,6 +88,7 @@ class PengajuanController extends Controller
                 ->get();
 
         }
+
         return view('surat_selesai', compact('data'));
     }
 }

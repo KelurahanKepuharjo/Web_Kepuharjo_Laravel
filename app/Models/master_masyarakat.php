@@ -15,8 +15,6 @@ class master_masyarakat extends Model
     //     $this->join('master_kks','master_kks.id','master_masyarakats.id');
     // }
 
-
-
     protected $fillable = ['id_masyarakat', 'nik', 'nama_lengkap', 'jenis_kelamin', 'tempat_lahir',
         'tgl_lahir', 'agama', 'pendidikan', 'pekerjaan', 'golongan_darah', 'status_perkawinan', 'tgl_perkawinan',
         'status_keluarga', 'kewarganegaraan', 'no_paspor', 'no_kitap', 'nama_ayah', 'nama_ibu', 'id', 'created_at', 'updated_at'];

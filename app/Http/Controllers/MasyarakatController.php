@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\master_akun;
-use App\Models\master_masyarakat;
 use App\Http\Requests\MasyarakatRequest;
+use App\Models\master_masyarakat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class MasyarakatController extends Controller
@@ -83,7 +81,7 @@ class MasyarakatController extends Controller
             $data->nama_ibu = $request->nama_ibu;
             $data->save();
 
-            return Redirect('masterkkmas/'.$data->id)->with('success','');
+            return Redirect('masterkkmas/'.$data->id)->with('success', '');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -99,7 +97,6 @@ class MasyarakatController extends Controller
             throw $th;
         }
     }
-
 
     public function updatemasteruser(MasyarakatRequest $request, $id)
     {
@@ -134,7 +131,7 @@ class MasyarakatController extends Controller
                 ->select('master_kks.id')
                 ->first();
 
-            return Redirect('masterkkmas/'.$data->id)->with('successedit','');
+            return Redirect('masterkkmas/'.$data->id)->with('successedit', '');
         } catch (\Throwable $th) {
             throw $th;
         }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\KartukkeditRequest;
 use App\Http\Requests\KartukkRequest;
-use App\Models\master_akun;
 use App\Models\master_kks;
 use App\Models\master_masyarakat;
 use Illuminate\Http\Request;
@@ -77,6 +76,7 @@ class KartukkController extends Controller
             $data->nama_lengkap = $other_id;
             $data->status_keluarga = 'Kepala Keluarga';
             $data->save();
+
             return Redirect('masterkk')->with('success', '');
             // return Redirect('simpanakunskk/'.$data->id_masyarakat);
         } catch (\Throwable $th) {

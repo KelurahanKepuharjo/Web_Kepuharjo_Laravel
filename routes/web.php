@@ -63,8 +63,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('{id}/hapus-masterrw', 'hapusmasterrw');
         Route::get('/ajax', 'ajax');
         Route::get('/read', 'read');
-        Route::post('/simpanrw', 'simpanmasterrw')->name('simpanrw');
+        Route::get('/simpanrw/{id}', 'simpanmasterrw');
         Route::post('update-masterw/{id}', '')->name('updatemasterrw');
+        Route::get('/rw', 'Rw');
     });
 
     // Route Pengajuan Surat
