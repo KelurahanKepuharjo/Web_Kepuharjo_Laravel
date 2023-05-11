@@ -133,6 +133,6 @@ public function updatemasterrt(Request $request, $id)
             'master_akuns.password' => $pass,
         ]);
 
-    return Redirect('masterrt/'.$request->rt);
+    return Redirect('masterrt/'.$request->rt)->with('success', '');
 }
 }
