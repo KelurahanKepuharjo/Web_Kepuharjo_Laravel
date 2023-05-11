@@ -76,7 +76,7 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" data-id="" href="" data-toggle="modal"
-                                            data-target="#modal-edit{{ $value->no_kk }}">Edit</a>
+                                            data-target="#modal-edit{{ $value->nik }}">Edit</a>
                                         <a class="dropdown-item" href="#" data-toggle="modal"
                                             data-target="#modal-hapus{{ $value->no_kk }}" value="{{ $value->no_kk }}"
                                             href="{{ url('masterkk') }}">Hapus</a>
@@ -125,44 +125,56 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Akun RT</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Akun RW</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ url('update-masterrtrw/' . $value->nik) }}" method="post">
+                    <form action="{{ url('update-masterrt/' . $value->nik) }}" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
+                                <label for="">NIK</label>
                                 <input type="text" name="nik" class="form-control" value="{{ $value->nik }}"
-                                    maxlength="50" required="" placeholder="NIK" autocomplete="off" disabled>
+                                    maxlength="50" required="" placeholder="NIK" autocomplete="off" readonly>
                             </div>
                             <div class="form-group">
+                                <label for="">Nama Lengkap</label>
                                 <input type="text" name="nama_lengkap" class="form-control"
                                     value="{{ $value->nama_lengkap }}" maxlength="50" required=""
-                                    placeholder="Nama Lengkap" autocomplete="off" disabled>
+                                    placeholder="Nama Lengkap" autocomplete="off" readonly>
                             </div>
                             <div class="form-group">
+                                <label for="">Alamat</label>
                                 <input type="text" name="alamat" class="form-control" value="{{ $value->alamat }}"
-                                    maxlength="50" required="" placeholder="Alamat" autocomplete="off" disabled>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="no_hp" class="form-control" value="{{ $value->no_hp }}"
-                                    maxlength="50" required="" placeholder="No HP" autocomplete="off">
+                                    maxlength="50" required="" placeholder="Alamat" autocomplete="off" readonly>
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col">
+                                        <label for="">RT</label>
                                         <input type="text" name="rt" class="form-control"
-                                            value="{{ $value->rt }}" placeholder="RT" autocomplete="off">
+                                            value="{{ $value->rt }}" placeholder="RT" autocomplete="off" readonly>
                                     </div>
                                     <div class="col">
+                                        <label for="">RW</label>
                                         <input type="text" name="rw" class="form-control"
-                                            value="{{ $value->rw }}" placeholder="RW" autocomplete="off">
+                                            value="{{ $value->rw }}" placeholder="RW" autocomplete="off" readonly>
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label for="">No Telepon</label>
+                                <input type="text" name="no_hp" class="form-control" value="{{ $value->no_hp }}"
+                                    maxlength="50" required="" placeholder="No HP" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label>Kata Sandi</label>
+                                <input type="password" name="password"
+                                    class="form-control @error('password') is-invalid
+                            @enderror"
+                                    value="" maxlength="50" autocomplete="off">
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

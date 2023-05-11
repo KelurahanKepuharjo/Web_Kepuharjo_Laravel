@@ -76,16 +76,8 @@ class RwController extends Controller
             ->where('master_kks.rw', $request->rw)
             ->where('master_akuns.role', 'RW')
             ->first();
-        // $datacheck2 = DB::table('master_kks')
-        //     ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
-        //     ->join('master_akuns','master_akuns.id_masyarakat','master_masyarakats.id_masyarakat')
-        //     ->where('master_kks.rt', $request->rt)
-        //     ->where('master_akuns.role', 'RT')
-        //     ->get();
         if ($datacheck !== null) {
             return Redirect('masterrw')->with('errorissetrw', '');
-        // }elseif($datacheck2 !== null){
-        //     return Redirect('masterrw')->with('errorrt', '');
         } else {
             // dd('data bisa ditamabhkan');
             $rw = new RwaksesModal();
@@ -146,15 +138,17 @@ class RwController extends Controller
 
     public function updatemasterrw(Request $request, $id)
     {
-        $data = RwaksesModal::where('nik', $id)
-            ->where('master_akuns.role', 'RW')->first();
-        $data->nik = $request->nik;
-        $data->nama_lengkap = $request->nama_lengkap;
-        $data->alamat = $request->alamat;
-        $data->no_hp = $request->no_hp;
-        $data->rt = $request->rt;
-        $data->rw = $request->rw;
-        $data->save();
+        $passwordhash = $request->password;
+        $pass = Hash::make($passwordhash);
+        $data = DB::table('master_kks')
+            ->join('master_masyarakats', 'master_masyarakats.id', '=', 'master_kks.id')
+            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+            ->where('master_masyarakats.nik', $request->nik)
+            ->where('master_akuns.role', 'RW')
+            ->update([
+                'master_akuns.no_hp' => $request->no_hp,
+                'master_akuns.password' => $pass,
+            ]);
 
         return Redirect('masterrw');
     }

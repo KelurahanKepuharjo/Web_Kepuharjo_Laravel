@@ -64,8 +64,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('{id}/hapus-masterrw', 'hapusmasterrw');
         Route::get('/ajax', 'ajax');
         Route::get('/read', 'read');
-        Route::get('/simpanrw/{id}', 'simpanmasterrw');
-        Route::post('update-masterw/{id}', '')->name('updatemasterrw');
+        Route::post('/simpanrw/{id}', 'simpanmasterrw');
+        Route::post('update-masterw/{id}', 'updatemasterrw');
         Route::get('/rw', 'Rw');
     });
 

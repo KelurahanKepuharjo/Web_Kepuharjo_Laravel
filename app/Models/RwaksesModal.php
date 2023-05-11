@@ -14,4 +14,5 @@ class RwaksesModal extends Model
             ->join('master_akuns', 'master_masyarakats.id_masyarakat', 'master_akuns.id_masyarakat')
             ->select('master_kks.*', 'master_masyarakats.*', 'master_akuns.*');
     }
+    // protected $fillable = ['master_akuns.no_hp', 'master_akuns.password'];
 }

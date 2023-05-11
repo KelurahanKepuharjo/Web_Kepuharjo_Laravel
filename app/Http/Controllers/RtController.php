@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\master_akun;
 use App\Models\RwaksesModal;
-use App\Models\master_kks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -30,24 +29,51 @@ class RtController extends Controller
     public function simpanmasterrt(Request $request, $id)
     {
         $datacheck = DB::table('master_kks')
-        ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
-        ->join('master_akuns', 'master_akuns.id_masyarakat', 'master_masyarakats.id_masyarakat')
-        ->where('master_kks.rt', $request->rt)
-        ->where('master_akuns.role', 'RT')
-        ->first();
+            ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->join('master_akuns', 'master_akuns.id_masyarakat', 'master_masyarakats.id_masyarakat')
+            ->where('master_masyarakats.nik', $request->nik)
+            ->where('master_kks.rt', $request->rt)
+            ->where('master_kks.rw', $request->rw)
+            ->where('master_akuns.role', 'RT')
+            ->orwhere('master_akuns.role', 'RW')
+            ->first();
         if ($datacheck !== null) {
             return Redirect('masterrw')->with('errorissetrt', '');
-        }else{
-        $rt = new RwaksesModal();
-        $data = $rt->Rw()
-            ->where('nik', $id)
-            ->first();
-        if ($data) {
-            if ($data->role == 'RT') {
-                return Redirect('masterrt/'. $request->rt)->with('errorrt', '');
-            } elseif ($data->role == 'RW') {
-                return Redirect('masterrt/'. $request->rt)->with('errorrw', '');
-            } elseif ($data->role == '4') {
+        } else {
+            $rt = new RwaksesModal();
+            $data = $rt->Rw()
+                ->where('nik', $id)
+                ->first();
+            if ($data) {
+                if ($data->role == 'RT') {
+                    return Redirect('masterrt/'.$request->rt)->with('errorrt', '');
+                } elseif ($data->role == 'RW') {
+                    return Redirect('masterrt/'.$request->rt)->with('errorrw', '');
+                } elseif ($data->role == '4') {
+                    $request->validate([
+                        'no_hp' => 'required|min:10|max:13',
+                    ], [
+                        'no_hp.required' => 'Nomor Telepon Tidak Boleh Kosong',
+                        'no_hp.min' => 'Nomor Telepon Minimal 10 Angka',
+                        'no_hp.max' => 'Nomor Telepon Maksimal 13 Angka',
+                    ]);
+                    $data = new master_akun();
+                    $uuid = Str::uuid()->toString();
+                    $data->id = $uuid;
+                    $data->no_hp = $request->no_hp;
+                    $passwordhash = $request->password;
+                    $data->password = Hash::make($passwordhash);
+                    $data->role = 'RT';
+                    $data->id_masyarakat = $request->id_masyarakat;
+                    $data->save();
+
+                    return Redirect('masterrt/'.$request->rt)->with('success', '');
+                }
+            } else {
+                $data = DB::table('master_masyarakats')
+                    ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+                    ->where('master_masyarakats.nik', '=', $id)
+                    ->first();
                 $request->validate([
                     'no_hp' => 'required|min:10|max:13',
                 ], [
@@ -65,33 +91,9 @@ class RtController extends Controller
                 $data->id_masyarakat = $request->id_masyarakat;
                 $data->save();
 
-                return Redirect('masterrt/'. $request->rt)->with('success', '');
+                return Redirect('masterrt/'.$request->rt)->with('success', '');
             }
-        } else {
-            $data = DB::table('master_masyarakats')
-                ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-                ->where('master_masyarakats.nik', '=', $id)
-                ->first();
-            $request->validate([
-                'no_hp' => 'required|min:10|max:13',
-            ], [
-                'no_hp.required' => 'Nomor Telepon Tidak Boleh Kosong',
-                'no_hp.min' => 'Nomor Telepon Minimal 10 Angka',
-                'no_hp.max' => 'Nomor Telepon Maksimal 13 Angka',
-            ]);
-            $data = new master_akun();
-            $uuid = Str::uuid()->toString();
-            $data->id = $uuid;
-            $data->no_hp = $request->no_hp;
-            $passwordhash = $request->password;
-            $data->password = Hash::make($passwordhash);
-            $data->role = 'RT';
-            $data->id_masyarakat = $request->id_masyarakat;
-            $data->save();
-
-            return Redirect('masterrt/'. $request->rt)->with('success', '');
         }
-    }
     }
 
 public function ajax_rt(Request $request)
@@ -116,6 +118,21 @@ public function read()
 {
     return 'Silahkan Melakukan Pencarian Data';
 }
+
+public function updatemasterrt(Request $request, $id)
+{
+    $passwordhash = $request->password;
+    $pass = Hash::make($passwordhash);
+    $data = DB::table('master_kks')
+        ->join('master_masyarakats', 'master_masyarakats.id', '=', 'master_kks.id')
+        ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+        ->where('master_masyarakats.nik', $request->nik)
+        ->where('master_akuns.role', 'RT')
+        ->update([
+            'master_akuns.no_hp' => $request->no_hp,
+            'master_akuns.password' => $pass,
+        ]);
+
+    return Redirect('masterrt/'.$request->rt);
 }
-
-
+}

@@ -141,18 +141,18 @@
                             <div class="form-group">
                                 <label for="">NIK</label>
                                 <input type="text" name="nik" class="form-control" value="{{ $value->nik }}"
-                                    maxlength="50" required="" placeholder="NIK" autocomplete="off" disabled>
+                                    maxlength="50" required="" placeholder="NIK" autocomplete="off" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Nama Lengkap</label>
                                 <input type="text" name="nama_lengkap" class="form-control"
                                     value="{{ $value->nama_lengkap }}" maxlength="50" required=""
-                                    placeholder="Nama Lengkap" autocomplete="off" disabled>
+                                    placeholder="Nama Lengkap" autocomplete="off" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Alamat</label>
                                 <input type="text" name="alamat" class="form-control" value="{{ $value->alamat }}"
-                                    maxlength="50" required="" placeholder="Alamat" autocomplete="off" disabled>
+                                    maxlength="50" required="" placeholder="Alamat" autocomplete="off" readonly>
                             </div>
                             <div class="form-group">
                                 <div class="row">
