@@ -117,9 +117,9 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                            style="background-color: rgb(0, 189, 0); color: white;">Setujui</button>
-                        <button type="button" class="btn btn-danger">Tolak</button>
+                        <a type="button" class="btn btn-secondary"
+                            style="background-color: rgb(0, 189, 0); color: white;" href="{{  url('updatestatus/' . $value->id_pengajuan.'/'. $akses ) }}">Setujui</a>
+                        <a type="button" class="btn btn-danger" href="{{  url('updatestatus/' . $value->nik) }}">Tolak</a>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -200,7 +200,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <button type="button" class="btn btn-secondary"
                             style="background-color: rgb(0, 189, 0); color: white;">Kirim melalui WhatsApp</button>
                         <button type="button" class="btn btn-danger">Kirim</button>

@@ -33,6 +33,12 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('login/auth', 'store');
 });
 
+// Route Logout
+Route::controller(KepuharjoController::class)->group(function () {
+    Route::get('logout', 'logout')->name('logout');
+    // Route::post('login/auth', 'store');
+});
+
 Route::middleware(['auth'])->group(function () {
 
     Route::controller(KepuharjoController::class)->group(function () {
@@ -72,6 +78,7 @@ Route::middleware(['auth'])->group(function () {
     // Route Pengajuan Surat
     Route::controller(PengajuanController::class)->group(function () {
         Route::get('/suratmasuk', 'surat_masuk')->name('suratmasuk');
+        Route::get('updatestatus/{id}/{akses}', 'update_status');
         Route::get('/suratditolak', 'surat_ditolak')->name('suratditolak');
         Route::get('/suratselesai', 'surat_selesai')->name('suratselesai');
     });

@@ -72,7 +72,7 @@
                             <a class="dropdown-item preview-item" data-toggle="modal" data-target="#modal-profile">
                                 <i class="icon-head"></i> Profile
                             </a>
-                            <a class="dropdown-item preview-item" href="logout">
+                            <a class="dropdown-item preview-item" data-toggle="modal" data-target="#modal-logout">
                                 <i class="icon-inbox"></i> Logout
                             </a>
                         </div>
@@ -274,6 +274,28 @@
     </div>
     </div>
     {{-- batad modal edit profile --}}
+
+    {{-- modal logout --}}
+    <div class="modal fade" id="modal-logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" autocomplete="off">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Logout</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Apakah Anda Yakin Untuk Keluar ?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+              <a type="submit" class="btn btn-primary" href="logout">Iya</a>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 
 </html>

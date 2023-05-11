@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\pengajuan_surat;
+use App\Models\UpdateStatusModel;
+use Illuminate\Http\Request;
 
 class PengajuanController extends Controller
 {
@@ -22,6 +24,7 @@ class PengajuanController extends Controller
                 ->where('master_kks.RT', '=', $RT)
                 ->where('master_kks.RW', '=', $RW)
                 ->get();
+                // dd($data);
         } elseif (session('hak_akses') == 'RW') {
             $RW = session('rw');
             $pengajuan = new pengajuan_surat();
@@ -32,6 +35,23 @@ class PengajuanController extends Controller
         }
 
         return view('surat_masuk', compact('data'));
+    }
+
+    public function update_status(Request $request, $id, $akses){
+        if($akses=='RT'){
+            $status = 'Disetujui RT';
+        } elseif ($akses=='RW') {
+            $status = 'Disetujui RW';
+        } elseif ($akses=='admin') {
+            $status = 'Selesai';
+        }
+        $updatestatus = new UpdateStatusModel();
+        $data = $updatestatus->UpdateStatus()
+        ->where('master_masyarakats.nik', $id)
+        ->first();
+        $data->update([
+            'pengajuan_surats.status' => $status,
+        ]);
     }
 
     public function surat_ditolak()
