@@ -1,5 +1,5 @@
 @foreach ($data as $item)
-    <form action="{{ url('simpanrw/' . $item->nik) }}" method="get">
+    <form action="{{ url('simpanrw/' . $item->nik) }}" method="post">
         <div class="modal-body">
             <input type="hidden" name="id_masyarakat" class="form-control" value="{{ $item->id_masyarakat }}" maxlength="50"
                 required="" readonly>
