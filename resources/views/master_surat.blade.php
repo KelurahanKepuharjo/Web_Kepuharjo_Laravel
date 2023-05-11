@@ -30,7 +30,7 @@
     @endif
     @if ($errors->any())
         <script>
-            toastr.error('Cek Kembali Data yang Anda Input', 'Berita Gagal Ditambahkan')
+            toastr.error('Cek Kembali Data Yang Anda Input', 'Berita Gagal Ditambahkan')
         </script>
     @endif
     <div class="table_wrapper" style="overflow-x: scroll;">
