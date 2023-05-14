@@ -28,7 +28,7 @@
             @endif
             @if ($errors->any())
                 <script>
-                    toastr.error('Cek Kembali Data yang Anda Input', 'Data Gagal Ditambahkan')
+                    toastr.error('Cek Kembali Data yang Anda Masukkan', 'Data Gagal Ditambahkan')
                 </script>
             @endif
 

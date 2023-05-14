@@ -116,7 +116,7 @@ $rw = session()->get('rw');
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 <button type="button" class="btn btn-secondary"
                     style="background-color: rgb(0, 189, 0); color: white;">Unduh Surat</button>
             </div>

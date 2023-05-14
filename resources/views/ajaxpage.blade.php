@@ -48,6 +48,9 @@
                         class="form-control @error('password') is-invalid
                 @enderror" value=""
                         maxlength="50" autocomplete="off">
+                        @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                 </div>
             </div>
             <div class="modal-footer">
