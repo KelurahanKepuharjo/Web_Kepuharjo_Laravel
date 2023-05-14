@@ -11,7 +11,6 @@ class SuratController extends Controller
     public function index()
     {
         $data = surat::all();
-
         return view('master_surat', compact('data'));
     }
 

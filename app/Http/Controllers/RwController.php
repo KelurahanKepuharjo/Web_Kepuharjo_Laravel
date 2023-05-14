@@ -150,6 +150,6 @@ class RwController extends Controller
                 'master_akuns.password' => $pass,
             ]);
 
-        return Redirect('masterrw')->with('success', '');
+        return Redirect('masterrw')->with('successedit', '');
     }
 }

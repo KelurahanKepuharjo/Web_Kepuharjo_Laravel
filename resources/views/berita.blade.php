@@ -10,22 +10,22 @@
 
     @if (session::has('success'))
         <script>
-            toastr.success('Berita Berhasil Ditambahkan', '')
+            toastr.success('Data Berhasil Ditambahkan', '')
         </script>
     @endif
     @if (session::has('successedit'))
         <script>
-            toastr.success('Berita Berhasil Diedit', '')
+            toastr.success('Data Berhasil Diedit', '')
         </script>
     @endif
     @if (session::has('successhapus'))
         <script>
-            toastr.success('Berita Berhasil Dihapus', '')
+            toastr.success('Data Berhasil Dihapus', '')
         </script>
     @endif
     @if ($errors->any())
         <script>
-            toastr.error('Cek Kembali Data yang Anda Input', 'Berita Gagal Ditambahkan')
+            toastr.error('Cek Kembali Data yang Anda Input', 'Data Gagal Ditambahkan')
         </script>
     @endif
 
@@ -165,9 +165,8 @@
                                     placeholder="Sub Title" autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <input type="text" name="deskripsi" class="form-control"
-                                    value="{{ $value->deskripsi }}" maxlength="50" required=""
-                                    placeholder="Deskripsi" autocomplete="off">
+                                <textarea type="text" name="deskripsi" class="form-control" value="" maxlength="50" required=""
+                                    placeholder="Deskripsi" autocomplete="off">{{ $value->deskripsi }}</textarea>
                             </div>
                         </div>
                         <div class="modal-footer">

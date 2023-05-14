@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\pengajuan_surat;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class KepuharjoController extends Controller
 {
@@ -82,7 +83,7 @@ class KepuharjoController extends Controller
         return view('tentang');
     }
 
-    public function updateprofil()
+    public function updateprofil(Request $request)
     {
         request()->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -90,7 +91,14 @@ class KepuharjoController extends Controller
 
         $imageName = time().'.'.request()->image->getClientOriginalExtension();
         request()->image->move(public_path('images'), $imageName);
-        dd($imageName);
+        $data = DB::table('master_masyarakats')
+        ->join('master_akuns','master_akuns.id_masyarakat','master_masyarakats.id_masyarakat')
+        ->where('master_masyarakats.nik','=', $request->nik)
+        ->update([
+            'master_akuns.image' => $imageName,
+        ]);
+
+       return redirect()->back()->with('successedit','');
     }
 
     public function logout()

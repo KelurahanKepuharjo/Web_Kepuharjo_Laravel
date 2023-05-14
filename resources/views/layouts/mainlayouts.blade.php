@@ -40,6 +40,7 @@
 
 @php
     $nama = session()->get('nama');
+    $nik = session()->get('nik');
     $akses = session()->get('hak_akses');
     $rt = session()->get('rt');
     $rw = session()->get('rw');
@@ -222,52 +223,52 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="profile">
-                        <img class="img-profile rounded-circle" src="images/1682171772.jpg" style="">
-                    </div>
-                    <style>
-                        .profile {
-                            display: table-cell;
-                            vertical-align: middle;
-                            text-align: center;
-                        }
+                <form action="/image-upload" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="profile">
+                            <img class="img-profile rounded-circle" src="" style="">
+                            <style>
+                                .profile {
+                                    display: table-cell;
+                                    vertical-align: middle;
+                                    text-align: center;
+                                }
 
-                        .profile img {
-                            margin: auto;
-                            display: block;
-                            width: 150px;
-                            height: 150px;
-                        }
-                    </style>
-                    <form action="/image-upload" method="POST" enctype="multipart/form-data">
-                        @csrf
+                                .profile img {
+                                    margin: auto;
+                                    display: block;
+                                    width: 150px;
+                                    height: 150px;
+                                }
+                            </style>
+                        </div>
                         <div class="form-group">
                             <input type="file" name="image">
-                            <button type="submit">Upload</button>
                         </div>
-                    </form>
-                    <div class="form-group">
-                        <label>Nama Lengkap</label>
-                        <input type="text" name="namalengkap" class="form-control" value=" " maxlength="50"
-                            placeholder="Nama Lengkap" autocomplete="off">
+                        <div class="form-group">
+                            <input type="hidden" name="nik" class="form-control" value="{{ $nik }}"
+                                maxlength="50" placeholder="Nama Lengkap" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Lengkap</label>
+                            <input type="text" name="namalengkap" class="form-control"
+                                value="{{ $nama }}" maxlength="50" placeholder="Nama Lengkap"
+                                autocomplete="off" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <input type="text" name="status" class="form-control" value="{{ $akses }}"
+                                maxlength="50" placeholder="Status" autocomplete="off" readonly>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Status</label>
-                        <input type="text" name="status" class="form-control" value=" " maxlength="50"
-                            placeholder="Status" autocomplete="off">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-secondary" style="background: green; color: white;">
+                            simpan
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="text" name="Password" class="form-control" value=" " maxlength="50"
-                            placeholder="Password" autocomplete="off">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-danger"> simpan
-                    </button>
-                </div>
+                </form>
             </div>
         </div>
     </div>

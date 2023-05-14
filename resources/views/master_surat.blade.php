@@ -10,27 +10,27 @@
             $rt = session()->get('rt');
             $rw = session()->get('rw');
         @endphp
-        <h4 class="font-weight-bold text-dark" >Master Surat</h4>
+        <h4 class="font-weight-bold text-dark">Master Surat</h4>
         <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button>
     </div>
     @if (session::has('success'))
         <script>
-            toastr.success('Berita Berhasil Ditambahkan', '')
+            toastr.success('Data Berhasil Ditambahkan', '')
         </script>
     @endif
     @if (session::has('successedit'))
         <script>
-            toastr.success('Berita Berhasil Diedit', '')
+            toastr.success('Data Berhasil Diperbarui', '')
         </script>
     @endif
     @if (session::has('successhapus'))
         <script>
-            toastr.success('Berita Berhasil Dihapus', '')
+            toastr.success('Data Berhasil Dihapus', '')
         </script>
     @endif
     @if ($errors->any())
         <script>
-            toastr.error('Cek Kembali Data yang Anda Input', 'Berita Gagal Ditambahkan')
+            toastr.error('Cek Kembali Data yang Anda Input', 'Data Gagal Ditambahkan')
         </script>
     @endif
     <div class="table_wrapper" style="overflow-x: scroll;">

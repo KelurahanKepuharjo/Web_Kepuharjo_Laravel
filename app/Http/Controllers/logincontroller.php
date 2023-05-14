@@ -21,22 +21,12 @@ class LoginController extends Controller
     {
         // Validasi input
         // dd($request->session()->get('_token'));
-        $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'password' => 'required',
-        ], [
-            'username.required' => 'Username harus diisi',
-            'password.required' => 'Password harus diisi',
-        ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         // Memeriksa apakah user adalah admin
         if ($request->username == 'admin' && $request->password == 'admin') {
             $session = [
-                'nama' => 'Admin Kepuharjo',
+                'nama' => 'Kepuharjo',
                 'hak_akses' => 'admin',
                 'rt' => '',
                 'rw' => '',
@@ -48,6 +38,18 @@ class LoginController extends Controller
             Session::put('_token', $token);
 
             return redirect('dashboard');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'username' => 'required',
+            'password' => 'required',
+        ], [
+            'username.required' => 'Username harus diisi',
+            'password.required' => 'Password harus diisi',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         // Memeriksa apakah user adalah masyarakat
@@ -62,6 +64,7 @@ class LoginController extends Controller
         } elseif ($request->password != null) {
             Hash::check($request->password, $user->password);
             $session = [
+                'nik' =>$user->nik,
                 'nama' => $user->nama_lengkap,
                 'hak_akses' => $user->role,
                 'rt' => $user->rt,

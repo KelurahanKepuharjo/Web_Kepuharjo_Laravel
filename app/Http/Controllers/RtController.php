@@ -35,10 +35,9 @@ class RtController extends Controller
             ->where('master_kks.rt', $request->rt)
             ->where('master_kks.rw', $request->rw)
             ->where('master_akuns.role', 'RT')
-            ->orwhere('master_akuns.role', 'RW')
             ->first();
         if ($datacheck !== null) {
-            return Redirect('masterrw')->with('errorissetrt', '');
+            return redirect()->back()->with('errorrt','');
         } else {
             $rt = new RwaksesModal();
             $data = $rt->Rw()
@@ -133,6 +132,6 @@ public function updatemasterrt(Request $request, $id)
             'master_akuns.password' => $pass,
         ]);
 
-    return Redirect('masterrt/'.$request->rt)->with('success', '');
+    return Redirect('masterrt/'.$request->rt)->with('successedit', '');
 }
 }
