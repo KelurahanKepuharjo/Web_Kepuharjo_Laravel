@@ -14,10 +14,11 @@ class CreateMasterBeritasTable extends Migration
     public function up()
     {
         Schema::create('master_beritas', function (Blueprint $table) {
-            $table->smallIncrements('id');
+            $table->id();
             $table->text('judul')->nullable()->default('text');
             $table->text('sub_title')->nullable()->default('text');
             $table->text('deskripsi')->nullable()->default('text');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
