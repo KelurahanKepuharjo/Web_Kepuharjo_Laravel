@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -17,6 +17,7 @@ class AuthController extends Controller
         $username = $request->input('username');
         $password = $request->input('password');
 
+
         $users = DB::table('master_masyarakats')
             ->join('master_akuns', 'master_akuns.id_masyarakats', '=', 'master_masyarakats.id_masyarakats')
             ->get();
@@ -26,7 +27,7 @@ class AuthController extends Controller
 
         // $user = User::where('username', $username)->first();
 
-        if ($users->nik == $username && $users->password == $password) {
+        if ($users->nik == $username &&  $users->password == $password) {
             // Jika autentikasi berhasil, redirect ke halaman dashboard.
             return redirect()->intended('dashboard');
         }

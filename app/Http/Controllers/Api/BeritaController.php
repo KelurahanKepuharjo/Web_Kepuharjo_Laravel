@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-class WebBeritaController extends Controller
+use App\Models\MobileBeritaModel;
+use Illuminate\Http\Request;
+
+class BeritaController extends Controller
 {
     public function berita()
     {
         try {
-            $masterBerita = master_berita::all();
-
+            $masterBerita = MobileBeritaModel::all();
             return response()->json([
                 'message' => 'success',
-                'data' => $masterBerita,
+                'data' => $masterBerita
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'error',
                 'data' => [],
-                'error' => $e->getMessage(),
+                'error' => $e->getMessage()
             ], 500);
         }
     }

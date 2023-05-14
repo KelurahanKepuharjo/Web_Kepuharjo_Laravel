@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-class WebSuratController extends Controller
+use App\Models\MobileMasterSuratModel;
+use Illuminate\Http\Request;
+
+class SuratController extends Controller
 {
     public function surat()
     {
         try {
-            $masterSurat = master_surat::all();
-
+            $masterSurat = MobileMasterSuratModel::all();
             return response()->json([
                 'message' => 'success',
-                'data' => $masterSurat,
+                'data' => $masterSurat
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'error',
                 'data' => [],
-                'error' => $e->getMessage(),
+                'error' => $e->getMessage()
             ], 500);
         }
     }
