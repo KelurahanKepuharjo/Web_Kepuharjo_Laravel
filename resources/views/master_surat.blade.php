@@ -30,11 +30,7 @@
     @endif
     @if ($errors->any())
         <script>
-<<<<<<< HEAD
             toastr.error('Cek Kembali Data yang Anda Input', 'Data Gagal Ditambahkan')
-=======
-            toastr.error('Cek Kembali Data Yang Anda Input', 'Berita Gagal Ditambahkan')
->>>>>>> 9f6f1e7a10ff22ca034479b73df9c79f367600a7
         </script>
     @endif
     <div class="table_wrapper" style="overflow-x: scroll;">
@@ -81,20 +77,37 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ url('simpansurat') }}" method="post">
+                <form action="{{ url('simpansurat') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nomor-kartu"></label>
-                            <input type="number" name="id_surat" class="form-control" value="" placeholder="Id Surat"
-                                autocomplete="off">
+                            <input type="file" name="image"
+                                class="form-control  @error('image')is-invalid
+                                @enderror">
+                            @error('image')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="nomor-kartu"></label>
-                            <input type="text" name="nama_surat" class="form-control" value="" maxlength="50"
-                                required="" placeholder="Masukkan Nama Surat Contoh : Domisili" autocomplete="off">
+                            <input type="number" name="id_surat"
+                                class="form-control  @error('id_surat')is-invalid
+                                @enderror"
+                                value="" placeholder="Id Surat" autocomplete="off">
+                            @error('id_surat')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-
+                        <div class="form-group">
+                            <label for="nomor-kartu"></label>
+                            <input type="text" name="nama_surat"
+                                class="form-control @error('nama_surat')is-invalid
+                                @enderror"
+                                value="" placeholder="Jenis Surat" autocomplete="off">
+                            @error('nama_surat')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -120,18 +133,39 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ url('editsurat/' . $value->id_surat) }}" method="post">
+                    <form action="{{ url('editsurat/' . $value->id_surat) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
+                            <img src="{{ asset('images/' . $value->image) }}" alt="">
                             <div class="form-group">
-                                <label for="nomor-kartu"></label>
-                                <input type="number" name="id_surat" class="form-control" value="{{ $value->id_surat }}"
-                                    placeholder="Id Surat" autocomplete="off" readonly>
+                                <input type="file" name="image"
+                                    class="form-control  @error('image')is-invalid
+                                @enderror">
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="nomor-kartu"></label>
-                                <input type="text" name="nama_surat" class="form-control"
-                                    value="{{ $value->nama_surat }}" placeholder="Jenis Surat" autocomplete="off">
+                                <input type="number" name="id_surat"
+                                    class="form-control  @error('id_surat')is-invalid
+                                @enderror"
+                                    value="{{ old('id_surat', $value->id_surat) }}" placeholder="Id Surat"
+                                    autocomplete="off">
+                                @error('id_surat')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="nomor-kartu"></label>
+                                <input type="text" name="nama_surat"
+                                    class="form-control @error('nama_surat')is-invalid
+                                @enderror"
+                                    value="{{ old('nama_surat', $value->nama_surat) }}" placeholder="Jenis Surat"
+                                    autocomplete="off">
+                                @error('nama_surat')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="modal-footer">

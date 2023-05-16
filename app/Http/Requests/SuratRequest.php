@@ -26,6 +26,7 @@ class SuratRequest extends FormRequest
         return [
             'id_surat' => 'required|numeric',
             'nama_surat' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
@@ -35,6 +36,7 @@ class SuratRequest extends FormRequest
             'id_surat.required' => 'Nomor Surat harus diisi',
             'id_surat.numeric' => 'Nomor Surat harus berisi angka',
             'nama_surat.required' => 'Nama Surat Harus diisi',
+            'image.required' => 'Image Surat Harus diisi',
         ];
     }
 }

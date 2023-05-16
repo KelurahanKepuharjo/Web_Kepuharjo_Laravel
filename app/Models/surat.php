@@ -10,5 +10,5 @@ class surat extends Model
 
     protected $primaryKey = 'id_surat';
 
-    protected $fillable = ['id_surat', 'nama_surat'];
+    protected $fillable = ['id_surat', 'nama_surat','image'];
 }

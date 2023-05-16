@@ -16,9 +16,15 @@ class SuratController extends Controller
 
     public function store(SuratRequest $suratrequest)
     {
+        $imageName = time().'.'.$suratrequest->image->getClientOriginalExtension();
+        $suratrequest->image->move(public_path('images'), $imageName);
+        $validated['image'] = $imageName;
         $validated = $suratrequest->validated();
-        $surat = surat::create($validated);
-
+        $surat = surat::create([
+            'id_surat' => $validated['id_surat'],
+            'nama_surat' => $validated['nama_surat'],
+            'image' => $imageName,
+        ]);
         return Redirect('mastersurat')->with('success', '');
     }
 
@@ -33,9 +39,15 @@ class SuratController extends Controller
     public function update(SuratRequest $suratrequest, $id)
     {
         $data = surat::where('id_surat', $id)->first();
+        $imageName = time().'.'.$suratrequest->image->getClientOriginalExtension();
+        $suratrequest->image->move(public_path('images'), $imageName);
+        $validated['image'] = $imageName;
         $validated = $suratrequest->validated();
-        $data->update($validated);
-
+        $data->update([
+        'id_surat' => $validated['id_surat'],
+        'nama_surat' => $validated['nama_surat'],
+        'image' => $imageName,
+    ]);
         return Redirect('mastersurat')->with('successedit', '');
     }
 }
