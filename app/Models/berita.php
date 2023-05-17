@@ -8,5 +8,5 @@ class berita extends Model
 {
     protected $table = 'master_beritas';
 
-    protected $fillable = ['judul', 'sub_title', 'deskripsi'];
+    protected $fillable = ['judul', 'sub_title', 'deskripsi', 'image'];
 }

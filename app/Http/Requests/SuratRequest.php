@@ -36,7 +36,7 @@ class SuratRequest extends FormRequest
             'id_surat.required' => 'Nomor Surat harus diisi',
             'id_surat.numeric' => 'Nomor Surat harus berisi angka',
             'nama_surat.required' => 'Nama Surat Harus diisi',
-            'image.required' => 'Image Surat Harus diisi',
+            'image.required' => 'Gambar Surat Harus diisi',
         ];
     }
 }
