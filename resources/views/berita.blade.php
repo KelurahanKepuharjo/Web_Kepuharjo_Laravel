@@ -4,12 +4,12 @@
 <!-- partial -->
 @section('content')
 <div class="header-atas">
-    @php
+    {{-- @php
     $nama = session()->get('nama');
     $akses = session()->get('hak_akses');
     $rt = session()->get('rt');
     $rw = session()->get('rw');
-    @endphp
+    @endphp --}}
     <h4 class="font-weight-bold text-dark">Berita</h4>
     <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button>
 </div>

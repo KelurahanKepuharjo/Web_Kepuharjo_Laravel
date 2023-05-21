@@ -17,7 +17,7 @@ class CreatePengajuanSuratsTable extends Migration
             $table->uuid('id')->nullable();
             $table->string('status', 20)->nullable()->default('text');
             $table->text('keterangan')->nullable()->default('text');
-            $table->dateTime('created_at', $precision = 0);
+            $table->timestamps();
             $table->string('file_pdf')->nullable()->default('');
             $table->string('image_kk')->nullable()->default('');
             $table->string('image_bukti')->nullable()->default('');

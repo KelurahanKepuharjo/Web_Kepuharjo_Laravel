@@ -28,7 +28,7 @@ $rw = session()->get('rw');
             <td>{{ $value->nik }}</td>
             <td>{{ $value->nama_lengkap }}</td>
             <td>{{ $value->nama_surat }}</td>
-            <td>{{ $value->created_at->format('d-m-Y') }} Pukul {{ $value->created_at->format('H:i') }}</td>
+            <td>{{ $value->created_at}} Pukul {{ $value->created_at }}</td>
             <td>{{ $value->status }}</td>
             <td>
                 <a class="btn btn-secondary" style="background: #00AAAA; color: white;" data-toggle="modal"
@@ -104,8 +104,8 @@ $rw = session()->get('rw');
                 </div>
                 <div class="form-group">
                     <label>Tanggal Pengajuan</label>
-                    <input type="text" name="tglpengajuan" class="form-control"
-                        value="{{ $value->created_at->format('d-m-Y ') }}" maxlength="50" required="">
+                    <input type="text" name="tglpengajuan" class="form-control" value="{{ $value->created_at }}"
+                        maxlength="50" required="">
                     <span class="text-danger">
                 </div>
                 <div class="form-group">
@@ -117,8 +117,8 @@ $rw = session()->get('rw');
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-secondary"
-                    style="background-color: rgb(0, 189, 0); color: white;">Unduh Surat</button>
+                <a type="button" class="btn btn-secondary" href="{{ url('generate-pdf/' . $value->id) }}"
+                    style="background-color: rgb(0, 189, 0); color: white;">Unduh Surat</a>
             </div>
         </div>
     </div>

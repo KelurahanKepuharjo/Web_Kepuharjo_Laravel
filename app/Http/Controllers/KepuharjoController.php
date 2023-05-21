@@ -21,10 +21,10 @@ class KepuharjoController extends Controller
     {
         if (session('hak_akses') == 'admin') {
             $suratmasuk = DB::table('pengajuan_surats')
-                ->where('pengajuan_surats.status', '=', 'Selesai')
+                ->where('pengajuan_surats.status', '=', 'Disetujui RW')
                 ->count();
             $suratselesai = DB::table('pengajuan_surats')
-                ->where('pengajuan_surats.status', '=', 'Disetujui RW')
+                ->where('pengajuan_surats.status', '=', 'Selesai')
                 ->count();
             $suratditolak = '';
 
