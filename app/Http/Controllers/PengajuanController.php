@@ -37,6 +37,42 @@ class PengajuanController extends Controller
         return view('surat_masuk', compact('data'));
     }
 
+    public function update_statustolak(Request $request, $id, $akses)
+    {
+        if ($akses == 'RT') {
+            $status = 'Ditolak RT';
+        } elseif ($akses == 'RW') {
+            $status = 'Ditolak RW';
+        }
+        $updatestatus = new UpdateStatusModel();
+        $data = $updatestatus->UpdateStatus()
+            ->where('pengajuan_surats.id', $id)
+            ->first();
+        $data->update([
+            'pengajuan_surats.status' => $status,
+        ]);
+
+        return redirect('/suratmasuk')->with('successedit', '');
+    }
+
+    // public function update_status(Request $request, $id, $akses)
+    // {
+    //     if ($akses == 'RT') {
+    //         $status = 'Disetujui RT';
+    //     } elseif ($akses == 'RW') {
+    //         $status = 'Disetujui RW';
+    //     }
+    //     $updatestatus = new UpdateStatusModel();
+    //     $data = $updatestatus->UpdateStatus()
+    //         ->where('pengajuan_surats.id', $id)
+    //         ->first();
+    //     $data->update([
+    //         'pengajuan_surats.status' => $status,
+    //     ]);
+
+    //     return redirect('/suratmasuk')->with('successedit', '');
+    // }
+
     public function update_status(Request $request, $id, $akses){
         if($akses=='RT'){
             $status = 'Disetujui RT';
@@ -46,12 +82,14 @@ class PengajuanController extends Controller
             $status = 'Selesai';
         }
         $updatestatus = new UpdateStatusModel();
-        $data = $updatestatus->UpdateStatus()
-        ->where('master_masyarakats.nik', $id)
-        ->first();
-        $data->update([
-            'pengajuan_surats.status' => $status,
-        ]);
+            $data = $updatestatus->UpdateStatus()
+                ->where('pengajuan_surats.id', $id)
+                ->first();
+            $data->update([
+                'pengajuan_surats.status' => $status,
+            ]);
+
+            return redirect('/suratmasuk')->with('successedit', '');
     }
 
     public function surat_ditolak()
@@ -86,6 +124,7 @@ class PengajuanController extends Controller
                 ->where('pengajuan_surats.status', '=', 'Selesai')
                 ->get();
 
+                // dd($data);
         } elseif (session('hak_akses') == 'RT') {
             $RT = session('rt');
             $RW = session('rw');

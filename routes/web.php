@@ -12,6 +12,7 @@ use App\Http\Controllers\KartukkController;
 use App\Http\Controllers\KepuharjoController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\MasyarakatController;
+use App\Http\Controllers\StatusPdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(PengajuanController::class)->group(function () {
         Route::get('/suratmasuk', 'surat_masuk')->name('suratmasuk');
         Route::get('updatestatus/{id}/{akses}', 'update_status');
+        Route::get('updatestatustolak/{id}/{akses}', 'update_statustolak');
         Route::get('/suratditolak', 'surat_ditolak')->name('suratditolak');
         Route::get('/suratselesai', 'surat_selesai')->name('suratselesai');
     });
@@ -121,4 +123,5 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get('generate-pdf/{id}', [PdfController::class, 'generatePDF']);
+    Route::get('pdfstatus/{id}', [StatusPdfController::class, 'generatePDF']);
 });

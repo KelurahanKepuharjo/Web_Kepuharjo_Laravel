@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\PdfModel;
+use App\Models\UpdateStatusModel;
 use FPDF;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,10 @@ class PdfController extends Controller
             ->where('pengajuan_surats.id', '=', $id)
             // ->where('nik', '=', $request->nik)
             ->get();
+        $data->update([
+            'pengajuan_surats.status' => "Selesai",
+            'pengajuan_surats.file_pdf' => $data->nama_lengkap.'_'.$data->nik.'_'.'_'.$id.'.pdf'
+        ]);
 
             // dd($data);
         foreach ($data as $user) {
@@ -88,9 +93,23 @@ class PdfController extends Controller
 
                     ",
                 0, 'L', false, 20);
+
                 $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.'_'.$id.'.pdf', 'I');
                 exit;
         }
+
+
+
+            // $updatestatus = new UpdateStatusModel();
+            // $dataupdate = $updatestatus->UpdateStatus()
+            //     ->where('pengajuan_surats.id', $id)
+            //     ->first();
+            // $dataupdate->update([
+            //     'pengajuan_surats.status' => "Selesai",
+            //     'pengajuan_surats.file_pdf' => $data->nama_lengkap.'_'.$data->nik.'_'.'_'.$id.'.pdf'
+            // ]);
+
+            // return redirect('/suratmasuk')->with('successedit', '');
 
 
         // $pdf->Output('I', 'example.pdf');

@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class UpdateStatusModel extends Model
 {
-    protected $table = 'master_masyarakats';
+    protected $table = 'pengajuan_surats';
 
     public function UpdateStatus()
     {
-        return $this->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
-            ->join('pengajuan_surats', 'pengajuan_surats.id', 'master_akuns.id')
-            ->select('master_masyarakats.*', 'master_akuns.*', 'pengajuan_surats.id_pengajuan');
+        return $this->join('master_masyarakats', 'pengajuan_surats.id_masyarakat', 'master_masyarakats.id_masyarakat')
+            ->select('master_masyarakats.*', 'pengajuan_surats.id');
     }
+
+    protected $fillable = ['pengajuan_surats.status'];
 }
