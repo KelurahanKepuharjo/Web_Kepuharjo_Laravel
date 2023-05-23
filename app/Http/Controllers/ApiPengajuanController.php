@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\MobileMasterKksModel;
 use App\Models\MobileMasterMasyarakatModel;
 use App\Models\MobilePengajuanSuratModel;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class PengajuanController extends Controller
+class ApiPengajuanController extends Controller
 {
     public function pengajuan(Request $request)
     {
@@ -184,7 +184,7 @@ class PengajuanController extends Controller
                 $query->where('pengajuan_surats.id_masyarakat', $id_masyarakat)
                     ->orWhere('master_kks.no_kk', '=', $no_kk);
             })
-            ->where('pengajuan_surats.status',  $status)
+            ->where('pengajuan_surats.status', $status)
             ->select('pengajuan_surats.*', 'master_masyarakats.*', 'master_surats.*')
             ->get();
 

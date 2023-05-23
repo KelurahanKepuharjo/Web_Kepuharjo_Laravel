@@ -41,10 +41,10 @@ Route::controller(KepuharjoController::class)->group(function () {
     // Route::post('login/auth', 'store');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware('auth.auth')->group(function () {
 
     Route::controller(KepuharjoController::class)->group(function () {
-        Route::get('/dashboard', 'dashboard')->name('dashboard')->middleware('auth');
+        Route::get('/dashboard', 'dashboard')->name('dashboard')->middleware('auth.auth');
         Route::get('/tentang', 'tentang')->name('tentang');
         Route::post('image-upload', 'updateprofil');
         Route::get('/logout', 'logout')->name('logout');

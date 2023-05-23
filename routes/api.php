@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\BeritaController;
 use App\Http\Controllers\Api\PengajuanController;
 use App\Http\Controllers\Api\SuratController;
+use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\ApiBeritaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('auth/register', [AuthController::class, 'register']);
-Route::post('auth/login', [AuthController::class, 'login']);
-Route::get('berita', [BeritaController::class, 'berita']);
+Route::post('auth/register', [ApiAuthController::class, 'register']);
+Route::post('auth/login', [ApiAuthController::class, 'login']);
+Route::get('berita', [ApiBeritaController::class, 'berita']);
 Route::get('surat', [SuratController::class, 'surat']);
 Route::post('rekap', [PengajuanController::class, 'rekap']);
 Route::post('statussurat', [PengajuanController::class, 'statussurat']);
@@ -28,12 +29,12 @@ Route::post('pengajuan', [PengajuanController::class, 'pengajuan']);
 Route::post('pembatalan', [PengajuanController::class, 'pembatalan']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('auth/me', [AuthController::class, 'me']);
-    Route::post('auth/logout', [AuthController::class, 'logout']);
-    Route::get('keluarga', [AuthController::class, 'keluarga']);
+    Route::get('auth/me', [ApiAuthController::class, 'me']);
+    Route::post('auth/logout', [ApiAuthController::class, 'logout']);
+    Route::get('keluarga', [ApiAuthController::class, 'keluarga']);
     Route::post('statusdiajukan', [PengajuanController::class, 'statusdiajukan']);
     Route::get('statusproses', [PengajuanController::class, 'statusproses']);
     Route::get('statusselesai', [PengajuanController::class, 'statusselesai']);
-    Route::post('editnohp', [AuthController::class, 'editnohp']);
+    Route::post('editnohp', [ApiAuthController::class, 'editnohp']);
     Route::post('suratmasuk', [PengajuanController::class, 'suratmasuk']);
 });

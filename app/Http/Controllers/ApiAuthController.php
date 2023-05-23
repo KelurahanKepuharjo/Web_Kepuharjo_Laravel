@@ -1,19 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Api\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\MobileMasterAkunModel;
 use App\Models\MobileMasterKksModel;
-use App\Models\MobileMasterBeritaModel;
 use App\Models\MobileMasterMasyarakatModel;
-use Illuminate\Support\Facades\Validator;
-use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
-class AuthController extends Controller
+class ApiAuthController extends Controller
 {
     public function register(Request $request)
     {
@@ -81,9 +78,9 @@ class AuthController extends Controller
 
         return response()->json($response, 200);
     }
-    public function me()
+    public function me(Request $request)
     {
-        $user = Auth::user();
+        $user = $request->user();
 
         $response = [
             'message' => 'success',
@@ -94,7 +91,7 @@ class AuthController extends Controller
     }
     public function logout()
     {
-        $logout = auth()->user()->currentAccessToken()->delete();
+        $logout = request()->user()->currentAccessToken()->delete();
         $response = [
             'message' => 'success',
         ];

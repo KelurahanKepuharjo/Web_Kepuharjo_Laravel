@@ -15,11 +15,11 @@ class MobilePengajuanSuratModel extends Model
 
     public function akun()
     {
-        return $this->belongsTo(master_masyarakat::class, 'id_masyarakat', 'id_masyarakat');
+        return $this->belongsTo(MobileMasterMasyarakatModel::class, 'id_masyarakat', 'id_masyarakat');
     }
 
     public function surat()
     {
-        return $this->belongsTo(master_surat::class, 'id_surat', 'id_surat');
+        return $this->belongsTo(MobileMasterSuratModel::class, 'id_surat', 'id_surat');
     }
 }

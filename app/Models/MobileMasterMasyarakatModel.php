@@ -51,15 +51,15 @@ class MobileMasterMasyarakatModel extends Model
     }
     public function akun()
     {
-        return $this->hasOne(master_akun::class, 'id_masyarakat', 'id_masyarakat');
+        return $this->hasOne(MobileMasterAkunModel::class, 'id_masyarakat', 'id_masyarakat');
     }
 
     public function kks()
     {
-        return $this->hasOne(master_kks::class, 'id', 'id');
+        return $this->hasOne(MobileMasterKksModel::class, 'id', 'id');
     }
     public function pengajuan_surats()
     {
-        return $this->hasMany(pengajuan_surat::class, 'id_masyarakat', 'id_masyarakat');
+        return $this->hasMany(MobilePengajuanSuratModel::class, 'id_masyarakat', 'id_masyarakat');
     }
 }

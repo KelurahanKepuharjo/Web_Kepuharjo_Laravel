@@ -37,6 +37,6 @@ class MobileMasterKksModel extends Model
     }
     public function masyarakat()
     {
-        return $this->hasMany(master_masyarakat::class, 'id', 'id');
+        return $this->hasMany(MobileMasterMasyarakatModel::class, 'id', 'id');
     }
 }

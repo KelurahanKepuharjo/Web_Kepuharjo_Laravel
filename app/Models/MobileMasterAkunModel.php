@@ -46,6 +46,6 @@ class MobileMasterAkunModel extends Model
     }
     public function masyarakat()
     {
-        return $this->belongsTo(master_masyarakat::class, 'id_masyarakat', 'id_masyarakat');
+        return $this->belongsTo(MobileMasterMasyarakatModel::class, 'id_masyarakat', 'id_masyarakat');
     }
 }
