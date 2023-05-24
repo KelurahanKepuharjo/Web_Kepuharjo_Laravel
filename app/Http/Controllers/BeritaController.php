@@ -33,6 +33,7 @@ class BeritaController extends Controller
 
     public function update(BeritaRequest $beritaRequest, $id)
     {
+        // dd($beritaRequest);
         $berita = MobileBeritaModel::where('id', $id)->first();
         $imageName = time().'.'.$beritaRequest->image->getClientOriginalExtension();
         $beritaRequest->image->move(public_path('images'), $imageName);

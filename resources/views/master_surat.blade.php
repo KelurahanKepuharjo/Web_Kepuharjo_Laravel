@@ -40,7 +40,7 @@
                             <h6>Jenis Surat</h6>
                         </th>
                         <th>
-                            <h6>Image</h6>
+                            <h6>Ikon Surat</h6>
                         </th>
                         <th>
                             <h6>Aksi</h6>
@@ -86,14 +86,7 @@
                 <form action="{{ url('simpansurat') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <div class="form-group">
-                            <input type="file" name="image"
-                                class="form-control  @error('image')is-invalid
-                                @enderror">
-                            @error('image')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        <label for="">Id Surat</label>
                         <div class="form-group">
                             <label for="nomor-kartu"></label>
                             <input type="number" name="id_surat"
@@ -104,6 +97,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <label for="">Nama Surat</label>
                         <div class="form-group">
                             <label for="nomor-kartu"></label>
                             <input type="text" name="nama_surat"
@@ -111,6 +105,15 @@
                                 @enderror"
                                 value="" placeholder="Jenis Surat" autocomplete="off">
                             @error('nama_surat')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <label for="">Ikon Surat</label>
+                        <div class="form-group">
+                            <input type="file" name="image"
+                                class="form-control  @error('image')is-invalid
+                                @enderror">
+                            @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -140,7 +143,10 @@
                     <form action="{{ url('editsurat/' . $value->id_surat) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <img src="{{ asset('images/' . $value->image) }}" alt="">
+                            <label for="">Ikon Surat</label>
+                            <div class="form-group">
+                                <img width="100%;" height="100%;" src="{{ asset('images/' . $value->image) }}" alt="">
+                            </div>
                             <div class="form-group">
                                 <input type="file" name="image"
                                     class="form-control  @error('image')is-invalid
@@ -149,6 +155,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <label for="">Id Surat</label>
                             <div class="form-group">
                                 <label for="nomor-kartu"></label>
                                 <input type="number" name="id_surat"
@@ -160,6 +167,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <label for="">Nama Surat</label>
                             <div class="form-group">
                                 <label for="nomor-kartu"></label>
                                 <input type="text" name="nama_surat"
