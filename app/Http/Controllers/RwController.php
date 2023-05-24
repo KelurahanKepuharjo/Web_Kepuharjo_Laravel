@@ -24,7 +24,7 @@ class RwController extends Controller
     {
 
         $nik = $request->nik;
-        $results = MobileMasterMasyarakatModel::where('master_masyarakats.nik', 'like', '%'.$nik.'%')->get();
+        $results = MobileMasterMasyarakatModel::with('masyarakat')->where('master_masyarakats.nik', 'like', '%'.$nik.'%')->get();
         $c = count($results);
         if ($c == 0) {
             return '<p class="text-muted">Maaf, Data tidak ditemukan</p>';
@@ -42,7 +42,7 @@ class RwController extends Controller
 
     public function simpanmasterrw(Request $request, $id)
     {
-        $datacheck = MobileMasterAkunModel::with('user')
+        $datacheck = MobileMasterAkunModel::with('masyarakat')
             ->where('master_kks.rw', $request->rw)
             ->where('master_akuns.role', 'RW')
             ->first();
@@ -132,5 +132,3 @@ class RwController extends Controller
     // }
 
 }
-
-

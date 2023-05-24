@@ -7,7 +7,7 @@
             <div class="container mt-5">
                 <div class="row">
                     <div class="col-md-6">
-                        <h2>About Us</h2>
+                        <h2>Tentang</h2>
                         <p> S-kepuharjo merupakan aplikasi berbasis website dan mobile kepuharjo ini dapat
                             digunakan oleh pihak masyarakat,
                             RT, dan RW serta website khusus untuk

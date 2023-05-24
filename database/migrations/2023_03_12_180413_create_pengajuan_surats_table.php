@@ -15,6 +15,7 @@ class CreatePengajuanSuratsTable extends Migration
     {
         Schema::create('pengajuan_surats', function (Blueprint $table) {
             $table->uuid('id')->nullable();
+            $table->String('nomor_surat')->nullable()->default('');
             $table->string('status', 20)->nullable()->default('text');
             $table->text('keterangan')->nullable()->default('text');
             $table->timestamps();

@@ -128,12 +128,12 @@
                                 <span class="menu-title">Surat Selesai</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="../suratditolak">
                                 <i class="icon-archive menu-icon"></i>
                                 <span class="menu-title">Surat Ditolak</span>
                             </a>
-                        </li>
+                        </li> --}}
                     @endif
 
                     @if ($akses == 'admin')

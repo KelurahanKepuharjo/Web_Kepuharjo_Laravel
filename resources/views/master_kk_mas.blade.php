@@ -24,7 +24,7 @@
     <div class="card" style="border-radius: 2px;">
         <div class="card-body">
             <div class="header-atas">
-                <h5 class="font-weight-bold text-dark">Halaman Berita</h5>
+                <h5 class="font-weight-bold text-dark">Anggota Keluarga KK</h5>
                 <button data-toggle="modal" name='tambah' data-target="#modal-tambahmas">Tambah
                     data</button>
             </div>
