@@ -8,44 +8,45 @@
         $rt = session()->get('rt');
         $rw = session()->get('rw');
     @endphp
-    <h4 class="font-weight-bold text-dark">Surat Selesai</h4>
-    <table id="myTable" class="table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>NIK</th>
-                <th>Nama</th>
-                <th>Jenis Surat</th>
-                <th>Waktu Pengajuan</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($data as $no => $value)
-                <tr>
-                    <td>{{ $no + 1 }}</td>
-                    <td>{{ $value->nik }}</td>
-                    <td>{{ $value->nama_lengkap }}</td>
-                    <td>{{ $value->nama_surat }}</td>
-                    <td>{{ $value->created_at }} Pukul {{ $value->created_at }}</td>
-                    <td>{{ $value->status }}</td>
-                    <td>
-                        <a class="btn btn-secondary" style="background: #00AAAA; color: white;" data-toggle="modal"
-                            data-target="#exampleModal{{ $value->nik }}" style="color: white;" href="#">Detail
-                            Surat</a>
-                    </td>
-                </tr>
-            @endforeach
+    <div class="card" style="border-radius: 2px;">
+        <div class="card-body">
+            <div class="header-atas">
+                <h5 class="font-weight-bold text-dark">Surat Selesai</h5>
+            </div>
+            <table id="myTable" class="table table-bordered">
+                <thead style="background-color: grey; color: white;">
+                    <tr>
+                        <th>No</th>
+                        <th>NIK</th>
+                        <th>Nama</th>
+                        <th>Jenis Surat</th>
+                        <th>Waktu Pengajuan</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($data as $no => $value)
+                        <tr>
+                            <td>{{ $no + 1 }}</td>
+                            <td>{{ $value->pengajuan->nik }}</td>
+                            <td>{{ $value->pengajuan->nama_lengkap }}</td>
+                            <td>{{ $value->pengajuan->nama_surat }}</td>
+                            <td>{{ $value->created_at }} Pukul {{ $value->created_at }}</td>
+                            <td>{{ $value->status }}</td>
+                            <td>
+                                <a class="btn btn-secondary" style="background: #00AAAA; color: white;" data-toggle="modal"
+                                    data-target="#exampleModal{{ $value->nik }}" style="color: white;"
+                                    href="#">Detail
+                                    Surat</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-
-        </tbody>
-        <tfoot>
-    </table>
-
-
-
-    <!-- Modal -->
     @foreach ($data as $no => $value)
         <div class="modal fade" id="exampleModal{{ $value->nik }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -110,8 +111,8 @@
                         </div>
                         <div class="form-group">
                             <label>Keperluan Surat</label>
-                            <input type="text" name="keperluan" class="form-control" value="{{ $value->keterangan }}"
-                                maxlength="50" required="">
+                            <input type="text" name="keperluan" class="form-control"
+                                value="{{ $value->keterangan }}" maxlength="50" required="">
                             <span class="text-danger">
                         </div>
                     </div>

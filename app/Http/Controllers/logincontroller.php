@@ -22,7 +22,6 @@ class LoginController extends Controller
         // Validasi input
         // dd($request->session()->get('_token'));
 
-
         // Memeriksa apakah user adalah admin
         if ($request->username == 'admin' && $request->password == 'admin') {
             $session = [
@@ -64,7 +63,7 @@ class LoginController extends Controller
         } elseif ($request->password != null) {
             Hash::check($request->password, $user->password);
             $session = [
-                'nik' =>$user->nik,
+                'nik' => $user->nik,
                 'nama' => $user->nama_lengkap,
                 'hak_akses' => $user->role,
                 'rt' => $user->rt,

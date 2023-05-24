@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MasyarakatRequest;
-use App\Models\master_masyarakat;
+use App\Models\MobileMasterMasyarakatModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -12,9 +12,8 @@ class MasyarakatController extends Controller
 {
     public function master_kk_mas(Request $request, $id)
     {
-        $data = DB::table('master_masyarakats')
-            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-            ->where('master_kks.id', '=', $id)
+        $data = MobileMasterMasyarakatModel::with('masyarakat')
+            ->where('id', '=', $id)
             ->get();
 
         return view('master_kk_mas', ['nomor_kk' => $id], compact('data'));
@@ -58,7 +57,7 @@ class MasyarakatController extends Controller
             'nama_ibu.required' => 'Nama Ibu Tidak Boleh Kosong',
         ]);
         try {
-            $data = new master_masyarakat();
+            $data = new MobileMasterMasyarakatModel();
             $uuid = Str::uuid()->toString();
             $data->id_masyarakat = $uuid;
             $data->id = $request->nokk;
@@ -87,11 +86,10 @@ class MasyarakatController extends Controller
         }
 
         try {
-            $data = DB::table('master_masyarakats')
-                ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+            $data = MobileMasterMasyarakatModel::with('masyarakat')
                 ->orderBy('created_at', 'desc')
                 ->limit(1)
-                ->select('master_kks.id')
+                ->select('id')
                 ->first();
         } catch (\Throwable $th) {
             throw $th;
@@ -125,10 +123,9 @@ class MasyarakatController extends Controller
         }
 
         try {
-            $data = DB::table('master_masyarakats')
-                ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+            $data = MobileMasterMasyarakatModel::with('masyarakat')
                 ->where('nik', '=', $request->nik)
-                ->select('master_kks.id')
+                ->select('id')
                 ->first();
 
             return Redirect('masterkkmas/'.$data->id)->with('successedit', '');
@@ -140,10 +137,10 @@ class MasyarakatController extends Controller
     public function hapusmasteruser(Request $request, $id)
     {
         try {
-            $data = master_masyarakat::where('nik', $id);
+            $data = MobileMasterMasyarakatModel::where('nik', $id);
             $data->delete();
 
-            return Redirect('masterkkmas/'.$request->nokk);
+            return Redirect('masterkkmas/'.$request->id);
         } catch (\Throwable $th) {
             throw $th;
         }

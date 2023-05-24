@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
@@ -10,9 +9,11 @@ use Laravel\Sanctum\HasApiTokens;
 class MobileMasterAkunModel extends Model
 {
     use HasApiTokens;
+
     protected $table = 'master_akuns';
+
     protected $fillable = [
-        'id', 'password', 'no_hp', 'role', 'id_masyarakat'
+        'id', 'password', 'no_hp', 'role', 'id_masyarakat',
     ];
 
     protected static function boot()
@@ -44,6 +45,13 @@ class MobileMasterAkunModel extends Model
     {
         return 'string';
     }
+
+    public function user()
+    {
+        return $this->hasOne(MobileMasterMasyarakatModel::class, 'id_masyarakat', 'id_masyarakat')
+                    ->join('master_kks','master_kks.id','=','master_masyarakats.id');
+    }
+
     public function masyarakat()
     {
         return $this->belongsTo(MobileMasterMasyarakatModel::class, 'id_masyarakat', 'id_masyarakat');

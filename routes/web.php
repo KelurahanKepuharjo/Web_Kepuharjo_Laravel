@@ -1,18 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RtController;
-use App\Http\Controllers\RwController;
-use App\Http\Controllers\PdfController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\SuratController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KartukkController;
 use App\Http\Controllers\KepuharjoController;
-use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasyarakatController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\RtController;
+use App\Http\Controllers\RwController;
 use App\Http\Controllers\StatusPdfController;
+use App\Http\Controllers\SuratController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------

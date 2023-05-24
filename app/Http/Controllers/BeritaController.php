@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BeritaRequest;
-use App\Models\berita;
+use App\Models\MobileBeritaModel;
 use Illuminate\Http\Request;
 
 class BeritaController extends Controller
 {
     public function index()
     {
-        $data = berita::all();
+        $data = MobileBeritaModel::all();
 
         return view('berita', compact('data'));
     }
@@ -21,11 +21,11 @@ class BeritaController extends Controller
         $beritaRequest->image->move(public_path('images'), $imageName);
         $validated['image'] = $imageName;
         $validated = $beritaRequest->validated();
-        $Berita = berita::create([
+        $Berita = MobileBeritaModel::create([
             'judul' => $validated['judul'],
             'sub_title' => $validated['sub_title'],
             'deskripsi' => $validated['deskripsi'],
-            'image' => $imageName
+            'image' => $imageName,
         ]);
 
         return Redirect('berita')->with('success', '');
@@ -33,23 +33,24 @@ class BeritaController extends Controller
 
     public function update(BeritaRequest $beritaRequest, $id)
     {
-        $berita = Berita::where('id', $id)->first();
+        $berita = MobileBeritaModel::where('id', $id)->first();
         $imageName = time().'.'.$beritaRequest->image->getClientOriginalExtension();
         $beritaRequest->image->move(public_path('images'), $imageName);
         $validated['image'] = $imageName;
         $validated = $beritaRequest->validated();
-        $Berita->update([
+        $berita->update([
             'judul' => $validated['judul'],
             'sub_title' => $validated['sub_title'],
             'deskripsi' => $validated['deskripsi'],
-            'image' => $imageName
+            'image' => $imageName,
         ]);
+
         return back()->with('successedit', '');
     }
 
     public function delete(Request $request, $id)
     {
-        $data = berita::where('id', $id);
+        $data = MobileBeritaModel::where('id', $id);
         $data->delete();
 
         return Redirect('berita')->with('successhapus', '');

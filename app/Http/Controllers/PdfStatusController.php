@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\PdfModel;
 use App\Models\UpdateStatusModel;
 use FPDF;
 use Illuminate\Http\Request;
 
 class PdfController extends Controller
-{   public function generatePDF(Request $request, $id)
+{
+    public function generatePDF(Request $request, $id)
     {
         $pdf = new FPDF();
         $pdf->AddPage();
@@ -18,11 +20,11 @@ class PdfController extends Controller
             // ->where('nik', '=', $request->nik)
             ->get();
         $data->update([
-            'pengajuan_surats.status' => "Selesai",
-            'pengajuan_surats.file_pdf' => $data->nama_lengkap.'_'.$data->nik.'_'.'_'.$id.'.pdf'
+            'pengajuan_surats.status' => 'Selesai',
+            'pengajuan_surats.file_pdf' => $data->nama_lengkap.'_'.$data->nik.'_'.'_'.$id.'.pdf',
         ]);
 
-            // dd($data);
+        // dd($data);
         foreach ($data as $user) {
             $pdf->Image('image/logohp.png', 18, 27, 43, 0, 'PNG');
             // $pdf->SetFont('Arial','B',12);
@@ -94,23 +96,20 @@ class PdfController extends Controller
                     ",
                 0, 'L', false, 20);
 
-                $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.'_'.$id.'.pdf', 'I');
-                exit;
+            $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.'_'.$id.'.pdf', 'I');
+            exit;
         }
 
+        // $updatestatus = new UpdateStatusModel();
+        // $dataupdate = $updatestatus->UpdateStatus()
+        //     ->where('pengajuan_surats.id', $id)
+        //     ->first();
+        // $dataupdate->update([
+        //     'pengajuan_surats.status' => "Selesai",
+        //     'pengajuan_surats.file_pdf' => $data->nama_lengkap.'_'.$data->nik.'_'.'_'.$id.'.pdf'
+        // ]);
 
-
-            // $updatestatus = new UpdateStatusModel();
-            // $dataupdate = $updatestatus->UpdateStatus()
-            //     ->where('pengajuan_surats.id', $id)
-            //     ->first();
-            // $dataupdate->update([
-            //     'pengajuan_surats.status' => "Selesai",
-            //     'pengajuan_surats.file_pdf' => $data->nama_lengkap.'_'.$data->nik.'_'.'_'.$id.'.pdf'
-            // ]);
-
-            // return redirect('/suratmasuk')->with('successedit', '');
-
+        // return redirect('/suratmasuk')->with('successedit', '');
 
         // $pdf->Output('I', 'example.pdf');
         // $pdf->Output();

@@ -5,35 +5,31 @@
 @section('content')
 
     {{-- Page 2 Halaman master Masyarakat --}}
-    <div id="myDiv1">
-        <div class="header-atas">
-            @php
-                $nama = session()->get('nama');
-                $akses = session()->get('hak_akses');
-                $rt = session()->get('rt');
-                $rw = session()->get('rw');
-            @endphp
-            <h4 class="font-weight-bold text-dark">Anggota Kartu Keluarga </h4>
-            <button data-toggle="modal" data-target="#modal-tambahmas">Tambah data</button>
-        </div>
-        @if (session::has('success'))
-            <script>
-                toastr.success('Data Berhasil Ditambahkan', '')
-            </script>
-        @endif
-        @if (session::has('successedit'))
-            <script>
-                toastr.success('Data Berhasil Diperbarui', '')
-            </script>
-        @endif
-        @if ($errors->any())
-            <script>
-                toastr.error('Cek Kembali Data yang Anda Masukkan', 'Data Gagal Ditambahkan')
-            </script>
-        @endif
-        <div class="table_wrapper" style="overflow-x: scroll;">
-            <table id="myTable" class="table table-striped" style="width:100%">
-                <thead>
+
+    @if (session::has('success'))
+        <script>
+            toastr.success('Data Berhasil Ditambahkan', '')
+        </script>
+    @endif
+    @if (session::has('successedit'))
+        <script>
+            toastr.success('Data Berhasil Diperbarui', '')
+        </script>
+    @endif
+    @if ($errors->any())
+        <script>
+            toastr.error('Cek Kembali Data yang Anda Masukkan', 'Data Gagal Ditambahkan')
+        </script>
+    @endif
+    <div class="card" style="border-radius: 2px;">
+        <div class="card-body">
+            <div class="header-atas">
+                <h5 class="font-weight-bold text-dark">Halaman Berita</h5>
+                <button data-toggle="modal" name='tambah' data-target="#modal-tambahmas">Tambah
+                    data</button>
+            </div>
+            <table id="myTable" class="table table-bordered">
+                <thead style="background-color: grey; color: white;">
                     <tr>
                         <th>No</th>
                         <th>No KK</th>
@@ -49,18 +45,24 @@
                         @foreach ($data as $no => $value)
                             <tr>
                                 <td>{{ $no + 1 }}</td>
-                                <td>{{ $value->no_kk }}</td>
+                                <td>{{ $value->masyarakat->no_kk }}</td>
                                 <td>{{ $value->nik }}</td>
                                 <td>{{ $value->nama_lengkap }}</td>
                                 <td>{{ $value->status_keluarga }}</td>
                                 <td>{{ $value->tempat_lahir }}, {{ $value->tgl_lahir }}</td>
                                 <td>
-                                    <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
-                                        data-toggle="modal" data-target="#modal-edit{{ $value->nik }}">
-                                    </a>
-                                    <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
-                                        data-target="#modal-hapus{{ $value->nik }}" style="margin-left: 10px; "
-                                        href="{{ url('masteruser') }}"></a>
+                                    <div class="row">
+                                        <div class="btn-group">
+                                            <a class="btn btn-warning  btn-sm btn-sm fa fa-pencil" style="color:white;"
+                                                href="" data-toggle="modal"
+                                                data-target="#modal-edit{{ $value->nik }}">
+                                            </a>
+                                            <a class="btn btn-danger  btn-sm btn-sm icon-trash" name='Hapus'
+                                                href="#" data-toggle="modal"
+                                                data-target="#modal-hapus{{ $value->nik }}"
+                                                href="{{ url('masteruser') }}"></a>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -724,20 +726,22 @@
             aria-labelledby="exampleModalLabel" aria-hidden="true" autocomplete="off">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Hapus Data Anggota Kartu Keluarga</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <label for="">Yakin untuk Menghapus Data {{ $value->nama_lengkap }} ?</label>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <a type="button" onclick="showNotification()"
-                            href="{{ url($value->nik . '/hapus-masteruser') }}" class="btn btn-danger">Hapus</a>
-                    </div>
+                    <form action="{{ url($value->nik . '/hapus-masteruser') }}" method="get">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Hapus Data Anggota Kartu Keluarga</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" value="{{ $value->masyarakat->id }}" name="id">
+                            <label for="">Yakin untuk Menghapus Data {{ $value->nama_lengkap }} ?</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

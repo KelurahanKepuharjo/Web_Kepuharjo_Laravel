@@ -37,22 +37,6 @@ class KartukkeditRequest extends FormRequest
         ];
     }
 
-    public function attributes()
-    {
-        return [
-            'nokkedit' => 'no_kk',
-            'alamatkkedit' => 'alamat',
-            'rtedit' => 'rt',
-            'rwedit' => 'rw',
-            'kdposedit' => 'kode_pos',
-            'keledit' => 'kelurahan',
-            'kecedit' => 'kecamatan',
-            'kabedit' => 'kabupaten',
-            'provedit' => 'provinsi',
-            'tglkkedit' => 'kk_tgl',
-        ];
-    }
-
     public function messages()
     {
         return [

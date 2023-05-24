@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\PdfModel;
 use App\Models\UpdateStatusModel;
 use FPDF;
@@ -19,7 +20,7 @@ class StatusPdfController extends Controller
             // ->where('nik', '=', $request->nik)
             ->get();
 
-            // dd($data);
+        // dd($data);
         foreach ($data as $user) {
             $pdf->Image('image/logohp.png', 18, 27, 43, 0, 'PNG');
             // $pdf->SetFont('Arial','B',12);
@@ -91,8 +92,8 @@ class StatusPdfController extends Controller
                     ",
                 0, 'L', false, 20);
 
-                $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.'_'.$id.'.pdf', 'I');
-                exit;
+            $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.'_'.$id.'.pdf', 'I');
+            exit;
         }
 
         foreach ($data as $value) {
@@ -102,8 +103,8 @@ class StatusPdfController extends Controller
                 ->where('pengajuan_surats.id', $id)
                 ->first();
             $dataupdate->update([
-                'pengajuan_surats.status' => "Selesai",
-                'pengajuan_surats.file_pdf' => $value->nama_lengkap.'_'.$value->nik.'_'.'_'.$id.'.pdf'
+                'pengajuan_surats.status' => 'Selesai',
+                'pengajuan_surats.file_pdf' => $value->nama_lengkap.'_'.$value->nik.'_'.'_'.$id.'.pdf',
             ]);
 
             return redirect('/suratmasuk')->with('successedit', '');

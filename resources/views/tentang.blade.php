@@ -2,52 +2,43 @@
 @section('title', 'Tentang')
 <!-- partial -->
 @section('content')
-    <div class="main-panel">
-        @php
-            $nama = session()->get('nama');
-            $akses = session()->get('hak_akses');
-            $rt = session()->get('rt');
-            $rw = session()->get('rw');
-        @endphp
-        <h4 class="font-weight-bold text-dark">Tentang</h4>
-        <div class="title">
-            <h1>Tentang</h1>
-        </div>
-
-        <h3>Sistem Informasi Pengajuan Surat</h3>
-        <p style="align=justify;"> S-kepuharjo merupakan aplikasi berbasis website dan mobile kepuharjo ini dapat
-            digunakan oleh pihak masyarakat,
-            RT, dan RW serta website khusus untuk
-            pihak Admin Kelurahan yang digunakan untuk menampung surat sekaligus digunakan untuk data master
-            dari masyarakat, dan
-            diharapkan juga aplikasi pengajuan surat untuk masyarakat ini dapat dilakukan dimanapun dan
-            kapanpun sehingga menjadi
-            lebih efektif dan efisien.</p>
-        <p style="align=justify;"> S-Kepuharjo termasuk upaya meningkatkan transparansi, kontrol serta
-            akuntabilitas kinerja kelurahan dalam
-            proses penanganan surat pengajuan dari
-            masyarakat. Memperbaiki kualitas pelayanan publik untuk pengajuan surat pada tahap RT/RW,
-            terutama dalam hal
-            efektivitas dan efisiensi yang bisa memakan waktu berhari hari karena situasi pandemi.
-            Mempermudah masyarakat dalam melakukan pengajuan berbagai macam jenis surat kepada pihak
-            kelurahan</p>
-
-
-        <div class="image-section">
-            {{-- <img src="images/icon-laman-tentang.png"> --}}
-        </div>
-        <div class="image-section">
-            {{-- <img src="images/icon-laman-tentang.png"> --}}
+    <div class="card" style="border-radius: 2px;">
+        <div class="card-body">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>About Us</h2>
+                        <p> S-kepuharjo merupakan aplikasi berbasis website dan mobile kepuharjo ini dapat
+                            digunakan oleh pihak masyarakat,
+                            RT, dan RW serta website khusus untuk
+                            pihak Admin Kelurahan yang digunakan untuk menampung surat sekaligus digunakan untuk data master
+                            dari masyarakat, dan
+                            diharapkan juga aplikasi pengajuan surat untuk masyarakat ini dapat dilakukan dimanapun dan
+                            kapanpun sehingga menjadi
+                            lebih efektif dan efisien.
+                        </p>
+                        <p>
+                            S-Kepuharjo termasuk upaya meningkatkan transparansi, kontrol serta
+                            akuntabilitas kinerja kelurahan dalam
+                            proses penanganan surat pengajuan dari
+                            masyarakat. Memperbaiki kualitas pelayanan publik untuk pengajuan surat pada tahap RT/RW,
+                            terutama dalam hal
+                            efektivitas dan efisiensi yang bisa memakan waktu berhari hari karena situasi pandemi.
+                            Mempermudah masyarakat dalam melakukan pengajuan berbagai macam jenis surat kepada pihak
+                            kelurahan
+                        </p>
+                        <p>
+                            Fitur Fitur Aplikasi S-Kepuharjo
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{{ asset('image/icon-laman-tentang (1).png') }}" alt="About Image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
-    </div>
-
-
-
-
 @endsection
-
 <style>
     /* style untuk modal */
     .modal {
@@ -126,11 +117,3 @@
         background-color: #45a049;
     }
 </style>
-{{--
-<script>
-    // mendapatkan modal
-    var modal = document.getElementById("myModal");
-
-    // mendapatkan tombol untuk membuka modal
-    var btn = document.getElementsByTagName("
-</script> --}}

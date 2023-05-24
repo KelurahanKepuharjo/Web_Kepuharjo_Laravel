@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class MobileMasterKksModel extends Model
 {
     protected $table = 'master_kks';
+
     protected $fillable = [
-        'no_kk', 'nama_kepala_keluarga',
+        'no_kk',
         'alamat', 'rt', 'rw', 'kode_pos', 'kelurahan', 'kecamatan', 'kabupaten',
-        'provinsi', 'kk_tgl', 'created_at', 'updated_at'
+        'provinsi', 'kk_tgl', 'created_at', 'updated_at',
     ];
     // protected $primarykey = 'no_kk';
 
@@ -35,6 +35,7 @@ class MobileMasterKksModel extends Model
     {
         return 'string';
     }
+
     public function masyarakat()
     {
         return $this->hasMany(MobileMasterMasyarakatModel::class, 'id', 'id');

@@ -3,15 +3,6 @@
 @include('sweetalert::alert')
 <!-- partial -->
 @section('content')
-    <div class="header-atas">
-        @php
-            $nama = session()->get('nama');
-            $akses = session()->get('hak_akses');
-            $rt = session()->get('rt');
-            $rw = session()->get('rw');
-        @endphp
-        <h4 class="font-weight-bold text-dark">Master Akun User</h4>
-    </div>
     <div>
         @if (session::has('success'))
             <script>
@@ -30,44 +21,50 @@
         @endif
 
     </div>
-    <div class="table_wrapper" style="overflow-x: scroll;">
-        <table id="myTable" class="table table-striped" style="width:100%">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Username</th>
-                    <th>Nama Lengkap</th>
-                    <th>RW</th>
-                    <th>RT</th>
-                    <th>Tempat, Tanggal Lahir</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <form action="" method="post">
-                    @foreach ($data as $no => $value)
-                        <tr>
-                            <td>{{ $no + 1 }}</td>
-                            <td>{{ $value->nik }}</td>
-                            <td>{{ $value->nama_lengkap }}</td>
-                            <td>{{ $value->rw }}</td>
-                            <td>{{ $value->rt }}</td>
-                            <td>{{ $value->tempat_lahir }}, {{ $value->tgl_lahir }}</td>
-                            <td>
-                                <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
-                                    data-toggle="modal" data-target="#modal-edit{{ $value->nik }}">
-                                </a>
-                                <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
-                                    data-target="#modal-hapus{{ $value->nik }}" style="margin-left: 10px; "
-                                    href="{{ url('masteruser') }}"></a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </form>
-            </tbody>
-        </table>
+    <div class="card" style="border-radius: 2px;">
+        <div class="card-body">
+            <div class="header-atas">
+                <h5 class="font-weight-bold text-dark">Master Akun User</h5>
+                <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah
+                    data</button>
+            </div>
+            <table id="myTable" class="table table-bordered">
+                <thead style="background-color: grey; color: white;">
+                    <tr>
+                        <th>No</th>
+                        <th>Username</th>
+                        <th>Nama Lengkap</th>
+                        <th>RW</th>
+                        <th>RT</th>
+                        <th>Tempat, Tanggal Lahir</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form action="" method="post">
+                        @foreach ($data as $value)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $value->user->nik }}</td>
+                                <td>{{ $value->user->nama_lengkap }}</td>
+                                <td>{{ $value->user->rw }}</td>
+                                <td>{{ $value->user->rt }}</td>
+                                <td>{{ $value->user->tempat_lahir }}, {{ $value->user->tgl_lahir }}</td>
+                                <td>
+                                    <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
+                                        data-toggle="modal" data-target="#modal-edit{{ $value->nik }}">
+                                    </a>
+                                    <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
+                                        data-target="#modal-hapus{{ $value->nik }}" style="margin-left: 10px; "
+                                        href="{{ url('masteruser') }}"></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </form>
+                </tbody>
+            </table>
+        </div>
     </div>
-
 
     @foreach ($data as $no => $value)
         <div class="modal fade" id="modal-edit{{ $value->nik }}" tabindex="-1" role="dialog"
@@ -132,8 +129,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <a type="button" onclick="showNotification()" href="{{ url($value->nik . '/hapus-masteruser') }}"
-                            class="btn btn-danger">Hapus</a>
+                        <a type="button" onclick="showNotification()"
+                            href="{{ url($value->nik . '/hapus-masteruser') }}" class="btn btn-danger">Hapus</a>
                     </div>
                 </div>
             </div>

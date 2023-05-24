@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\KkSeeder;
 use Illuminate\Database\Seeder;
-use Database\Seeders\MasyarakatSeeder;
 
 class DatabaseSeeder extends Seeder
 {

@@ -37,7 +37,7 @@ class RtController extends Controller
             ->where('master_akuns.role', 'RT')
             ->first();
         if ($datacheck !== null) {
-            return redirect()->back()->with('errorrt','');
+            return redirect()->back()->with('errorrt', '');
         } else {
             $rt = new RwaksesModal();
             $data = $rt->Rw()
@@ -51,14 +51,14 @@ class RtController extends Controller
                 } elseif ($data->role == '4') {
                     $request->validate([
                         'no_hp' => 'required|min:10|max:13',
-                        'password' => 'required|min:8|max:8'
+                        'password' => 'required|min:8|max:8',
                     ], [
                         'no_hp.required' => 'Nomor Telepon Tidak Boleh Kosong',
                         'no_hp.min' => 'Nomor Telepon Minimal 10 Angka',
                         'no_hp.max' => 'Nomor Telepon Maksimal 13 Angka',
                         'password.required' => 'Password Tidak Boleh Kosong',
                         'password.min' => 'Password Minimal 8 Karakter, Terdapat Huruf dan Angka',
-                        'password.max'=> 'Password Maxsimal 8 Karakter, Terdapat Huruf dan Angka'
+                        'password.max' => 'Password Maxsimal 8 Karakter, Terdapat Huruf dan Angka',
                     ]);
                     $data = new master_akun();
                     $uuid = Str::uuid()->toString();

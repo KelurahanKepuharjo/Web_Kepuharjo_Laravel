@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\MobileMasterKksModel;
 use App\Models\MobileMasterMasyarakatModel;
 use App\Models\MobilePengajuanSuratModel;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ApiPengajuanController extends Controller
 {
@@ -23,7 +22,7 @@ class ApiPengajuanController extends Controller
         ]);
         $masyarakat = MobileMasterMasyarakatModel::where('nik', $request->nik)->first();
 
-        if (!$masyarakat) {
+        if (! $masyarakat) {
             return response()->json([
                 'message' => 'Nik tidak ditemukan',
             ], 400);
@@ -33,7 +32,7 @@ class ApiPengajuanController extends Controller
             ->where('id_masyarakat', $masyarakat->id_masyarakat)
             ->first();
 
-        if (!$existingSurat) {
+        if (! $existingSurat) {
             $data = MobilePengajuanSuratModel::create([
                 'uuid' => Str::uuid(),
                 'status' => 'Diajukan',
@@ -45,7 +44,7 @@ class ApiPengajuanController extends Controller
 
             return response()->json([
                 'message' => 'Berhasil mengajukan surat',
-                'data' => $data
+                'data' => $data,
             ], 200);
         } else {
             $cek = MobilePengajuanSuratModel::where('id_surat', $request->id_surat)
@@ -69,11 +68,12 @@ class ApiPengajuanController extends Controller
 
                 return response()->json([
                     'message' => 'Berhasil mengajukan surat',
-                    'data' => $data
+                    'data' => $data,
                 ], 200);
             }
         }
     }
+
     public function suratmasuk(Request $request)
     {
 
@@ -93,7 +93,7 @@ class ApiPengajuanController extends Controller
 
         return response()->json([
             'message' => 'success',
-            'data' => $suratMasuk
+            'data' => $suratMasuk,
         ], 200);
     }
 
@@ -113,7 +113,7 @@ class ApiPengajuanController extends Controller
 
         return response()->json([
             'message' => 'success',
-            'data' => $suratMasuk
+            'data' => $suratMasuk,
         ], 200);
     }
 
@@ -133,7 +133,7 @@ class ApiPengajuanController extends Controller
 
         return response()->json([
             'message' => 'success',
-            'data' => $statussurat
+            'data' => $statussurat,
         ], 200);
     }
 
@@ -161,7 +161,7 @@ class ApiPengajuanController extends Controller
 
         return response()->json([
             'message' => 'success',
-            'data' => $pengajuan_surats
+            'data' => $pengajuan_surats,
         ], 200);
     }
 
@@ -190,7 +190,7 @@ class ApiPengajuanController extends Controller
 
         return response()->json([
             'message' => 'success',
-            'data' => $pengajuan_surats
+            'data' => $pengajuan_surats,
         ], 200);
     }
 
@@ -198,7 +198,6 @@ class ApiPengajuanController extends Controller
     {
         $user = $request->user();
         $id_masyarakat = $user->id_masyarakat;
-
 
         $no_kk = MobileMasterKksModel::whereHas('masyarakat', function ($query) use ($id_masyarakat) {
             $query->where('id_masyarakat', $id_masyarakat);
@@ -219,7 +218,7 @@ class ApiPengajuanController extends Controller
 
         return response()->json([
             'message' => 'success',
-            'data' => $pengajuan_surats
+            'data' => $pengajuan_surats,
         ], 200);
     }
 
@@ -231,7 +230,7 @@ class ApiPengajuanController extends Controller
         ]);
         $masyarakat = MobileMasterMasyarakatModel::where('nik', $request->nik)->first();
 
-        if (!$masyarakat) {
+        if (! $masyarakat) {
             return response()->json([
                 'message' => 'Nik tidak ditemukan',
             ], 400);
@@ -239,7 +238,7 @@ class ApiPengajuanController extends Controller
         $existingSurat = MobilePengajuanSuratModel::where('id_surat', $request->id_surat)
             ->where('id_masyarakat', $masyarakat->id_masyarakat)
             ->first();
-        if (!$existingSurat) {
+        if (! $existingSurat) {
             return response()->json([
                 'message' => 'Surat tidak ditemukan',
             ], 400);

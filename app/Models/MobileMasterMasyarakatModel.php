@@ -9,12 +9,21 @@ use Illuminate\Support\Str;
 class MobileMasterMasyarakatModel extends Model
 {
     use HasFactory;
+
     protected $keyType = 'uuid';
+
     protected $table = 'master_masyarakats';
+
+    public function masyarakat()
+    {
+        return $this->belongsTo(MobileMasterKksModel::class, 'id', 'id');
+    }
+
+
     protected $fillable = [
         'id_masyarakat', 'nik', 'nama_lengkap', 'jenis_kelamin', 'tempat_lahir',
         'tgl_lahir', 'agama', 'pendidikan', 'pekerjaan', 'golongan_darah', 'status_perkawinan', 'tgl_perkawinan',
-        'status_keluarga', 'kewarganegaraan', 'no_paspor', 'no_kitap', 'nama_ayah', 'nama_ibu', 'id', 'created_at', 'updated_at'
+        'status_keluarga', 'kewarganegaraan', 'no_paspor', 'no_kitap', 'nama_ayah', 'nama_ibu', 'id', 'created_at', 'updated_at',
     ];
     // public function master_masyarakat(){
     // return $this->belongsTo(master_masyarakat::class);
@@ -49,6 +58,7 @@ class MobileMasterMasyarakatModel extends Model
     {
         return 'string';
     }
+
     public function akun()
     {
         return $this->hasOne(MobileMasterAkunModel::class, 'id_masyarakat', 'id_masyarakat');
@@ -58,6 +68,7 @@ class MobileMasterMasyarakatModel extends Model
     {
         return $this->hasOne(MobileMasterKksModel::class, 'id', 'id');
     }
+
     public function pengajuan_surats()
     {
         return $this->hasMany(MobilePengajuanSuratModel::class, 'id_masyarakat', 'id_masyarakat');

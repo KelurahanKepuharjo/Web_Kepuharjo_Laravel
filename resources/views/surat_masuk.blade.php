@@ -1,47 +1,51 @@
 @extends('layouts.mainlayout')
 @section('title', 'Surat Masuk')
 <!-- partial -->
+@php
+    $nama = session()->get('nama');
+    $akses = session()->get('hak_akses');
+    $rt = session()->get('rt');
+    $rw = session()->get('rw');
+@endphp
 @section('content')
-    @php
-        $nama = session()->get('nama');
-        $akses = session()->get('hak_akses');
-        $rt = session()->get('rt');
-        $rw = session()->get('rw');
-    @endphp
-    {{-- <h4>{{ $nama }}</h4> --}}
-    <h4 class="font-weight-bold text-dark">Surat Masuk</h4>
-    <table id="myTable" class="table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>NIK</th>
-                <th>Nama</th>
-                <th>Jenis Surat</th>
-                <th>Waktu Pengajuan</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($data as $no => $value)
-                <tr>
-                    <td>{{ $no + 1 }}</td>
-                    <td>{{ $value->nik }}</td>
-                    <td>{{ $value->nama_lengkap }}</td>
-                    <td>{{ $value->nama_surat }}</td>
-                    <td>{{ $value->created_at->format('d-m-Y') }} Pukul {{ $value->created_at->format('H:i') }}</td>
-                    <td>{{ $value->status }}</td>
-                    <td>
-                        <a class="btn btn-secondary" style="background: #00AAAA; color: white;" data-toggle="modal"
-                            data-target="#exampleModal{{ $value->nik }}" style="color: white;" href="#">Proses
-                            Surat</a>
-                    </td>
-                </tr>
-            @endforeach
-
-        </tbody>
-        <tfoot>
-    </table>
+    <div class="card" style="border-radius: 2px;">
+        <div class="card-body">
+            <div class="header-atas">
+                <h5 class="font-weight-bold text-dark">Surat Masuk</h5>
+            </div>
+            <table id="myTable" class="table table-bordered">
+                <thead style="background-color: grey; color: white;">
+                    <tr>
+                        <th>No</th>
+                        <th>NIK</th>
+                        <th>Nama</th>
+                        <th>Jenis Surat</th>
+                        <th>Waktu Pengajuan</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($data as $no => $value)
+                        <tr>
+                            <td>{{ $no + 1 }}</td>
+                            <td>{{ $value->pengajuan->nik }}</td>
+                            <td>{{ $value->pengajuan->nama_lengkap }}</td>
+                            <td>{{ $value->pengajuan->nama_surat }}</td>
+                            <td>{{ $value->created_at }} Pukul {{ $value->created_at }}</td>
+                            <td>{{ $value->status }}</td>
+                            <td>
+                                <a class="btn btn-secondary" style="background: #00AAAA; color: white;" data-toggle="modal"
+                                    data-target="#exampleModal{{ $value->nik }}" style="color: white;"
+                                    href="#">Proses
+                                    Surat</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 
 
@@ -104,19 +108,17 @@
                         </div>
                         <div class="form-group">
                             <label>Tanggal Pengajuan</label>
-                            <input type="text" name="tglpengajuan" class="form-control"
-                                value="{{ $value->created_at->format('d-m-Y ') }}" maxlength="50" required="">
+                            <input type="text" name="tglpengajuan" class="form-control" value="{{ $value->created_at }}"
+                                maxlength="50" required="">
                             <span class="text-danger">
                         </div>
                         <div class="form-group">
                             <label>Keperluan Surat</label>
-                            <input type="text" name="keperluan" class="form-control" value="{{ $value->keterangan }}"
-                                maxlength="50" required="">
+                            <input type="text" name="keperluan" class="form-control"
+                                value="{{ $value->keterangan }}" maxlength="50" required="">
                             <span class="text-danger">
                         </div>
                     </div>
-                    {{--
-                    @if ($akses == 'RT') --}}
                     <div class="modal-footer">
                         <a type="button" class="btn btn-secondary"
                             style="background-color: rgb(0, 189, 0); color: white;"
@@ -125,25 +127,7 @@
                             href="{{ url('updatestatustolak/' . $value->id . '/' . $akses) }}">Tolak</a>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
-                    {{-- @endif  --}}
-                    {{-- @if ($akses == 'RW')
-                        <div class="modal-footer">
-                            <a type="button" class="btn btn-secondary"
-                                style="background-color: rgb(0, 189, 0); color: white;"
-                                href="{{ url('updatestatus/' . $value->id . '/' . $akses) }}">Setujui</a>
-                            <a type="button" class="btn btn-danger"
-                                href="{{ url('updatestatustolak/' . $value->id . '/' . $akses) }}">Tolak</a>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    @endif
-                    @if ($akses == 'admin')
-                        <div class="modal-footer">
-                            <a type="button" class="btn btn-secondary"
-                                style="background-color: rgb(0, 189, 0); color: white;"
-                                href="{{ url('pdfstatus/' . $value->id) }}">Setujui</a>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    @endif --}}
+
 
                 </div>
             </div>
@@ -213,7 +197,7 @@
                             <div class="form-group">
                                 <label>Tanggal Pengajuan</label>
                                 <input type="text" name="tglpengajuan" class="form-control"
-                                    value="{{ $value->created_at->format('d-m-Y ') }}" maxlength="50" required="">
+                                    value="{{ $value->created_at }}" maxlength="50" required="">
                                 <span class="text-danger">
                             </div>
                             <div class="form-group">
@@ -227,7 +211,8 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                             <button type="button" class="btn btn-secondary"
-                                style="background-color: rgb(0, 189, 0); color: white;">Kirim melalui WhatsApp</button>
+                                style="background-color: rgb(0, 189, 0); color: white;">Kirim melalui
+                                WhatsApp</button>
                             <button type="button" class="btn btn-danger">Kirim</button>
                         </div>
                     </div>

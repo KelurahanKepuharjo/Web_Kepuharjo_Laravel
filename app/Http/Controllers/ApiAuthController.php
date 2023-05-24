@@ -6,7 +6,6 @@ use App\Models\MobileMasterAkunModel;
 use App\Models\MobileMasterKksModel;
 use App\Models\MobileMasterMasyarakatModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,9 +19,8 @@ class ApiAuthController extends Controller
             'password' => 'required|min:8',
         ]);
 
-
         $dataMasyarakat = MobileMasterMasyarakatModel::where('nik', $request->nik)->first();
-        if (!$dataMasyarakat) {
+        if (! $dataMasyarakat) {
             return response()->json([
                 'message' => 'Nik anda belum terdaftar',
             ], 400);
@@ -56,14 +54,14 @@ class ApiAuthController extends Controller
         ]);
 
         $dataMasyarakat = MobileMasterMasyarakatModel::where('nik', $request->nik)->first();
-        if (!$dataMasyarakat) {
+        if (! $dataMasyarakat) {
             return response()->json([
                 'message' => 'Nik Anda Belum Terdaftar',
             ], 400);
         }
 
         $akun = MobileMasterAkunModel::where('id_masyarakat', $dataMasyarakat->id_masyarakat)->first();
-        if (!Hash::check($request->password, $akun->password)) {
+        if (! Hash::check($request->password, $akun->password)) {
             return response()->json([
                 'message' => 'Password Anda Salah',
             ], 400);
@@ -78,17 +76,19 @@ class ApiAuthController extends Controller
 
         return response()->json($response, 200);
     }
+
     public function me(Request $request)
     {
         $user = $request->user();
 
         $response = [
             'message' => 'success',
-            'data' => $user->load(['masyarakat', 'masyarakat.kks'])
+            'data' => $user->load(['masyarakat', 'masyarakat.kks']),
         ];
 
         return response()->json($response, 200);
     }
+
     public function logout()
     {
         $logout = request()->user()->currentAccessToken()->delete();
@@ -98,6 +98,7 @@ class ApiAuthController extends Controller
 
         return response()->json($response, 200);
     }
+
     public function keluarga(Request $request)
     {
         $user = $request->user();
@@ -113,10 +114,12 @@ class ApiAuthController extends Controller
 
         $response = [
             'message' => 'success',
-            'data' => $keluarga
+            'data' => $keluarga,
         ];
+
         return response()->json($response);
     }
+
     public function editnohp(Request $request)
     {
         $user = $request->user();
@@ -127,7 +130,7 @@ class ApiAuthController extends Controller
             'no_hp' => [
                 'required',
                 'min:10',
-                'unique:master_akuns,no_hp,' . $user->id,
+                'unique:master_akuns,no_hp,'.$user->id,
                 function ($attribute, $value, $fail) use ($no_hp) {
                     if ($value === $no_hp) {
                         $fail('Nomor HP baru harus berbeda dengan nomor HP lama');

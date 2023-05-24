@@ -3,16 +3,6 @@
 @include('sweetalert::alert')
 <!-- partial -->
 @section('content')
-    <div class="header-atas" style="display: flex; justify-content: space-between; align-items: center;">
-        @php
-            $nama = session()->get('nama');
-            $akses = session()->get('hak_akses');
-            $rt = session()->get('rt');
-            $rw = session()->get('rw');
-        @endphp
-        <h4 class="font-weight-bold text-dark">Master Surat</h4>
-        <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah data</button>
-    </div>
     @if (session::has('success'))
         <script>
             toastr.success('Data Berhasil Ditambahkan', '')
@@ -33,40 +23,56 @@
             toastr.error('Cek Kembali Data yang Anda Input', 'Data Gagal Ditambahkan')
         </script>
     @endif
-    <div class="table_wrapper" style="overflow-x: scroll;">
-        <table id="myTable" class="table table-striped" style="width:100%">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Id Surat</th>
-                    <th>Jenis Surat</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <form action="mastersurat" method="post">
+    <div class="card" style="border-radius: 2px;">
+        <div class="card-body">
+            <div class="header-atas">
+                <h5 class="font-weight-bold text-dark">Halaman Master Surat</h5>
+                <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah
+                    data</button>
+            </div>
+            <table id="myTable" class="table table-bordered">
+                <thead style="background-color: grey; color: white;">
+                    <tr>
+                        <th>
+                            <h6>No</h6>
+                        </th>
+                        <th>
+                            <h6>Jenis Surat</h6>
+                        </th>
+                        <th>
+                            <h6>Image</h6>
+                        </th>
+                        <th>
+                            <h6>Aksi</h6>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
                     @foreach ($data as $no => $value)
                         <tr>
-                            <td>{{ $no + 1 }}</td>
-                            <td>{{ $value->id_surat }}</td>
-                            <td>{{ $value->nama_surat }}</td>
+                            <td class="text-lg">{{ $no + 1 }}</td>
+                            <td class="text-lg">SURAT KETERANGAN {{ $value->nama_surat }}</td>
+                            <td><img style="width: 30px; height: 30px;  border-radius: 5%;"
+                                    src="{{ asset('images/' . $value->image) }}">
+                            </td>
                             <td>
-                                <a class="btn btn-warning fa fa-pencil" style="color:white;"
-                                    data-id="{{ $value->id_surat }}" href="" data-toggle="modal"
-                                    data-target="#modal-editsurat{{ $value->id_surat }}">
-                                </a>
-                                <a class="btn btn-danger icon-trash" name='Hapus' data-toggle="modal"
-                                    data-target="#modal-hapus{{ $value->id_surat }}" style="margin-left: 10px; "
-                                    href="{{ url('/mastersurat') }}"></a>
+                                <div class="row">
+                                    <div class="btn-group">
+                                        <a class="btn btn-warning btn-sm fa fa-pencil" style="color:white;"
+                                            data-toggle="modal" data-target="#modal-editsurat{{ $value->id_surat }}">
+                                        </a>
+                                        <a class="btn btn-danger btn-sm icon-trash" data-toggle="modal"
+                                            data-target="#modal-hapus{{ $value->id_surat }}"></a>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
-                </form>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    {{-- modal tambah data surat --}}
     <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true" autocomplete="off">
         <div class="modal-dialog" role="document">
@@ -118,10 +124,8 @@
             </div>
         </div>
     </div>
-    {{-- batas modal tambah surat --}}
 
 
-    {{-- modal edit master surat --}}
     @foreach ($data as $no => $value)
         <div class="modal fade" id="modal-editsurat{{ $value->id_surat }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true" autocomplete="off">
@@ -178,9 +182,7 @@
             </div>
         </div>
     @endforeach
-    {{-- batas modal edit --}}
 
-    {{-- Modal Hapus --}}
     @foreach ($data as $no => $value)
         <div class="modal fade" id="modal-hapus{{ $value->id_surat }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true" autocomplete="off">
@@ -205,9 +207,30 @@
             </div>
         </div>
     @endforeach
-    {{-- Batas Modal Hapus --}}
 
 @endsection
+
+
+<style>
+    .header-atas {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header h4 {
+        margin: 0;
+    }
+
+    .header button {
+        margin-left: auto;
+    }
+
+    a {
+        style="margin-top: 10px;
+
+    }
+</style>
 
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 

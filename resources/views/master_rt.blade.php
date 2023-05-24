@@ -3,17 +3,6 @@
 @include('sweetalert::alert')
 <!-- partial -->
 @section('content')
-    <div class="header-atas">
-        @php
-            $nama = session()->get('nama');
-            $akses = session()->get('hak_akses');
-            $rt = session()->get('rt');
-            $rw = session()->get('rw');
-        @endphp
-        <h4 class="font-weight-bold text-dark">Master RT</h4>
-
-        <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah Data</i></button>
-    </div>
     <div>
         @if (session::has('success'))
             <script>
@@ -47,47 +36,54 @@
         @endif
 
     </div>
-    <div class="table_wrapper" style="overflow-x: scroll;">
-        <table id="myTable" class="table table-striped" style="width:100%">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>NIK</th>
-                    <th>Nama RW</th>
-                    <th>RT</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <form action="" method="post">
-                    @foreach ($datartrw as $no => $value)
-                        <tr>
-                            <td>{{ $no + 1 }}</td>
-                            <td>{{ $value->nik }}</td>
-                            <td>{{ $value->nama_lengkap }}</td>
-                            <td>{{ $value->rt }}</td>
-                            <td>Ketua RT</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                        style="background-color: #00AAAA; color: white;">
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" data-id="" href="" data-toggle="modal"
-                                            data-target="#modal-edit{{ $value->nik }}">Edit</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal"
-                                            data-target="#modal-hapus{{ $value->no_kk }}" value="{{ $value->no_kk }}"
-                                            href="{{ url('masterkk') }}">Hapus</a>
+    <div class="card" style="border-radius: 2px;">
+        <div class="card-body">
+            <div class="header-atas">
+                <h5 class="font-weight-bold text-dark">Master RT</h5>
+                <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah
+                    data</button>
+            </div>
+            <table id="myTable" class="table table-bordered">
+                <thead style="background-color: grey; color: white;">
+                    <tr>
+                        <th>No</th>
+                        <th>NIK</th>
+                        <th>Nama RW</th>
+                        <th>RT</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form action="" method="post">
+                        @foreach ($datartrw as $no => $value)
+                            <tr>
+                                <td>{{ $no + 1 }}</td>
+                                <td>{{ $value->nik }}</td>
+                                <td>{{ $value->nama_lengkap }}</td>
+                                <td>{{ $value->rt }}</td>
+                                <td>Ketua RT</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn icon-cog dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            style="background-color: #00AAAA; color: white;">
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" data-id="" href="" data-toggle="modal"
+                                                data-target="#modal-edit{{ $value->nik }}">Edit</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                                data-target="#modal-hapus{{ $value->no_kk }}" value="{{ $value->no_kk }}"
+                                                href="{{ url('masterkk') }}">Hapus</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </form>
-            </tbody>
-        </table>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </form>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 

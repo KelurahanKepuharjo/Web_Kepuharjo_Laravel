@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use DB;
+use Illuminate\Database\Seeder;
 
 class KkSeeder extends Seeder
 {
@@ -99,4 +99,4 @@ class KkSeeder extends Seeder
         ],
         );
     }
-    }
+}

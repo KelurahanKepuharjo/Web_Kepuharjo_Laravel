@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class MobileMasterSuratModel extends Model
 {
     protected $table = 'master_surats';
-    protected $fillable = ['*'];
+
+    protected $primaryKey = 'id_surat';
+
+    protected $fillable = ['id_surat', 'nama_surat', 'image'];
 
     public function pengajuan_surats()
     {
