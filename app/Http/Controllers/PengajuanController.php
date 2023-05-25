@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pengajuan_surat;
-use App\Models\MobilePengajuanSuratModel;
-use App\Models\MobileMasterMasyarakatModel;
+use App\Models\PengajuanModel;
 use App\Models\UpdateStatusModel;
 use Illuminate\Http\Request;
 
@@ -13,25 +11,29 @@ class PengajuanController extends Controller
     public function surat_masuk()
     {
         if (session('hak_akses') == 'admin') {
-            $data = MobilePengajuanSuratModel::with('pengajuan')
+            $pengajuan = new PengajuanModel();
+            $data = $pengajuan->pengajuan()
                 ->where('pengajuan_surats.status', '=', 'Disetujui RW')
                 ->get();
+
         } elseif (session('hak_akses') == 'RT') {
             $RT = session('rt');
             $RW = session('rw');
-            $data = MobilePengajuanSuratModel::with('pengajuan')
+            $pengajuan = new PengajuanModel();
+            $data = $pengajuan->pengajuan()
                 ->where('pengajuan_surats.status', '=', 'Diajukan')
                 ->where('master_kks.RT', '=', $RT)
                 ->where('master_kks.RW', '=', $RW)
                 ->get();
-                // dd($data);
         } elseif (session('hak_akses') == 'RW') {
             $RW = session('rw');
-            $data = MobilePengajuanSuratModel::with('pengajuan')
+            $pengajuan = new PengajuanModel();
+            $data = $pengajuan->pengajuan()
                 ->where('pengajuan_surats.status', '=', 'Disetujui RT')
                 ->where('master_kks.RW', '=', $RW)
                 ->get();
         }
+
         return view('surat_masuk', compact('data'));
     }
 
@@ -52,6 +54,24 @@ class PengajuanController extends Controller
 
         return redirect('/suratmasuk')->with('successedit', '');
     }
+
+    // public function update_status(Request $request, $id, $akses)
+    // {
+    //     if ($akses == 'RT') {
+    //         $status = 'Disetujui RT';
+    //     } elseif ($akses == 'RW') {
+    //         $status = 'Disetujui RW';
+    //     }
+    //     $updatestatus = new UpdateStatusModel();
+    //     $data = $updatestatus->UpdateStatus()
+    //         ->where('pengajuan_surats.id', $id)
+    //         ->first();
+    //     $data->update([
+    //         'pengajuan_surats.status' => $status,
+    //     ]);
+
+    //     return redirect('/suratmasuk')->with('successedit', '');
+    // }
 
     public function update_status(Request $request, $id, $akses){
         if($akses=='RT'){
@@ -77,7 +97,8 @@ class PengajuanController extends Controller
         if (session('hak_akses') == 'RT') {
             $RT = session('rt');
             $RW = session('rw');
-            $data = MobilePengajuanSuratModel::with('pengajuan')
+            $pengajuan = new PengajuanModel();
+            $data = $pengajuan->pengajuan()
                 ->where('pengajuan_surats.status', '=', 'Ditolak RT')
                 ->where('master_kks.RT', '=', $RT)
                 ->where('master_kks.RW', '=', $RW)
@@ -85,7 +106,8 @@ class PengajuanController extends Controller
         } elseif (session('hak_akses') == 'RW') {
             $RW = session('rw');
             $hak_akses = session('hak_akses');
-            $data = MobilePengajuanSuratModel::with('pengajuan')
+            $pengajuan = new PengajuanModel();
+            $data = $pengajuan->pengajuan()
                 ->where('pengajuan_surats.status', '=', 'Ditolak RW')
                 ->where('master_kks.RW', '=', $RW)
                 ->get();
@@ -97,7 +119,8 @@ class PengajuanController extends Controller
     public function surat_selesai()
     {
         if (session('hak_akses') == 'admin') {
-            $data = MobilePengajuanSuratModel::with('pengajuan')
+            $pengajuan = new PengajuanModel();
+            $data = $pengajuan->pengajuan()
                 ->where('pengajuan_surats.status', '=', 'Selesai')
                 ->get();
 
@@ -105,7 +128,8 @@ class PengajuanController extends Controller
         } elseif (session('hak_akses') == 'RT') {
             $RT = session('rt');
             $RW = session('rw');
-            $data = MobilePengajuanSuratModel::with('pengajuan')
+            $pengajuan = new PengajuanModel();
+            $data = $pengajuan->pengajuan()
                 ->where('master_kks.RT', '=', $RT)
                 ->where('master_kks.RW', '=', $RW)
                 ->where('pengajuan_surats.status', '=', 'Disetujui RT')
@@ -115,7 +139,8 @@ class PengajuanController extends Controller
 
         } elseif (session('hak_akses') == 'RW') {
             $RW = session('rw');
-            $data = MobilePengajuanSuratModel::with('pengajuan')
+            $pengajuan = new PengajuanModel();
+            $data = $pengajuan->pengajuan()
                 ->where('master_kks.RW', '=', $RW)
                 ->Where('pengajuan_surats.status', '=', 'Disetujui RW')
                 ->orWhere('pengajuan_surats.status', '=', 'Selesai')

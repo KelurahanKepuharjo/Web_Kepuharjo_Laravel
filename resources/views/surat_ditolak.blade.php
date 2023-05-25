@@ -29,9 +29,9 @@
                     @foreach ($data as $no => $value)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td>{{ $value->pengajuan->nik }}</td>
-                            <td>{{ $value->pengajuan->nama_lengkap }}</td>
-                            <td>{{ $value->pengajuan->nama_surat }}</td>
+                            <td>{{ $value->nik }}</td>
+                            <td>{{ $value->nama_lengkap }}</td>
+                            <td>{{ $value->nama_surat }}</td>
                             <td>{{ $value->created_at->format('d-m-Y') }} Pukul {{ $value->created_at->format('H:i') }}</td>
                             <td>{{ $value->status }}</td>
                             <td>
