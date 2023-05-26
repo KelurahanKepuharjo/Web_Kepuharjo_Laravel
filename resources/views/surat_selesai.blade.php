@@ -65,7 +65,7 @@
                                 <input type="text" name="nik" class="form-control" value="{{ $value->nomor_surat }}"
                                     maxlength="50" required="">
                                 <span class="text-danger">
-                            </div>
+                            </div>  
                         @endif
                         <div class="form-group">
                             <label>NIK</label>

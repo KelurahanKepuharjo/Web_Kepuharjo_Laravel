@@ -123,7 +123,7 @@ Route::middleware('auth.auth')->group(function () {
     });
 
     Route::get('generate-pdf/{id}', [PdfController::class, 'generatePDF']);
-    Route::get('generate-pdf/{id}', [PdfController::class, 'PDFKematian']);
-    Route::get('generate-pdf/{id}', [PdfController::class, 'PDFKenalLahir']);
+    // Route::get('generate-pdf/{id}', [PdfController::class, 'PDFKematian']);
+    // Route::get('generate-pdf/{id}', [PdfController::class, 'PDFKenalLahir']);
     Route::get('pdfstatus/{id}', [StatusPdfController::class, 'generatePDF']);
 });
