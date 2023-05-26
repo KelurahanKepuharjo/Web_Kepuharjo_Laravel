@@ -13,6 +13,9 @@ use App\Http\Controllers\StatusPdfController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExcelController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/export', [ExcelController::class, 'export']);
 
 Route::controller(KepuharjoController::class)->group(function () {
     Route::get('/', 'index')->name('index');

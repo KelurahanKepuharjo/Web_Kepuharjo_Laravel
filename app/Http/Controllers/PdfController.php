@@ -8,6 +8,7 @@ use App\Models\PengajuanModel;
 use App\Models\MobileMasterMasyarakatModel;
 use App\Models\MobileMasterKksModel;
 
+
 class PdfController extends Controller
 {
     public function generatePDF(Request $request, $id)
@@ -25,83 +26,91 @@ class PdfController extends Controller
                     $data = MobileMasterMasyarakatModel::where('id_masyarakat', '=', $user->id_masyarakat)
                     ->select('id')
                     ->get();
-                        // dd($data);
-                        $id_kk = $data;
-                        $keluarga = MobileMasterKksModel::with('masyarakat')->where('id', '=', $data )->get();
-                        dd($keluarga);
-                        $pdf->Image('image/logohp.png', 18, 27, 43, 0, 'PNG');
-                        // $pdf->SetFont('Arial','B',12);
-                        $pdf->SetFont('Times', '', 12);
-                        $pdf->SetXY(30, 24);
+                        foreach ($data as $id) {
+                            $keluarga = MobileMasterKksModel::
+                            join('master_masyarakats','master_masyarakats.id','master_kks.id')
+                            ->where('status_keluarga', 'Kepala Keluarga')
+                            ->where('master_kks.id', $id->id)->get();
 
-                        // Add a multi-line cell with a left indentation of 20mm
-                        $pdf->MultiCell(0, 6, '
-                        P E M E R I N T A H   K A B U P A T E N  L U M A J A N G
-                        KECAMATAN LUMAJANG
-                        KELURAHAN KEPUHARJO
-                        Jl. Langsep No. 18 Telp. (0334) 888243
-                        L U M A J A N G
+                            $pdf->Image('image/logohp.png', 18, 27, 43, 0, 'PNG');
+                            // $pdf->SetFont('Arial','B',12);
+                            $pdf->SetFont('Times', '', 12);
+                            $pdf->SetXY(30, 24);
 
-                        ',
-                            0, 'C', false, 20);
+                            // Add a multi-line cell with a left indentation of 20mm
+foreach ($keluarga as $value) {
 
-                        $pdf->SetFont('Times', 'B', 14);
-                        $pdf->SetXY(20, 66);
+    $pdf->MultiCell(0, 6, '
+    P E M E R I N T A H   K A B U P A T E N  L U M A J A N G
+    KECAMATAN LUMAJANG
+    KELURAHAN KEPUHARJO
+    Jl. Langsep No. 18 Telp. (0334) 888243
+    L U M A J A N G
 
-                        // Add a multi-line cell with a left indentation of 20mm
-                        $pdf->MultiCell(0, 6, "SURAT KETERANGAN $user->nama_surat
-                        ",
-                            0, 'C', false, 20);
+                            ',
+                                0, 'C', false, 20);
 
-                        $pdf->SetFont('Times', '', 12);
-                        $pdf->SetXY(20, 72);
+                            $pdf->SetFont('Times', 'B', 14);
+                            $pdf->SetXY(20, 66);
 
-                        // Add a multi-line cell with a left indentation of 20mm
-                        $pdf->MultiCell(0, 6, 'NOMOR :
-                        ',
-                            0, 'C', false, 20);
-
-                        $pdf->SetFont('Times', '', 12);
-                        $pdf->SetXY(20, 84);
-                        $pdf->MultiCell(0, 6, '             Yang bertanda tangan di bawah ini kami Lurah Kelurahan kepuharjo Kecamatan Lumajang  Kabupaten Lumajang menerangkan bahwa : ',
-                            0, 'L', false, 20);
-                            $pdf->SetXY(42, 102);
-                            $pdf->MultiCell(0, 6, "                Nama                            : $user->nama_lengkap
-                            Tempat,Tgl Lahir         : $user->tempat_lahir ,$user->tgl_lahir
-                            Jenis Kelamin               : $user->jenis_kelamin
-                            Kebangsaan / Agama    : $user->kewarganegaraan , $user->agama
-                            Status 	                          : $user->status_perkawinan
-                            Pekerjaan 	                    : $user->pekerjaan
-                            NIK	                              : $user->nik
-                            Alamat 	                        : $user->alamat
+                            // Add a multi-line cell with a left indentation of 20mm
+                            $pdf->MultiCell(0, 6, "SURAT KETERANGAN $user->nama_surat
                             ",
+                                0, 'C', false, 20);
+
+                            $pdf->SetFont('Times', '', 12);
+                            $pdf->SetXY(20, 72);
+
+                            // Add a multi-line cell with a left indentation of 20mm
+                            $pdf->MultiCell(0, 6, 'NOMOR :
+                            ',
+                                0, 'C', false, 20);
+
+                            $pdf->SetFont('Times', '', 12);
+                            $pdf->SetXY(20, 84);
+                            $pdf->MultiCell(0, 6, '             Yang bertanda tangan di bawah ini kami Lurah Kelurahan kepuharjo Kecamatan Lumajang  Kabupaten Lumajang menerangkan bahwa : ',
                                 0, 'L', false, 20);
-                        $pdf->Image('image/stempel.png', 120, 226, 33, 0, 'PNG');
-                        $pdf->Image('image/ttd.png', 110, 230, 40, 0, 'PNG');
-                        $pdf->SetXY(20, 154);
-                        $pdf->MultiCell(0, 6, "            Kelurahan Kepuharjo Kecamatan Lumajang
-                        Adalah benar - benar anak dari :
-
-                                A Y A H                                                                                         I B U
-            N a m a : (NAMA_AYAH)                                                   N a m a : (NAMA_IBU)
-            U m u r : (UMUR)                                                                 U m u r : (UMUR1)
-            Bangsa/Agama : (KEBANGSAANAGAMA)                      Bangsa/Agama : (KEBANGSAANAGAMA)
-            Pekerjaan : (PEKERJAAN1)                                                 Pekerjaan : (PEKERJAAN2)
-            Alamat  : (ALAMAT) Kel. Kepuharjo                                  Alamat : (ALAMAT) Kel. Kepuharjo
-
-
-                                                                                                            Lumajang, $user->created_at
-                                                                                                            LURAH KEPUHARJO
-
-
-
-
-                                                                                                            MUHAMMAD SAIFUL,S.AP
-                                                                                                            NIP. 19720202 199803 1 010
+                                $pdf->SetXY(42, 102);
+                                $pdf->MultiCell(0, 6, "
+    Nama                            : $user->nama_lengkap
+    Tempat,Tgl Lahir         : $user->tempat_lahir ,$user->tgl_lahir
+    Jenis Kelamin               : $user->jenis_kelamin
+    Kebangsaan / Agama    : $user->kewarganegaraan , $user->agama
+    Status 	                          : $user->status_perkawinan
+    Pekerjaan 	                    : $user->pekerjaan
+    NIK	                              : $user->nik
+    Alamat 	                        : $user->alamat
                                 ",
-                            0, 'L', false, 20);
-                        $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.'_'.$id.'.pdf', 'I');
-                        exit;
+                                    0, 'L', false, 20);
+                            $pdf->Image('image/stempel.png', 120, 226, 33, 0, 'PNG');
+                            $pdf->Image('image/ttd.png', 110, 230, 40, 0, 'PNG');
+                            $pdf->SetXY(20, 154);
+                            $pdf->MultiCell(0, 6, "
+                            Kelurahan Kepuharjo Kecamatan Lumajang Adalah benar - benar anak dari :
+
+                        A Y A H                                                                                         I B U
+    N a m a : $value->nama_lengkap                                             N a m a : (NAMA_IBU)
+    U m u r :                                        U m u r : (UMUR1)
+    Bangsa/Agama :                       Bangsa/Agama : (KEBANGSAANAGAMA)
+    Pekerjaan :                                Pekerjaan : (PEKERJAAN2)
+    Alamat  :                       Alamat :
+
+
+                                                                                        Lumajang, $user->created_at
+                                                                                        LURAH KEPUHARJO
+
+
+
+
+                                                                                        MUHAMMAD SAIFUL,S.AP
+                                                                                        NIP. 19720202 199803 1 010
+                                                ",
+                                            0, 'L', false, 20);
+                                        $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.'_'.$id.'.pdf', 'I');
+                                        exit;
+                        }
+                    }
+
                 }elseif ($surat == 'KEMATIAN') {
             $pdf->Image('image/logohp.png', 18, 27, 43, 0, 'PNG');
             $pdf->SetFont('Arial','B',12);

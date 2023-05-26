@@ -13,6 +13,8 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "2.15",
         "laravel/tinker": "^2.5",
+        "maatwebsite/excel": "^1.1",
+        "phpoffice/phpspreadsheet": "dev-master",
         "realrashid/sweet-alert": "^6.0",
         "setasign/fpdf": "^1.8",
         "yajra/laravel-datatables-oracle": "^9.21"
@@ -20,6 +22,7 @@
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "friendsofphp/php-cs-fixer": "^3.14",
         "laravel/pint": "^1.10",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",

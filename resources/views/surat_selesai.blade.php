@@ -12,6 +12,10 @@
         <div class="card-body">
             <div class="header-atas">
                 <h5 class="font-weight-bold text-dark">Surat Selesai</h5>
+                @if ($akses == 'admin')
+                    <a class="btn btn-sm mb-2 btn-success icon-paper" style="color: white;" href="{{ url('/export') }}"> Export
+                        Excel</a>
+                @endif
             </div>
             <table id="myTable" class="table table-bordered">
                 <thead style="background-color: grey; color: white;">
@@ -32,13 +36,12 @@
                             <td>{{ $value->nik }}</td>
                             <td>{{ $value->nama_lengkap }}</td>
                             <td>{{ $value->nama_surat }}</td>
-                            <td>{{ $value->created_at }} Pukul {{ $value->created_at }}</td>
+                            <td>{{ $value->created_at }}</td>
                             <td>{{ $value->status }}</td>
                             <td>
-                                <a class="btn btn-secondary" style="background: #00AAAA; color: white;" data-toggle="modal"
-                                    data-target="#exampleModal{{ $value->nik }}" style="color: white;"
-                                    href="#">Detail
-                                    Surat</a>
+                                <a class="btn btn-secondary btn-sm" style="background: #00AAAA; color: white;"
+                                    data-toggle="modal" data-target="#exampleModal{{ $value->nik }}" style="color: white;"
+                                    href="#">Detail</a>
                             </td>
                         </tr>
                     @endforeach
@@ -65,7 +68,7 @@
                                 <input type="text" name="nik" class="form-control" value="{{ $value->nomor_surat }}"
                                     maxlength="50" required="">
                                 <span class="text-danger">
-                            </div>  
+                            </div>
                         @endif
                         <div class="form-group">
                             <label>NIK</label>
@@ -139,3 +142,20 @@
         </div>
     @endforeach
 @endsection
+
+
+<style>
+    .header-atas {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header h4 {
+        margin: 0;
+    }
+
+    .header button {
+        margin-left: auto;
+    }
+</style>
