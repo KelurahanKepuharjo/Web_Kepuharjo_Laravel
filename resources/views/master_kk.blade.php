@@ -3,28 +3,26 @@
 @include('sweetalert::alert')
 
 @section('content')
-    <div>
-        @if (session::has('success'))
-            <script>
-                toastr.success('Data Berhasil Ditambahkan', '')
-            </script>
-        @endif
-        @if (session::has('successedit'))
-            <script>
-                toastr.success('Data Berhasil Diperbarui', '')
-            </script>
-        @endif
-        @if ($errors->any())
-            <script>
-                toastr.error('Cek Kembali Data yang Anda Masukkan', 'Data Gagal Ditambahkan')
-            </script>
-        @endif
-    </div>
+    @if (session::has('success'))
+        <script>
+            toastr.success('Data Berhasil Ditambahkan', '')
+        </script>
+    @endif
+    @if (session::has('successedit'))
+        <script>
+            toastr.success('Data Berhasil Diperbarui', '')
+        </script>
+    @endif
+    @if ($errors->any())
+        <script>
+            toastr.error('Cek Kembali Data yang Anda Masukkan', 'Data Gagal Ditambahkan')
+        </script>
+    @endif
     <div class="card" style="border-radius: 2px;">
         <div class="card-body">
             <div class="header-atas">
                 <h5 class="font-weight-bold text-dark">Master KK</h5>
-                <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah
+                <button data-toggle="modal" name='tambah' data-target="#modal-tambahkk">Tambah
                     data</button>
             </div>
             <table id="myTable" class="table table-bordered">
@@ -418,6 +416,87 @@
     }
 </style>
 
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        readData()
+        $('#input').keyup(function() {
+            var strcari = $("#input").val();
+            if (strcari != "") {
+                $("#read").html('<p class="text-muted">Menunggu Mencari Data ...</p>')
+                $.ajax({
+                    type: "get",
+                    url: "{{ url('ajax') }}",
+                    data: "nik=" + strcari,
+                    success: function(data) {
+                        $("#read").html(data);
+                    }
+                });
+            } else {
+                readData()
+            }
+        });
+    });
+
+    function readData() {
+        $.get("{{ url('read') }}", {}, function(data, status) {
+            $("#read").html(data);
+        });
+    }
+</script>
+
+
+<script>
+    function isiTextfield(nilai) {
+        document.getElementById("input").value = nilai;
+    }
+
+    var input = document.querySelector('#input'); // mengambil elemen input
+
+    input.addEventListener('keyup', function(event) {
+        if (event.keyCode === 13) { // cek jika tombol yang ditekan adalah tombol "Enter"
+            event.preventDefault(); // membatalkan perilaku default tombol "Enter"
+            document.querySelector('form').submit(); // melakukan submit form
+        }
+    });
+</script>
+<script>
+    function isiTextfield2(nilai) {
+        document.getElementById("input2").value = nilai;
+    }
+
+    var input = document.querySelector('#input'); // mengambil elemen input
+
+    input.addEventListener('keyup', function(event) {
+        if (event.keyCode === 13) { // cek jika tombol yang ditekan adalah tombol "Enter"
+            event.preventDefault(); // membatalkan perilaku default tombol "Enter"
+            document.querySelector('form').submit(); // melakukan submit form
+        }
+    });
+</script>
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        white-space: nowrap;
+        min-width: 100%;
+    }
+
+    .header-atas {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header h4 {
+        margin: 0;
+    }
+
+    .header button {
+        margin-left: auto;
+    }
+</style>
 
 {{-- toast cdn --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"

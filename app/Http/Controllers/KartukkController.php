@@ -6,6 +6,8 @@ use App\Http\Requests\KartukkeditRequest;
 use App\Http\Requests\KartukkRequest;
 use App\Models\MobileMasterKksModel;
 use App\Models\MobileMasterMasyarakatModel;
+use Exception;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -15,7 +17,7 @@ class KartukkController extends Controller
     {
         $data = MobileMasterMasyarakatModel::with('masyarakat')->get();
 
-        return view('master_kk', compact('data'));
+        return view('master_kk', compact('data'))->with('success','');
     }
 
     public function update(Request $request, KartukkeditRequest $kartukkeditRequest, $id)
@@ -49,10 +51,17 @@ class KartukkController extends Controller
 
       public function simpanmasterkk(Request $request, KartukkRequest $kkrequest)
       {
-          $validated = $kkrequest->validated();
-          $data = MobileMasterKksModel::create($validated);
+        try {
+            $validated = $kkrequest->validated();
+            $data = MobileMasterKksModel::create($validated);
 
-          return redirect('simpankepala/'.$request->no_kk.'/'.$request->kepala_keluarga.'/'.$request->nik);
+            return redirect('simpankepala/'.$request->no_kk.'/'.$request->kepala_keluarga.'/'.$request->nik);
+        } catch (Exception $e) {
+            Log::error('Exception: ' . $e->getMessage());
+            // return redirect()->back()->withErrors('','')->withInput();
+            return response()->json(['error' => 'Data Kartu Keluarga Sudah Ditambahkan'], 500);
+        }
+
       }
 
     public function simpankepalakeluarga(Request $request, $id, $other_id, $nik)
@@ -69,8 +78,9 @@ class KartukkController extends Controller
             $data->status_keluarga = 'Kepala Keluarga';
             $data->save();
 
-            return Redirect('masterkk')->with('success', '');
+            return Redirect('masterkk')->with('success', 'Berhasil Disimpan');
         } catch (\Throwable $th) {
+
         }
 
         try {

@@ -37,7 +37,7 @@ class RtController extends Controller
             ->where('master_akuns.role', 'RT')
             ->first();
         if ($datacheck !== null) {
-            return redirect()->back()->with('errorrt', '');
+            return redirect()->back()->with('errorrt','');
         } else {
             $rt = new RwaksesModal();
             $data = $rt->Rw()
@@ -51,14 +51,14 @@ class RtController extends Controller
                 } elseif ($data->role == '4') {
                     $request->validate([
                         'no_hp' => 'required|min:10|max:13',
-                        'password' => 'required|min:8|max:8',
+                        'password' => 'required|min:8|max:8'
                     ], [
                         'no_hp.required' => 'Nomor Telepon Tidak Boleh Kosong',
                         'no_hp.min' => 'Nomor Telepon Minimal 10 Angka',
                         'no_hp.max' => 'Nomor Telepon Maksimal 13 Angka',
                         'password.required' => 'Password Tidak Boleh Kosong',
                         'password.min' => 'Password Minimal 8 Karakter, Terdapat Huruf dan Angka',
-                        'password.max' => 'Password Maxsimal 8 Karakter, Terdapat Huruf dan Angka',
+                        'password.max'=> 'Password Maxsimal 8 Karakter, Terdapat Huruf dan Angka'
                     ]);
                     $data = new master_akun();
                     $uuid = Str::uuid()->toString();
@@ -99,43 +99,41 @@ class RtController extends Controller
         }
     }
 
-public function ajax_rt(Request $request)
-{
-    $nik = $request->nik;
-    $results = DB::table('master_masyarakats')
-        ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
-        ->where('master_masyarakats.nik', 'like', '%'.$nik.'%')->get();
-    $c = count($results);
-    if ($c == 0) {
-        // jikaa data kosong
-        return '<p class="text-muted">Maaf, Data tidak ditemukan</p>';
-    } else {
-        // jika data ada
-        return view('ajax_pagert')->with([
-            'data' => $results,
-        ]);
+    public function ajax_rt(Request $request)
+    {
+        $nik = $request->nik;
+        $results = DB::table('master_masyarakats')
+            ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->where('master_masyarakats.nik', 'like', '%'.$nik.'%')->get();
+        $c = count($results);
+        if ($c == 0) {
+            return '<p class="text-muted">Maaf, Data tidak ditemukan</p>';
+        } else {
+            return view('ajax_pagert')->with([
+                'datart' => $results,
+            ]);
+        }
     }
-}
 
-public function read()
-{
-    return 'Silahkan Melakukan Pencarian Data';
-}
+    public function read()
+    {
+        return 'Silahkan Melakukan Pencarian Data';
+    }
 
-public function updatemasterrt(Request $request, $id)
-{
-    $passwordhash = $request->password;
-    $pass = Hash::make($passwordhash);
-    $data = DB::table('master_kks')
-        ->join('master_masyarakats', 'master_masyarakats.id', '=', 'master_kks.id')
-        ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
-        ->where('master_masyarakats.nik', $request->nik)
-        ->where('master_akuns.role', 'RT')
-        ->update([
-            'master_akuns.no_hp' => $request->no_hp,
-            'master_akuns.password' => $pass,
-        ]);
+    public function updatemasterrt(Request $request, $id)
+    {
+        $passwordhash = $request->password;
+        $pass = Hash::make($passwordhash);
+        $data = DB::table('master_kks')
+            ->join('master_masyarakats', 'master_masyarakats.id', '=', 'master_kks.id')
+            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
+            ->where('master_masyarakats.nik', $request->nik)
+            ->where('master_akuns.role', 'RT')
+            ->update([
+                'master_akuns.no_hp' => $request->no_hp,
+                'master_akuns.password' => $pass,
+            ]);
 
-    return Redirect('masterrt/'.$request->rt)->with('successedit', '');
-}
+        return Redirect('masterrt/'.$request->rt)->with('successedit', '');
+    }
 }

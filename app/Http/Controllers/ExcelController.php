@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Models\PengajuanModel;
 use Carbon\Carbon;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class ExcelController extends Controller
 {
@@ -27,8 +26,8 @@ class ExcelController extends Controller
 
         $row = 2;
         foreach ($data as $item) {
-            $sheet->setCellValue('A' . $row, $item->nama_lengkap);
-            $sheet->setCellValue('B' . $row, $item->agama);
+            $sheet->setCellValue('A'.$row, $item->nama_lengkap);
+            $sheet->setCellValue('B'.$row, $item->agama);
             // ...
 
             $row++;

@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\ApiPengajuanController;
-use App\Http\Controllers\ApiSuratController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\ApiBeritaController;
+use App\Http\Controllers\ApiPengajuanController;
+use App\Http\Controllers\ApiSuratController;
 use Illuminate\Support\Facades\Route;
 
 /*

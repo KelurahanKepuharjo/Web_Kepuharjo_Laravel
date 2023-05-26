@@ -19,7 +19,6 @@ class MobileMasterMasyarakatModel extends Model
         return $this->belongsTo(MobileMasterKksModel::class, 'id', 'id');
     }
 
-
     protected $fillable = [
         'id_masyarakat', 'nik', 'nama_lengkap', 'jenis_kelamin', 'tempat_lahir',
         'tgl_lahir', 'agama', 'pendidikan', 'pekerjaan', 'golongan_darah', 'status_perkawinan', 'tgl_perkawinan',

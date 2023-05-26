@@ -25,8 +25,6 @@
         <div class="card-body">
             <div class="header-atas">
                 <h5 class="font-weight-bold text-dark">Master Akun User</h5>
-                <button data-toggle="modal" name='tambah' data-target="#modal-tambah">Tambah
-                    data</button>
             </div>
             <table id="myTable" class="table table-bordered">
                 <thead style="background-color: grey; color: white;">
@@ -129,8 +127,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <a type="button" onclick="showNotification()"
-                            href="{{ url($value->nik . '/hapus-masteruser') }}" class="btn btn-danger">Hapus</a>
+                        <a type="button" onclick="showNotification()" href="{{ url($value->nik . '/hapus-masteruser') }}"
+                            class="btn btn-danger">Hapus</a>
                     </div>
                 </div>
             </div>
@@ -144,20 +142,6 @@
         border-collapse: collapse;
         white-space: nowrap;
         min-width: 100%;
-    }
-
-    .header-atas {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .header h4 {
-        margin: 0;
-    }
-
-    .header button {
-        margin-left: auto;
     }
 </style>
 

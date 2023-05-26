@@ -92,13 +92,13 @@ class KepuharjoController extends Controller
         $imageName = time().'.'.request()->image->getClientOriginalExtension();
         request()->image->move(public_path('images'), $imageName);
         $data = DB::table('master_masyarakats')
-        ->join('master_akuns','master_akuns.id_masyarakat','master_masyarakats.id_masyarakat')
-        ->where('master_masyarakats.nik','=', $request->nik)
-        ->update([
-            'master_akuns.image' => $imageName,
-        ]);
+            ->join('master_akuns', 'master_akuns.id_masyarakat', 'master_masyarakats.id_masyarakat')
+            ->where('master_masyarakats.nik', '=', $request->nik)
+            ->update([
+                'master_akuns.image' => $imageName,
+            ]);
 
-       return redirect()->back()->with('successedit','');
+        return redirect()->back()->with('successedit', '');
     }
 
     public function logout()

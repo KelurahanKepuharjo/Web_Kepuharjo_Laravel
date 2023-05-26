@@ -1,4 +1,4 @@
-@foreach ($data as $item)
+@foreach ($datart as $item)
     <form action="{{ url('simpanrt/' . $item->nik) }}" method="post">
         @csrf
         <div class="modal-body">
@@ -16,19 +16,19 @@
             </div>
             <div class="form-group">
                 <label>Alamat</label>
-                <input type="text" name="alamat" class="form-control" value="{{ $item->masyarakat->alamat }}" maxlength="50"
+                <input type="text" name="alamat" class="form-control" value="{{ $item->alamat }}" maxlength="50"
                     required="" autocomplete="off">
             </div>
             <div class="form-group">
                 <div class="row">
                     <div class="col">
                         <label for="">RT</label>
-                        <input type="text" name="rt" value="{{ $item->masyarakat->rt }} "class="form-control"
+                        <input type="text" name="rt" value="{{ $item->rt }} "class="form-control"
                             placeholder="RT" autocomplete="off">
                     </div>
                     <div class="col">
                         <label for="">RW</label>
-                        <input type="text" name="rw" value="{{ $item->masyarakat->rw }}" class="form-control"
+                        <input type="text" name="rw" value="{{ $item->rw }}" class="form-control"
                             placeholder="RW">
                     </div>
                 </div>
@@ -49,9 +49,9 @@
                         class="form-control @error('password') is-invalid
                 @enderror" value=""
                         maxlength="50" autocomplete="off">
-                        @error('password')
+                    @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                    @enderror
                 </div>
             </div>
             <div class="modal-footer">

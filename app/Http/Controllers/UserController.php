@@ -11,6 +11,7 @@ class UserController extends Controller
     {
         $data = MobileMasterAkunModel::with('user')
             ->where('role', '=', '4')->get();
+
         return view('master_user', compact('data'));
     }
 

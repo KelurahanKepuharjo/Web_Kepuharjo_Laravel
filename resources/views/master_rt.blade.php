@@ -86,7 +86,6 @@
         </div>
     </div>
 
-
     <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -266,7 +265,7 @@
                 $("#read").html('<p class="text-muted">Menunggu Mencari Data ...</p>')
                 $.ajax({
                     type: "get",
-                    url: "{{ url('ajaxrt') }}",
+                    url: "{{ url('/ajaxrt') }}",
                     data: "nik=" + strcari,
                     success: function(data) {
                         $("#read").html(data);
@@ -279,7 +278,7 @@
     });
 
     function readData() {
-        $.get("{{ url('readrt') }}", {}, function(data, status) {
+        $.get("{{ url('read') }}", {}, function(data, status) {
             $("#read").html(data);
         });
     }

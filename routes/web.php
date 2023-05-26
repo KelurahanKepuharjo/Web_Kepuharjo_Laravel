@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\KartukkController;
 use App\Http\Controllers\KepuharjoController;
 use App\Http\Controllers\LoginController;
@@ -13,9 +14,6 @@ use App\Http\Controllers\StatusPdfController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExcelController;
-
-
 
 /*
 |--------------------------------------------------------------------------

@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\MobileMasterAkunModel;
+use App\Models\MobileMasterKksModel;
 use App\Models\MobileMasterMasyarakatModel;
+use App\Models\RwaksesModal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +22,13 @@ class RwController extends Controller
         return view('master_rw', compact('datartrw'));
     }
 
+    public function hapusmasterrw(Request $request, $id)
+    {
+        $data = MobileMasterKksModel::where('nik', $id);
+        $data->delete();
+
+        return Redirect('masterrw');
+    }
 
     public function ajax(Request $request)
     {
@@ -42,14 +52,18 @@ class RwController extends Controller
 
     public function simpanmasterrw(Request $request, $id)
     {
-        $datacheck = MobileMasterAkunModel::with('masyarakat')
+        $datacheck = DB::table('master_kks')
+            ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
+            ->join('master_akuns', 'master_akuns.id_masyarakat', 'master_masyarakats.id_masyarakat')
             ->where('master_kks.rw', $request->rw)
             ->where('master_akuns.role', 'RW')
             ->first();
         if ($datacheck !== null) {
             return Redirect('masterrw')->with('errorissetrw', '');
         } else {
-            $data = MobileMasterAkunModel::with('user')
+            // dd('data bisa ditamabhkan');
+            $rw = new RwaksesModal();
+            $data = $rw->Rw()
                 ->where('nik', $id)
                 ->first();
             if ($data) {
@@ -112,7 +126,9 @@ class RwController extends Controller
     {
         $passwordhash = $request->password;
         $pass = Hash::make($passwordhash);
-        $data = MobileMasterAkunModel::with('user')
+        $data = DB::table('master_kks')
+            ->join('master_masyarakats', 'master_masyarakats.id', '=', 'master_kks.id')
+            ->join('master_akuns', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
             ->where('master_masyarakats.nik', $request->nik)
             ->where('master_akuns.role', 'RW')
             ->update([
@@ -122,13 +138,4 @@ class RwController extends Controller
 
         return Redirect('masterrw')->with('successedit', '');
     }
-
-     // public function hapusmasterrw(Request $request, $id)
-    // {
-    //     $data = master_rtrw::where('nik', $id);
-    //     $data->delete();
-
-    //     return Redirect('masterrw');
-    // }
-
 }
