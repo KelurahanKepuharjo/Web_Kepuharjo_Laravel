@@ -2910,12 +2910,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "9a13f526c53abb9cac00fc5a644bcfcd966e644d"
+                "reference": "b8191244d51711e66ba5f2439c474475abd73905"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/9a13f526c53abb9cac00fc5a644bcfcd966e644d",
-                "reference": "9a13f526c53abb9cac00fc5a644bcfcd966e644d",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/b8191244d51711e66ba5f2439c474475abd73905",
+                "reference": "b8191244d51711e66ba5f2439c474475abd73905",
                 "shasum": ""
             },
             "require": {
@@ -3008,7 +3008,7 @@
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
                 "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/master"
             },
-            "time": "2023-05-25T20:05:55+00:00"
+            "time": "2023-05-27T14:54:12+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -9567,9 +9567,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "phpoffice/phpspreadsheet": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
