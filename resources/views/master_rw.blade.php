@@ -31,7 +31,7 @@
         @endif
         @if ($errors->any())
             <script>
-                toastr.error('Data Yang Anda Masukkan Salah', 'Data Gagal Ditambahkan')
+                toastr.error('Cek Kembali Nomor HP dan Passwors', 'Data Gagal Ditambahkan')
             </script>
         @endif
 

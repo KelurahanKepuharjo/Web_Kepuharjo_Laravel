@@ -21,6 +21,11 @@
             toastr.error('Cek Kembali Data yang Anda Masukkan', 'Data Gagal Ditambahkan')
         </script>
     @endif
+    @if (session::has('exist'))
+        <script>
+            toastr.error('Data Gagal Ditambahkan', 'Nomor KK sudah Ada')
+        </script>
+    @endif
     <div class="card" style="border-radius: 2px;">
         <div class="card-body">
             <div class="header-atas">

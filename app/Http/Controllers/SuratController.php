@@ -17,6 +17,13 @@ class SuratController extends Controller
 
     public function store(SuratRequest $suratrequest)
     {
+        $validated = $suratrequest->id_surat;
+        $check = MobileMasterSuratModel::all();
+        foreach ($check as  $value) {
+            if ($value->id_surat == $validated) {
+                return redirect()->back()->with('exist','')->withInput();
+            }
+        }
         $imageName = time().'.'.$suratrequest->image->getClientOriginalExtension();
         $suratrequest->image->move(public_path('images'), $imageName);
         $validated['image'] = $imageName;

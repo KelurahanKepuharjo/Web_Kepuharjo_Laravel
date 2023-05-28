@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class RwController extends Controller
 {
@@ -72,7 +73,7 @@ class RwController extends Controller
                 } elseif ($data->role == 'RW') {
                     return Redirect('masterrw')->with('errorrw', '');
                 } elseif ($data->role == '4') {
-                    $request->validate([
+                    $validator = Validator::make($request->all(), [
                         'no_hp' => 'required|min:10|max:13',
                         'password' => 'required|min:8|max:8',
                     ], [
@@ -83,11 +84,15 @@ class RwController extends Controller
                         'password.min' => 'Password Minimal 8 Karakter, Terdapat Huruf dan Angka',
                         'password.max' => 'Password Maxsimal 8 Karakter, Terdapat Huruf dan Angka',
                     ]);
+                    if ($validator->fails()) {
+                        // Jika validasi gagal, lakukan tindakan yang sesuai
+                        return redirect()->back()->withErrors($validator)->withInput();
+                    }
                     $data = new MobileMasterAkunModel();
                     $uuid = Str::uuid()->toString();
                     $data->id = $uuid;
-                    $data->no_hp = $request->no_hp;
-                    $passwordhash = $request->password;
+                    $data->no_hp =  $validator->validated()['no_hp'];
+                    $passwordhash = $validator->validated()['password'];
                     $data->password = Hash::make($passwordhash);
                     $data->role = 'RW';
                     $data->id_masyarakat = $request->id_masyarakat;
@@ -100,22 +105,30 @@ class RwController extends Controller
                     ->join('master_kks', 'master_kks.id', '=', 'master_masyarakats.id')
                     ->where('master_masyarakats.nik', '=', $id)
                     ->first();
-                $request->validate([
-                    'no_hp' => 'required|min:10|max:13',
-                ], [
-                    'no_hp.required' => 'Nomor Telepon Tidak Boleh Kosong',
-                    'no_hp.min' => 'Nomor Telepon Minimal 10 Angka',
-                    'no_hp.max' => 'Nomor Telepon Maksimal 13 Angka',
-                ]);
-                $data = new MobileMasterAkunModel();
-                $uuid = Str::uuid()->toString();
-                $data->id = $uuid;
-                $data->no_hp = $request->no_hp;
-                $passwordhash = $request->password;
-                $data->password = Hash::make($passwordhash);
-                $data->role = 'RW';
-                $data->id_masyarakat = $request->id_masyarakat;
-                $data->save();
+                    $validator = Validator::make($request->all(), [
+                        'no_hp' => 'required|min:10|max:13',
+                        'password' => 'required|min:8|max:8',
+                    ], [
+                        'no_hp.required' => 'Nomor Telepon Tidak Boleh Kosong',
+                        'no_hp.min' => 'Nomor Telepon Minimal 10 Angka',
+                        'no_hp.max' => 'Nomor Telepon Maksimal 13 Angka',
+                        'password.required' => 'Password Tidak Boleh Kosong',
+                        'password.min' => 'Password Minimal 8 Karakter, Terdapat Huruf dan Angka',
+                        'password.max' => 'Password Maxsimal 8 Karakter, Terdapat Huruf dan Angka',
+                    ]);
+                    if ($validator->fails()) {
+                        // Jika validasi gagal, lakukan tindakan yang sesuai
+                        return redirect()->back()->withErrors($validator)->withInput();
+                    }
+                    $data = new MobileMasterAkunModel();
+                    $uuid = Str::uuid()->toString();
+                    $data->id = $uuid;
+                    $data->no_hp =  $validator->validated()['no_hp'];
+                    $passwordhash = $validator->validated()['password'];
+                    $data->password = Hash::make($passwordhash);
+                    $data->role = 'RW';
+                    $data->id_masyarakat = $request->id_masyarakat;
+                    $data->save();
 
                 return Redirect('masterrw')->with('success', '');
             }

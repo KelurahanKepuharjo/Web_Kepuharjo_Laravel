@@ -51,8 +51,6 @@ class KartukkController extends Controller
 
       public function simpanmasterkk(Request $request, KartukkRequest $kkrequest)
       {
-
-
             $validated = $kkrequest->validated();
             $check = MobileMasterKksModel::all();
             foreach ($check as  $value) {
@@ -60,7 +58,6 @@ class KartukkController extends Controller
                     return redirect()->back()->with('exist','');
                 }
             }
-
             $data = MobileMasterKksModel::create($validated);
             return redirect('simpankepala/'.$request->no_kk.'/'.$request->kepala_keluarga.'/'.$request->nik);
       }

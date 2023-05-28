@@ -41,7 +41,6 @@ class ApiPengajuanController extends Controller
                 ], 400);
             } else {
                 $data = MobilePengajuanSuratModel::create([
-                    'id' => Str::uuid(),
                     'keterangan' => $request->keterangan,
                     'status' => 'Diajukan',
                     'info' => 'active',

@@ -21,6 +21,7 @@ class MasyarakatController extends Controller
 
     public function simpanmasteruser(Request $request)
     {
+
         $this->validate($request, [
         ]);
         $request->validate([
@@ -56,6 +57,13 @@ class MasyarakatController extends Controller
             'nama_ayah.required' => 'Nama Ayah Tidak Boleh Kosong',
             'nama_ibu.required' => 'Nama Ibu Tidak Boleh Kosong',
         ]);
+        $validated = $request->nik;
+        $check = MobileMasterMasyarakatModel::all();
+        foreach ($check as  $value) {
+            if ($value->nik == $validated) {
+                return redirect()->back()->with('exist','')->withInput();
+            }
+        }
         try {
             $data = new MobileMasterMasyarakatModel();
             $uuid = Str::uuid()->toString();
