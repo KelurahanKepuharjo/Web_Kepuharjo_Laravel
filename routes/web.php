@@ -114,6 +114,7 @@ Route::middleware('auth.auth')->group(function () {
         Route::get('hapus-berita/{id}', 'delete');
         Route::post('update-berita/{id}', 'update');
         Route::post('/simpanberita', 'store')->name('simpanberita');
+        Route::patch('updateimageberita/{id}', 'updateimage');
     });
 
     // Route Master Surat
@@ -122,6 +123,7 @@ Route::middleware('auth.auth')->group(function () {
         Route::get('hapussurat/{id}', 'delete');
         Route::post('/simpansurat', 'store')->name('simpansurat');
         Route::post('/editsurat/{id}', 'update');
+        Route::patch('updateimage/{id}', 'updateimage');
     });
 
     Route::get('generate-pdf/{id}', [PdfController::class, 'generatePDF']);

@@ -51,7 +51,7 @@
                         <td class="text-lg">{{ $value->sub_title }}</td>
                         <td class="text-lg">{{ $value->deskripsi }}</td>
                         <td><img style="width: 100px; height: 100px;  border-radius: 5%;"
-                                src="{{ asset('images/' . $value->image) }}">
+                                src="{{ asset('image/' . $value->image) }}">
                         </td>
                         <td>
                             <div class="row">
@@ -144,31 +144,30 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ url('update-berita/' . $value->id) }}" method="post" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body">
-                    <form action="{{ url('update-berita/' . $value->id) }}" method="post" enctype="multipart/form-data">
-                        @csrf
+            <div class="modal-body">
+                <form action="{{ url('updateimageberita/' . $value->id) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method('PATCH')
                     <label for="">Gambar Berita</label>
                     <div class="form-group">
-                        <img width="100%;" height="100%;" src="{{ asset('images/' . $value->image) }}" alt="">
+                        <img width="100%;" height="100%;" src="{{ asset('image/' . $value->image) }}" alt="">
                     </div>
-                    <form action="{{ url('update-berita/' . $value->id) }}" method="post" enctype="multipart/form-data">
-                        <div class="row form-group">
-                            <div class="col-md-9">
-                                <input type="file" name="image" class="form-control  @error('image')is-invalid
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <input type="file" name="image" class="form-control  @error('image')is-invalid
                                     @enderror">
-                                @error('image')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-2 ml-3 mt-1">
-                                <button type="submit" class="btn btn-Success">Update</button>
-                            </div>
-
+                            @error('image')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                    </form>
-                    </form>
+                        <div class="col-md-2 ml-3 mt-1">
+                            <button type="submit" class="btn btn-Success">Update</button>
+                        </div>
+
+                    </div>
+                </form>
+                <form action="{{ url('update-berita/' . $value->id) }}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <label for="">Judul Berita</label>
                     <div class="form-group">
                         <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror"
@@ -201,9 +200,8 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-Success">Simpan</button>
                     </div>
-
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>

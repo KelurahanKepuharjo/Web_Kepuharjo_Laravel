@@ -27,7 +27,7 @@ class BeritaRequest extends FormRequest
             'judul' => 'required',
             'sub_title' => 'required',
             'deskripsi' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
@@ -37,7 +37,7 @@ class BeritaRequest extends FormRequest
             'judul.required' => 'Judul harus diisi',
             'sub_title.required' => 'Sub Judul harus diisi',
             'deskripsi.required' => 'Isi Berita harus diisi',
-            'image.required' => 'Gambar Berita harus diisi',
+            // 'image.required' => 'Gambar Berita harus diisi',
         ];
     }
 }

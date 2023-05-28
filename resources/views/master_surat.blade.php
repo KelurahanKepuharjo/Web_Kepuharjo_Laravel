@@ -53,7 +53,7 @@
                             <td class="text-lg">{{ $no + 1 }}</td>
                             <td class="text-lg">SURAT KETERANGAN {{ $value->nama_surat }}</td>
                             <td><img style="width: 30px; height: 30px;  border-radius: 5%;"
-                                    src="{{ asset('images/' . $value->image) }}">
+                                    src="{{ asset('image/' . $value->image) }}">
                             </td>
                             <td>
                                 <div class="row">
@@ -129,67 +129,74 @@
     </div>
 
 
-    @foreach ($data as $no => $value)
-        <div class="modal fade" id="modal-editsurat{{ $value->id_surat }}" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true" autocomplete="off">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Master Surat</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+{{-- Modal Edit Surat --}}
+@foreach ($data as $no => $value)
+<div class="modal fade" id="modal-editsurat{{ $value->id_surat }}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" autocomplete="off">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Master Surat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url('updateimage/' . $value->id_surat) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PATCH')
+                    <label for="">Ikon Surat</label>
+                    <div class="form-group">
+                        <img width="100%;" height="100%;" src="{{ asset('image/' . $value->image) }}" alt="">
                     </div>
-                    <form action="{{ url('editsurat/' . $value->id_surat) }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal-body">
-                            <label for="">Ikon Surat</label>
-                            <div class="form-group">
-                                <img width="100%;" height="100%;" src="{{ asset('images/' . $value->image) }}" alt="">
-                            </div>
-                            <div class="form-group">
-                                <input type="file" name="image"
-                                    class="form-control  @error('image')is-invalid
-                                @enderror">
-                                @error('image')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <label for="">Id Surat</label>
-                            <div class="form-group">
-                                <label for="nomor-kartu"></label>
-                                <input type="number" name="id_surat"
-                                    class="form-control  @error('id_surat')is-invalid
-                                @enderror"
-                                    value="{{ old('id_surat', $value->id_surat) }}" placeholder="Id Surat"
-                                    autocomplete="off">
-                                @error('id_surat')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <label for="">Nama Surat</label>
-                            <div class="form-group">
-                                <label for="nomor-kartu"></label>
-                                <input type="text" name="nama_surat"
-                                    class="form-control @error('nama_surat')is-invalid
-                                @enderror"
-                                    value="{{ old('nama_surat', $value->nama_surat) }}" placeholder="Jenis Surat"
-                                    autocomplete="off">
-                                @error('nama_surat')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <input type="file" name="image" class="form-control @error('image')is-invalid
+                            @enderror">
+                            @error('image')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-Success"
-                                style="background-color: rgb(0, 189, 0); color: white;">Simpan</button>
+                        <div class="col-md-2 ml-3 mt-1">
+                            <button type=" submit" class="btn btn-Success"
+                                style="background-color: rgb(0, 189, 0); color: white;">Update</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+                <form action="{{ url('editsurat/' . $value->id_surat) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <label for="">Id Surat</label>
+                    <div class="form-group">
+                        <label for="nomor-kartu"></label>
+                        <input type="number" name="id_surat" class="form-control  @error('id_surat')is-invalid
+                                @enderror" value="{{ old('id_surat', $value->id_surat) }}" placeholder="Id Surat"
+                            autocomplete="off" readonly>
+                        @error('id_surat')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <label for="">Nama Surat</label>
+                    <div class="form-group">
+                        <label for="nomor-kartu"></label>
+                        <input type="text" name="nama_surat" class="form-control @error('nama_surat')is-invalid
+                                @enderror" value="{{ old('nama_surat', $value->nama_surat) }}"
+                            placeholder="Jenis Surat" autocomplete="off">
+                        @error('nama_surat')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-Success"
+                            style="background-color: rgb(0, 189, 0); color: white;">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
-    @endforeach
+    </div>
+</div>
+@endforeach
+{{-- Batas Modal Edit Berita --}}
 
     @foreach ($data as $no => $value)
         <div class="modal fade" id="modal-hapus{{ $value->id_surat }}" tabindex="-1" role="dialog"

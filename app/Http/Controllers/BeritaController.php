@@ -18,7 +18,7 @@ class BeritaController extends Controller
     public function store(BeritaRequest $beritaRequest)
     {
         $imageName = time().'.'.$beritaRequest->image->getClientOriginalExtension();
-        $beritaRequest->image->move(public_path('images'), $imageName);
+        $beritaRequest->image->move(public_path('image'), $imageName);
         $validated['image'] = $imageName;
         $validated = $beritaRequest->validated();
         $Berita = MobileBeritaModel::create([
@@ -35,15 +35,35 @@ class BeritaController extends Controller
     {
         // dd($beritaRequest);
         $berita = MobileBeritaModel::where('id', $id)->first();
-        $imageName = time().'.'.$beritaRequest->image->getClientOriginalExtension();
-        $beritaRequest->image->move(public_path('images'), $imageName);
-        $validated['image'] = $imageName;
+        // $imageName = time().'.'.$beritaRequest->image->getClientOriginalExtension();
+        // $beritaRequest->image->move(public_path('images'), $imageName);
+        // $validated['image'] = $imageName;
         $validated = $beritaRequest->validated();
         $berita->update([
             'judul' => $validated['judul'],
             'sub_title' => $validated['sub_title'],
             'deskripsi' => $validated['deskripsi'],
-            'image' => $imageName,
+
+        ]);
+
+        return back()->with('successedit', '');
+    }
+
+    public function updateimage(Request $beritaRequest, $id){
+        request()->validate([
+            'image' => 'required|image|mimes: jpeg,png,jpg,gif,svg|max:2048'
+        ],
+        [
+            'image.required' => 'Gambar Surat Harus diisi',
+            'image.mimes' => 'Format Ikon Harus jpeg,png,jpg,gif,svg',
+            'image.max'=> 'Ukuran Ikon Maksimal 2 Mb'
+        ]);
+
+        $imageName = time().'.'.$beritaRequest->image->getClientOriginalExtension();
+        $beritaRequest->image->move(public_path('image'), $imageName);
+        $berita = MobileBeritaModel::where('id', $id);
+        $berita->update([
+            'image' => $imageName
         ]);
 
         return back()->with('successedit', '');
