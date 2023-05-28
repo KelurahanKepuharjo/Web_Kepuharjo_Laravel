@@ -91,9 +91,11 @@ class StatusPdfController extends Controller
 
                     ",
                 0, 'L', false, 20);
+                $outputPath = public_path('nama_folder/nama_file.pdf');
 
-            $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.'_'.$id.'.pdf', 'I');
-            exit;
+                // Output file PDF ke path yang ditentukan
+                $pdf->Output($outputPath, 'F');
+
         }
 
         foreach ($data as $value) {
@@ -104,14 +106,10 @@ class StatusPdfController extends Controller
                 ->first();
             $dataupdate->update([
                 'pengajuan_surats.status' => 'Selesai',
-                'pengajuan_surats.file_pdf' => $value->nama_lengkap.'_'.$value->nik.'_'.'_'.$id.'.pdf',
+                'pengajuan_surats.file_pdf' => $value->nama_lengkap.'_'.$value->nik.'_'.$id.'.pdf',
             ]);
 
             return redirect('/suratmasuk')->with('successedit', '');
         }
-
-        // $pdf->Output('I', 'example.pdf');
-        // $pdf->Output();
-        // $pdf->Output(public_path('example.pdf'), 'F');
     }
 }
