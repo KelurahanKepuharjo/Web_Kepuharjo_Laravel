@@ -11,9 +11,9 @@ class MobilePengajuanSuratModel extends Model
 
     protected $table = 'pengajuan_surats';
 
-    protected $fillable = ['id_masyarakat', 'id_surat', 'keterangan', 'created_at', 'uuid', 'status', 'file_pdf'];
+    protected $fillable = ['id_masyarakat', 'id_surat', 'keterangan', 'id', 'status', 'file_pdf', 'info', 'image_kk', 'image_bukti'];
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function akun()
     {

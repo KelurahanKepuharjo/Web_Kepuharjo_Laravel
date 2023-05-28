@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\MobileMasterKksModel;
 use App\Models\MobileMasterMasyarakatModel;
 use App\Models\MobilePengajuanSuratModel;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -14,15 +13,16 @@ class ApiPengajuanController extends Controller
 {
     public function pengajuan(Request $request)
     {
-        $now = Carbon::now();
         $request->validate([
             'nik' => 'required',
             'keterangan' => 'required',
             'id_surat' => 'required',
+            'image_kk' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image_bukti' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
         $masyarakat = MobileMasterMasyarakatModel::where('nik', $request->nik)->first();
 
-        if (! $masyarakat) {
+        if (!$masyarakat) {
             return response()->json([
                 'message' => 'Nik tidak ditemukan',
             ], 400);
@@ -31,25 +31,34 @@ class ApiPengajuanController extends Controller
         $existingSurat = MobilePengajuanSuratModel::where('id_surat', $request->id_surat)
             ->where('id_masyarakat', $masyarakat->id_masyarakat)
             ->first();
+        $imagekk = $request->file('image_kk');
+        $imagebukti = $request->file('image_bukti');
 
-        if (! $existingSurat) {
+        $imagenamekk = Str::random(10) . time() . '.' . $imagekk->getClientOriginalExtension();
+        $imagenamebukti = Str::random(10) . time() . '.' . $imagebukti->getClientOriginalExtension();
+
+        $imagekk->move(public_path('images/'), $imagenamekk);
+        $imagebukti->move(public_path('images/'), $imagenamebukti);
+        if (!$existingSurat) {
             $data = MobilePengajuanSuratModel::create([
-                'uuid' => Str::uuid(),
+                'id' => Str::uuid(),
                 'status' => 'Diajukan',
                 'keterangan' => $request->keterangan,
                 'id_surat' => $request->id_surat,
-                'created_at' => $now,
+                'info' => 'active',
+                'image_kk' => $imagenamekk,
+                'image_bukti' => $imagenamebukti,
                 'id_masyarakat' => $masyarakat->id_masyarakat,
             ]);
 
             return response()->json([
                 'message' => 'Berhasil mengajukan surat',
-                'data' => $data,
+                'data' => $data
             ], 200);
         } else {
             $cek = MobilePengajuanSuratModel::where('id_surat', $request->id_surat)
                 ->where('id_masyarakat', $masyarakat->id_masyarakat)
-                ->whereIn('status', ['Selesai', 'Ditolak RT', 'Ditolak RW'], 'and', true)
+                ->where('info', 'active')
                 ->exists();
 
             if ($cek) {
@@ -58,17 +67,19 @@ class ApiPengajuanController extends Controller
                 ], 400);
             } else {
                 $data = MobilePengajuanSuratModel::create([
-                    'uuid' => Str::uuid(),
+                    'id' => Str::uuid(),
                     'status' => $request->status,
                     'keterangan' => 'Diajukan',
+                    'info' => 'active',
                     'id_surat' => $request->id_surat,
-                    'created_at' => $now,
+                    'image_kk' => $imagenamekk,
+                    'image_bukti' => $imagenamebukti,
                     'id_masyarakat' => $masyarakat->id_masyarakat,
                 ]);
 
                 return response()->json([
                     'message' => 'Berhasil mengajukan surat',
-                    'data' => $data,
+                    'data' => $data
                 ], 200);
             }
         }
@@ -146,17 +157,14 @@ class ApiPengajuanController extends Controller
             $query->where('id_masyarakat', $id_masyarakat);
         })->value('no_kk');
 
-        // menggunakan query builder
-        $pengajuan_surats = DB::table('pengajuan_surats')
-            ->join('master_surats', 'pengajuan_surats.id_surat', '=', 'master_surats.id_surat')
-            ->join('master_masyarakats', 'pengajuan_surats.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
-            ->join('master_kks', 'master_masyarakats.id', '=', 'master_kks.id')
-            ->where(function ($query) use ($id_masyarakat, $no_kk) {
-                $query->where('pengajuan_surats.id_masyarakat', $id_masyarakat)
-                    ->orWhere('master_kks.no_kk', '=', $no_kk);
-            })
-            ->whereNotIn('pengajuan_surats.status', ['Selesai', 'Diajukan', 'Dibatalkan', 'Ditolak RT', 'Ditolak RW'])
-            ->select('pengajuan_surats.*', 'master_masyarakats.*', 'master_surats.*')
+        $pengajuan_surats = MobilePengajuanSuratModel::with('surat', 'akun.masyarakat')
+        ->where(function ($query) use ($id_masyarakat, $no_kk) {
+            $query->where('id_masyarakat', $id_masyarakat)
+                ->orWhereHas('akun.masyarakat', function ($query) use ($no_kk) {
+                    $query->where('no_kk', $no_kk);
+                });
+        })
+            ->whereNotIn('status', ['Selesai', 'Diajukan', 'Dibatalkan', 'Ditolak RT'])
             ->get();
 
         return response()->json([
@@ -164,6 +172,7 @@ class ApiPengajuanController extends Controller
             'data' => $pengajuan_surats,
         ], 200);
     }
+
 
     public function statusdiajukan(Request $request)
     {
@@ -175,17 +184,14 @@ class ApiPengajuanController extends Controller
             $query->where('id_masyarakat', $id_masyarakat);
         })->value('no_kk');
 
-        // menggunakan query builder
-        $pengajuan_surats = DB::table('pengajuan_surats')
-            ->join('master_surats', 'pengajuan_surats.id_surat', '=', 'master_surats.id_surat')
-            ->join('master_masyarakats', 'pengajuan_surats.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
-            ->join('master_kks', 'master_masyarakats.id', '=', 'master_kks.id')
-            ->where(function ($query) use ($id_masyarakat, $no_kk) {
-                $query->where('pengajuan_surats.id_masyarakat', $id_masyarakat)
-                    ->orWhere('master_kks.no_kk', '=', $no_kk);
-            })
-            ->where('pengajuan_surats.status', $status)
-            ->select('pengajuan_surats.*', 'master_masyarakats.*', 'master_surats.*')
+        $pengajuan_surats = MobilePengajuanSuratModel::with('surat', 'akun.kks')
+        ->where(function ($query) use ($id_masyarakat, $no_kk) {
+            $query->where('id_masyarakat', $id_masyarakat)
+                ->orWhereHas('akun.kks', function ($query) use ($no_kk) {
+                    $query->where('no_kk', $no_kk);
+                });
+        })
+            ->where('status', $status)
             ->get();
 
         return response()->json([
@@ -230,7 +236,7 @@ class ApiPengajuanController extends Controller
         ]);
         $masyarakat = MobileMasterMasyarakatModel::where('nik', $request->nik)->first();
 
-        if (! $masyarakat) {
+        if (!$masyarakat) {
             return response()->json([
                 'message' => 'Nik tidak ditemukan',
             ], 400);
@@ -238,7 +244,7 @@ class ApiPengajuanController extends Controller
         $existingSurat = MobilePengajuanSuratModel::where('id_surat', $request->id_surat)
             ->where('id_masyarakat', $masyarakat->id_masyarakat)
             ->first();
-        if (! $existingSurat) {
+        if (!$existingSurat) {
             return response()->json([
                 'message' => 'Surat tidak ditemukan',
             ], 400);
@@ -248,7 +254,7 @@ class ApiPengajuanController extends Controller
         $pengajuan_surat = MobilePengajuanSuratModel::where('id_surat', $request->id_surat)
             ->where('id_masyarakat', $masyarakat->id_masyarakat)
             ->where('status', 'Diajukan')
-            ->update(['status' => 'Dibatalkan']);
+            ->update(['status' => 'Dibatalkan', 'info' => 'active']);
 
         if ($pengajuan_surat) {
             return response()->json([
