@@ -103,7 +103,7 @@ class PdfController extends Controller
                                                                                         NIP. 19720202 199803 1 010
                                                 ",
                             0, 'L', false, 20);
-                        $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.'_'.$id.'.pdf', 'I');
+                        $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.$user->nama_surat.'.pdf', 'D');
                         exit;
                     }
                 }
@@ -250,7 +250,7 @@ class PdfController extends Controller
 
                     ",
                     0, 'L', false, 20);
-                $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.'_'.$id.'.pdf', 'I');
+                    $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.$user->nama_surat.'.pdf', 'D');
                 exit;
             }
         }
@@ -325,7 +325,7 @@ class PdfController extends Controller
 
                     ",
                 0, 'L', false, 20);
-            $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.'_'.$id.'.pdf', 'I');
+                $pdf->Output($user->nama_lengkap.'_'.$user->nik.'_'.$user->nama_surat.'.pdf', 'D');
             exit;
         }
 
