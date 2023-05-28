@@ -202,9 +202,9 @@
                         <div class="modal-footer">
                             <a type="button" class="btn btn-secondary" href="{{ url('generate-pdf/' . $value->id) }}"
                                 style="background-color: rgb(0, 189, 0); color: white;">Unduh Surat</a>
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal"
-                                onClick="window.open('https://wa.me/62');" target="_blank">Kirim Via
-                                WhatsApp</button>
+                            <a class="btn btn-secondary" type="button"
+                                onClick="window.open('https://wa.me/62{{ $value->no_hp }}')" target="_blank">Kirim Via
+                                WhatsApp</a>
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
                         </div>
                     @endif

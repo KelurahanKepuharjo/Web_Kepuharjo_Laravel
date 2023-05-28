@@ -51,17 +51,18 @@ class KartukkController extends Controller
 
       public function simpanmasterkk(Request $request, KartukkRequest $kkrequest)
       {
-        try {
+
+
             $validated = $kkrequest->validated();
+            $check = MobileMasterKksModel::all();
+            foreach ($check as  $value) {
+                if ($value->no_kk == $validated['no_kk']) {
+                    return redirect()->back()->with('exist','');
+                }
+            }
+
             $data = MobileMasterKksModel::create($validated);
-
             return redirect('simpankepala/'.$request->no_kk.'/'.$request->kepala_keluarga.'/'.$request->nik);
-        } catch (Exception $e) {
-            Log::error('Exception: ' . $e->getMessage());
-            // return redirect()->back()->withErrors('','')->withInput();
-            return response()->json(['error' => 'Data Kartu Keluarga Sudah Ditambahkan'], 500);
-        }
-
       }
 
     public function simpankepalakeluarga(Request $request, $id, $other_id, $nik)

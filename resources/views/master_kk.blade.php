@@ -13,6 +13,11 @@
             toastr.success('Data Berhasil Diperbarui', '')
         </script>
     @endif
+    @if (session::has('exist'))
+        <script>
+            toastr.error('Data Gagal Ditambahkan', 'Nomor KK sudah Ada')
+        </script>
+    @endif
     @if ($errors->any())
         <script>
             toastr.error('Cek Kembali Data yang Anda Masukkan', 'Data Gagal Ditambahkan')

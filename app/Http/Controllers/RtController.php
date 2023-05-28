@@ -31,12 +31,11 @@ class RtController extends Controller
         $datacheck = DB::table('master_kks')
             ->join('master_masyarakats', 'master_kks.id', '=', 'master_masyarakats.id')
             ->join('master_akuns', 'master_akuns.id_masyarakat', 'master_masyarakats.id_masyarakat')
-            ->where('master_masyarakats.nik', $request->nik)
             ->where('master_kks.rt', $request->rt)
             ->where('master_kks.rw', $request->rw)
             ->where('master_akuns.role', 'RT')
             ->first();
-        if ($datacheck !== null) {
+        if ($datacheck != null) {
             return redirect()->back()->with('errorrt','');
         } else {
             $rt = new RwaksesModal();
@@ -45,9 +44,9 @@ class RtController extends Controller
                 ->first();
             if ($data) {
                 if ($data->role == 'RT') {
-                    return Redirect('masterrt/'.$request->rt)->with('errorrt', '');
+                    return Redirect('masterrt/'.$request->rt)->with('errorissetrt', '');
                 } elseif ($data->role == 'RW') {
-                    return Redirect('masterrt/'.$request->rt)->with('errorrw', '');
+                    return Redirect('masterrt/'.$request->rt)->with('errorissetrw', '');
                 } elseif ($data->role == '4') {
                     $request->validate([
                         'no_hp' => 'required|min:10|max:13',
