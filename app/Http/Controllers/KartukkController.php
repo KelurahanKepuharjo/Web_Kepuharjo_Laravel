@@ -15,8 +15,9 @@ class KartukkController extends Controller
 {
     public function index()
     {
-        $data = MobileMasterMasyarakatModel::with('masyarakat')->get();
-
+        $data = MobileMasterMasyarakatModel::with('masyarakat')
+        ->where('status_keluarga','kepala Keluarga')
+        ->orderBy('nik','DESC')->get();
         return view('master_kk', compact('data'))->with('success','');
     }
 

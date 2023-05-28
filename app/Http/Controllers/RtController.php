@@ -93,7 +93,7 @@ class RtController extends Controller
                 $data->id_masyarakat = $request->id_masyarakat;
                 $data->save();
 
-                return Redirect('masterrt/'.$request->rt)->with('success', '');
+                return Redirect('masterrt/'.$request->rw)->with('success', '');
             }
         }
     }

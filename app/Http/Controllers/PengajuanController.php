@@ -151,7 +151,6 @@ class PengajuanController extends Controller
 
                             ",
                         0, 'L', false, 20);
-                        $pdf->Output();
                 $pdf->Output(public_path('pdf/'.$user->nama_lengkap.'_'.$user->nik.'_'.$user->nama_surat.'_'.$id.'.pdf'), 'F');
                 $updatestatus = new UpdateStatusModel();
 

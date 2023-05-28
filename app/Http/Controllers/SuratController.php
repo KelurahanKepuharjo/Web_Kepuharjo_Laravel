@@ -17,10 +17,10 @@ class SuratController extends Controller
 
     public function store(SuratRequest $suratrequest)
     {
-        $validated = $suratrequest->id_surat;
+        $valid = $suratrequest->id_surat;
         $check = MobileMasterSuratModel::all();
         foreach ($check as  $value) {
-            if ($value->id_surat == $validated) {
+            if ($value->id_surat == $valid) {
                 return redirect()->back()->with('exist','')->withInput();
             }
         }
