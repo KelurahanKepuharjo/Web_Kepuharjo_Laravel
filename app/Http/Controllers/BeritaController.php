@@ -18,7 +18,7 @@ class BeritaController extends Controller
     public function store(BeritaRequest $beritaRequest)
     {
         $imageName = time().'.'.$beritaRequest->image->getClientOriginalExtension();
-        $beritaRequest->image->move(public_path('image'), $imageName);
+        $beritaRequest->image->move(public_path('images'), $imageName);
         $validated['image'] = $imageName;
         $validated = $beritaRequest->validated();
         $Berita = MobileBeritaModel::create([
@@ -60,7 +60,7 @@ class BeritaController extends Controller
         ]);
 
         $imageName = time().'.'.$beritaRequest->image->getClientOriginalExtension();
-        $beritaRequest->image->move(public_path('image'), $imageName);
+        $beritaRequest->image->move(public_path('images'), $imageName);
         $berita = MobileBeritaModel::where('id', $id);
         $berita->update([
             'image' => $imageName

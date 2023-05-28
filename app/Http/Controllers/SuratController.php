@@ -18,7 +18,7 @@ class SuratController extends Controller
     public function store(SuratRequest $suratrequest)
     {
         $imageName = time().'.'.$suratrequest->image->getClientOriginalExtension();
-        $suratrequest->image->move(public_path('image'), $imageName);
+        $suratrequest->image->move(public_path('images'), $imageName);
         $validated['image'] = $imageName;
         $validated = $suratrequest->validated();
         $surat = MobileMasterSuratModel::create([
@@ -41,9 +41,6 @@ class SuratController extends Controller
     public function update(SuratRequest $suratrequest, $id)
     {
         $data = MobileMasterSuratModel::where('id_surat', $id)->first();
-        // $imageName = time().'.'.$suratrequest->image->getClientOriginalExtension();
-        // $suratrequest->image->move(public_path('images'), $imageName);
-        // $validated['image'] = $imageName;
         $validated = $suratrequest->validated();
         $data->update([
             'id_surat' => $validated['id_surat'],
@@ -65,9 +62,7 @@ class SuratController extends Controller
         ]);
 
         $imageName = time().'.'.$suratrequest->image->getClientOriginalExtension();
-        $suratrequest->image->move(public_path('image'), $imageName);
-        // $validated['image'] = $imageName;
-        // $validated = $suratrequest->validated();
+        $suratrequest->image->move(public_path('images'), $imageName);
         $data = MobileMasterSuratModel::where('id_surat', $id);
         $data->update([
             'image' => $imageName,

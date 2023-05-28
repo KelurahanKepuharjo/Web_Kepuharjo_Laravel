@@ -53,7 +53,7 @@
                             <td class="text-lg">{{ $no + 1 }}</td>
                             <td class="text-lg">SURAT KETERANGAN {{ $value->nama_surat }}</td>
                             <td><img style="width: 30px; height: 30px;  border-radius: 5%;"
-                                    src="{{ asset('image/' . $value->image) }}">
+                                    src="{{ asset('images/' . $value->image) }}">
                             </td>
                             <td>
                                 <div class="row">
@@ -142,12 +142,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('updateimage/' . $value->id_surat) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('updateimages/' . $value->id_surat) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <label for="">Ikon Surat</label>
                     <div class="form-group">
-                        <img width="100%;" height="100%;" src="{{ asset('image/' . $value->image) }}" alt="">
+                        <img width="100%;" height="100%;" src="{{ asset('images/' . $value->image) }}" alt="">
                     </div>
                     <div class="row form-group">
                         <div class="col-md-9">

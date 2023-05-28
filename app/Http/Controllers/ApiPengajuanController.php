@@ -22,15 +22,6 @@ class ApiPengajuanController extends Controller
         ]);
         $masyarakat = MobileMasterMasyarakatModel::where('nik', $request->nik)->first();
 
-        if (!$masyarakat) {
-            return response()->json([
-                'message' => 'Nik tidak ditemukan',
-            ], 400);
-        }
-
-        $existingSurat = MobilePengajuanSuratModel::where('id_surat', $request->id_surat)
-            ->where('id_masyarakat', $masyarakat->id_masyarakat)
-            ->first();
         $imagekk = $request->file('image_kk');
         $imagebukti = $request->file('image_bukti');
 
@@ -39,23 +30,6 @@ class ApiPengajuanController extends Controller
 
         $imagekk->move(public_path('images/'), $imagenamekk);
         $imagebukti->move(public_path('images/'), $imagenamebukti);
-        if (!$existingSurat) {
-            $data = MobilePengajuanSuratModel::create([
-                'id' => Str::uuid(),
-                'status' => 'Diajukan',
-                'keterangan' => $request->keterangan,
-                'id_surat' => $request->id_surat,
-                'info' => 'active',
-                'image_kk' => $imagenamekk,
-                'image_bukti' => $imagenamebukti,
-                'id_masyarakat' => $masyarakat->id_masyarakat,
-            ]);
-
-            return response()->json([
-                'message' => 'Berhasil mengajukan surat',
-                'data' => $data
-            ], 200);
-        } else {
             $cek = MobilePengajuanSuratModel::where('id_surat', $request->id_surat)
                 ->where('id_masyarakat', $masyarakat->id_masyarakat)
                 ->where('info', 'active')
@@ -68,8 +42,8 @@ class ApiPengajuanController extends Controller
             } else {
                 $data = MobilePengajuanSuratModel::create([
                     'id' => Str::uuid(),
-                    'status' => $request->status,
-                    'keterangan' => 'Diajukan',
+                    'keterangan' => $request->keterangan,
+                    'status' => 'Diajukan',
                     'info' => 'active',
                     'id_surat' => $request->id_surat,
                     'image_kk' => $imagenamekk,
@@ -81,7 +55,6 @@ class ApiPengajuanController extends Controller
                     'message' => 'Berhasil mengajukan surat',
                     'data' => $data
                 ], 200);
-            }
         }
     }
 

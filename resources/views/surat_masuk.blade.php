@@ -1,5 +1,6 @@
 @extends('layouts.mainlayout')
 @section('title', 'Surat Masuk')
+@include('sweetalert::alert')
 <!-- partial -->
 @php
     $nama = session()->get('nama');
@@ -8,6 +9,27 @@
     $rw = session()->get('rw');
 @endphp
 @section('content')
+
+    @if (session::has('success'))
+        <script>
+            toastr.success('Data Berhasil Ditambahkan', '')
+        </script>
+    @endif
+    @if (session::has('successedit'))
+        <script>
+            toastr.success('Pengajuan Berhasil Disetujui', '')
+        </script>
+    @endif
+    @if (session::has('successhapus'))
+        <script>
+            toastr.success('Data Berhasil Dihapus', '')
+        </script>
+    @endif
+    @if ($errors->any())
+        <script>
+            toastr.error('Cek Kembali Data Pengajuan', 'Pengajuan Gagal Diupdate')
+        </script>
+    @endif
     <div class="card" style="border-radius: 2px;">
         <div class="card-body">
             <div class="header-atas">
@@ -55,98 +77,180 @@
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Pratinjau Data</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        @if ($akses == 'admin')
+                    <form action="{{ url('updatestatus/' . $value->id . '/' . $akses) }}" method="get">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Pratinjau Data</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @if ($akses == 'admin')
+                                <div class="form-group">
+                                    <label for="">Nomor Pengajuan</label>
+                                    <input type="text" name="nomor_surat"
+                                        class="form-control @error('nomor_surat')is-invalid
+                                @enderror"
+                                        value="{{ old('nomor_surat') }}" autocomplete="off">
+                                    @error('nomor_surat')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Nomor Pengantar</label>
+                                    <input type="text" name="" class="form-control"
+                                        value="{{ $value->no_pengantar }}" autocomplete="off">
+                                </div>
+                            @endif
+                            @if ($akses == 'RT')
+                                <div class="form-group">
+                                    <label for="">Nomor Pengantar</label>
+                                    <input type="text" name="nomor_surat"
+                                        class="form-control @error('nomor_surat')is-invalid
+                            @enderror"
+                                        value="{{ old('nomor_surat') }}" autocomplete="off">
+                                    @error('nomor_surat')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            @endif
+                            @if ($akses == 'RW')
+                                <div class="form-group">
+                                    <label for="">Nomor Pengantar</label>
+                                    <input type="text" name="nomor_surat" class="form-control"
+                                        value="{{ $value->no_pengantar }}" autocomplete="off">
+                                </div>
+                            @endif
                             <div class="form-group">
-                                <label>Nomor Surat</label>
-                                <input type="text" name="nik" class="form-control" value="{{ $value->nomor_surat }}"
+                                <label>NIK</label>
+                                <input type="text" name="nik" class="form-control" value="{{ $value->nik }}"
                                     maxlength="50" required="">
                                 <span class="text-danger">
                             </div>
-                        @endif
-                        <div class="form-group">
-                            <label>NIK</label>
-                            <input type="text" name="nik" class="form-control" value="{{ $value->nik }}"
-                                maxlength="50" required="">
-                            <span class="text-danger">
-                        </div>
-                        <div class="form-group">
-                            <label>Nama </label>
-                            <input type="text" name="nama" class="form-control" value="{{ $value->nama_lengkap }}"
-                                maxlength="50" required="">
-                        </div>
-                        <div class="form-group">
-                            <label>Tempat, Tanggal Lahir </label>
-                            <input type="text" name="ttl" class="form-control"
-                                value="{{ $value->tempat_lahir }}, {{ $value->tgl_lahir }}" maxlength="50" required="">
-                        </div>
-                        <div class="form-group">
-                            <label>Jenis kelamin</label>
-                            <input type="text" name="kelamin" class="form-control" value="{{ $value->jenis_kelamin }}"
-                                maxlength="50" required="">
-                        </div>
-                        <div class="form-group ">
-                            <label>Kebangsaan/Agama</label>
-                            <input type="text" name="kebangsaan" class="form-control"
-                                value="{{ $value->kewarganegaraan }} / {{ $value->agama }}" maxlength="30" required="">
-                        </div>
-                        <div class="form-group">
-                            <label>Status</label>
-                            <input type="text" name="status" class="form-control"
-                                value="{{ $value->status_perkawinan }}" maxlength="50" required="">
-                            <span class="text-danger">
-                        </div>
-                        <div class="form-group">
-                            <label>Pekerjaan</label>
-                            <input type="text" name="pekerjaan" class="form-control" value="{{ $value->pekerjaan }}"
-                                maxlength="50" required="">
-                            <span class="text-danger">
-                        </div>
-                        <div class="form-group">
-                            <label>Alamat</label>
-                            <input type="text" name="alamat" class="form-control" value="{{ $value->alamat }}"
-                                maxlength="50" required="">
-                            <span class="text-danger">
-                        </div>
-                        <div class="form-group">
-                            <label>Tanggal Pengajuan</label>
-                            <input type="text" name="tglpengajuan" class="form-control"
-                                value="{{ $value->created_at }}" maxlength="50" required="">
-                            <span class="text-danger">
-                        </div>
-                        <div class="form-group">
-                            <label>Keperluan Surat</label>
-                            <input type="text" name="keperluan" class="form-control"
-                                value="{{ $value->keterangan }}" maxlength="50" required="">
-                            <span class="text-danger">
-                        </div>
-                        @if ($akses == 'RT')
                             <div class="form-group">
-                                <label>Keterangan Ditolak</label>
+                                <label>Nama </label>
+                                <input type="text" name="nama" class="form-control"
+                                    value="{{ $value->nama_lengkap }}" maxlength="50" required="">
+                            </div>
+                            <div class="form-group">
+                                <label>Tempat, Tanggal Lahir </label>
+                                <input type="text" name="ttl" class="form-control"
+                                    value="{{ $value->tempat_lahir }}, {{ $value->tgl_lahir }}" maxlength="50"
+                                    required="">
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis kelamin</label>
+                                <input type="text" name="kelamin" class="form-control"
+                                    value="{{ $value->jenis_kelamin }}" maxlength="50" required="">
+                            </div>
+                            <div class="form-group ">
+                                <label>Kebangsaan/Agama</label>
+                                <input type="text" name="kebangsaan" class="form-control"
+                                    value="{{ $value->kewarganegaraan }} / {{ $value->agama }}" maxlength="30"
+                                    required="">
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <input type="text" name="status" class="form-control"
+                                    value="{{ $value->status_perkawinan }}" maxlength="50" required="">
+                                <span class="text-danger">
+                            </div>
+                            <div class="form-group">
+                                <label>Pekerjaan</label>
+                                <input type="text" name="pekerjaan" class="form-control"
+                                    value="{{ $value->pekerjaan }}" maxlength="50" required="">
+                                <span class="text-danger">
+                            </div>
+                            <div class="form-group">
+                                <label>Alamat</label>
+                                <input type="text" name="alamat" class="form-control" value="{{ $value->alamat }}"
+                                    maxlength="50" required="">
+                                <span class="text-danger">
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Pengajuan</label>
+                                <input type="text" name="tglpengajuan" class="form-control"
+                                    value="{{ $value->created_at }}" maxlength="50" required="">
+                                <span class="text-danger">
+                            </div>
+                            <div class="form-group">
+                                <label>Keperluan Surat</label>
                                 <input type="text" name="keperluan" class="form-control"
                                     value="{{ $value->keterangan }}" maxlength="50" required="">
                                 <span class="text-danger">
                             </div>
-                        @endif
-                    </div>
-                    <div class="modal-footer">
-                        <a type="button" class="btn btn-secondary"
-                            style="background-color: rgb(0, 189, 0); color: white;"
-                            href="{{ url('updatestatus/' . $value->id . '/' . $akses) }}">Setujui</a>
-                        @if ($akses == 'RT')
-                            <a type="button" class="btn btn-danger"
-                                href="{{ url('updatestatustolak/' . $value->id . '/' . $akses) }}">Tolak</a>
-                        @endif
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                    </div>
+                            <div class="form-group">
+                                <label for="">Foto Kartu Keluarga</label>
+                                <img src="{{ asset('images/' . $value->image_kk) }}" class="img-thumbnail"
+                                    alt="Responsive image">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Bukti Pendukung</label>
+                                <img src="{{ asset('images/' . $value->image_bukti) }}" class="img-thumbnail"
+                                    alt="Responsive image">
+                            </div>
+                            {{-- @if ($akses == 'RT')
+                                <div class="form-group">
+                                    <label>Keterangan Ditolak</label>
+                                    <input type="text" name="keperluan" class="form-control"
+                                        value="{{ $value->keterangan }}" maxlength="50" required="">
+                                    <span class="text-danger">
+                                </div>
+                            @endif --}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary"
+                                style="background-color: rgb(0, 189, 0); color: white;">Setujui</button>
+                            @if ($akses == 'RT')
+                                <a type="button" data-toggle="modal" data-target="#modal-ditolak{{ $value->id }}"
+                                    class="btn btn-danger" data-dismiss="modal" href="">Tolak</a>
+                            @endif
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     @endforeach
+
+    @foreach ($data as $no => $value)
+        <div class="modal fade" id="modal-ditolak{{ $value->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true" autocomplete="off">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="{{ url('updatestatustolak/' . $value->id . '/' . $akses) }}" method="get">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Keterangan Surat Ditolak</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Keterangan Ditolak</label>
+                                <textarea type="text" name="keterangan_ditolak" class="form-control" maxlength="50" required=""></textarea>
+                                <span class="text-danger">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-danger">Tolak</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
 @endsection
+
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+{{-- toast cdn --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{-- jquery cdn --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
