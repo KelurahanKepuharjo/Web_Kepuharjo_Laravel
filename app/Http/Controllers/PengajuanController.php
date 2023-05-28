@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\PengajuanModel;
 use App\Models\UpdateStatusModel;
 use Illuminate\Http\Request;
+use App\Models\MobileMasterKksModel;
+use App\Models\MobileMasterMasyarakatModel;
+use FPDF;
 
 class PengajuanController extends Controller
 {
@@ -44,53 +47,73 @@ class PengajuanController extends Controller
         } elseif ($akses == 'RW') {
             $status = 'Ditolak RW';
         }
-        $updatestatus = new UpdateStatusModel();
-        $data = $updatestatus->UpdateStatus()
-            ->where('pengajuan_surats.id', $id)
-            ->first();
-        $data->update([
-            'pengajuan_surats.status' => $status,
-        ]);
-
+            $updatestatus = new UpdateStatusModel();
+            $data = $updatestatus->UpdateStatus()
+                ->where('pengajuan_surats.id', $id)
+                ->first();
+            $data->update([
+                'pengajuan_surats.status' => $status,
+            ]);
         return redirect('/suratmasuk')->with('successedit', '');
     }
-
-    // public function update_status(Request $request, $id, $akses)
-    // {
-    //     if ($akses == 'RT') {
-    //         $status = 'Disetujui RT';
-    //     } elseif ($akses == 'RW') {
-    //         $status = 'Disetujui RW';
-    //     }
-    //     $updatestatus = new UpdateStatusModel();
-    //     $data = $updatestatus->UpdateStatus()
-    //         ->where('pengajuan_surats.id', $id)
-    //         ->first();
-    //     $data->update([
-    //         'pengajuan_surats.status' => $status,
-    //     ]);
-
-    //     return redirect('/suratmasuk')->with('successedit', '');
-    // }
 
     public function update_status(Request $request, $id, $akses)
     {
         if ($akses == 'RT') {
             $status = 'Disetujui RT';
+            $updatestatus = new UpdateStatusModel();
+            $data = $updatestatus->UpdateStatus()
+                ->where('pengajuan_surats.id', $id)
+                ->first();
+            $data->update([
+                'pengajuan_surats.status' => $status,
+            ]);
+            return redirect('/suratmasuk')->with('successedit', '');
         } elseif ($akses == 'RW') {
             $status = 'Disetujui RW';
+            $updatestatus = new UpdateStatusModel();
+            $data = $updatestatus->UpdateStatus()
+                ->where('pengajuan_surats.id', $id)
+                ->first();
+            $data->update([
+                'pengajuan_surats.status' => $status,
+            ]);
+            return redirect('/suratmasuk')->with('successedit', '');
         } elseif ($akses == 'admin') {
             $status = 'Selesai';
-        }
-        $updatestatus = new UpdateStatusModel();
-        $data = $updatestatus->UpdateStatus()
-            ->where('pengajuan_surats.id', $id)
-            ->first();
-        $data->update([
-            'pengajuan_surats.status' => $status,
-        ]);
+            $file_pdf = 'sktm.pdf';
 
-        return redirect('/suratmasuk')->with('successedit', '');
+            $pdf = new FPDF();
+            $pdf->AddPage();
+            $pdf->Image('image/logohp.png', 18, 27, 43, 0, 'PNG');
+            // $pdf->SetFont('Arial','B',12);
+            $pdf->SetFont('Times', '', 12);
+            $pdf->SetXY(30, 24);
+
+            // Add a multi-line cell with a left indentation of 20mm
+            $pdf->MultiCell(0, 6, '
+            P E M E R I N T A H   K A B U P A T E N  L U M A J A N G
+            KECAMATAN LUMAJANG
+            KELURAHAN KEPUHARJO
+            Jl. Langsep No. 18 Telp. (0334) 888243
+            L U M A J A N G
+
+            ',
+                0, 'C', false, 20);
+
+            $outputPath = public_path('pdf/sktm.pdf');
+            $pdf->Output($outputPath, 'F');
+
+            $updatestatus = new UpdateStatusModel();
+            $data = $updatestatus->UpdateStatus()
+                ->where('pengajuan_surats.id', $id)
+                ->first();
+            $data->update([
+                'pengajuan_surats.status' => $status,
+                'file_pdf' => $file_pdf,
+            ]);
+            return redirect('/suratmasuk')->with('successedit', '');
+        }
     }
 
     public function surat_ditolak()

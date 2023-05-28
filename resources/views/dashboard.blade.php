@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="col-auto">
-                            <img src="images/suratmasuk.png" height="40">
+                            <img src="image/suratmasuk.png" height="40">
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <img src="images/suratditolak.png" height="40">
+                                <img src="image/suratditolak.png" height="40">
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <img src="images/suratditolak.png" height="40">
+                                <img src="image/suratditolak.png" height="40">
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
 
                         </div>
                         <div class="col-auto">
-                            <img src="images/suratselesai.png" height="40">
+                            <img src="image/suratselesai.png" height="40">
                         </div>
                     </div>
                 </div>

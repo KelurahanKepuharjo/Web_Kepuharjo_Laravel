@@ -334,12 +334,3 @@ class PdfController extends Controller
         // $pdf->Output(public_path('example.pdf'), 'F');
     }
 }
-
-//     public function PDFKenalLahir(Request $request, $id)
-//     {
-
-//         // $pdf->Output('I', 'example.pdf');
-//         // $pdf->Output();
-//         // $pdf->Output(public_path('example.pdf'), 'F');
-//     }
-// }

@@ -14,5 +14,5 @@ class UpdateStatusModel extends Model
             ->select('master_masyarakats.*', 'pengajuan_surats.id');
     }
 
-    protected $fillable = ['pengajuan_surats.status'];
+    protected $fillable = ['pengajuan_surats.status', 'file_pdf'];
 }
