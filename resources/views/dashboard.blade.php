@@ -56,7 +56,7 @@
             </div>
         @endif
 
-        @if (session('hak_akses') == 'RW')
+        {{-- @if (session('hak_akses') == 'RW')
             <div class="col-xl-3 col-md-6 mb-2 mt-3">
                 <div class="card border-left-danger shadow h-100 py-2">
                     <div class="card-body">
@@ -75,7 +75,7 @@
                     </div>
                 </div>
             </div>
-        @endif
+        @endif --}}
         <!-- kartu surat ditolak -->
 
 

@@ -32,7 +32,7 @@
                         <a href="#about" class="nav__link">About us</a>
                     </li>
                     <li class="nav__item">
-                        <a href="#services" class="nav__link">Services</a>
+                        <a href="#services" class="nav__link">Fitur</a>
                     </li>
                     <li class="nav__item">
                         <a href="#contact" class="nav__link">Contact us</a>
