@@ -26,6 +26,11 @@
             toastr.error('Data Gagal Ditambahkan', 'Nomor KK sudah Ada')
         </script>
     @endif
+    @if (session::has('relation'))
+        <script>
+            toastr.error('Data Gagal Dihapus', 'Data Memiliki Relasi')
+        </script>
+    @endif
     <div class="card" style="border-radius: 2px;">
         <div class="card-body">
             <div class="header-atas">

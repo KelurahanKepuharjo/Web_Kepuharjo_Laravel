@@ -58,7 +58,7 @@
                             <td>{{ $value->status }}</td>
                             <td>
                                 <a class="btn btn-secondary" style="background: #00AAAA; color: white;" data-toggle="modal"
-                                    data-target="#exampleModal{{ $value->nik }}" style="color: white;"
+                                    data-target="#exampleModal{{ $value->id }}" style="color: white;"
                                     href="#">Proses
                                     Surat</a>
                             </td>
@@ -73,7 +73,7 @@
 
     <!-- Modal RT dan RW-->
     @foreach ($data as $no => $value)
-        <div class="modal fade" id="exampleModal{{ $value->nik }}" tabindex="-1" role="dialog"
+        <div class="modal fade" id="exampleModal{{ $value->id }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -87,7 +87,7 @@
                         <div class="modal-body">
                             @if ($akses == 'admin')
                                 <div class="form-group">
-                                    <label for="">Nomor Pengajuan</label>
+                                    <label for="">Nomor Surat</label>
                                     <input type="text" name="nomor_surat"
                                         class="form-control @error('nomor_surat')is-invalid
                                 @enderror"
@@ -118,7 +118,7 @@
                                 <div class="form-group">
                                     <label for="">Nomor Pengantar</label>
                                     <input type="text" name="nomor_surat" class="form-control"
-                                        value="{{ $value->no_pengantar }}" autocomplete="off">
+                                        value="{{ $value->no_pengantar }}" autocomplete="off" readonly>
                                 </div>
                             @endif
                             <div class="form-group">

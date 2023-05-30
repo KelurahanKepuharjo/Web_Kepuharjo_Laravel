@@ -102,7 +102,7 @@ Route::middleware('auth.auth')->group(function () {
     Route::controller(KartukkController::class)->group(function () {
         Route::get('/masterkk', 'index')->name('masterkk');
         Route::get('/simpankepala/{id}/{other_id}/{nik}', 'simpankepalakeluarga');
-        Route::get('{id}/hapus-masterkk', 'delete');
+        Route::get('hapus-masterkk/{id}', 'delete');
         Route::get('simpanakunskk/{id}', 'simpanmasteruserakunkk');
         Route::post('/simpankk', 'simpanmasterkk')->name('simpankk');
         Route::post('update-masterkk/{id}', 'update');

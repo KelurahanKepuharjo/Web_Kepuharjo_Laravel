@@ -8,6 +8,11 @@
             toastr.success('Data Berhasil Ditambahkan', '')
         </script>
     @endif
+    @if (session::has('relation'))
+        <script>
+            toastr.error('Data Gagal Dihapus', 'Data Memiliki Relasi')
+        </script>
+    @endif
     @if (session::has('successedit'))
         <script>
             toastr.success('Data Berhasil Diperbarui', '')

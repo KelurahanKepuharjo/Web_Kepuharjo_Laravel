@@ -25,10 +25,19 @@ class RwController extends Controller
 
     public function hapusmasterrw(Request $request, $id)
     {
-        $data = MobileMasterKksModel::where('nik', $id);
-        $data->delete();
+        // try {
+            $data = MobileMasterAkunModel::with('user')
+            ->where('nik', $id);
+            $data->delete();
 
-        return Redirect('masterrw');
+            return Redirect('masterrw');
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        // }
+        // $this->return->response()->json([
+        //     'message' => 'Data Tidak Bisa Dihapus, Sudah Pernah Mengajukan',
+        // ], 200);
+
     }
 
     public function ajax(Request $request)

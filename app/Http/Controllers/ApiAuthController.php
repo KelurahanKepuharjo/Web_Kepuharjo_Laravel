@@ -20,7 +20,7 @@ class ApiAuthController extends Controller
         ]);
 
         $dataMasyarakat = MobileMasterMasyarakatModel::where('nik', $request->nik)->first();
-        if (! $dataMasyarakat) {
+        if (!$dataMasyarakat) {
             return response()->json([
                 'message' => 'Nik anda belum terdaftar',
             ], 400);
@@ -42,7 +42,6 @@ class ApiAuthController extends Controller
             'message' => 'Berhasil Register',
             'user' => $data,
         ];
-
         return response()->json($response, 200);
     }
 
@@ -54,27 +53,26 @@ class ApiAuthController extends Controller
         ]);
 
         $dataMasyarakat = MobileMasterMasyarakatModel::where('nik', $request->nik)->first();
-        if (! $dataMasyarakat) {
+        if (!$dataMasyarakat) {
             return response()->json([
                 'message' => 'Nik Anda Belum Terdaftar',
             ], 400);
         }
 
         $akun = MobileMasterAkunModel::where('id_masyarakat', $dataMasyarakat->id_masyarakat)->first();
-        if (! Hash::check($request->password, $akun->password)) {
+        if (!Hash::check($request->password, $akun->password)) {
             return response()->json([
                 'message' => 'Password Anda Salah',
             ], 400);
         }
         $token = $akun->createToken('authToken')->plainTextToken;
-        $response = [
+
+        return response()->json([
             'message' => 'Berhasil login',
             'user' => $dataMasyarakat,
             'token' => $token,
             'role' => $akun->role,
-        ];
-
-        return response()->json($response, 200);
+        ], 200);
     }
 
     public function me(Request $request)
@@ -86,6 +84,16 @@ class ApiAuthController extends Controller
             'data' => $user->load(['masyarakat', 'masyarakat.kks']),
         ];
 
+        return response()->json($response, 200);
+    }
+    public function cektoken(Request $request)
+    {
+        $user = $request->user();
+        if ($user) {
+            $response = [
+                'message' => 'success',
+            ];
+        }
         return response()->json($response, 200);
     }
 
@@ -130,7 +138,7 @@ class ApiAuthController extends Controller
             'no_hp' => [
                 'required',
                 'min:10',
-                'unique:master_akuns,no_hp,'.$user->id,
+                'unique:master_akuns,no_hp,' . $user->id,
                 function ($attribute, $value, $fail) use ($no_hp) {
                     if ($value === $no_hp) {
                         $fail('Nomor HP baru harus berbeda dengan nomor HP lama');

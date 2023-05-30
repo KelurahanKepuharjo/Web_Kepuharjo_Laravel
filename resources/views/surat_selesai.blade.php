@@ -197,6 +197,16 @@
                                 value="{{ $value->keterangan }}" maxlength="50" required="">
                             <span class="text-danger">
                         </div>
+                        <div class="form-group">
+                            <label for="">Foto Kartu Keluarga</label>
+                            <img src="{{ asset('images/' . $value->image_kk) }}" class="img-thumbnail"
+                                alt="Responsive image">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Bukti Pendukung</label>
+                            <img src="{{ asset('images/' . $value->image_bukti) }}" class="img-thumbnail"
+                                alt="Responsive image">
+                        </div>
                     </div>
                     @if ($akses == 'admin')
                         <div class="modal-footer">

@@ -150,7 +150,10 @@ class MasyarakatController extends Controller
 
             return Redirect('masterkkmas/'.$request->id);
         } catch (\Throwable $th) {
-            throw $th;
+            // return response()->json([
+            //     'message' => 'Data Tidak Bisa Dihapus, Sudah Pernah Mengajukan',
+            // ], 200);
+            return redirect()->back()->with('relation','');
         }
     }
 }

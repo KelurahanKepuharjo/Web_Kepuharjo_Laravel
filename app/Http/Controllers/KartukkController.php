@@ -44,10 +44,17 @@ class KartukkController extends Controller
     //Untuk Hapus Master KK
     public function delete(Request $request, $id)
     {
-        $data = MobileMasterKksModel::where('no_kk', $id);
-        $data->delete();
+        try {
+            $data = MobileMasterKksModel::where('no_kk', $id);
+            $data->delete();
+            return Redirect('masterkk')->with('successhapus', '');
+        } catch (\Throwable $th) {
+            // return response()->json([
+            //     'message' => 'Data Tidak Bisa Dihapus, Karena Berelasi dengan data Masyarakat',
+            // ], 200);
+            return redirect()->back()->with('relation','');
+        }
 
-        return Redirect('masterkk')->with('successhapus', '');
     }
 
       public function simpanmasterkk(Request $request, KartukkRequest $kkrequest)

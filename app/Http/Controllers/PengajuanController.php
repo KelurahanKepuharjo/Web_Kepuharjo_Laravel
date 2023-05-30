@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PengajuanModel;
+use App\Models\AdminPengajuanModel;
 use App\Models\UpdateStatusModel;
 use Illuminate\Http\Request;
 use FPDF;
@@ -111,7 +112,7 @@ class PengajuanController extends Controller
                     $pdf->SetFont('Times', '', 12);
                     $pdf->SetXY(20, 72);
 
-                    $pdf->MultiCell(0, 6, "NOMOR : $user->nomor_surat
+                    $pdf->MultiCell(0, 6, "NOMOR : $request->nomor_surat
                     ",
                         0, 'C', false, 20);
                     $pdf->SetFont('Times', '', 12);

@@ -19,6 +19,11 @@
                 toastr.error('Cek Kembali Data yang Anda Input', 'Data Gagal Ditambahkan')
             </script>
         @endif
+        @if (session::has('relation'))
+            <script>
+                toastr.error('Data Gagal Dihapus', 'Data Memiliki Relasi')
+            </script>
+        @endif
 
     </div>
     <div class="card" style="border-radius: 2px;">
@@ -52,9 +57,9 @@
                                     <a class="btn btn-warning fa fa-pencil" style="color:white;" href=""
                                         data-toggle="modal" data-target="#modal-edit{{ $value->nik }}">
                                     </a>
-                                    <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
+                                    {{-- <a class="btn btn-danger icon-trash" name='Hapus' href="#" data-toggle="modal"
                                         data-target="#modal-hapus{{ $value->nik }}" style="margin-left: 10px; "
-                                        href="{{ url('masteruser') }}"></a>
+                                        href="{{ url('masteruser') }}"></a> --}}
                                 </td>
                             </tr>
                         @endforeach

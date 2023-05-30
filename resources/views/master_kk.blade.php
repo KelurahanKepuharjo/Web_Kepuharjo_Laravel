@@ -23,6 +23,11 @@
             toastr.error('Cek Kembali Data yang Anda Masukkan', 'Data Gagal Ditambahkan')
         </script>
     @endif
+    @if (session::has('relation'))
+        <script>
+            toastr.error('Data Gagal Dihapus', 'Data Memiliki Relasi')
+        </script>
+    @endif
     <div class="card" style="border-radius: 2px;">
         <div class="card-body">
             <div class="header-atas">
@@ -237,7 +242,8 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <a type="button" onclick="showNotification()"
-                            href="{{ url($value->no_kk . '/hapus-masterkk') }}" class="btn btn-danger">Hapus</a>
+                            href="{{ url('hapus-masterkk/' . $value->masyarakat['no_kk']) }}"
+                            class="btn btn-danger">Hapus</a>
                     </div>
                 </div>
             </div>

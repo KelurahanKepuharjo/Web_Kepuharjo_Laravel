@@ -27,6 +27,7 @@ Route::post('pengajuan', [ApiPengajuanController::class, 'pengajuan']);
 Route::post('pembatalan', [ApiPengajuanController::class, 'pembatalan']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('auth/cek', [ApiAuthController::class, 'cektoken']);
     Route::get('auth/me', [ApiAuthController::class, 'me']);
     Route::post('auth/logout', [ApiAuthController::class, 'logout']);
     Route::get('keluarga', [ApiAuthController::class, 'keluarga']);

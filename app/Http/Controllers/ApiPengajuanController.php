@@ -22,6 +22,15 @@ class ApiPengajuanController extends Controller
         ]);
         $masyarakat = MobileMasterMasyarakatModel::where('nik', $request->nik)->first();
 
+        if (!$masyarakat) {
+            return response()->json([
+                'message' => 'Nik tidak ditemukan',
+            ], 400);
+        }
+
+        $existingSurat = MobilePengajuanSuratModel::where('id_surat', $request->id_surat)
+            ->where('id_masyarakat', $masyarakat->id_masyarakat)
+            ->first();
         $imagekk = $request->file('image_kk');
         $imagebukti = $request->file('image_bukti');
 
@@ -30,6 +39,23 @@ class ApiPengajuanController extends Controller
 
         $imagekk->move(public_path('images/'), $imagenamekk);
         $imagebukti->move(public_path('images/'), $imagenamebukti);
+        if (!$existingSurat) {
+            $data = MobilePengajuanSuratModel::create([
+                // 'id' => Str::uuid(),
+                'status' => 'Diajukan',
+                'keterangan' => $request->keterangan,
+                'id_surat' => $request->id_surat,
+                'info' => 'active',
+                'image_kk' => $imagenamekk,
+                'image_bukti' => $imagenamebukti,
+                'id_masyarakat' => $masyarakat->id_masyarakat,
+            ]);
+
+            return response()->json([
+                'message' => 'Berhasil mengajukan surat',
+                'data' => $data
+            ], 200);
+        } else {
             $cek = MobilePengajuanSuratModel::where('id_surat', $request->id_surat)
                 ->where('id_masyarakat', $masyarakat->id_masyarakat)
                 ->where('info', 'active')
@@ -41,6 +67,7 @@ class ApiPengajuanController extends Controller
                 ], 400);
             } else {
                 $data = MobilePengajuanSuratModel::create([
+                    // 'id' => Str::uuid(),
                     'keterangan' => $request->keterangan,
                     'status' => 'Diajukan',
                     'info' => 'active',
@@ -54,6 +81,7 @@ class ApiPengajuanController extends Controller
                     'message' => 'Berhasil mengajukan surat',
                     'data' => $data
                 ], 200);
+            }
         }
     }
 
@@ -62,7 +90,7 @@ class ApiPengajuanController extends Controller
 
         $rt = $request->input('rt'); // rt yang dipilih atau ditentukan
         $status = $request->input('status');
-        $suratMasuk = MobilePengajuanSuratModel::select('pengajuan_surats.*', 'master_surats.*', 'master_masyarakats.*')
+        $suratMasuk = MobilePengajuanSuratModel::select('pengajuan_surats.', 'master_surats.', 'master_masyarakats.*')
             ->join('master_masyarakats', 'pengajuan_surats.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
             ->join('master_surats', 'pengajuan_surats.id_surat', '=', 'master_surats.id_surat')
             ->where('pengajuan_surats.status', $status)
@@ -83,7 +111,7 @@ class ApiPengajuanController extends Controller
     public function rekap(Request $request)
     {
         $rt = $request->input('rt'); // rt yang dipilih atau ditentukan
-        $suratMasuk = MobilePengajuanSuratModel::select('pengajuan_surats.*', 'master_akuns.id as id_akun', 'master_masyarakats.*')
+        $suratMasuk = MobilePengajuanSuratModel::select('pengajuan_surats.', 'master_akuns.id as id_akun', 'master_masyarakats.')
             ->join('master_akuns', 'pengajuan_surats.id', '=', 'master_akuns.id')
             ->join('master_masyarakats', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakat')
             ->whereHas('akun.masyarakat', function ($query) use ($rt) {
@@ -104,7 +132,7 @@ class ApiPengajuanController extends Controller
     {
         $no_kk = $request->input('no_kk');
         $status = $request->input('status');
-        $statussurat = MobilePengajuanSuratModel::select('pengajuan_surats.*', 'master_akuns.*', 'master_masyarakat.*')
+        $statussurat = MobilePengajuanSuratModel::select('pengajuan_surats.', 'master_akuns.', 'master_masyarakat.*')
             ->join('master_akuns', 'pengajuan_surats.id', '=', 'master_akuns.id')
             ->join('master_masyarakats', 'master_akuns.id_masyarakat', '=', 'master_masyarakats.id_masyarakats')
             ->where('pengajuan_surats.status', $status)
@@ -130,12 +158,12 @@ class ApiPengajuanController extends Controller
         })->value('no_kk');
 
         $pengajuan_surats = MobilePengajuanSuratModel::with('surat', 'akun.masyarakat')
-        ->where(function ($query) use ($id_masyarakat, $no_kk) {
-            $query->where('id_masyarakat', $id_masyarakat)
-                ->orWhereHas('akun.masyarakat', function ($query) use ($no_kk) {
-                    $query->where('no_kk', $no_kk);
-                });
-        })
+            ->where(function ($query) use ($id_masyarakat, $no_kk) {
+                $query->where('id_masyarakat', $id_masyarakat)
+                    ->orWhereHas('akun.masyarakat', function ($query) use ($no_kk) {
+                        $query->where('no_kk', $no_kk);
+                    });
+            })
             ->whereNotIn('status', ['Selesai', 'Diajukan', 'Dibatalkan', 'Ditolak RT'])
             ->get();
 
@@ -157,12 +185,12 @@ class ApiPengajuanController extends Controller
         })->value('no_kk');
 
         $pengajuan_surats = MobilePengajuanSuratModel::with('surat', 'akun.kks')
-        ->where(function ($query) use ($id_masyarakat, $no_kk) {
-            $query->where('id_masyarakat', $id_masyarakat)
-                ->orWhereHas('akun.kks', function ($query) use ($no_kk) {
-                    $query->where('no_kk', $no_kk);
-                });
-        })
+            ->where(function ($query) use ($id_masyarakat, $no_kk) {
+                $query->where('id_masyarakat', $id_masyarakat)
+                    ->orWhereHas('akun.kks', function ($query) use ($no_kk) {
+                        $query->where('no_kk', $no_kk);
+                    });
+            })
             ->where('status', $status)
             ->get();
 
@@ -191,7 +219,7 @@ class ApiPengajuanController extends Controller
                     ->orWhere('master_kks.no_kk', '=', $no_kk);
             })
             ->whereIn('pengajuan_surats.status', ['Ditolak RT', 'Ditolak RW'])
-            ->select('pengajuan_surats.*', 'master_masyarakats.*', 'master_surats.*')
+            ->select('pengajuan_surats.', 'master_masyarakats.', 'master_surats.*')
             ->get();
 
         return response()->json([
@@ -226,7 +254,7 @@ class ApiPengajuanController extends Controller
         $pengajuan_surat = MobilePengajuanSuratModel::where('id_surat', $request->id_surat)
             ->where('id_masyarakat', $masyarakat->id_masyarakat)
             ->where('status', 'Diajukan')
-            ->update(['status' => 'Dibatalkan', 'info' => 'active']);
+            ->update(['status' => 'Dibatalkan', 'info' => 'non_active']);
 
         if ($pengajuan_surat) {
             return response()->json([

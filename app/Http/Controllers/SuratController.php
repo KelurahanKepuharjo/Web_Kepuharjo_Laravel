@@ -39,10 +39,18 @@ class SuratController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $data = MobileMasterSuratModel::where('id_surat', $id);
-        $data->delete();
+        try {
+            $data = MobileMasterSuratModel::where('id_surat', $id);
+            $data->delete();
 
-        return Redirect('mastersurat')->with('successhapus', '');
+            return Redirect('mastersurat')->with('successhapus', '');
+        } catch (\Throwable $th) {
+            // return response()->json([
+            //     'message' => 'Data Tidak Bisa Dihapus, Sudah Pernah Mengajukan',
+            // ], 200);
+            return redirect()->back()->with('relation','');
+        }
+
     }
 
     public function update(SuratRequest $suratrequest, $id)

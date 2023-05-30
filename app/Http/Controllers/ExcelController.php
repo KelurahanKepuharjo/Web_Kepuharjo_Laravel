@@ -98,7 +98,7 @@ class ExcelController extends Controller
             $sheet->setCellValue('A'.$row, $item->nomor_surat);
             $sheet->setCellValue('B'.$row, $item->tempat_lahir.', '.$item->tgl_lahir);
             $sheet->setCellValue('C'.$row, $item->jenis_kelamin);
-            $sheet->setCellValue('D'.$row, $item->kebangsaan);
+            $sheet->setCellValue('D'.$row, $item->kewarganegaraan);
             $sheet->setCellValue('E'.$row, $item->agama);
             $sheet->setCellValue('F'.$row, $item->status_perkawinan);
             $sheet->setCellValue('G'.$row, $item->pekerjaan);
@@ -107,7 +107,7 @@ class ExcelController extends Controller
             $sheet->setCellValue('J'.$row, $item->rt);
             $sheet->setCellValue('K'.$row, $item->rw);
             $sheet->setCellValue('L'.$row, $item->created_at->format('d-m-Y'));
-            $sheet->setCellValue('M'.$row, $item->keperluan);
+            $sheet->setCellValue('M'.$row, $item->keterangan);
             $row++;
         }
         $writer = new Xlsx($spreadsheet);
