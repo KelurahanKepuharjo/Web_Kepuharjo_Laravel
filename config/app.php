@@ -164,6 +164,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Brian2694\Toastr\ToastrServiceProvider::class,
+        Kreait\Laravel\Firebase\ServiceProvider::class,
 
         // App\Providers\BadgeServiceProvider::class,
         /*

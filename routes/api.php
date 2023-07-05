@@ -3,37 +3,49 @@
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\ApiBeritaController;
 use App\Http\Controllers\ApiPengajuanController;
+use App\Http\Controllers\ApiPengajuanRtController;
+use App\Http\Controllers\ApiPengajuanRwController;
 use App\Http\Controllers\ApiSuratController;
+use App\Http\Controllers\NotifikasiController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
 Route::post('auth/register', [ApiAuthController::class, 'register']);
 Route::post('auth/login', [ApiAuthController::class, 'login']);
+
 Route::get('berita', [ApiBeritaController::class, 'berita']);
 Route::get('surat', [ApiSuratController::class, 'surat']);
-Route::post('rekap', [ApiPengajuanController::class, 'rekap']);
-Route::post('statussurat', [ApiPengajuanController::class, 'statussurat']);
+
+
+Route::post('store', [NotifikasiController::class, 'store']);
+Route::post('store-all', [NotifikasiController::class, 'storeall']);
+
 Route::post('pengajuan', [ApiPengajuanController::class, 'pengajuan']);
-Route::post('pembatalan', [ApiPengajuanController::class, 'pembatalan']);
+
+
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('auth/cek', [ApiAuthController::class, 'cektoken']);
+
+    //user
+    Route::post('auth/fcm-token', [ApiAuthController::class, 'storeFCMToken']);
     Route::get('auth/me', [ApiAuthController::class, 'me']);
     Route::post('auth/logout', [ApiAuthController::class, 'logout']);
     Route::get('keluarga', [ApiAuthController::class, 'keluarga']);
-    Route::post('statusdiajukan', [ApiPengajuanController::class, 'statusdiajukan']);
-    Route::get('statusproses', [ApiPengajuanController::class, 'statusproses']);
-    Route::get('statusselesai', [ApiPengajuanController::class, 'statusselesai']);
+    Route::post('status-surat', [ApiPengajuanController::class, 'status_surat']);
+    Route::get('status-proses', [ApiPengajuanController::class, 'status_proses']);
     Route::post('editnohp', [ApiAuthController::class, 'editnohp']);
-    Route::post('suratmasuk', [ApiPengajuanController::class, 'suratmasuk']);
+    Route::post('pembatalan/{id}', [ApiPengajuanController::class, 'pembatalan']);
+
+    //rt
+    Route::post('status-surat-rt', [ApiPengajuanRtController::class, 'status_surat_rt']);
+    Route::get('rekap-rt', [ApiPengajuanRtController::class, 'rekap_rt']);
+    Route::post('update-status-setuju-rt/{id}', [ApiPengajuanRtController::class, 'update_status_setuju_rt']);
+    Route::post('update-status-tolak-rt/{id}', [ApiPengajuanRtController::class, 'update_status_tolak_rt']);
+
+
+    //rw
+    Route::post('status-surat-rw', [ApiPengajuanRwController::class, 'status_surat_rw']);
+    Route::get('rekap-rw', [ApiPengajuanRwController::class, 'rekap_rw']);
+    Route::post('update-status-setuju-rw/{id}', [ApiPengajuanRwController::class, 'update_status_setuju_rw']);
+
+
 });

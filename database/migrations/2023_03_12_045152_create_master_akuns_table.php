@@ -17,6 +17,7 @@ class CreateMasterAkunsTable extends Migration
             $table->string('password', 255)->nullable()->default('text');
             $table->Biginteger('no_hp')->nullable()->default(13);
             $table->string('role', 12)->nullable()->default('text');
+            $table->string('fcm_token')->nullable();
             $table->timestamps();
             $table->uuid('id_masyarakat');
             $table->Foreign('id_masyarakat')->references('id_masyarakat')->on('master_masyarakats');

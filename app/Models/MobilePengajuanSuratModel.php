@@ -15,7 +15,7 @@ class MobilePengajuanSuratModel extends Model
 
     public $timestamps = true;
 
-    public function akun()
+    public function masyarakat()
     {
         return $this->belongsTo(MobileMasterMasyarakatModel::class, 'id_masyarakat', 'id_masyarakat');
     }

@@ -23,12 +23,12 @@ class ApiAuthController extends Controller
         if (!$dataMasyarakat) {
             return response()->json([
                 'message' => 'Nik anda belum terdaftar',
-            ], 400);
+            ]);
         }
         if (MobileMasterAkunModel::where('id_masyarakat', $dataMasyarakat->id_masyarakat)->exists()) {
             return response()->json([
                 'message' => 'Akun sudah terdaftar',
-            ], 400);
+            ]);
         }
 
         $data = MobileMasterAkunModel::create([
@@ -42,7 +42,7 @@ class ApiAuthController extends Controller
             'message' => 'Berhasil Register',
             'user' => $data,
         ];
-        return response()->json($response, 200);
+        return response()->json($response);
     }
 
     public function login(Request $request)
@@ -65,6 +65,13 @@ class ApiAuthController extends Controller
                 'message' => 'Password Anda Salah',
             ], 400);
         }
+
+        if ($akun->role == 1) {
+            return response()->json([
+                'message' => 'Anda tidak memiliki akses untuk login',
+            ], 400);
+        }
+
         $token = $akun->createToken('authToken')->plainTextToken;
 
         return response()->json([
@@ -72,8 +79,24 @@ class ApiAuthController extends Controller
             'user' => $dataMasyarakat,
             'token' => $token,
             'role' => $akun->role,
-        ], 200);
+        ]);
     }
+
+    public function storeFCMToken(Request $request)
+    {
+        $request->validate([
+            'fcm_token' => 'required|string'
+        ]);
+
+        $user = auth()->user();
+        $user->fcm_token = $request->fcm_token;
+        $user->save();
+
+        return response()->json([
+            'message' => 'Token perangkat berhasil disimpan',
+        ]);
+    }
+
 
     public function me(Request $request)
     {
@@ -84,16 +107,6 @@ class ApiAuthController extends Controller
             'data' => $user->load(['masyarakat', 'masyarakat.kks']),
         ];
 
-        return response()->json($response, 200);
-    }
-    public function cektoken(Request $request)
-    {
-        $user = $request->user();
-        if ($user) {
-            $response = [
-                'message' => 'success',
-            ];
-        }
         return response()->json($response, 200);
     }
 
@@ -117,7 +130,6 @@ class ApiAuthController extends Controller
             $query->where('id_masyarakat', $id_masyarakat);
         })->value('no_kk');
 
-        // Ambil data keluarga dari nomor kartu keluarga
         $keluarga = MobileMasterKksModel::with('masyarakat')->where('no_kk', $no_kk)->first();
 
         $response = [
@@ -133,7 +145,6 @@ class ApiAuthController extends Controller
         $user = $request->user();
         $no_hp = $user->no_hp;
 
-        // Validate the incoming request
         $validator = Validator::make($request->all(), [
             'no_hp' => [
                 'required',
@@ -150,16 +161,15 @@ class ApiAuthController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => $validator->errors()->first(),
-            ], 400);
+            ]);
         }
 
-        // Update the user's no_hp
         $user->update([
             'no_hp' => $request->no_hp,
         ]);
 
         return response()->json([
             'message' => 'Nomor HP berhasil diperbarui',
-        ], 200);
+        ]);
     }
 }
