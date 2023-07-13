@@ -14,7 +14,8 @@ class CreatePengajuanSuratsTable extends Migration
     public function up()
     {
         Schema::create('pengajuan_surats', function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
+            $table->id('id_pengajuan');
+            $table->uuid('uuid');
             $table->String('nomor_surat')->nullable();
             $table->String('no_pengantar')->nullable();
             $table->string('status', 20)->nullable();
@@ -25,7 +26,7 @@ class CreatePengajuanSuratsTable extends Migration
             $table->string('image_kk')->nullable();
             $table->string('image_bukti')->nullable();
             $table->enum('info', ['active', 'non_active']);
-            $table->uuid('id_masyarakat');
+            $table->bigInteger('id_masyarakat')->unsigned();
             $table->Foreign('id_masyarakat')->references('id_masyarakat')->on('master_masyarakats');
             $table->smallInteger('id_surat');
             $table->Foreign('id_surat')->references('id_surat')->on('master_surats');
