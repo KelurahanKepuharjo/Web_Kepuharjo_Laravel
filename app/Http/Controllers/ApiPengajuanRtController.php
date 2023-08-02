@@ -19,7 +19,7 @@ class ApiPengajuanRtController extends Controller
         $userMasyarakat = MobileMasterMasyarakatModel::where('id_masyarakat', $userId)->first();
 
         if ($userMasyarakat) {
-            $userKks = MobileMasterKksModel::where('id', $userMasyarakat->id)->first();
+            $userKks = MobileMasterKksModel::where('id_kk', $userMasyarakat->id_kk)->first();
 
             if ($userKks) {
                 if ($userRole != 2) {
@@ -59,7 +59,7 @@ class ApiPengajuanRtController extends Controller
         $userMasyarakat = MobileMasterMasyarakatModel::where('id_masyarakat', $userId)->first();
 
         if ($userMasyarakat) {
-            $userKks = MobileMasterKksModel::where('id', $userMasyarakat->id)->first();
+            $userKks = MobileMasterKksModel::where('id_kk', $userMasyarakat->id_kk)->first();
 
             if ($userKks) {
                 if ($userRole != 2) {
@@ -72,9 +72,9 @@ class ApiPengajuanRtController extends Controller
                         $query->where('rt', $userKks->rt);
                     })
                     ->with(['masyarakat', 'surat'])
-                    // ->whereIn('status', ['Ditolak RT', 'Disetujui RT'])
-                    ->orderByDesc('id')
-                    ->get();
+                    ->whereNotIn('status', ['Dibatalkan'])
+                    ->orderByDesc('id_pengajuan')
+                    ->paginate(10);
 
                     return response()->json($suratData);
                 }
@@ -98,7 +98,7 @@ class ApiPengajuanRtController extends Controller
         $userMasyarakat = MobileMasterMasyarakatModel::where('id_masyarakat', $userId)->first();
 
         if ($userMasyarakat) {
-            $userKks = MobileMasterKksModel::where('id', $userMasyarakat->id)->first();
+            $userKks = MobileMasterKksModel::where('id_kk', $userMasyarakat->id_kk)->first();
 
             if ($userKks) {
                 if ($userRole != 2) {
@@ -141,7 +141,7 @@ class ApiPengajuanRtController extends Controller
         $userMasyarakat = MobileMasterMasyarakatModel::where('id_masyarakat', $userId)->first();
 
         if ($userMasyarakat) {
-            $userKks = MobileMasterKksModel::where('id', $userMasyarakat->id)->first();
+            $userKks = MobileMasterKksModel::where('id_kk', $userMasyarakat->id_kk)->first();
 
             if ($userKks) {
                 if ($userRole != 2) {

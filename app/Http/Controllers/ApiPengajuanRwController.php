@@ -19,7 +19,7 @@ class ApiPengajuanRwController extends Controller
         $userMasyarakat = MobileMasterMasyarakatModel::where('id_masyarakat', $userId)->first();
 
         if ($userMasyarakat) {
-            $userKks = MobileMasterKksModel::where('id', $userMasyarakat->id)->first();
+            $userKks = MobileMasterKksModel::where('id_kk', $userMasyarakat->id_kk)->first();
 
             if ($userKks) {
                 if ($userRole != 3) {
@@ -30,7 +30,7 @@ class ApiPengajuanRwController extends Controller
                     $suratData = MobilePengajuanSuratModel::whereHas('masyarakat.kks', function ($query) use ($userKks) {
                         $query->where('rw', $userKks->rw);
                     })
-                    ->with(['masyarakat', 'surat'])
+                    ->with(['masyarakat.akun', 'surat'])
                     ->when($status, function ($query, $status) {
                         return $query->where('status', $status);
                     })
@@ -58,7 +58,7 @@ class ApiPengajuanRwController extends Controller
         $userMasyarakat = MobileMasterMasyarakatModel::where('id_masyarakat', $userId)->first();
 
         if ($userMasyarakat) {
-            $userKks = MobileMasterKksModel::where('id', $userMasyarakat->id)->first();
+            $userKks = MobileMasterKksModel::where('id_kk', $userMasyarakat->id_kk)->first();
 
             if ($userKks) {
                 if ($userRole != 3) {
@@ -70,9 +70,10 @@ class ApiPengajuanRwController extends Controller
                         $query->where('rw', $userKks->rw);
                     })
                     ->with(['masyarakat', 'surat'])
-                    // ->where('status', 'Disetujui RW')
-                    ->orderByDesc('id')
-                    ->get();
+                    ->whereNotIn('status', ['Dibatalkan'])
+                    ->orderByDesc('id_pengajuan')
+                    ->paginate(10);
+
 
                     return response()->json($suratData);
                 }
@@ -96,7 +97,7 @@ class ApiPengajuanRwController extends Controller
         $userMasyarakat = MobileMasterMasyarakatModel::where('id_masyarakat', $userId)->first();
 
         if ($userMasyarakat) {
-            $userKks = MobileMasterKksModel::where('id', $userMasyarakat->id)->first();
+            $userKks = MobileMasterKksModel::where('id_kk', $userMasyarakat->id_kk)->first();
 
             if ($userKks) {
                 if ($userRole != 3) {

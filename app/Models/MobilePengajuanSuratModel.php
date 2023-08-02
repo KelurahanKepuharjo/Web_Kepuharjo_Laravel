@@ -10,10 +10,10 @@ class MobilePengajuanSuratModel extends Model
     use HasFactory;
 
     protected $table = 'pengajuan_surats';
+    protected $primaryKey = 'id_pengajuan';
 
-    protected $fillable = ['id_masyarakat', 'id_surat', 'keterangan', 'id', 'status', 'file_pdf', 'info', 'image_kk', 'image_bukti'];
+    protected $fillable = ['id_masyarakat', 'id_surat', 'uuid', 'keterangan', 'id_pengajuan', 'status', 'file_pdf', 'info', 'image_kk', 'image_bukti'];
 
-    public $timestamps = true;
 
     public function masyarakat()
     {

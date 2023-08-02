@@ -18,22 +18,24 @@ Route::get('surat', [ApiSuratController::class, 'surat']);
 
 Route::post('store', [NotifikasiController::class, 'store']);
 Route::post('store-all', [NotifikasiController::class, 'storeall']);
-
-Route::post('pengajuan', [ApiPengajuanController::class, 'pengajuan']);
-
+Route::post('pengajuan', [ApiPengajuanController::class, 'pengajuan'])->middleware('guest');
 
 
 Route::middleware('auth:sanctum')->group(function () {
 
     //user
     Route::post('auth/fcm-token', [ApiAuthController::class, 'storeFCMToken']);
+    Route::get('auth/fcm-token-check', [ApiAuthController::class, 'check']);
     Route::get('auth/me', [ApiAuthController::class, 'me']);
+    Route::post('auth/role', [ApiAuthController::class, 'chooseRole']);
     Route::post('auth/logout', [ApiAuthController::class, 'logout']);
     Route::get('keluarga', [ApiAuthController::class, 'keluarga']);
     Route::post('status-surat', [ApiPengajuanController::class, 'status_surat']);
     Route::get('status-proses', [ApiPengajuanController::class, 'status_proses']);
+    Route::post('send-notification-rt', [ApiPengajuanController::class, 'sendNotification']);
     Route::post('editnohp', [ApiAuthController::class, 'editnohp']);
     Route::post('pembatalan/{id}', [ApiPengajuanController::class, 'pembatalan']);
+
 
     //rt
     Route::post('status-surat-rt', [ApiPengajuanRtController::class, 'status_surat_rt']);

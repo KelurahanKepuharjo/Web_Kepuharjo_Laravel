@@ -8,6 +8,8 @@ use App\Models\MobileMasterMasyarakatModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ApiAuthController extends Controller
 {
@@ -23,17 +25,18 @@ class ApiAuthController extends Controller
         if (!$dataMasyarakat) {
             return response()->json([
                 'message' => 'Nik anda belum terdaftar',
-            ]);
+            ], 400);
         }
         if (MobileMasterAkunModel::where('id_masyarakat', $dataMasyarakat->id_masyarakat)->exists()) {
             return response()->json([
                 'message' => 'Akun sudah terdaftar',
-            ]);
+            ], 400);
         }
 
         $data = MobileMasterAkunModel::create([
             'id_masyarakat' => $dataMasyarakat->id_masyarakat,
             'role' => '4',
+            'uuid' => Str::uuid(),
             'no_hp' => $request->no_hp,
             'password' => Hash::make($request->password),
         ]);
@@ -42,7 +45,7 @@ class ApiAuthController extends Controller
             'message' => 'Berhasil Register',
             'user' => $data,
         ];
-        return response()->json($response);
+        return response()->json($response, 200);
     }
 
     public function login(Request $request)
@@ -60,15 +63,16 @@ class ApiAuthController extends Controller
         }
 
         $akun = MobileMasterAkunModel::where('id_masyarakat', $dataMasyarakat->id_masyarakat)->first();
-        if (!Hash::check($request->password, $akun->password)) {
+        if (!$akun) {
             return response()->json([
-                'message' => 'Password Anda Salah',
+                'message' => 'Akun tidak ditemukan',
             ], 400);
         }
 
-        if ($akun->role == 1) {
+
+        if (!Hash::check($request->password, $akun->password)) {
             return response()->json([
-                'message' => 'Anda tidak memiliki akses untuk login',
+                'message' => 'Password Anda Salah',
             ], 400);
         }
 
@@ -76,7 +80,7 @@ class ApiAuthController extends Controller
 
         return response()->json([
             'message' => 'Berhasil login',
-            'user' => $dataMasyarakat,
+            'user' => $akun->masyarakat,
             'token' => $token,
             'role' => $akun->role,
         ]);
@@ -110,9 +114,39 @@ class ApiAuthController extends Controller
         return response()->json($response, 200);
     }
 
+    public function check(Request $request)
+    {
+        $user = $request->user();
+        $fcmToken = $user->fcm_token;
+
+        if ($fcmToken) {
+            return response()->json([
+                'message' => 'FCM token sudah ada',
+                'fcm_token' => $fcmToken,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'FCM token belum ada',
+            ], 400);
+        }
+    }
+
+
     public function logout()
     {
-        $logout = request()->user()->currentAccessToken()->delete();
+        $user = request()->user();
+
+        // Get the user's current FCM token
+        $fcmToken = $user->fcm_token;
+
+        // Revoke the current access token
+        $logout = $user->currentAccessToken()->delete();
+
+        // Update the fcm_token column to null
+        $user->update([
+            'fcm_token' => null,
+        ]);
+
         $response = [
             'message' => 'success',
         ];
@@ -149,7 +183,7 @@ class ApiAuthController extends Controller
             'no_hp' => [
                 'required',
                 'min:10',
-                'unique:master_akuns,no_hp,' . $user->id,
+                'unique:master_akuns,no_hp,' . $user->akun_id . ',akun_id',
                 function ($attribute, $value, $fail) use ($no_hp) {
                     if ($value === $no_hp) {
                         $fail('Nomor HP baru harus berbeda dengan nomor HP lama');

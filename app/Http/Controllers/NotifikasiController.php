@@ -34,7 +34,7 @@ class NotifikasiController extends Controller
     }
 
 
-    /**
+    /** 
      * Mengirim notifikasi ke semua perangkat
      *
      * @param  \Illuminate\Http\Request  $request
