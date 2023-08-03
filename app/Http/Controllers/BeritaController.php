@@ -30,15 +30,16 @@ class BeritaController extends Controller
             'deskripsi' => $validated['deskripsi'],
             'image' => $imageName,
         ]);
-        if ($Berita) {
-            $message = CloudMessage::new()
-            ->withNotification(Notification::create("Berita", "Berita terbaru terkait kelurahan kepuharjo", ))
-            ->withChangedTarget('topic', 'all');
+        // if ($Berita) {
+        //     $message = CloudMessage::new()
+        //     ->withNotification(Notification::create("Berita", "Berita terbaru terkait kelurahan kepuharjo", ))
+        //     ->withChangedTarget('topic', 'all');
 
-            FirebaseMessaging::send($message);
-            return Redirect('berita')->with('success', '');
+        //     FirebaseMessaging::send($message);
+        //     return Redirect('berita')->with('success', '');
 
-        }
+        // }
+        return Redirect('berita')->with('success', '');
     }
 
     public function update(BeritaRequest $beritaRequest, $id)

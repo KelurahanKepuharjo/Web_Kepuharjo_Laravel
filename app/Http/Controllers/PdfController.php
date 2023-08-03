@@ -16,7 +16,7 @@ class PdfController extends Controller
         $pdf->AddPage();
 
         $pengajuan = new PengajuanModel();
-        $data = $pengajuan->pengajuan()->where('pengajuan_surats.id', '=', $id)->get();
+        $data = $pengajuan->pengajuan()->where('pengajuan_surats.id_pengajuan', '=', $id)->get();
 
         foreach ($data as $user) {
             $surat = $user->nama_surat;

@@ -13,7 +13,7 @@ class MasyarakatController extends Controller
     public function master_kk_mas(Request $request, $id)
     {
         $data = MobileMasterMasyarakatModel::with('masyarakat')
-            ->where('id', '=', $id)
+            ->where('id_kk', '=', $id)
             ->get();
 
         return view('master_kk_mas', ['nomor_kk' => $id], compact('data'));
@@ -66,9 +66,9 @@ class MasyarakatController extends Controller
         }
         try {
             $data = new MobileMasterMasyarakatModel();
-            $uuid = Str::uuid()->toString();
-            $data->id_masyarakat = $uuid;
-            $data->id = $request->nokk;
+            // $uuid = Str::uuid()->toString();
+            // $data->id_masyarakat = $uuid;
+            $data->id_kk = $request->nokk;
             $data->nik = $request->nik;
             $data->nama_lengkap = $request->nama_lengkap;
             $data->jenis_kelamin = $request->kelamin;
@@ -88,7 +88,7 @@ class MasyarakatController extends Controller
             $data->nama_ibu = $request->nama_ibu;
             $data->save();
 
-            return Redirect('masterkkmas/'.$data->id)->with('success', '');
+            return Redirect('masterkkmas/'.$data->id_kk)->with('success', '');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -97,7 +97,7 @@ class MasyarakatController extends Controller
             $data = MobileMasterMasyarakatModel::with('masyarakat')
                 ->orderBy('created_at', 'desc')
                 ->limit(1)
-                ->select('id')
+                ->select('id_kk')
                 ->first();
         } catch (\Throwable $th) {
             throw $th;
@@ -133,10 +133,10 @@ class MasyarakatController extends Controller
         try {
             $data = MobileMasterMasyarakatModel::with('masyarakat')
                 ->where('nik', '=', $request->nik)
-                ->select('id')
+                ->select('id_kk')
                 ->first();
 
-            return Redirect('masterkkmas/'.$data->id)->with('successedit', '');
+            return Redirect('masterkkmas/'.$data->id_kk)->with('successedit', '');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -148,7 +148,8 @@ class MasyarakatController extends Controller
             $data = MobileMasterMasyarakatModel::where('nik', $id);
             $data->delete();
 
-            return Redirect('masterkkmas/'.$request->id);
+            // return Redirect('masterkkmas/'.$request->id_kk);
+            return redirect()->back()->with('successhapus','');
         } catch (\Throwable $th) {
             // return response()->json([
             //     'message' => 'Data Tidak Bisa Dihapus, Sudah Pernah Mengajukan',

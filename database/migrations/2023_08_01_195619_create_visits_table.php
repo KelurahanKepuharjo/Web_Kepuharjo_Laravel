@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMasterBeritasTable extends Migration
+class CreateVisitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateMasterBeritasTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_beritas', function (Blueprint $table) {
+        Schema::create('visits', function (Blueprint $table) {
             $table->id();
-            $table->text('judul')->nullable()->default('text');
-            $table->text('sub_title')->nullable()->default('text');
-            $table->text('deskripsi')->nullable()->default('text');
-            $table->string('image')->nullable();
+            $table->string('ip_address');
+            $table->string('user_agent')->nullable();
+            $table->unsignedInteger('duration')->nullable();
+            $table->timestamp('visited_at')->useCurrent();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateMasterBeritasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_beritas');
+        Schema::dropIfExists('visits');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 
 class MobileMasterKksModel extends Model
 {
@@ -15,6 +16,20 @@ class MobileMasterKksModel extends Model
         'alamat', 'rt', 'rw', 'kode_pos', 'kelurahan', 'kecamatan', 'kabupaten',
         'provinsi', 'kk_tgl', 'created_at', 'updated_at',
     ];
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (!$model->uuid) {
+                $model->uuid = Uuid::uuid4()->toString();
+            }
+        });
+    }
     // protected $primarykey = 'no_kk';
 
     // protected static function boot()

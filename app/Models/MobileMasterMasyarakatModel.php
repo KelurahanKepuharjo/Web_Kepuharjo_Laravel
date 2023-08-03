@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 
 class MobileMasterMasyarakatModel extends Model
 {
@@ -28,6 +29,19 @@ class MobileMasterMasyarakatModel extends Model
     protected $primaryKey = 'id_masyarakat'; // Jika id_masyarakat adalah primary key pada tabel master_masyarakats
 
 
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (!$model->uuid) {
+                $model->uuid = Uuid::uuid4()->toString();
+            }
+        });
+    }
 
     // protected static function boot()
     // {

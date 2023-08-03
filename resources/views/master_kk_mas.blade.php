@@ -11,6 +11,11 @@
             toastr.success('Data Berhasil Ditambahkan', '')
         </script>
     @endif
+    @if (session::has('successhappus'))
+        <script>
+            toastr.success('Data Berhasil Dihapus', '')
+        </script>
+    @endif
     @if (session::has('successedit'))
         <script>
             toastr.success('Data Berhasil Diperbarui', '')

@@ -16,8 +16,9 @@ class KartukkController extends Controller
     public function index()
     {
         $data = MobileMasterMasyarakatModel::with('masyarakat')
-        ->where('status_keluarga', 'kepala keluarga')
-        ->orderBy('nik', 'DESC')->get();
+            ->where('status_keluarga', 'kepala keluarga')
+            ->orderBy('nik', 'DESC')->get();
+
         return view('master_kk', compact('data'))->with('success', '');
     }
 
@@ -47,27 +48,26 @@ class KartukkController extends Controller
         try {
             $data = MobileMasterKksModel::where('no_kk', $id);
             $data->delete();
+
             return Redirect('masterkk')->with('successhapus', '');
         } catch (\Throwable $th) {
-            // return response()->json([
-            //     'message' => 'Data Tidak Bisa Dihapus, Karena Berelasi dengan data Masyarakat',
-            // ], 200);
             return redirect()->back()->with('relation', '');
         }
 
     }
 
-      public function simpanmasterkk(Request $request, KartukkRequest $kkrequest)
+      public function simpanmasterkk(KartukkRequest $kkrequest)
       {
           $validated = $kkrequest->validated();
           $check = MobileMasterKksModel::all();
-          foreach ($check as  $value) {
+          foreach ($check as $value) {
               if ($value->no_kk == $validated['no_kk']) {
                   return redirect()->back()->with('exist', '');
               }
           }
           $data = MobileMasterKksModel::create($validated);
-          return redirect('simpankepala/'.$request->no_kk.'/'.$request->kepala_keluarga.'/'.$request->nik);
+
+          return redirect('simpankepala/'.$kkrequest->no_kk.'/'.$kkrequest->kepala_keluarga.'/'.$kkrequest->nik);
       }
 
     public function simpankepalakeluarga(Request $request, $id, $other_id, $nik)
@@ -75,10 +75,10 @@ class KartukkController extends Controller
         try {
             $datakepala = MobileMasterKksModel::where('no_kk', '=', $id)
                 ->first();
+                // dd($datakepala);
             $data = new MobileMasterMasyarakatModel();
-            $uuid = Str::uuid()->toString();
-            $data->id_masyarakat = $uuid;
-            $data->id = $datakepala->id;
+            // $uuid = Str::uuid()->toString();
+            $data->id_kk = $datakepala->id_kk;
             $data->nik = $nik;
             $data->nama_lengkap = $other_id;
             $data->status_keluarga = 'Kepala Keluarga';

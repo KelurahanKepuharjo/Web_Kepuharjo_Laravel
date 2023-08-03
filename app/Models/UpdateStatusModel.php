@@ -11,7 +11,7 @@ class UpdateStatusModel extends Model
     public function UpdateStatus()
     {
         return $this->join('master_masyarakats', 'pengajuan_surats.id_masyarakat', 'master_masyarakats.id_masyarakat')
-            ->select('master_masyarakats.*', 'pengajuan_surats.id');
+            ->select('master_masyarakats.*', 'pengajuan_surats.id_pengajuan');
     }
 
     protected $fillable = ['pengajuan_surats.status', 'file_pdf', 'info','nomor_surat', 'no_pengantar','keterangan_ditolak'];

@@ -210,7 +210,8 @@
                     </div>
                     @if ($akses == 'admin')
                         <div class="modal-footer">
-                            <a type="button" class="btn btn-secondary" href="{{ url('generate-pdf/' . $value->id) }}"
+                            <a type="button" class="btn btn-secondary"
+                                href="{{ url('generate-pdf/' . $value->id_pengajuan) }}"
                                 style="background-color: rgb(0, 189, 0); color: white;">Unduh Surat</a>
                             <a class="btn btn-secondary" type="button"
                                 onClick="window.open('https://wa.me/62{{ $value->no_hp }}')" target="_blank">Kirim Via

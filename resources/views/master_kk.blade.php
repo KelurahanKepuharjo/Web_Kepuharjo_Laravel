@@ -68,7 +68,7 @@
                                                 value="{{ $value->no_kk }}" href="{{ url('masterkk') }}"></a>
                                             <a class="btn btn-success btn-sm icon-head" style=" color: white;"
                                                 name="kk" value="{{ $value->masyarakat->no_kk }}"
-                                                href="{{ url('masterkkmas/' . $value->id) }}"></a>
+                                                href="{{ url('masterkkmas/' . $value->id_kk) }}"></a>
                                         </div>
                                     </div>
                             </tr>

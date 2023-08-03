@@ -3,92 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\PengajuanModel;
-use App\Models\AdminPengajuanModel;
 use App\Models\UpdateStatusModel;
-use Illuminate\Http\Request;
-use FPDF;
 use App\Http\Requests\PengajuanRequest;
+use FPDF;
 
 class PengajuanController extends Controller
 {
     public function surat_masuk()
     {
-        if (session('hak_akses') == 'admin') {
-            $pengajuan = new PengajuanModel();
-            $data = $pengajuan->pengajuan()
-                ->where('pengajuan_surats.status', '=', 'Disetujui RW')
-                ->get();
-        } elseif (session('hak_akses') == 'RT') {
-            $RT = session('rt');
-            $RW = session('rw');
-            $pengajuan = new PengajuanModel();
-            $data = $pengajuan->pengajuan()
-                ->where('pengajuan_surats.status', '=', 'Diajukan')
-                ->where('master_kks.RT', '=', $RT)
-                ->where('master_kks.RW', '=', $RW)
-                ->get();
-        } elseif (session('hak_akses') == 'RW') {
-            $RW = session('rw');
-            $pengajuan = new PengajuanModel();
-            $data = $pengajuan->pengajuan()
-                ->where('pengajuan_surats.status', '=', 'Disetujui RT')
-                ->where('master_kks.RW', '=', $RW)
-                ->get();
-        }
-        return view('surat_masuk', compact('data'));
-    }
+        $pengajuan = new PengajuanModel();
+        $data = $pengajuan->pengajuan()
+            ->where('pengajuan_surats.status', '=', 'Disetujui RW')
+            ->get();
 
-    public function update_statustolak(Request $request, $id, $akses)
-    {
-        if ($akses == 'RT') {
-            $status = 'Ditolak RT';
-        } elseif ($akses == 'RW') {
-            $status = 'Ditolak RW';
-        }
-            $updatestatus = new UpdateStatusModel();
-            $data = $updatestatus->UpdateStatus()
-                ->where('pengajuan_surats.id', $id)
-                ->first();
-            $data->update([
-                'pengajuan_surats.status' => $status,
-                'info' => 'non_active',
-                'keterangan_ditolak' => $request->keterangan_ditolak,
-            ]);
-        return redirect('/suratmasuk')->with('successedit', '');
+        return view('surat_masuk', compact('data'));
     }
 
     public function update_status(PengajuanRequest $request, $id, $akses)
     {
-        if ($akses == 'RT') {
-            $validated = $request->validated();
-            $status = 'Disetujui RT';
-            $updatestatus = new UpdateStatusModel();
-            $data = $updatestatus->UpdateStatus()
-                ->where('pengajuan_surats.id', $id)
-                ->first();
-            $data->update([
-                'pengajuan_surats.status' => $status,
-                'no_pengantar' => $validated['nomor_surat'],
-            ]);
-            return redirect('/suratmasuk')->with('successedit', '');
-        } elseif ($akses == 'RW') {
-            $status = 'Disetujui RW';
-            $updatestatus = new UpdateStatusModel();
-            $data = $updatestatus->UpdateStatus()
-                ->where('pengajuan_surats.id', $id)
-                ->first();
-            $data->update([
-                'pengajuan_surats.status' => $status,
-            ]);
-            return redirect('/suratmasuk')->with('successedit', '');
-        } elseif ($akses == 'admin') {
-            $status = 'Selesai';
+        $status = 'Selesai';
             $validated = $request->validated();
             $pdf = new FPDF();
             $pdf->AddPage();
             $pengajuan = new PengajuanModel;
             $data = $pengajuan->pengajuan()
-            ->where('pengajuan_surats.id', $id)->get();
+            ->where('pengajuan_surats.id_pengajuan', $id)->get();
             foreach ($data as $user) {
 
                 $pdf->Image('image/logohp.png', 18, 27, 43, 0, 'PNG');
@@ -154,43 +93,15 @@ class PengajuanController extends Controller
                         0, 'L', false, 20);
                 $pdf->Output(public_path('pdf/'.$user->nama_lengkap.'_'.$user->nik.'_'.$user->nama_surat.'_'.$id.'.pdf'), 'F');
                 $updatestatus = new UpdateStatusModel();
-
-                $data = $updatestatus->UpdateStatus()
-                    ->where('pengajuan_surats.id', $id)
-                    ->first();
-                $data->update([
-                    'nomor_surat' => $validated['nomor_surat'],
-                    'pengajuan_surats.status' => $status,
-                    'info' => 'non_active',
-                    'file_pdf' => $user->nama_lengkap.'_'.$user->nik.'_'.$user->nama_surat.'_'.$id.'.pdf',
-                ]);
+                    $data = $updatestatus->where('id_pengajuan', $id)
+                    ->update([
+                        'nomor_surat' => $validated['nomor_surat'],
+                        'status' => $status,
+                        'info' => 'non_active',
+                        'file_pdf' => $user->nama_lengkap.'_'.$user->nik.'_'.$user->nama_surat.'_'.$id.'.pdf'
+                    ]);
             return redirect('/suratmasuk')->with('successedit', '');
         }
-        }
-    }
-
-    public function surat_ditolak()
-    {
-        if (session('hak_akses') == 'RT') {
-            $RT = session('rt');
-            $RW = session('rw');
-            $pengajuan = new PengajuanModel();
-            $data = $pengajuan->pengajuan()
-                ->where('pengajuan_surats.status', '=', 'Ditolak RT')
-                ->where('master_kks.RT', '=', $RT)
-                ->where('master_kks.RW', '=', $RW)
-                ->get();
-        } elseif (session('hak_akses') == 'RW') {
-            $RW = session('rw');
-            $hak_akses = session('hak_akses');
-            $pengajuan = new PengajuanModel();
-            $data = $pengajuan->pengajuan()
-                ->where('pengajuan_surats.status', '=', 'Ditolak RW')
-                ->where('master_kks.RW', '=', $RW)
-                ->get();
-        }
-
-        return view('surat_ditolak', compact('data'));
     }
 
     public function surat_selesai()
@@ -200,29 +111,6 @@ class PengajuanController extends Controller
             $data = $pengajuan->pengajuan()
                 ->where('pengajuan_surats.status', '=', 'Selesai')
                 ->get();
-
-        // dd($data);
-        } elseif (session('hak_akses') == 'RT') {
-            $RT = session('rt');
-            $RW = session('rw');
-            $pengajuan = new PengajuanModel();
-            $data = $pengajuan->pengajuan()
-                ->where('master_kks.RT', '=', $RT)
-                ->where('master_kks.RW', '=', $RW)
-                ->where('pengajuan_surats.status', '=', 'Disetujui RT')
-                ->orWhere('pengajuan_surats.status', '=', 'Disetujui RW')
-                ->orWhere('pengajuan_surats.status', '=', 'Selesai')
-                ->get();
-
-        } elseif (session('hak_akses') == 'RW') {
-            $RW = session('rw');
-            $pengajuan = new PengajuanModel();
-            $data = $pengajuan->pengajuan()
-                ->where('master_kks.RW', '=', $RW)
-                ->Where('pengajuan_surats.status', '=', 'Disetujui RW')
-                ->orWhere('pengajuan_surats.status', '=', 'Selesai')
-                ->get();
-
         }
 
         return view('surat_selesai', compact('data'));

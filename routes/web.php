@@ -13,6 +13,7 @@ use App\Http\Controllers\RwController;
 use App\Http\Controllers\StatusPdfController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,9 +28,11 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/export', [ExcelController::class, 'export']);
 
-Route::controller(KepuharjoController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
-});
+// Route::controller(KepuharjoController::class)->group(function () {
+//     Route::get('/', 'index')->name('index');
+// });
+
+Route::get('/', [VisitorController::class, 'landingpage']);
 
 // Route Login
 Route::controller(LoginController::class)->group(function () {

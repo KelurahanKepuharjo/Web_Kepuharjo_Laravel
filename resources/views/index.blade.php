@@ -148,9 +148,9 @@
             <div class="contact container" id="contact">
                 <div class="contact__container grid">
                     <div class="contact__content">
-                        <h2 class="section__title-center">Contact Us From <br> Here</h2>
-                        <p class="contact__description">You can contact us from here, you can write to us,
-                            call us or visit our service center, we will gladly assist you.</p>
+                        <h2 class="section__title-center">S-Kepuharjo<br> Here</h2>
+                        <p class="contact__description">Pengunjung {{ $totalVisits }}</p>
+                        <p>Rata Rata Lama Kunjungan {{ $averageDuration }} Menit</p>
                     </div>
 
                     <ul class="contact__content grid">
